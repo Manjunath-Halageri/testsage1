@@ -1,0 +1,54 @@
+.ml-10{
+        margin-left: 10px;
+}
+.header{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 10px;
+}
+.size-set{
+        font-size: 14px;
+}
+
+.form-control {     
+        height: auto;
+}
+
+.chip-list {
+        width: 100%;
+}
+
+.flex-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        float: right;
+}
+
+.list-group-item{
+        padding:5px 15px 0px 15px  !important ;
+}
+
+.iterativeForm{
+        /* border: 2px solid white ;
+        border-radius: 3px 3px; */
+        margin-bottom: 20px;
+}
+ .form-group1{
+        margin-top: -15px;
+        margin-bottom: 20px;
+ }
+ .form-group2{
+        margin-bottom: 0px;
+ }
+ :hover.glyphicon-remove{
+        background-color: red;
+        color: white;
+ }
+ .IterativeMethod{
+        font-size: 12px;
+ }
+ .InputVals{
+        font-size: 12px;
+ }

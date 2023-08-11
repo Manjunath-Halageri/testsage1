@@ -1,0 +1,109 @@
+tbody {
+  display:block;
+  height: 282px;
+  overflow:auto;
+}
+thead, tbody tr {
+  display:table;
+  width:100%;
+  table-layout:fixed;
+}
+/* thead {
+  width: calc( 101% - 0.5em )
+} */
+
+#s1 {
+  /* margin-left: 49px; */
+  width: 150px;
+  /* height: 282px; */
+}
+
+#s2 {
+  /* margin-left: 30px; */
+  width: 150px;
+  height: 25px;
+}
+
+#s3 {
+  /* margin-left: 19px; */
+  width: 150px;
+  height: 25px;
+}
+
+
+
+#sdiv {
+  margin-left: 1%;
+  /* margin-top: 6%; */
+  /* margin-left: -4%; */
+}
+
+.col6 {
+  height: 400px;
+  padding: unset;
+}
+
+.row {
+  margin-left: 1px;
+  margin-right: 1px;
+}
+
+.invalidInput {
+  font-size: small;
+}
+
+@media screen and (min-device-width: 768px) and (max-device-width: 1023px) {
+  .ui-md-2 {
+    width: 25%;
+    height: 100%;
+}
+.ui-md-10{
+  width: 75%;
+  height: 100%;
+}
+.createCard{
+  width: 80%;
+  margin-top: 5%;
+}
+}
+
+@media screen and (min-device-width: 1024px) and (max-device-width: 1440px) { 
+  .ui-md-2 {
+    width: 20%;
+    height: 100%;
+}
+.ui-md-10{
+  width: 80%;
+  height: 100%;
+}
+.createCard{
+  width: 45%;
+margin-top: 5%;
+}
+}
+@media screen and (min-device-width: 375px) and (max-device-width: 767px) { 
+.ui-md-2 {
+  width: 30%;
+  height: 100%;
+}
+.ui-md-10{
+width: 70%;
+height: 100%;
+}
+
+}
+@media screen and (min-device-width: 0px) and (max-device-width: 375px) { 
+.ui-md-2 {
+  width: 100%;
+  height: 100%;
+}
+.ui-md-10{
+width: 100%;
+height: 100%;
+}
+}
+
+.one{
+	height: 85vh !important;
+	overflow: scroll;
+}

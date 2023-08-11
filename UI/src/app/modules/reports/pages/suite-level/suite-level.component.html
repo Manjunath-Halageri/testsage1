@@ -1,0 +1,251 @@
+<ul class="breadcrumb" style="font-size:15px;background-color: unset;margin:unset">
+  <li class="breadcrumb-item"><a id="mainheader">{{projectName}}</a></li>
+  <!-- <li class="breadcrumb-item" *ngIf="navSuite != 0"><a id="subheader">{{suiteName}}</a></li> -->
+  <li class="breadcrumb-item" *ngIf="navSuite != 0"><a id="subheader">{{suiteName}}</a></li>
+  <!-- <li *ngIf="navSuite != 0 " class="breadcrumb-item" id="subheader"><a id="subheader">{{suiteName}}</a></li> -->
+  <li *ngIf="navSuite != 0 " class="breadcrumb-item" id="subheader"><a id="subheader">{{module}}</a></li>
+  <!-- <li *ngIf="navSuite != 0 " class="breadcrumb-item" id="subheader"><a id="subheader">{{suiteName}}</a></li> -->
+
+</ul>
+
+<div class="ui-fluid">
+  <div class="ui-g">
+    <div class="ui-g-3 ui-md-3 border">
+      <div class="one">
+        <div>
+          <div class="form-group row manualAutoAlign">
+            <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5 col-xl-5">
+            <mat-radio-button class="example-margin" [checked]="Manual==true" (click)="manualReport()">Manual</mat-radio-button>
+            <mat-radio-button class="example-margin" [checked]="Automation==true" (click)="unChecked()">Automation</mat-radio-button>
+            <mat-radio-button class="example-margin" [checked]="jenkinsDisplay==true" (click)="jenkinsChecked($event)">Jenkins</mat-radio-button>
+            <!-- <input type="radio" name="check" (click)="jenkinsChecked($event)"> <label>Jenkins</label> &nbsp;
+              (click)="selectedSchedule(schedule)" (click)="selectedRelease(releaseVersion)"-->
+            </div>
+          </div>
+          <div class="form-group row">
+            <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5 col-xl-5">
+              <mat-radio-button class="example-margin" [checked]="scheduleDisplay==true"  (click)="checked()">Schedule</mat-radio-button>
+            </div>
+            <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7 col-xl-7">
+              <select class="form-control" [(ngModel)]="selectedScheduleName" >
+                <option value="" style="display:none;"></option>
+                <option *ngFor="let schedule of newSchedules">{{schedule}}</option>
+              </select>
+            </div>
+          </div>
+
+
+        </div>
+        <div>
+          <div class="row" style="display: block;">
+            <div class="form-group ">
+              <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5 col-xl-5">
+                <label>Release</label>
+              </div>
+              <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7 col-xl-7">
+                <select class="form-control" [(ngModel)]="releaseSelected"
+                 >
+                  <!-- <option value="" style="display:none;"></option> [hidden]="releaseclicked"-->
+                  <option value="Select Release"  >Select Release</option>
+                  <option *ngFor="let activeVersion of activeReleaseVer">
+                    {{activeVersion.releaseVersion}}</option>
+                </select>
+              </div>
+            </div>
+          </div><br>
+
+          <div class="row" style="display: block;">
+            <div class="form-group ">
+              <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5 col-xl-5">
+                <label>FromDate</label>
+              </div>
+              <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7 col-xl-7">
+                <input type="date" class="form-control" name="bday" [(ngModel)]="fromDate">
+              </div>
+            </div>
+          </div><br>
+
+          <div class="row" style="display: block;">
+            <div class="form-group ">
+              <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5 col-xl-5">
+                <label>ToDate</label>
+              </div>
+              <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7 col-xl-7">
+                <input type="date" class="form-control" name="tday" [(ngModel)]="toDate">
+              </div>
+            </div>
+          </div>
+          <br>
+
+          <div class="row" style="display: block;">
+            <div class="form-group ">
+              <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5 col-xl-5">
+                <label>Report Number :</label>
+              </div>
+              <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7 col-xl-7">
+                <input type="number" [(ngModel)]="reportNumber" min="1" step="1" name="reportNumber" placeholder="Enter report number"
+              (keydown)="inputBox($event)"  class="form-control">
+              </div>
+            </div>
+          </div>
+          <br>
+          <div style="text-align: center;position:relative">
+            <button class="btn btn-lg" (click)="searchReport(fromDate,toDate,releaseVersion)">Search</button>
+          </div>
+        </div>
+        <div class="example-container2 table-container2" style="overflow-y: scroll;
+        min-height: 250px;max-height:280px ; width:100%;">
+          <table mat-table [dataSource]="dateWiseData" matSort class="mat-elevation-z8" style="table-layout:fixed;">
+            <!-- Name Column -->
+            <ng-container matColumnDef="Run No">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header class="angulartheadColor">Run No</th>
+              <td mat-cell *matCellDef="let element"> {{element._id.Run}} </td>
+            </ng-container>
+
+            <!-- Weight Column (click)="selectedSuite(element._id.suiteName,element._id)" -->
+            <ng-container matColumnDef="Suite">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header class="angulartheadColor">Suite Name</th>
+              <td mat-cell *matCellDef="let element" style="word-break: break-word;"> {{element._id.suiteName}} </td>
+            </ng-container>
+
+            <!-- Symbol Column -->
+            <ng-container matColumnDef="Date">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header class="angulartheadColor">Date </th>
+              <td mat-cell *matCellDef="let element" style="text-align: center;"> {{element._id.startedAt| date : "d/MM/yy"}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="Time">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header class="angulartheadColor">Time </th>
+              <td mat-cell *matCellDef="let element"  style="text-align: right;">{{element._id.startedAt| date : "h:mm:ss a"}}
+                <!-- <span href="" data-toggle="modal" data-target="#copyToSuiteModal"
+                  (click)="myscripts(element)">{{element._id.startedAt| date : "h:mm:ss a"}}</span> -->
+                 </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; let i=index;columns: displayedColumns;"
+              (click)="selectedSuite(row._id.suiteName,row._id,i)"
+              [class.editSelected]="i === index2"></tr>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- </div> -->
+
+    <div class="ui-g-9 ui-md-9 border">
+      <div *ngIf="navSuite">
+        <div align="center">
+          <div class="mt-3 border_ExecutionSummary">
+            <span>ExecutionSummary</span>
+          </div>
+        </div>
+        <hr>
+
+        <div class="d-flex mb-4 bg-secondary" style="font-size: 12px;text-align: center;font-weight: bold;" *ngIf="exceptionOption||previousExcepOption">
+          <button type="button" class="buttonsStyle p-2 flex-sm-fill" *ngFor="let t of title" [class.selected]="t === selected"
+            (click)="onSelect(t);getClicked(t)" [routerLink]="['/projectdetail/reports/suitelevel']">{{t}}</button>
+        </div>
+        <div>
+          <div class="col-sm-12 col-xs-8 col-lg-8 col-md-12">
+            <div class="details">
+              TestSuite Execution Summary
+              <br>
+              <div style="margin-top:3%">
+                <span class="exe">Executed On :
+                  <span *ngIf="navSuite != 0">{{executedAt | date : "d/MM/yy"}}</span>
+                </span>
+                <span class="exe">Executed At :
+                  <span> {{executedAt | date :"h:mm:ss a"}}</span>
+                </span>
+              </div>
+            </div>
+              <div class="row">
+                <div class="col-sm-6 col-xs-6 col-lg-6 col-md-6">
+                  <div class="totaltable">
+                    <table >
+                      <tbody>
+                        <tr style="width: 220px;">
+                          <th>Total TestCases</th>
+                          <td>{{totalScripts}}</td>
+                        </tr>
+                        <tr>
+                          <th>Pass</th>
+                          <td>{{totalPass}}</td>
+                        </tr>
+                        <tr>
+                          <th>Fail</th>
+                          <td>{{totalFail}}</td>
+                        </tr>
+                        <tr>
+                          <th>Skipped</th>
+                          <td>{{totalSkipped}}</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+                <div class="col-sm-6 col-xs-6 col-lg-6 col-md-6 pieClass">
+                  <google-chart [data]="pieChart" *ngIf='activatePie != 0'></google-chart>
+                </div>
+              </div>
+          </div>
+          <div class="col-sm-12 col-md-12 col-xs-12 col-lg-4 pieClass barClass" style="margin-bottom: 10px;">
+            <div class="details" style="text-align: left">
+              Executed By:
+              <input type="text" disabled  [(ngModel)]="executedBy" style="width:50%;border:none">
+            </div><br>
+            <div>
+              <google-chart *ngIf="activateStacked" [data]="stackedColumnChart"></google-chart>
+            </div>
+          </div>
+        </div>
+        <div style="padding-top: 10px">
+          <div class="example-container shadow-lg table-container table-container1">
+            <table mat-table [dataSource]="moduleDataDisplay" matSort class="mat-elevation-z8">
+              <!-- Position Column -->
+              <ng-container matColumnDef="Sl.No">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header class="angulartheadColor"> Sl.No </th>
+                <td mat-cell *matCellDef="let element; let i = index;"> {{i+1}}</td>
+              </ng-container>
+              <!-- Name Column -->
+              <ng-container matColumnDef="Module">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header class="angulartheadColor">Module</th>
+                <td mat-cell *matCellDef="let element"> <a class="mat-row-link" [routerLink]="['/projectdetail/reports/suitelevel/featurelevel']"
+                  (click)="getModuleName(element.moduleName)">{{element.moduleName}}</a></td>
+              </ng-container>
+
+              <!-- Weight Column (click)="selectedSuite(element._id.suiteName,element._id)" -->
+              <ng-container matColumnDef="Total Testcases">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header class="angulartheadColor">Total Testcases</th>
+                <td mat-cell *matCellDef="let element"> {{element.moduleScriptCount}} </td>
+              </ng-container>
+
+              <!-- Symbol Column -->
+              <ng-container matColumnDef="Pass">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header class="angulartheadColor">Pass </th>
+                <td mat-cell *matCellDef="let element"> {{element.passed}} </td>
+              </ng-container>
+
+              <!-- Symbol Column -->
+              <ng-container matColumnDef="Fail">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header class="angulartheadColor">Fail </th>
+                <td mat-cell *matCellDef="let element"> {{element.failed}} </td>
+              </ng-container>
+              <!-- Symbol Column -->
+              <ng-container matColumnDef="Skipped">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header class="angulartheadColor">Skipped </th>
+                <td mat-cell *matCellDef="let element"> {{element.skipped}} </td>
+              </ng-container>
+
+              <tr mat-header-row *matHeaderRowDef="suiteLevelTable"></tr>
+              <tr mat-row *matRowDef="let row; columns: suiteLevelTable;"></tr>
+            </table>
+          </div>
+          <br>
+        </div>
+      </div>
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>

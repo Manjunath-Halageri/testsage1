@@ -1,0 +1,239 @@
+<ul class="breadcrumb" style="font-size:15px;background-color: unset;margin:unset">
+  <li class="breadcrumb-item"><a  id="mainheader">Release</a></li>
+  <li class="breadcrumb-item"><a id="subheader">Release Scope</a></li>
+
+</ul>
+<hr style="margin:3px">
+<div class="ui-fluid">
+  <div class="ui-g">
+
+    <div class="ui-g-2 ui-md-2 border">
+      <div class="one">
+        <div>
+          <span class="treeStructureTitle" 
+            style="position:sticky;">Release</span>
+          <p-tree [value]="displayModuleForTree" (onNodeSelect)="nodeSelect($event)" selectionMode="single"
+            [(selection)]="selectedFile" [filter]="true" [contextMenu]="cm">sfsfsfsfs</p-tree>
+          <p-contextMenu #cm appendTo="body" [model]="items"></p-contextMenu>
+        </div>
+        <div>
+          <!-- <sh-context-menu #menu1 style="background-color:white">
+            <ng-template shContextMenuItem let-data style="background-color:white">
+              <div (click)="landModulePage()" class="menuu treeStructureCreate" *ngIf="create==true">Show All Modules</div>
+            </ng-template>
+          </sh-context-menu> -->
+        </div>
+      </div>
+    </div>
+
+    <div class="ui-g-10 ui-md-10" style="height:100vh;border-top: 1px solid #dee2e6!important;">
+      <div>
+        <div *ngIf="addRelease == true">
+          <div class="row" style="margin: unset">
+            <div class="col-lg-2 col-md-2 col-sm-2 mb-3 mr-sm-3" style="padding: unset">
+              <label for="module">Module</label>
+              <select class="form-control" [(ngModel)]="moduleId" (change)="moduleIndex(moduleId)">
+                <!-- <option value="" ></option> -->
+                <option *ngFor="let var_moduleName of moduleNames" value="{{var_moduleName.moduleId}}">
+                  {{var_moduleName.moduleName}}</option>
+              </select>
+            </div>
+            <br>
+            <div class="col-lg-2 col-md-2 col-sm-2 mb-3 mr-sm-3" style="padding: unset">
+              <label for="feature">Features</label>
+              <select class="form-control" [(ngModel)]="featureId">
+                <!-- <option value="" ></option> -->
+                <option *ngFor="let var2_featureName of featureNames" value="{{var2_featureName.featureId}}">
+                  {{var2_featureName.featureName}}</option>
+              </select>
+            </div>
+            <br>
+            <div class="col-lg-2 col-md-2 col-sm-2 mb-3 mr-sm-3" style="padding: unset">
+              <label for="type">Type</label>
+              <select class="form-control" [(ngModel)]="selectedType">
+                <option [ngValue]='All'>All</option>
+                <option *ngFor="let type of typeArray" value="{{type.typeId}}">{{type.typeName}}</option>
+              </select>
+            </div>
+            <br>
+            <div class="col-lg-2 col-md-2 col-sm-2 mb-3 mr-sm-3" style="padding: unset">
+              <label for="priority">Priority</label>
+              <select class="form-control " [(ngModel)]="selectedPriority">
+                <option [ngValue]='All'>All</option>
+                <option *ngFor="let priority of priorityArray" value="{{priority.priorityId}}">{{priority.priorityName}}
+                </option>
+              </select>
+            </div>
+            <div class="col-lg-2 col-md-2 col-sm-2 col2">
+              <button type="button" class="btn btn-lg"
+                (click)=search(moduleId,featureId,selectedType,selectedPriority)>Search</button>
+            </div>
+            <br>
+          </div><br><br>
+
+          <!-- <div class="example-container shadow-lg table-container">
+            <table mat-table [dataSource]="testScriptsData" matSort class="mat-elevation-z8">
+              <div *ngIf="noData==true" id="noData">{{allData}}</div>
+              <div *ngIf="noData!=true">
+                <ng-container matColumnDef="Sl.No">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header class="angulartheadColor"> Sl.No </th>
+                  <td mat-cell *matCellDef="let element;">
+                    <mat-checkbox class="example-margin" [(ngModel)]="element.checkbox" (ngModelChange)=copy(i,element,element.checkbox)></mat-checkbox>
+                  </td>
+                </ng-container>
+
+                <ng-container matColumnDef="Module">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header class="angulartheadColor"> Module </th>
+                  <td mat-cell *matCellDef="let element"> {{element.moduleName}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="Feature">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header class="angulartheadColor">Feature </th>
+                  <td mat-cell *matCellDef="let element"> {{element.featureName}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="Testcase">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header class="angulartheadColor"> Testcase </th>
+                  <td mat-cell *matCellDef="let element"> {{element.scriptName}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="Type">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header class="angulartheadColor"> Type </th>
+                  <td mat-cell *matCellDef="let element"> {{element.type}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="Priority">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header class="angulartheadColor"> Priority </th>
+                  <td mat-cell *matCellDef="let element"> {{element.priority}} </td>
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumns;sticky: true" class="angulartheadColor"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+              </div>
+            </table>
+          </div> -->
+          <div>
+            <table class="shadow-lg scroll" style="width: 100%;">
+              <thead class="theadColor">
+                <th>&nbsp;
+                <input type="checkbox" name="fcheck" [(ngModel)]="disable"  [hidden]="hidden"
+                class='checkBoxSelect'(click)="checks(testScriptsData,$event)">
+            </th>
+                <th class="col-xs-3">Module</th>
+                <th class="col-xs-3">Feature </th>
+                <th class="col-xs-2">Testcase</th>
+                <th class="col-xs-1">Type</th>
+                <th class="col-xs-2">Priority</th>
+              </thead>
+              <tbody>
+                <div *ngIf="noData==true" id="noData">{{allData}}</div>
+                <div *ngIf="noData!=true">
+                  <tr *ngFor="let test of testScriptsData;let i = index;">
+                    <td *ngIf="srch==true" class="col-xs-1">
+                      <input type="checkbox" [(ngModel)]="test.checkbox" [checked]=checkd (ngModelChange)="copy(i,test,test.checkbox)">
+                      <!-- <input type="checkbox" [checked]=checkd  [(ngModel)]="test.checkbox" (ngModelChange)="copy(i,test,test.checkbox)"> -->
+                    </td>
+                    <td *ngIf="srch==true" class="col-xs-3"><span>{{test.moduleName}}</span></td>
+                    <td *ngIf="srch==true" class="col-xs-3"><span>{{test.featureName}}</span></td>
+                    <td *ngIf="srch==true" class="col-xs-2"><span style="margin-left: 6px">{{test.scriptName}}</span></td>
+                    <td *ngIf="srch==true" class="col-xs-1"><span style="margin-left: 6px">{{test.type1}}</span></td>
+                    <td *ngIf="srch==true" class="col-xs-2"><span style="margin-left: 6px">{{test.priority}}</span></td>
+                  </tr>
+                </div>
+              </tbody>
+            </table>
+            <br>
+            <div class="text-center">
+              <button type="button" class="btn btn-lg"  data-toggle="modal" (click)=" viewReleases(pageName)">
+                View Release</button>&nbsp;&nbsp;&nbsp;&nbsp;
+              <button type="button" class="btn btn-lg" *ngIf="create==true" data-toggle="modal" (click)="saveRelease(testScriptsData)">
+                Add to Release</button>
+            </div>
+          </div>
+        </div>
+        <!-- <div *ngIf="viewRelease == true">
+        <div>
+          <table class="shadow-lg scroll " style="width: auto;">
+            <thead class="theadColor" style="line-height: 17px ">
+                <th class="col-xs-1">Sl.No</th>
+                <th class="col-xs-2" >Module</th>
+                <th class="col-xs-2" >Feature</th>
+                <th class="col-xs-2" >Testcase</th>
+                <th class="col-xs-2">Type</th>
+                <th class="col-xs-2">Priority</th>
+            </thead>
+            <tbody>
+
+                <tr *ngFor="let test of releaseDataAdded; let i = index">
+                  <td *ngIf="searchButton==true" class="col-xs-1">{{i+1}}</td>
+                  <td *ngIf="searchButton==true" class="col-xs-2"><span>{{test.moduleName}}</span></td>
+                  <td *ngIf="searchButton==true" class="col-xs-2"><span>{{test.featureName}}</span></td>
+                  <td *ngIf="searchButton==true" class="col-xs-2"><span
+                      style="margin-left: 6px">{{test.scriptName}}</span></td>
+                  <td *ngIf="searchButton==true" class="col-xs-2"><span style="margin-left: 6px">{{test.type}}</span>
+                  </td>
+                  <td *ngIf="searchButton==true" class="col-xs-2"><span
+                      style="margin-left: 6px">{{test.priority}}</span></td>
+                </tr>
+            </tbody>
+          </table>
+        </div>
+      </div> -->
+
+
+      </div>
+      <div class="example-container shadow-lg table-container p-3" *ngIf="viewRelease == true">
+        <div><label><u><h1>Releases with mapped testcases</h1></u></label>
+        
+        </div>
+        <table mat-table [dataSource]="releaseDataAdded" matSort class="mat-elevation-z8">
+
+          <!-- Position Column -->
+          <ng-container matColumnDef="Sl.No">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header class="angulartheadColor"> Sl.No </th>
+            <td mat-cell *matCellDef="let element; let i = index;"> {{i+1}}</td>
+          </ng-container>
+
+          <!-- Name Column -->
+          <ng-container matColumnDef="Module">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header class="angulartheadColor"> Module </th>
+            <td mat-cell *matCellDef="let element"> {{element.moduleName}} </td>
+          </ng-container>
+
+          <!-- Weight Column -->
+          <ng-container matColumnDef="Feature">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header class="angulartheadColor">Feature </th>
+            <td mat-cell *matCellDef="let element"> {{element.featureName}} </td>
+          </ng-container>
+
+          <!-- Symbol Column -->
+          <ng-container matColumnDef="Testcase">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header class="angulartheadColor"> Testcase </th>
+            <td mat-cell *matCellDef="let element"> {{element.scriptName}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="Type">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header class="angulartheadColor"> Type </th>
+            <td mat-cell *matCellDef="let element"> {{element.type1}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="Priority">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header class="angulartheadColor"> Priority </th>
+            <td mat-cell *matCellDef="let element"> {{element.priority}} </td>
+          </ng-container>
+
+
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+        <div *ngIf="noData==true" id="noData">{{allData}}</div>
+      </div>
+      <div style="text-align: center;padding-top: 10px;" *ngIf="viewRelease == true">
+        <button type="button" class="btn btn-lg" *ngIf="create==true" data-toggle="modal" (click)="addToRelease()">
+          Add to Release</button>
+      </div>
+
+    </div>
+  </div>
+</div>

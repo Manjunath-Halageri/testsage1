@@ -1,0 +1,115 @@
+/* / You can add global styles to this file, and also import other style files / */
+@import "~@angular/cdk/overlay-prebuilt.css";
+
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+
+/* @import "~@ng-select/ng-select/themes/default.theme.css"; */
+
+/* @import "~jsoneditor/dist/jsoneditor.min.css"; */
+.save-snackbar {
+    background: #A6F30B;
+    color:black;
+    /* / font-weight: bold; / */
+  }
+  .update-snackbar {
+    background: #A6F30B;
+    color:black;
+    /* / font-weight: bold; / */
+  }
+  .duplicate-snackbar {
+    background: rgb(230, 102, 17);
+    color:black;
+    /* / font-weight: bold; / */
+  }
+    html {
+      /* overflow: hidden; */
+      height: 100%;
+      min-height: 100%;
+    }
+    
+    body {
+      margin: 0px;
+      font-family: 'Roboto', sans-serif;
+      height: 100%;
+      min-height: 100%;
+      /* background: #303030; */
+    }
+
+    .modal-backdrop.show  {
+      z-index: -1 !important;
+  }
+
+  .modal-backdrop.fade {
+    z-index: -1 !important;
+}
+
+.modal-backdrop.in {
+  z-index: -1 !important;
+}
+
+.mat-drawer-inner-container{ overflow-x: hidden !important; }
+
+.mat-form-field-wrapper {
+  padding-bottom: unset;
+}
+.mat-form-field-flex {
+align-items: center !important;
+}
+.mat-form-field-infix {
+padding: unset !important;
+border-top: unset !important;
+}
+
+
+.mat-datepicker-toggle .mat-icon-button {
+  
+  font-size: 12px;
+  background: #d1ecd1;
+  margin-left: 10px;
+  color: black;
+}
+
+.mat-radio-group{
+  display:flex ;
+  width:100%;
+  font-size:0.5em;
+  justify-content: space-between;
+  font-size: 14px  !important;
+font-weight: 700 !important;
+font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif !important;
+}
+
+.my-panel {
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-width: 150px !important;
+  font-size: 12px;
+  margin-left: 45px;
+}
+.my-panel-manual {
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-width: 150px !important;
+  font-size: 12px;
+  margin-left: 25px;
+}
+
+.mat-option {
+  font-size: 12px;
+  line-height: 3em;
+  height: 3em;
+}
+
+.mat-select-value {
+  display: table-cell;
+  max-width: 0;
+  width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 12px;
+}

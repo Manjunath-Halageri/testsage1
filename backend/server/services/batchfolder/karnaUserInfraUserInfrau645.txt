@@ -1,0 +1,2 @@
+CONTAINER ID   IMAGE                     COMMAND                  CREATED             STATUS                   PORTS                    NAMES
+8a24a5fd6447   owasp/zap2docker-stable   "zap-x.sh -daemon -h…"   About an hour ago   Up 2 minutes (healthy)   0.0.0.0:8080->8080/tcp   zapDocker_1

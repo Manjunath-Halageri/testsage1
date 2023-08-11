@@ -1,0 +1,22 @@
+const express = require('express');
+const releaseCreateController= require('../controllers/releaseCreateController');
+let router = express.Router();
+router.post('/releaseCreate',releaseCreateController.releaseCreate);
+router.get('/releaseDisplay',releaseCreateController.releaseDisplay);
+router.put('/releaseUpdate',releaseCreateController.releaseUpdate);
+router.get('/getModules',releaseCreateController.getModules);
+router.get('/getFeatures',releaseCreateController.getFeatures);
+router.post('/releaseVersion',releaseCreateController.releaseVersion);
+router.get('/findReleaseData',releaseCreateController.findReleaseData);
+router.get('/getActiveReleaseVer',releaseCreateController.getActiveReleaseVer);
+router.get('/displayAllRelease',releaseCreateController.displayAllRelease);
+router.get('/editRelease',releaseCreateController.editRelease);
+router.get('/displayClosedReleases',releaseCreateController.displayClosedReleases);
+router.get('/displayAllClosedRelease',releaseCreateController.displayAllClosedRelease);
+router.get('/searchReleaseWiseData',releaseCreateController.searchReleaseWiseData);
+router.get('/getTestScriptDetails',releaseCreateController.getTestScriptDetails);
+router.get('/getModuleData',releaseCreateController.getModuleData);
+router.get('/importType',releaseCreateController.importType);
+router.get('/importPriority',releaseCreateController.importPriority);
+
+module.exports = router;

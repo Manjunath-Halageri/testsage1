@@ -1,0 +1,2188 @@
+Sites: http://edgedl.me.gvt1.com https://update.googleapis.com http://the-internet.herokuapp.com https://298279967.log.optimizely.com https://accounts.google.com https://the-internet.herokuapp.com
+Generated on Mon, 17 Jul 2023 07:27:57
+ZAP Version: 2.12.0
+Summary of Alerts
+Risk Level	Number of Alerts
+High
+0
+Medium
+4
+Low
+7
+Informational
+5
+False Positives:
+0
+Alerts
+Name	Risk Level	Number of Instances
+Absence of Anti-CSRF Tokens	Medium	8
+Content Security Policy (CSP) Header Not Set	Medium	86
+Vulnerable JS Library	Medium	6
+Weak Authentication Method	Medium	7
+Application Error Disclosure	Low	3
+Cookie Without Secure Flag	Low	3
+Cookie without SameSite Attribute	Low	16
+Cross-Domain JavaScript Source File Inclusion	Low	5
+Information Disclosure - Debug Error Messages	Low	2
+Server Leaks Version Information via "Server" HTTP Response Header Field	Low	143
+Strict-Transport-Security Header Not Set	Low	18
+Information Disclosure - Sensitive Information in URL	Informational	2
+Information Disclosure - Suspicious Comments	Informational	43
+Modern Web Application	Informational	16
+Re-examine Cache-control Directives	Informational	3
+Retrieved from Cache	Informational	19
+Alert Detail
+Medium
+Absence of Anti-CSRF Tokens
+Description	
+No Anti-CSRF tokens were found in a HTML submission form.
+
+A cross-site request forgery is an attack that involves forcing a victim to send an HTTP request to a target destination without their knowledge or intent in order to perform an action as the victim. The underlying cause is application functionality using predictable URL/form actions in a repeatable way. The nature of the attack is that CSRF exploits the trust that a web site has for a user. By contrast, cross-site scripting (XSS) exploits the trust that a user has for a web site. Like XSS, CSRF attacks are not necessarily cross-site, but they can be. Cross-site request forgery is also known as CSRF, XSRF, one-click attack, session riding, confused deputy, and sea surf.
+
+CSRF attacks are effective in a number of situations, including:
+
+* The victim has an active session on the target site.
+
+* The victim is authenticated via HTTP auth on the target site.
+
+* The victim is on the same local network as the target site.
+
+CSRF has primarily been used to perform an action against a target site using the victim's privileges, but recent techniques have been discovered to disclose information by gaining access to the response. The risk of information disclosure is dramatically increased when the target site is vulnerable to XSS, because XSS can be used as a platform for CSRF, allowing the attack to operate within the bounds of the same-origin policy.
+URL	http://the-internet.herokuapp.com/checkboxes
+Method	GET
+Parameter	
+Attack	
+Evidence	<form id='checkboxes'>
+URL	http://the-internet.herokuapp.com/dynamic_controls
+Method	GET
+Parameter	
+Attack	
+Evidence	<form id="checkbox-example">
+URL	http://the-internet.herokuapp.com/dynamic_controls
+Method	GET
+Parameter	
+Attack	
+Evidence	<form id="input-example">
+URL	http://the-internet.herokuapp.com/forgot_password
+Method	GET
+Parameter	
+Attack	
+Evidence	<form name="forgot_password" id="forgot_password" action="/forgot_password" method="post" >
+URL	http://the-internet.herokuapp.com/key_presses
+Method	GET
+Parameter	
+Attack	
+Evidence	<form>
+URL	http://the-internet.herokuapp.com/login
+Method	GET
+Parameter	
+Attack	
+Evidence	<form name="login" id="login" action="/authenticate" method="post" >
+URL	http://the-internet.herokuapp.com/upload
+Method	GET
+Parameter	
+Attack	
+Evidence	<form method='POST' enctype='multipart/form-data'>
+URL	https://the-internet.herokuapp.com/login
+Method	GET
+Parameter	
+Attack	
+Evidence	<form name="login" id="login" action="/authenticate" method="post" >
+Instances	8
+Solution	
+Phase: Architecture and Design
+
+Use a vetted library or framework that does not allow this weakness to occur or provides constructs that make this weakness easier to avoid.
+
+For example, use anti-CSRF packages such as the OWASP CSRFGuard.
+
+Phase: Implementation
+
+Ensure that your application is free of cross-site scripting issues, because most CSRF defenses can be bypassed using attacker-controlled script.
+
+Phase: Architecture and Design
+
+Generate a unique nonce for each form, place the nonce into the form, and verify the nonce upon receipt of the form. Be sure that the nonce is not predictable (CWE-330).
+
+Note that this can be bypassed using XSS.
+
+Identify especially dangerous operations. When the user performs a dangerous operation, send a separate confirmation request to ensure that the user intended to perform that operation.
+
+Note that this can be bypassed using XSS.
+
+Use the ESAPI Session Management control.
+
+This control includes a component for CSRF.
+
+Do not use the GET method for any request that triggers a state change.
+
+Phase: Implementation
+
+Check the HTTP Referer header to see if the request originated from an expected page. This could break legitimate functionality, because users or proxies may have disabled sending the Referer for privacy reasons.
+Reference	http://projects.webappsec.org/Cross-Site-Request-Forgery
+http://cwe.mitre.org/data/definitions/352.html
+CWE Id	352
+WASC Id	9
+Plugin Id	10202
+Medium
+Content Security Policy (CSP) Header Not Set
+Description	
+Content Security Policy (CSP) is an added layer of security that helps to detect and mitigate certain types of attacks, including Cross Site Scripting (XSS) and data injection attacks. These attacks are used for everything from data theft to site defacement or distribution of malware. CSP provides a set of standard HTTP headers that allow website owners to declare approved sources of content that browsers should be allowed to load on that page — covered types are JavaScript, CSS, HTML frames, fonts, images and embeddable objects such as Java applets, ActiveX, audio and video files.
+URL	http://the-internet.herokuapp.com/
+Method	GET
+Parameter	
+Attack	
+Evidence	
+URL	http://the-internet.herokuapp.com/about/
+Method	GET
+Parameter	
+Attack	
+Evidence	
+URL	http://the-internet.herokuapp.com/abtest
+Method	GET
+Parameter	
+Attack	
+Evidence	
+URL	http://the-internet.herokuapp.com/abtest_cookies
+Method	GET
+Parameter	
+Attack	
+Evidence	
+URL	http://the-internet.herokuapp.com/abtest_manual
+Method	GET
+Parameter	
+Attack	
+Evidence	
+URL	http://the-internet.herokuapp.com/add_remove_elements/
+Method	GET
+Parameter	
+Attack	
+Evidence	
+URL	http://the-internet.herokuapp.com/asdf.jpg
+Method	GET
+Parameter	
+Attack	
+Evidence	
+URL	http://the-internet.herokuapp.com/basic_auth
+Method	GET
+Parameter	
+Attack	
+Evidence	
+URL	http://the-internet.herokuapp.com/broken_images
+Method	GET
+Parameter	
+Attack	
+Evidence	
+URL	http://the-internet.herokuapp.com/challenging_dom
+Method	GET
+Parameter	
+Attack	
+Evidence	
+URL	http://the-internet.herokuapp.com/checkboxes
+Method	GET
+Parameter	
+Attack	
+Evidence	
+URL	http://the-internet.herokuapp.com/contact-us/
+Method	GET
+Parameter	
+Attack	
+Evidence	
+URL	http://the-internet.herokuapp.com/context_menu
+Method	GET
+Parameter	
+Attack	
+Evidence	
+URL	http://the-internet.herokuapp.com/css/styles.css
+Method	GET
+Parameter	
+Attack	
+Evidence	
+URL	http://the-internet.herokuapp.com/disappearing_elements
+Method	GET
+Parameter	
+Attack	
+Evidence	
+URL	http://the-internet.herokuapp.com/download
+Method	GET
+Parameter	
+Attack	
+Evidence	
+URL	http://the-internet.herokuapp.com/download_secure
+Method	GET
+Parameter	
+Attack	
+Evidence	
+URL	http://the-internet.herokuapp.com/drag_and_drop
+Method	GET
+Parameter	
+Attack	
+Evidence	
+URL	http://the-internet.herokuapp.com/dropdown
+Method	GET
+Parameter	
+Attack	
+Evidence	
+URL	http://the-internet.herokuapp.com/dynamic_content
+Method	GET
+Parameter	
+Attack	
+Evidence	
+URL	http://the-internet.herokuapp.com/dynamic_content?with_content=static
+Method	GET
+Parameter	
+Attack	
+Evidence	
+URL	http://the-internet.herokuapp.com/dynamic_controls
+Method	GET
+Parameter	
+Attack	
+Evidence	
+URL	http://the-internet.herokuapp.com/dynamic_loading
+Method	GET
+Parameter	
+Attack	
+Evidence	
+URL	http://the-internet.herokuapp.com/dynamic_loading/1
+Method	GET
+Parameter	
+Attack	
+Evidence	
+URL	http://the-internet.herokuapp.com/dynamic_loading/2
+Method	GET
+Parameter	
+Attack	
+Evidence	
+URL	http://the-internet.herokuapp.com/entry_ad
+Method	GET
+Parameter	
+Attack	
+Evidence	
+URL	http://the-internet.herokuapp.com/exit_intent
+Method	GET
+Parameter	
+Attack	
+Evidence	
+URL	http://the-internet.herokuapp.com/floating_menu
+Method	GET
+Parameter	
+Attack	
+Evidence	
+URL	http://the-internet.herokuapp.com/forgot_password
+Method	GET
+Parameter	
+Attack	
+Evidence	
+URL	http://the-internet.herokuapp.com/frame_bottom
+Method	GET
+Parameter	
+Attack	
+Evidence	
+URL	http://the-internet.herokuapp.com/frame_left
+Method	GET
+Parameter	
+Attack	
+Evidence	
+URL	http://the-internet.herokuapp.com/frame_middle
+Method	GET
+Parameter	
+Attack	
+Evidence	
+URL	http://the-internet.herokuapp.com/frame_right
+Method	GET
+Parameter	
+Attack	
+Evidence	
+URL	http://the-internet.herokuapp.com/frame_top
+Method	GET
+Parameter	
+Attack	
+Evidence	
+URL	http://the-internet.herokuapp.com/frames
+Method	GET
+Parameter	
+Attack	
+Evidence	
+URL	http://the-internet.herokuapp.com/gallery/
+Method	GET
+Parameter	
+Attack	
+Evidence	
+URL	http://the-internet.herokuapp.com/geolocation
+Method	GET
+Parameter	
+Attack	
+Evidence	
+URL	http://the-internet.herokuapp.com/hjkl.jpg
+Method	GET
+Parameter	
+Attack	
+Evidence	
+URL	http://the-internet.herokuapp.com/horizontal_slider
+Method	GET
+Parameter	
+Attack	
+Evidence	
+URL	http://the-internet.herokuapp.com/hovers
+Method	GET
+Parameter	
+Attack	
+Evidence	
+URL	http://the-internet.herokuapp.com/iframe
+Method	GET
+Parameter	
+Attack	
+Evidence	
+URL	http://the-internet.herokuapp.com/infinite_scroll
+Method	GET
+Parameter	
+Attack	
+Evidence	
+URL	http://the-internet.herokuapp.com/infinite_scroll/1
+Method	GET
+Parameter	
+Attack	
+Evidence	
+URL	http://the-internet.herokuapp.com/infinite_scroll/2
+Method	GET
+Parameter	
+Attack	
+Evidence	
+URL	http://the-internet.herokuapp.com/infinite_scroll/3
+Method	GET
+Parameter	
+Attack	
+Evidence	
+URL	http://the-internet.herokuapp.com/inputs
+Method	GET
+Parameter	
+Attack	
+Evidence	
+URL	http://the-internet.herokuapp.com/javascript_alerts
+Method	GET
+Parameter	
+Attack	
+Evidence	
+URL	http://the-internet.herokuapp.com/javascript_error
+Method	GET
+Parameter	
+Attack	
+Evidence	
+URL	http://the-internet.herokuapp.com/jqueryui
+Method	GET
+Parameter	
+Attack	
+Evidence	
+URL	http://the-internet.herokuapp.com/jqueryui/menu
+Method	GET
+Parameter	
+Attack	
+Evidence	
+URL	http://the-internet.herokuapp.com/key_presses
+Method	GET
+Parameter	
+Attack	
+Evidence	
+URL	http://the-internet.herokuapp.com/large
+Method	GET
+Parameter	
+Attack	
+Evidence	
+URL	http://the-internet.herokuapp.com/login
+Method	GET
+Parameter	
+Attack	
+Evidence	
+URL	http://the-internet.herokuapp.com/nested_frames
+Method	GET
+Parameter	
+Attack	
+Evidence	
+URL	http://the-internet.herokuapp.com/notification_message_rendered
+Method	GET
+Parameter	
+Attack	
+Evidence	
+URL	http://the-internet.herokuapp.com/portfolio/
+Method	GET
+Parameter	
+Attack	
+Evidence	
+URL	http://the-internet.herokuapp.com/redirector
+Method	GET
+Parameter	
+Attack	
+Evidence	
+URL	http://the-internet.herokuapp.com/shadowdom
+Method	GET
+Parameter	
+Attack	
+Evidence	
+URL	http://the-internet.herokuapp.com/shifting_content
+Method	GET
+Parameter	
+Attack	
+Evidence	
+URL	http://the-internet.herokuapp.com/shifting_content/image
+Method	GET
+Parameter	
+Attack	
+Evidence	
+URL	http://the-internet.herokuapp.com/shifting_content/image?image_type=simple
+Method	GET
+Parameter	
+Attack	
+Evidence	
+URL	http://the-internet.herokuapp.com/shifting_content/image?mode=random
+Method	GET
+Parameter	
+Attack	
+Evidence	
+URL	http://the-internet.herokuapp.com/shifting_content/image?mode=random&pixel_shift=100
+Method	GET
+Parameter	
+Attack	
+Evidence	
+URL	http://the-internet.herokuapp.com/shifting_content/image?pixel_shift=100
+Method	GET
+Parameter	
+Attack	
+Evidence	
+URL	http://the-internet.herokuapp.com/shifting_content/list
+Method	GET
+Parameter	
+Attack	
+Evidence	
+URL	http://the-internet.herokuapp.com/shifting_content/menu
+Method	GET
+Parameter	
+Attack	
+Evidence	
+URL	http://the-internet.herokuapp.com/shifting_content/menu?mode=random
+Method	GET
+Parameter	
+Attack	
+Evidence	
+URL	http://the-internet.herokuapp.com/shifting_content/menu?mode=random&pixel_shift=100
+Method	GET
+Parameter	
+Attack	
+Evidence	
+URL	http://the-internet.herokuapp.com/shifting_content/menu?pixel_shift=100
+Method	GET
+Parameter	
+Attack	
+Evidence	
+URL	http://the-internet.herokuapp.com/slow
+Method	GET
+Parameter	
+Attack	
+Evidence	
+URL	http://the-internet.herokuapp.com/status_codes
+Method	GET
+Parameter	
+Attack	
+Evidence	
+URL	http://the-internet.herokuapp.com/status_codes/200
+Method	GET
+Parameter	
+Attack	
+Evidence	
+URL	http://the-internet.herokuapp.com/status_codes/404
+Method	GET
+Parameter	
+Attack	
+Evidence	
+URL	http://the-internet.herokuapp.com/status_codes/500
+Method	GET
+Parameter	
+Attack	
+Evidence	
+URL	http://the-internet.herokuapp.com/tables
+Method	GET
+Parameter	
+Attack	
+Evidence	
+URL	http://the-internet.herokuapp.com/tinymce
+Method	GET
+Parameter	
+Attack	
+Evidence	
+URL	http://the-internet.herokuapp.com/typos
+Method	GET
+Parameter	
+Attack	
+Evidence	
+URL	http://the-internet.herokuapp.com/upload
+Method	GET
+Parameter	
+Attack	
+Evidence	
+URL	http://the-internet.herokuapp.com/users/1
+Method	GET
+Parameter	
+Attack	
+Evidence	
+URL	http://the-internet.herokuapp.com/users/2
+Method	GET
+Parameter	
+Attack	
+Evidence	
+URL	http://the-internet.herokuapp.com/users/3
+Method	GET
+Parameter	
+Attack	
+Evidence	
+URL	http://the-internet.herokuapp.com/windows
+Method	GET
+Parameter	
+Attack	
+Evidence	
+URL	http://the-internet.herokuapp.com/windows/new
+Method	GET
+Parameter	
+Attack	
+Evidence	
+URL	https://the-internet.herokuapp.com/login
+Method	GET
+Parameter	
+Attack	
+Evidence	
+URL	http://the-internet.herokuapp.com/forgot_password
+Method	POST
+Parameter	
+Attack	
+Evidence	
+URL	http://the-internet.herokuapp.com/upload
+Method	POST
+Parameter	
+Attack	
+Evidence	
+Instances	86
+Solution	
+Ensure that your web server, application server, load balancer, etc. is configured to set the Content-Security-Policy header.
+Reference	https://developer.mozilla.org/en-US/docs/Web/Security/CSP/Introducing_Content_Security_Policy
+https://cheatsheetseries.owasp.org/cheatsheets/Content_Security_Policy_Cheat_Sheet.html
+http://www.w3.org/TR/CSP/
+http://w3c.github.io/webappsec/specs/content-security-policy/csp-specification.dev.html
+http://www.html5rocks.com/en/tutorials/security/content-security-policy/
+http://caniuse.com/#feat=contentsecuritypolicy
+http://content-security-policy.com/
+CWE Id	693
+WASC Id	15
+Plugin Id	10038
+Medium
+Vulnerable JS Library
+Description	
+The identified library jquery, version 1.6.4 is vulnerable.
+URL	http://the-internet.herokuapp.com/js/vendor/298279967.js
+Method	GET
+Parameter	
+Attack	
+Evidence	,jquery:"1.6.4"
+URL	http://the-internet.herokuapp.com/js/vendor/jquery-1.11.3.min.js
+Method	GET
+Parameter	
+Attack	
+Evidence	jquery-1.11.3.min.js
+URL	http://the-internet.herokuapp.com/js/vendor/jquery-ui-1.11.4/jquery-ui.js
+Method	GET
+Parameter	
+Attack	
+Evidence	/*! jQuery UI - v1.11.4
+URL	https://the-internet.herokuapp.com/js/vendor/298279967.js
+Method	GET
+Parameter	
+Attack	
+Evidence	,jquery:"1.6.4"
+URL	https://the-internet.herokuapp.com/js/vendor/jquery-1.11.3.min.js
+Method	GET
+Parameter	
+Attack	
+Evidence	jquery-1.11.3.min.js
+URL	https://the-internet.herokuapp.com/js/vendor/jquery-ui-1.11.4/jquery-ui.js
+Method	GET
+Parameter	
+Attack	
+Evidence	/*! jQuery UI - v1.11.4
+Instances	6
+Solution	
+Please upgrade to the latest version of jquery.
+Reference	https://nvd.nist.gov/vuln/detail/CVE-2012-6708
+https://github.com/jquery/jquery/issues/2432
+http://research.insecurelabs.org/jquery/test/
+https://nvd.nist.gov/vuln/detail/CVE-2019-11358
+https://github.com/jquery/jquery.com/issues/162
+https://nvd.nist.gov/vuln/detail/CVE-2020-7656
+http://blog.jquery.com/2016/01/08/jquery-2-2-and-1-12-released/
+http://bugs.jquery.com/ticket/11290
+https://blog.jquery.com/2019/04/10/jquery-3-4-0-released/
+https://nvd.nist.gov/vuln/detail/CVE-2015-9251
+https://github.com/advisories/GHSA-q4m3-2j7h-f7xw
+https://github.com/jquery/jquery/commit/753d591aea698e57d6db58c9f722cd0808619b1b
+https://blog.jquery.com/2020/04/10/jquery-3-5-0-released/
+CWE Id	829
+WASC Id	
+Plugin Id	10003
+Medium
+Weak Authentication Method
+Description	
+HTTP basic or digest authentication has been used over an unsecured connection. The credentials can be read and then reused by someone with access to the network.
+URL	http://the-internet.herokuapp.com/basic_auth
+Method	GET
+Parameter	
+Attack	
+Evidence	WWW-Authenticate: Basic realm="Restricted Area"
+URL	http://the-internet.herokuapp.com/digest_auth
+Method	GET
+Parameter	
+Attack	
+Evidence	WWW-Authenticate: Digest realm="Protected Area", nonce="MTY4OTU3Njc5MyBhMDFiZGE3NDMzZTdiNjUwMDRhMmIxYWVlMWUzMzU5NQ==", opaque="610a2ee688cda9e724885e23cd2cfdee", qop="auth"
+URL	http://the-internet.herokuapp.com/digest_auth
+Method	GET
+Parameter	
+Attack	
+Evidence	WWW-Authenticate: Digest realm="Protected Area", nonce="MTY4OTU3NzMyMiAwNjM2YjVhNjY0N2ZmM2M4MmE4NjhlNWU2Mjg3NTYxNg==", opaque="610a2ee688cda9e724885e23cd2cfdee", qop="auth"
+URL	http://the-internet.herokuapp.com/digest_auth
+Method	GET
+Parameter	
+Attack	
+Evidence	WWW-Authenticate: Digest realm="Protected Area", nonce="MTY4OTU3Nzc5NSA1YzA1YWQ4ODA3MWM5YjliNjc1ODQyZjNkOWE0OWIxYw==", opaque="610a2ee688cda9e724885e23cd2cfdee", qop="auth"
+URL	http://the-internet.herokuapp.com/digest_auth
+Method	GET
+Parameter	
+Attack	
+Evidence	WWW-Authenticate: Digest realm="Protected Area", nonce="MTY4OTU3ODIwNiA5NmM0MWMyNzE4MGMxYWFiY2QyOGE0ZDc0YmVmMjU2Mw==", opaque="610a2ee688cda9e724885e23cd2cfdee", qop="auth"
+URL	http://the-internet.herokuapp.com/digest_auth
+Method	GET
+Parameter	
+Attack	
+Evidence	WWW-Authenticate: Digest realm="Protected Area", nonce="MTY4OTU3ODcwMiA1YzAxZmM3ODc1YzYzNGQ0MGY5NThlMmI4NmExZjZmZg==", opaque="610a2ee688cda9e724885e23cd2cfdee", qop="auth"
+URL	http://the-internet.herokuapp.com/download_secure
+Method	GET
+Parameter	
+Attack	
+Evidence	WWW-Authenticate: Basic realm="Restricted Area"
+Instances	7
+Solution	
+Protect the connection using HTTPS or use a stronger authentication mechanism
+Reference	https://cheatsheetseries.owasp.org/cheatsheets/Authentication_Cheat_Sheet.html
+CWE Id	326
+WASC Id	4
+Plugin Id	10105
+Low
+Application Error Disclosure
+Description	
+This page contains an error/warning message that may disclose sensitive information like the location of the file that produced the unhandled exception. This information can be used to launch further attacks against the web application. The alert could be a false positive if the error message is found inside a documentation page.
+URL	http://the-internet.herokuapp.com/status_codes/500
+Method	GET
+Parameter	
+Attack	
+Evidence	HTTP/1.1 500 Internal Server Error
+URL	http://the-internet.herokuapp.com/forgot_password
+Method	POST
+Parameter	
+Attack	
+Evidence	HTTP/1.1 500 Internal Server Error
+URL	http://the-internet.herokuapp.com/upload
+Method	POST
+Parameter	
+Attack	
+Evidence	HTTP/1.1 500 Internal Server Error
+Instances	3
+Solution	
+Review the source code of this page. Implement custom error pages. Consider implementing a mechanism to provide a unique error reference/identifier to the client (browser) while logging the details on the server side and not exposing them to the user.
+Reference	
+CWE Id	200
+WASC Id	13
+Plugin Id	90022
+Low
+Cookie Without Secure Flag
+Description	
+A cookie has been set without the secure flag, which means that the cookie can be accessed via unencrypted connections.
+URL	https://the-internet.herokuapp.com/login
+Method	GET
+Parameter	rack.session
+Attack	
+Evidence	Set-Cookie: rack.session
+URL	https://the-internet.herokuapp.com/robots.txt
+Method	GET
+Parameter	rack.session
+Attack	
+Evidence	Set-Cookie: rack.session
+URL	https://the-internet.herokuapp.com/authenticate
+Method	POST
+Parameter	rack.session
+Attack	
+Evidence	Set-Cookie: rack.session
+Instances	3
+Solution	
+Whenever a cookie contains sensitive information or is a session token, then it should always be passed using an encrypted channel. Ensure that the secure flag is set for cookies containing such sensitive information.
+Reference	https://owasp.org/www-project-web-security-testing-guide/v41/4-Web_Application_Security_Testing/06-Session_Management_Testing/02-Testing_for_Cookies_Attributes.html
+CWE Id	614
+WASC Id	13
+Plugin Id	10011
+Low
+Cookie without SameSite Attribute
+Description	
+A cookie has been set without the SameSite attribute, which means that the cookie can be sent as a result of a 'cross-site' request. The SameSite attribute is an effective counter measure to cross-site request forgery, cross-site script inclusion, and timing attacks.
+URL	http://the-internet.herokuapp.com/
+Method	GET
+Parameter	rack.session
+Attack	
+Evidence	Set-Cookie: rack.session
+URL	http://the-internet.herokuapp.com/dynamic_content?with_content=static
+Method	GET
+Parameter	rack.session
+Attack	
+Evidence	Set-Cookie: rack.session
+URL	http://the-internet.herokuapp.com/login
+Method	GET
+Parameter	rack.session
+Attack	
+Evidence	Set-Cookie: rack.session
+URL	http://the-internet.herokuapp.com/notification_message
+Method	GET
+Parameter	rack.session
+Attack	
+Evidence	Set-Cookie: rack.session
+URL	http://the-internet.herokuapp.com/redirector
+Method	GET
+Parameter	rack.session
+Attack	
+Evidence	Set-Cookie: rack.session
+URL	http://the-internet.herokuapp.com/shifting_content/image
+Method	GET
+Parameter	page_visit_count
+Attack	
+Evidence	Set-Cookie: page_visit_count
+URL	http://the-internet.herokuapp.com/shifting_content/image?image_type=simple
+Method	GET
+Parameter	page_visit_count
+Attack	
+Evidence	Set-Cookie: page_visit_count
+URL	http://the-internet.herokuapp.com/shifting_content/image?pixel_shift=100
+Method	GET
+Parameter	page_visit_count
+Attack	
+Evidence	Set-Cookie: page_visit_count
+URL	http://the-internet.herokuapp.com/shifting_content/menu
+Method	GET
+Parameter	page_visit_count
+Attack	
+Evidence	Set-Cookie: page_visit_count
+URL	http://the-internet.herokuapp.com/shifting_content/menu?pixel_shift=100
+Method	GET
+Parameter	page_visit_count
+Attack	
+Evidence	Set-Cookie: page_visit_count
+URL	http://the-internet.herokuapp.com/slow
+Method	GET
+Parameter	rack.session
+Attack	
+Evidence	Set-Cookie: rack.session
+URL	http://the-internet.herokuapp.com/tables
+Method	GET
+Parameter	rack.session
+Attack	
+Evidence	Set-Cookie: rack.session
+URL	https://the-internet.herokuapp.com/login
+Method	GET
+Parameter	rack.session
+Attack	
+Evidence	Set-Cookie: rack.session
+URL	https://the-internet.herokuapp.com/robots.txt
+Method	GET
+Parameter	rack.session
+Attack	
+Evidence	Set-Cookie: rack.session
+URL	http://the-internet.herokuapp.com/authenticate
+Method	POST
+Parameter	rack.session
+Attack	
+Evidence	Set-Cookie: rack.session
+URL	https://the-internet.herokuapp.com/authenticate
+Method	POST
+Parameter	rack.session
+Attack	
+Evidence	Set-Cookie: rack.session
+Instances	16
+Solution	
+Ensure that the SameSite attribute is set to either 'lax' or ideally 'strict' for all cookies.
+Reference	https://tools.ietf.org/html/draft-ietf-httpbis-cookie-same-site
+CWE Id	1275
+WASC Id	13
+Plugin Id	10054
+Low
+Cross-Domain JavaScript Source File Inclusion
+Description	
+The page includes one or more script files from a third-party domain.
+URL	http://the-internet.herokuapp.com/dynamic_controls
+Method	GET
+Parameter	https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js
+Attack	
+Evidence	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+URL	http://the-internet.herokuapp.com/iframe
+Method	GET
+Parameter	https://cdn.tiny.cloud/1/mcq6n68fc0vsuywr7nx7awf11byv91g6ihxw5okkzj8aykz6/tinymce/5/tinymce.min.js
+Attack	
+Evidence	<script src="https://cdn.tiny.cloud/1/mcq6n68fc0vsuywr7nx7awf11byv91g6ihxw5okkzj8aykz6/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+URL	http://the-internet.herokuapp.com/jqueryui/menu
+Method	GET
+Parameter	http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js
+Attack	
+Evidence	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+URL	http://the-internet.herokuapp.com/jqueryui/menu
+Method	GET
+Parameter	http://ajax.googleapis.com/ajax/libs/jqueryui/1.9.2/jquery-ui.min.js
+Attack	
+Evidence	<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.9.2/jquery-ui.min.js"></script>
+URL	http://the-internet.herokuapp.com/tinymce
+Method	GET
+Parameter	https://cdn.tiny.cloud/1/mcq6n68fc0vsuywr7nx7awf11byv91g6ihxw5okkzj8aykz6/tinymce/5/tinymce.min.js
+Attack	
+Evidence	<script src="https://cdn.tiny.cloud/1/mcq6n68fc0vsuywr7nx7awf11byv91g6ihxw5okkzj8aykz6/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+Instances	5
+Solution	
+Ensure JavaScript source files are loaded from only trusted sources, and the sources can't be controlled by end users of the application.
+Reference	
+CWE Id	829
+WASC Id	15
+Plugin Id	10017
+Low
+Information Disclosure - Debug Error Messages
+Description	
+The response appeared to contain common error messages returned by platforms such as ASP.NET, and Web-servers such as IIS and Apache. You can configure the list of common debug messages.
+URL	http://the-internet.herokuapp.com/forgot_password
+Method	POST
+Parameter	
+Attack	
+Evidence	Internal Server Error
+URL	http://the-internet.herokuapp.com/upload
+Method	POST
+Parameter	
+Attack	
+Evidence	Internal Server Error
+Instances	2
+Solution	
+Disable debugging messages before pushing to production.
+Reference	
+CWE Id	200
+WASC Id	13
+Plugin Id	10023
+Low
+Server Leaks Version Information via "Server" HTTP Response Header Field
+Description	
+The web/application server is leaking version information via the "Server" HTTP response header. Access to such information may facilitate attackers identifying other vulnerabilities your web/application server is subject to.
+URL	http://the-internet.herokuapp.com/
+Method	GET
+Parameter	
+Attack	
+Evidence	WEBrick/1.6.0 (Ruby/2.7.2/2020-10-01)
+URL	http://the-internet.herokuapp.com/about/
+Method	GET
+Parameter	
+Attack	
+Evidence	WEBrick/1.6.0 (Ruby/2.7.2/2020-10-01)
+URL	http://the-internet.herokuapp.com/abtest
+Method	GET
+Parameter	
+Attack	
+Evidence	WEBrick/1.6.0 (Ruby/2.7.2/2020-10-01)
+URL	http://the-internet.herokuapp.com/abtest_cookies
+Method	GET
+Parameter	
+Attack	
+Evidence	WEBrick/1.6.0 (Ruby/2.7.2/2020-10-01)
+URL	http://the-internet.herokuapp.com/abtest_manual
+Method	GET
+Parameter	
+Attack	
+Evidence	WEBrick/1.6.0 (Ruby/2.7.2/2020-10-01)
+URL	http://the-internet.herokuapp.com/add_remove_elements/
+Method	GET
+Parameter	
+Attack	
+Evidence	WEBrick/1.6.0 (Ruby/2.7.2/2020-10-01)
+URL	http://the-internet.herokuapp.com/asdf.jpg
+Method	GET
+Parameter	
+Attack	
+Evidence	WEBrick/1.6.0 (Ruby/2.7.2/2020-10-01)
+URL	http://the-internet.herokuapp.com/basic_auth
+Method	GET
+Parameter	
+Attack	
+Evidence	WEBrick/1.6.0 (Ruby/2.7.2/2020-10-01)
+URL	http://the-internet.herokuapp.com/broken_images
+Method	GET
+Parameter	
+Attack	
+Evidence	WEBrick/1.6.0 (Ruby/2.7.2/2020-10-01)
+URL	http://the-internet.herokuapp.com/challenging_dom
+Method	GET
+Parameter	
+Attack	
+Evidence	WEBrick/1.6.0 (Ruby/2.7.2/2020-10-01)
+URL	http://the-internet.herokuapp.com/checkboxes
+Method	GET
+Parameter	
+Attack	
+Evidence	WEBrick/1.6.0 (Ruby/2.7.2/2020-10-01)
+URL	http://the-internet.herokuapp.com/contact-us/
+Method	GET
+Parameter	
+Attack	
+Evidence	WEBrick/1.6.0 (Ruby/2.7.2/2020-10-01)
+URL	http://the-internet.herokuapp.com/context_menu
+Method	GET
+Parameter	
+Attack	
+Evidence	WEBrick/1.6.0 (Ruby/2.7.2/2020-10-01)
+URL	http://the-internet.herokuapp.com/css/app.css
+Method	GET
+Parameter	
+Attack	
+Evidence	WEBrick/1.6.0 (Ruby/2.7.2/2020-10-01)
+URL	http://the-internet.herokuapp.com/css/font-awesome.css
+Method	GET
+Parameter	
+Attack	
+Evidence	WEBrick/1.6.0 (Ruby/2.7.2/2020-10-01)
+URL	http://the-internet.herokuapp.com/css/jqueryui/menu/menu.css
+Method	GET
+Parameter	
+Attack	
+Evidence	WEBrick/1.6.0 (Ruby/2.7.2/2020-10-01)
+URL	http://the-internet.herokuapp.com/css/styles.css
+Method	GET
+Parameter	
+Attack	
+Evidence	WEBrick/1.6.0 (Ruby/2.7.2/2020-10-01)
+URL	http://the-internet.herokuapp.com/digest_auth
+Method	GET
+Parameter	
+Attack	
+Evidence	WEBrick/1.6.0 (Ruby/2.7.2/2020-10-01)
+URL	http://the-internet.herokuapp.com/disappearing_elements
+Method	GET
+Parameter	
+Attack	
+Evidence	WEBrick/1.6.0 (Ruby/2.7.2/2020-10-01)
+URL	http://the-internet.herokuapp.com/download
+Method	GET
+Parameter	
+Attack	
+Evidence	WEBrick/1.6.0 (Ruby/2.7.2/2020-10-01)
+URL	http://the-internet.herokuapp.com/download/5mb%20script.xml
+Method	GET
+Parameter	
+Attack	
+Evidence	WEBrick/1.6.0 (Ruby/2.7.2/2020-10-01)
+URL	http://the-internet.herokuapp.com/download/Basics.pdf
+Method	GET
+Parameter	
+Attack	
+Evidence	WEBrick/1.6.0 (Ruby/2.7.2/2020-10-01)
+URL	http://the-internet.herokuapp.com/download/biden.png
+Method	GET
+Parameter	
+Attack	
+Evidence	WEBrick/1.6.0 (Ruby/2.7.2/2020-10-01)
+URL	http://the-internet.herokuapp.com/download/Book1.xlsx
+Method	GET
+Parameter	
+Attack	
+Evidence	WEBrick/1.6.0 (Ruby/2.7.2/2020-10-01)
+URL	http://the-internet.herokuapp.com/download/dog.png
+Method	GET
+Parameter	
+Attack	
+Evidence	WEBrick/1.6.0 (Ruby/2.7.2/2020-10-01)
+URL	http://the-internet.herokuapp.com/download/example.json
+Method	GET
+Parameter	
+Attack	
+Evidence	WEBrick/1.6.0 (Ruby/2.7.2/2020-10-01)
+URL	http://the-internet.herokuapp.com/download/jqueryui/menu/menu.csv
+Method	GET
+Parameter	
+Attack	
+Evidence	WEBrick/1.6.0 (Ruby/2.7.2/2020-10-01)
+URL	http://the-internet.herokuapp.com/download/jqueryui/menu/menu.pdf
+Method	GET
+Parameter	
+Attack	
+Evidence	WEBrick/1.6.0 (Ruby/2.7.2/2020-10-01)
+URL	http://the-internet.herokuapp.com/download/jqueryui/menu/menu.xls
+Method	GET
+Parameter	
+Attack	
+Evidence	WEBrick/1.6.0 (Ruby/2.7.2/2020-10-01)
+URL	http://the-internet.herokuapp.com/download/LambdaTest.txt
+Method	GET
+Parameter	
+Attack	
+Evidence	WEBrick/1.6.0 (Ruby/2.7.2/2020-10-01)
+URL	http://the-internet.herokuapp.com/download/raj.avif
+Method	GET
+Parameter	
+Attack	
+Evidence	WEBrick/1.6.0 (Ruby/2.7.2/2020-10-01)
+URL	http://the-internet.herokuapp.com/download/RunProject.ps1
+Method	GET
+Parameter	
+Attack	
+Evidence	WEBrick/1.6.0 (Ruby/2.7.2/2020-10-01)
+URL	http://the-internet.herokuapp.com/download/Sample%20file%20for%20test.docx
+Method	GET
+Parameter	
+Attack	
+Evidence	WEBrick/1.6.0 (Ruby/2.7.2/2020-10-01)
+URL	http://the-internet.herokuapp.com/download/sample.png
+Method	GET
+Parameter	
+Attack	
+Evidence	WEBrick/1.6.0 (Ruby/2.7.2/2020-10-01)
+URL	http://the-internet.herokuapp.com/download/some-file.txt
+Method	GET
+Parameter	
+Attack	
+Evidence	WEBrick/1.6.0 (Ruby/2.7.2/2020-10-01)
+URL	http://the-internet.herokuapp.com/download/TestImage.png
+Method	GET
+Parameter	
+Attack	
+Evidence	WEBrick/1.6.0 (Ruby/2.7.2/2020-10-01)
+URL	http://the-internet.herokuapp.com/download/upload-me.txt
+Method	GET
+Parameter	
+Attack	
+Evidence	WEBrick/1.6.0 (Ruby/2.7.2/2020-10-01)
+URL	http://the-internet.herokuapp.com/download/USA.png
+Method	GET
+Parameter	
+Attack	
+Evidence	WEBrick/1.6.0 (Ruby/2.7.2/2020-10-01)
+URL	http://the-internet.herokuapp.com/download_secure
+Method	GET
+Parameter	
+Attack	
+Evidence	WEBrick/1.6.0 (Ruby/2.7.2/2020-10-01)
+URL	http://the-internet.herokuapp.com/drag_and_drop
+Method	GET
+Parameter	
+Attack	
+Evidence	WEBrick/1.6.0 (Ruby/2.7.2/2020-10-01)
+URL	http://the-internet.herokuapp.com/dropdown
+Method	GET
+Parameter	
+Attack	
+Evidence	WEBrick/1.6.0 (Ruby/2.7.2/2020-10-01)
+URL	http://the-internet.herokuapp.com/dynamic_content
+Method	GET
+Parameter	
+Attack	
+Evidence	WEBrick/1.6.0 (Ruby/2.7.2/2020-10-01)
+URL	http://the-internet.herokuapp.com/dynamic_content?with_content=static
+Method	GET
+Parameter	
+Attack	
+Evidence	WEBrick/1.6.0 (Ruby/2.7.2/2020-10-01)
+URL	http://the-internet.herokuapp.com/dynamic_controls
+Method	GET
+Parameter	
+Attack	
+Evidence	WEBrick/1.6.0 (Ruby/2.7.2/2020-10-01)
+URL	http://the-internet.herokuapp.com/dynamic_loading
+Method	GET
+Parameter	
+Attack	
+Evidence	WEBrick/1.6.0 (Ruby/2.7.2/2020-10-01)
+URL	http://the-internet.herokuapp.com/dynamic_loading/1
+Method	GET
+Parameter	
+Attack	
+Evidence	WEBrick/1.6.0 (Ruby/2.7.2/2020-10-01)
+URL	http://the-internet.herokuapp.com/dynamic_loading/2
+Method	GET
+Parameter	
+Attack	
+Evidence	WEBrick/1.6.0 (Ruby/2.7.2/2020-10-01)
+URL	http://the-internet.herokuapp.com/entry_ad
+Method	GET
+Parameter	
+Attack	
+Evidence	WEBrick/1.6.0 (Ruby/2.7.2/2020-10-01)
+URL	http://the-internet.herokuapp.com/exit_intent
+Method	GET
+Parameter	
+Attack	
+Evidence	WEBrick/1.6.0 (Ruby/2.7.2/2020-10-01)
+URL	http://the-internet.herokuapp.com/floating_menu
+Method	GET
+Parameter	
+Attack	
+Evidence	WEBrick/1.6.0 (Ruby/2.7.2/2020-10-01)
+URL	http://the-internet.herokuapp.com/forgot_password
+Method	GET
+Parameter	
+Attack	
+Evidence	WEBrick/1.6.0 (Ruby/2.7.2/2020-10-01)
+URL	http://the-internet.herokuapp.com/frame_bottom
+Method	GET
+Parameter	
+Attack	
+Evidence	WEBrick/1.6.0 (Ruby/2.7.2/2020-10-01)
+URL	http://the-internet.herokuapp.com/frame_left
+Method	GET
+Parameter	
+Attack	
+Evidence	WEBrick/1.6.0 (Ruby/2.7.2/2020-10-01)
+URL	http://the-internet.herokuapp.com/frame_middle
+Method	GET
+Parameter	
+Attack	
+Evidence	WEBrick/1.6.0 (Ruby/2.7.2/2020-10-01)
+URL	http://the-internet.herokuapp.com/frame_right
+Method	GET
+Parameter	
+Attack	
+Evidence	WEBrick/1.6.0 (Ruby/2.7.2/2020-10-01)
+URL	http://the-internet.herokuapp.com/frame_top
+Method	GET
+Parameter	
+Attack	
+Evidence	WEBrick/1.6.0 (Ruby/2.7.2/2020-10-01)
+URL	http://the-internet.herokuapp.com/frames
+Method	GET
+Parameter	
+Attack	
+Evidence	WEBrick/1.6.0 (Ruby/2.7.2/2020-10-01)
+URL	http://the-internet.herokuapp.com/gallery/
+Method	GET
+Parameter	
+Attack	
+Evidence	WEBrick/1.6.0 (Ruby/2.7.2/2020-10-01)
+URL	http://the-internet.herokuapp.com/geolocation
+Method	GET
+Parameter	
+Attack	
+Evidence	WEBrick/1.6.0 (Ruby/2.7.2/2020-10-01)
+URL	http://the-internet.herokuapp.com/hjkl.jpg
+Method	GET
+Parameter	
+Attack	
+Evidence	WEBrick/1.6.0 (Ruby/2.7.2/2020-10-01)
+URL	http://the-internet.herokuapp.com/horizontal_slider
+Method	GET
+Parameter	
+Attack	
+Evidence	WEBrick/1.6.0 (Ruby/2.7.2/2020-10-01)
+URL	http://the-internet.herokuapp.com/hovers
+Method	GET
+Parameter	
+Attack	
+Evidence	WEBrick/1.6.0 (Ruby/2.7.2/2020-10-01)
+URL	http://the-internet.herokuapp.com/iframe
+Method	GET
+Parameter	
+Attack	
+Evidence	WEBrick/1.6.0 (Ruby/2.7.2/2020-10-01)
+URL	http://the-internet.herokuapp.com/img/ajax-loader.gif
+Method	GET
+Parameter	
+Attack	
+Evidence	WEBrick/1.6.0 (Ruby/2.7.2/2020-10-01)
+URL	http://the-internet.herokuapp.com/img/avatar-blank.jpg
+Method	GET
+Parameter	
+Attack	
+Evidence	WEBrick/1.6.0 (Ruby/2.7.2/2020-10-01)
+URL	http://the-internet.herokuapp.com/img/avatar.jpg
+Method	GET
+Parameter	
+Attack	
+Evidence	WEBrick/1.6.0 (Ruby/2.7.2/2020-10-01)
+URL	http://the-internet.herokuapp.com/img/avatars/Original-Facebook-Geek-Profile-Avatar-1.jpg
+Method	GET
+Parameter	
+Attack	
+Evidence	WEBrick/1.6.0 (Ruby/2.7.2/2020-10-01)
+URL	http://the-internet.herokuapp.com/img/avatars/Original-Facebook-Geek-Profile-Avatar-2.jpg
+Method	GET
+Parameter	
+Attack	
+Evidence	WEBrick/1.6.0 (Ruby/2.7.2/2020-10-01)
+URL	http://the-internet.herokuapp.com/img/avatars/Original-Facebook-Geek-Profile-Avatar-5.jpg
+Method	GET
+Parameter	
+Attack	
+Evidence	WEBrick/1.6.0 (Ruby/2.7.2/2020-10-01)
+URL	http://the-internet.herokuapp.com/img/avatars/Original-Facebook-Geek-Profile-Avatar-6.jpg
+Method	GET
+Parameter	
+Attack	
+Evidence	WEBrick/1.6.0 (Ruby/2.7.2/2020-10-01)
+URL	http://the-internet.herokuapp.com/img/avatars/Original-Facebook-Geek-Profile-Avatar-7.jpg
+Method	GET
+Parameter	
+Attack	
+Evidence	WEBrick/1.6.0 (Ruby/2.7.2/2020-10-01)
+URL	http://the-internet.herokuapp.com/img/forkme_right_green_007200.png
+Method	GET
+Parameter	
+Attack	
+Evidence	WEBrick/1.6.0 (Ruby/2.7.2/2020-10-01)
+URL	http://the-internet.herokuapp.com/infinite_scroll
+Method	GET
+Parameter	
+Attack	
+Evidence	WEBrick/1.6.0 (Ruby/2.7.2/2020-10-01)
+URL	http://the-internet.herokuapp.com/infinite_scroll/1
+Method	GET
+Parameter	
+Attack	
+Evidence	WEBrick/1.6.0 (Ruby/2.7.2/2020-10-01)
+URL	http://the-internet.herokuapp.com/infinite_scroll/2
+Method	GET
+Parameter	
+Attack	
+Evidence	WEBrick/1.6.0 (Ruby/2.7.2/2020-10-01)
+URL	http://the-internet.herokuapp.com/infinite_scroll/3
+Method	GET
+Parameter	
+Attack	
+Evidence	WEBrick/1.6.0 (Ruby/2.7.2/2020-10-01)
+URL	http://the-internet.herokuapp.com/inputs
+Method	GET
+Parameter	
+Attack	
+Evidence	WEBrick/1.6.0 (Ruby/2.7.2/2020-10-01)
+URL	http://the-internet.herokuapp.com/javascript_alerts
+Method	GET
+Parameter	
+Attack	
+Evidence	WEBrick/1.6.0 (Ruby/2.7.2/2020-10-01)
+URL	http://the-internet.herokuapp.com/javascript_error
+Method	GET
+Parameter	
+Attack	
+Evidence	WEBrick/1.6.0 (Ruby/2.7.2/2020-10-01)
+URL	http://the-internet.herokuapp.com/jqueryui
+Method	GET
+Parameter	
+Attack	
+Evidence	WEBrick/1.6.0 (Ruby/2.7.2/2020-10-01)
+URL	http://the-internet.herokuapp.com/jqueryui/menu
+Method	GET
+Parameter	
+Attack	
+Evidence	WEBrick/1.6.0 (Ruby/2.7.2/2020-10-01)
+URL	http://the-internet.herokuapp.com/js/foundation/foundation.alerts.js
+Method	GET
+Parameter	
+Attack	
+Evidence	WEBrick/1.6.0 (Ruby/2.7.2/2020-10-01)
+URL	http://the-internet.herokuapp.com/js/foundation/foundation.js
+Method	GET
+Parameter	
+Attack	
+Evidence	WEBrick/1.6.0 (Ruby/2.7.2/2020-10-01)
+URL	http://the-internet.herokuapp.com/js/vendor/298279967.js
+Method	GET
+Parameter	
+Attack	
+Evidence	WEBrick/1.6.0 (Ruby/2.7.2/2020-10-01)
+URL	http://the-internet.herokuapp.com/js/vendor/dropzone.js
+Method	GET
+Parameter	
+Attack	
+Evidence	WEBrick/1.6.0 (Ruby/2.7.2/2020-10-01)
+URL	http://the-internet.herokuapp.com/js/vendor/jquery-1.11.3.min.js
+Method	GET
+Parameter	
+Attack	
+Evidence	WEBrick/1.6.0 (Ruby/2.7.2/2020-10-01)
+URL	http://the-internet.herokuapp.com/js/vendor/jquery-ui-1.11.4/jquery-ui.js
+Method	GET
+Parameter	
+Attack	
+Evidence	WEBrick/1.6.0 (Ruby/2.7.2/2020-10-01)
+URL	http://the-internet.herokuapp.com/js/vendor/jquery.jscroll.min.js
+Method	GET
+Parameter	
+Attack	
+Evidence	WEBrick/1.6.0 (Ruby/2.7.2/2020-10-01)
+URL	http://the-internet.herokuapp.com/js/vendor/jquery.tablesorter.min.js
+Method	GET
+Parameter	
+Attack	
+Evidence	WEBrick/1.6.0 (Ruby/2.7.2/2020-10-01)
+URL	http://the-internet.herokuapp.com/js/vendor/ouibounce.min.js
+Method	GET
+Parameter	
+Attack	
+Evidence	WEBrick/1.6.0 (Ruby/2.7.2/2020-10-01)
+URL	http://the-internet.herokuapp.com/js/vendor/stickyfloat.js
+Method	GET
+Parameter	
+Attack	
+Evidence	WEBrick/1.6.0 (Ruby/2.7.2/2020-10-01)
+URL	http://the-internet.herokuapp.com/key_presses
+Method	GET
+Parameter	
+Attack	
+Evidence	WEBrick/1.6.0 (Ruby/2.7.2/2020-10-01)
+URL	http://the-internet.herokuapp.com/large
+Method	GET
+Parameter	
+Attack	
+Evidence	WEBrick/1.6.0 (Ruby/2.7.2/2020-10-01)
+URL	http://the-internet.herokuapp.com/login
+Method	GET
+Parameter	
+Attack	
+Evidence	WEBrick/1.6.0 (Ruby/2.7.2/2020-10-01)
+URL	http://the-internet.herokuapp.com/nested_frames
+Method	GET
+Parameter	
+Attack	
+Evidence	WEBrick/1.6.0 (Ruby/2.7.2/2020-10-01)
+URL	http://the-internet.herokuapp.com/notification_message
+Method	GET
+Parameter	
+Attack	
+Evidence	WEBrick/1.6.0 (Ruby/2.7.2/2020-10-01)
+URL	http://the-internet.herokuapp.com/notification_message_rendered
+Method	GET
+Parameter	
+Attack	
+Evidence	WEBrick/1.6.0 (Ruby/2.7.2/2020-10-01)
+URL	http://the-internet.herokuapp.com/portfolio/
+Method	GET
+Parameter	
+Attack	
+Evidence	WEBrick/1.6.0 (Ruby/2.7.2/2020-10-01)
+URL	http://the-internet.herokuapp.com/redirect
+Method	GET
+Parameter	
+Attack	
+Evidence	WEBrick/1.6.0 (Ruby/2.7.2/2020-10-01)
+URL	http://the-internet.herokuapp.com/redirector
+Method	GET
+Parameter	
+Attack	
+Evidence	WEBrick/1.6.0 (Ruby/2.7.2/2020-10-01)
+URL	http://the-internet.herokuapp.com/shadowdom
+Method	GET
+Parameter	
+Attack	
+Evidence	WEBrick/1.6.0 (Ruby/2.7.2/2020-10-01)
+URL	http://the-internet.herokuapp.com/shifting_content
+Method	GET
+Parameter	
+Attack	
+Evidence	WEBrick/1.6.0 (Ruby/2.7.2/2020-10-01)
+URL	http://the-internet.herokuapp.com/shifting_content/image
+Method	GET
+Parameter	
+Attack	
+Evidence	WEBrick/1.6.0 (Ruby/2.7.2/2020-10-01)
+URL	http://the-internet.herokuapp.com/shifting_content/image?image_type=simple
+Method	GET
+Parameter	
+Attack	
+Evidence	WEBrick/1.6.0 (Ruby/2.7.2/2020-10-01)
+URL	http://the-internet.herokuapp.com/shifting_content/image?mode=random
+Method	GET
+Parameter	
+Attack	
+Evidence	WEBrick/1.6.0 (Ruby/2.7.2/2020-10-01)
+URL	http://the-internet.herokuapp.com/shifting_content/image?mode=random&pixel_shift=100
+Method	GET
+Parameter	
+Attack	
+Evidence	WEBrick/1.6.0 (Ruby/2.7.2/2020-10-01)
+URL	http://the-internet.herokuapp.com/shifting_content/image?pixel_shift=100
+Method	GET
+Parameter	
+Attack	
+Evidence	WEBrick/1.6.0 (Ruby/2.7.2/2020-10-01)
+URL	http://the-internet.herokuapp.com/shifting_content/list
+Method	GET
+Parameter	
+Attack	
+Evidence	WEBrick/1.6.0 (Ruby/2.7.2/2020-10-01)
+URL	http://the-internet.herokuapp.com/shifting_content/menu
+Method	GET
+Parameter	
+Attack	
+Evidence	WEBrick/1.6.0 (Ruby/2.7.2/2020-10-01)
+URL	http://the-internet.herokuapp.com/shifting_content/menu?mode=random
+Method	GET
+Parameter	
+Attack	
+Evidence	WEBrick/1.6.0 (Ruby/2.7.2/2020-10-01)
+URL	http://the-internet.herokuapp.com/shifting_content/menu?mode=random&pixel_shift=100
+Method	GET
+Parameter	
+Attack	
+Evidence	WEBrick/1.6.0 (Ruby/2.7.2/2020-10-01)
+URL	http://the-internet.herokuapp.com/shifting_content/menu?pixel_shift=100
+Method	GET
+Parameter	
+Attack	
+Evidence	WEBrick/1.6.0 (Ruby/2.7.2/2020-10-01)
+URL	http://the-internet.herokuapp.com/slow
+Method	GET
+Parameter	
+Attack	
+Evidence	WEBrick/1.6.0 (Ruby/2.7.2/2020-10-01)
+URL	http://the-internet.herokuapp.com/status_codes
+Method	GET
+Parameter	
+Attack	
+Evidence	WEBrick/1.6.0 (Ruby/2.7.2/2020-10-01)
+URL	http://the-internet.herokuapp.com/status_codes/200
+Method	GET
+Parameter	
+Attack	
+Evidence	WEBrick/1.6.0 (Ruby/2.7.2/2020-10-01)
+URL	http://the-internet.herokuapp.com/status_codes/301
+Method	GET
+Parameter	
+Attack	
+Evidence	WEBrick/1.6.0 (Ruby/2.7.2/2020-10-01)
+URL	http://the-internet.herokuapp.com/status_codes/404
+Method	GET
+Parameter	
+Attack	
+Evidence	WEBrick/1.6.0 (Ruby/2.7.2/2020-10-01)
+URL	http://the-internet.herokuapp.com/status_codes/500
+Method	GET
+Parameter	
+Attack	
+Evidence	WEBrick/1.6.0 (Ruby/2.7.2/2020-10-01)
+URL	http://the-internet.herokuapp.com/tables
+Method	GET
+Parameter	
+Attack	
+Evidence	WEBrick/1.6.0 (Ruby/2.7.2/2020-10-01)
+URL	http://the-internet.herokuapp.com/tinymce
+Method	GET
+Parameter	
+Attack	
+Evidence	WEBrick/1.6.0 (Ruby/2.7.2/2020-10-01)
+URL	http://the-internet.herokuapp.com/typos
+Method	GET
+Parameter	
+Attack	
+Evidence	WEBrick/1.6.0 (Ruby/2.7.2/2020-10-01)
+URL	http://the-internet.herokuapp.com/upload
+Method	GET
+Parameter	
+Attack	
+Evidence	WEBrick/1.6.0 (Ruby/2.7.2/2020-10-01)
+URL	http://the-internet.herokuapp.com/users/1
+Method	GET
+Parameter	
+Attack	
+Evidence	WEBrick/1.6.0 (Ruby/2.7.2/2020-10-01)
+URL	http://the-internet.herokuapp.com/users/2
+Method	GET
+Parameter	
+Attack	
+Evidence	WEBrick/1.6.0 (Ruby/2.7.2/2020-10-01)
+URL	http://the-internet.herokuapp.com/users/3
+Method	GET
+Parameter	
+Attack	
+Evidence	WEBrick/1.6.0 (Ruby/2.7.2/2020-10-01)
+URL	http://the-internet.herokuapp.com/windows
+Method	GET
+Parameter	
+Attack	
+Evidence	WEBrick/1.6.0 (Ruby/2.7.2/2020-10-01)
+URL	http://the-internet.herokuapp.com/windows/new
+Method	GET
+Parameter	
+Attack	
+Evidence	WEBrick/1.6.0 (Ruby/2.7.2/2020-10-01)
+URL	https://the-internet.herokuapp.com/css/app.css
+Method	GET
+Parameter	
+Attack	
+Evidence	WEBrick/1.6.0 (Ruby/2.7.2/2020-10-01)
+URL	https://the-internet.herokuapp.com/css/font-awesome.css
+Method	GET
+Parameter	
+Attack	
+Evidence	WEBrick/1.6.0 (Ruby/2.7.2/2020-10-01)
+URL	https://the-internet.herokuapp.com/fonts/fontawesome-webfont.woff2?v=4.3.0
+Method	GET
+Parameter	
+Attack	
+Evidence	WEBrick/1.6.0 (Ruby/2.7.2/2020-10-01)
+URL	https://the-internet.herokuapp.com/img/forkme_right_green_007200.png
+Method	GET
+Parameter	
+Attack	
+Evidence	WEBrick/1.6.0 (Ruby/2.7.2/2020-10-01)
+URL	https://the-internet.herokuapp.com/js/foundation/foundation.alerts.js
+Method	GET
+Parameter	
+Attack	
+Evidence	WEBrick/1.6.0 (Ruby/2.7.2/2020-10-01)
+URL	https://the-internet.herokuapp.com/js/foundation/foundation.js
+Method	GET
+Parameter	
+Attack	
+Evidence	WEBrick/1.6.0 (Ruby/2.7.2/2020-10-01)
+URL	https://the-internet.herokuapp.com/js/vendor/298279967.js
+Method	GET
+Parameter	
+Attack	
+Evidence	WEBrick/1.6.0 (Ruby/2.7.2/2020-10-01)
+URL	https://the-internet.herokuapp.com/js/vendor/jquery-1.11.3.min.js
+Method	GET
+Parameter	
+Attack	
+Evidence	WEBrick/1.6.0 (Ruby/2.7.2/2020-10-01)
+URL	https://the-internet.herokuapp.com/js/vendor/jquery-ui-1.11.4/jquery-ui.js
+Method	GET
+Parameter	
+Attack	
+Evidence	WEBrick/1.6.0 (Ruby/2.7.2/2020-10-01)
+URL	https://the-internet.herokuapp.com/login
+Method	GET
+Parameter	
+Attack	
+Evidence	WEBrick/1.6.0 (Ruby/2.7.2/2020-10-01)
+URL	https://the-internet.herokuapp.com/robots.txt
+Method	GET
+Parameter	
+Attack	
+Evidence	WEBrick/1.6.0 (Ruby/2.7.2/2020-10-01)
+URL	https://the-internet.herokuapp.com/sitemap.xml
+Method	GET
+Parameter	
+Attack	
+Evidence	WEBrick/1.6.0 (Ruby/2.7.2/2020-10-01)
+URL	http://the-internet.herokuapp.com/authenticate
+Method	POST
+Parameter	
+Attack	
+Evidence	WEBrick/1.6.0 (Ruby/2.7.2/2020-10-01)
+URL	http://the-internet.herokuapp.com/forgot_password
+Method	POST
+Parameter	
+Attack	
+Evidence	WEBrick/1.6.0 (Ruby/2.7.2/2020-10-01)
+URL	http://the-internet.herokuapp.com/upload
+Method	POST
+Parameter	
+Attack	
+Evidence	WEBrick/1.6.0 (Ruby/2.7.2/2020-10-01)
+URL	https://the-internet.herokuapp.com/authenticate
+Method	POST
+Parameter	
+Attack	
+Evidence	WEBrick/1.6.0 (Ruby/2.7.2/2020-10-01)
+Instances	143
+Solution	
+Ensure that your web server, application server, load balancer, etc. is configured to suppress the "Server" header or provide generic details.
+Reference	http://httpd.apache.org/docs/current/mod/core.html#servertokens
+http://msdn.microsoft.com/en-us/library/ff648552.aspx#ht_urlscan_007
+http://blogs.msdn.com/b/varunm/archive/2013/04/23/remove-unwanted-http-response-headers.aspx
+http://www.troyhunt.com/2012/02/shhh-dont-let-your-response-headers.html
+CWE Id	200
+WASC Id	13
+Plugin Id	10036
+Low
+Strict-Transport-Security Header Not Set
+Description	
+HTTP Strict Transport Security (HSTS) is a web security policy mechanism whereby a web server declares that complying user agents (such as a web browser) are to interact with it using only secure HTTPS connections (i.e. HTTP layered over TLS/SSL). HSTS is an IETF standards track protocol and is specified in RFC 6797.
+URL	https://the-internet.herokuapp.com/css/app.css
+Method	GET
+Parameter	
+Attack	
+Evidence	
+URL	https://the-internet.herokuapp.com/css/font-awesome.css
+Method	GET
+Parameter	
+Attack	
+Evidence	
+URL	https://the-internet.herokuapp.com/fonts/fontawesome-webfont.woff2?v=4.3.0
+Method	GET
+Parameter	
+Attack	
+Evidence	
+URL	https://the-internet.herokuapp.com/img/forkme_right_green_007200.png
+Method	GET
+Parameter	
+Attack	
+Evidence	
+URL	https://the-internet.herokuapp.com/js/foundation/foundation.alerts.js
+Method	GET
+Parameter	
+Attack	
+Evidence	
+URL	https://the-internet.herokuapp.com/js/foundation/foundation.js
+Method	GET
+Parameter	
+Attack	
+Evidence	
+URL	https://the-internet.herokuapp.com/js/vendor/298279967.js
+Method	GET
+Parameter	
+Attack	
+Evidence	
+URL	https://the-internet.herokuapp.com/js/vendor/jquery-1.11.3.min.js
+Method	GET
+Parameter	
+Attack	
+Evidence	
+URL	https://the-internet.herokuapp.com/js/vendor/jquery-ui-1.11.4/jquery-ui.js
+Method	GET
+Parameter	
+Attack	
+Evidence	
+URL	https://the-internet.herokuapp.com/login
+Method	GET
+Parameter	
+Attack	
+Evidence	
+URL	https://the-internet.herokuapp.com/robots.txt
+Method	GET
+Parameter	
+Attack	
+Evidence	
+URL	https://the-internet.herokuapp.com/sitemap.xml
+Method	GET
+Parameter	
+Attack	
+Evidence	
+URL	https://update.googleapis.com/service/update2/json
+Method	POST
+Parameter	
+Attack	
+Evidence	
+URL	https://update.googleapis.com/service/update2/json?cup2key=11:2031900199&cup2hreq=ef09de10e26886be8c1be00abdb7f5a489b9863538999e1fe03f51249a561d13
+Method	POST
+Parameter	
+Attack	
+Evidence	
+URL	https://update.googleapis.com/service/update2/json?cup2key=11:2309294266&cup2hreq=6db0debd583acdabde9f8234c2b680b1155cd7f1df9b54807474f80c36f60df6
+Method	POST
+Parameter	
+Attack	
+Evidence	
+URL	https://update.googleapis.com/service/update2/json?cup2key=11:3724557838&cup2hreq=2766c0d922ebf8b4a1445bb229ece846d4f2cc9ec8da5a03a8199b80b23a63a7
+Method	POST
+Parameter	
+Attack	
+Evidence	
+URL	https://update.googleapis.com/service/update2/json?cup2key=11:3883658030&cup2hreq=965796235f437e31153a68ad3947c1237e7712e6fcd2de7cab0f107124e67ef8
+Method	POST
+Parameter	
+Attack	
+Evidence	
+URL	https://update.googleapis.com/service/update2/json?cup2key=11:4259044525&cup2hreq=e75b875eddb5fb57d7d5df4e4de73f8f8bfa024a1bf63b1f3168699c1c37c0e5
+Method	POST
+Parameter	
+Attack	
+Evidence	
+Instances	18
+Solution	
+Ensure that your web server, application server, load balancer, etc. is configured to enforce Strict-Transport-Security.
+Reference	https://cheatsheetseries.owasp.org/cheatsheets/HTTP_Strict_Transport_Security_Cheat_Sheet.html
+https://owasp.org/www-community/Security_Headers
+http://en.wikipedia.org/wiki/HTTP_Strict_Transport_Security
+http://caniuse.com/stricttransportsecurity
+http://tools.ietf.org/html/rfc6797
+CWE Id	319
+WASC Id	15
+Plugin Id	10035
+Informational
+Information Disclosure - Sensitive Information in URL
+Description	
+The request appeared to contain sensitive information leaked in the URL. This can violate PCI and most organizational compliance policies. You can configure the list of strings for this check to add or remove values specific to your environment.
+URL	https://298279967.log.optimizely.com/event?a=298279967&d=298279967&y=false&n=https%3A%2F%2Fthe-internet.herokuapp.com%2Flogin&u=oeu1689577308489r0.5310561188177532&wxhr=true&t=1689577308687&f=298349752,318188263
+Method	GET
+Parameter	u
+Attack	
+Evidence	oeu1689577308489r0.5310561188177532
+URL	https://298279967.log.optimizely.com/event?a=298279967&d=298279967&y=false&n=https%3A%2F%2Fthe-internet.herokuapp.com%2Flogin&u=oeu1689578684855r0.6504858160336144&wxhr=true&t=1689578684893&f=298349752,318188263
+Method	GET
+Parameter	u
+Attack	
+Evidence	oeu1689578684855r0.6504858160336144
+Instances	2
+Solution	
+Do not pass sensitive information in URIs.
+Reference	
+CWE Id	200
+WASC Id	13
+Plugin Id	10024
+Informational
+Information Disclosure - Suspicious Comments
+Description	
+The response appears to contain suspicious comments which may help an attacker. Note: Matches made within script blocks or files are against the entire content not only comments.
+URL	http://the-internet.herokuapp.com/js/foundation/foundation.js
+Method	GET
+Parameter	
+Attack	
+Evidence	query
+URL	http://the-internet.herokuapp.com/js/vendor/298279967.js
+Method	GET
+Parameter	
+Attack	
+Evidence	Db
+URL	http://the-internet.herokuapp.com/js/vendor/298279967.js
+Method	GET
+Parameter	
+Attack	
+Evidence	from
+URL	http://the-internet.herokuapp.com/js/vendor/298279967.js
+Method	GET
+Parameter	
+Attack	
+Evidence	query
+URL	http://the-internet.herokuapp.com/js/vendor/298279967.js
+Method	GET
+Parameter	
+Attack	
+Evidence	select
+URL	http://the-internet.herokuapp.com/js/vendor/298279967.js
+Method	GET
+Parameter	
+Attack	
+Evidence	user
+URL	http://the-internet.herokuapp.com/js/vendor/298279967.js
+Method	GET
+Parameter	
+Attack	
+Evidence	xxx
+URL	http://the-internet.herokuapp.com/js/vendor/dropzone.js
+Method	GET
+Parameter	
+Attack	
+Evidence	bug
+URL	http://the-internet.herokuapp.com/js/vendor/dropzone.js
+Method	GET
+Parameter	
+Attack	
+Evidence	FROM
+URL	http://the-internet.herokuapp.com/js/vendor/dropzone.js
+Method	GET
+Parameter	
+Attack	
+Evidence	select
+URL	http://the-internet.herokuapp.com/js/vendor/dropzone.js
+Method	GET
+Parameter	
+Attack	
+Evidence	user
+URL	http://the-internet.herokuapp.com/js/vendor/jquery-1.11.3.min.js
+Method	GET
+Parameter	
+Attack	
+Evidence	db
+URL	http://the-internet.herokuapp.com/js/vendor/jquery-1.11.3.min.js
+Method	GET
+Parameter	
+Attack	
+Evidence	select
+URL	http://the-internet.herokuapp.com/js/vendor/jquery-ui-1.11.4/jquery-ui.js
+Method	GET
+Parameter	
+Attack	
+Evidence	bug
+URL	http://the-internet.herokuapp.com/js/vendor/jquery-ui-1.11.4/jquery-ui.js
+Method	GET
+Parameter	
+Attack	
+Evidence	bugs
+URL	http://the-internet.herokuapp.com/js/vendor/jquery-ui-1.11.4/jquery-ui.js
+Method	GET
+Parameter	
+Attack	
+Evidence	from
+URL	http://the-internet.herokuapp.com/js/vendor/jquery-ui-1.11.4/jquery-ui.js
+Method	GET
+Parameter	
+Attack	
+Evidence	later
+URL	http://the-internet.herokuapp.com/js/vendor/jquery-ui-1.11.4/jquery-ui.js
+Method	GET
+Parameter	
+Attack	
+Evidence	select
+URL	http://the-internet.herokuapp.com/js/vendor/jquery-ui-1.11.4/jquery-ui.js
+Method	GET
+Parameter	
+Attack	
+Evidence	TODO
+URL	http://the-internet.herokuapp.com/js/vendor/jquery-ui-1.11.4/jquery-ui.js
+Method	GET
+Parameter	
+Attack	
+Evidence	user
+URL	http://the-internet.herokuapp.com/js/vendor/jquery-ui-1.11.4/jquery-ui.js
+Method	GET
+Parameter	
+Attack	
+Evidence	where
+URL	http://the-internet.herokuapp.com/js/vendor/jquery.jscroll.min.js
+Method	GET
+Parameter	
+Attack	
+Evidence	from
+URL	http://the-internet.herokuapp.com/js/vendor/jquery.tablesorter.min.js
+Method	GET
+Parameter	
+Attack	
+Evidence	debug
+URL	http://the-internet.herokuapp.com/js/vendor/stickyfloat.js
+Method	GET
+Parameter	
+Attack	
+Evidence	from
+URL	http://the-internet.herokuapp.com/js/vendor/stickyfloat.js
+Method	GET
+Parameter	
+Attack	
+Evidence	user
+URL	http://the-internet.herokuapp.com/key_presses
+Method	GET
+Parameter	
+Attack	
+Evidence	SELECT
+URL	https://the-internet.herokuapp.com/js/foundation/foundation.js
+Method	GET
+Parameter	
+Attack	
+Evidence	query
+URL	https://the-internet.herokuapp.com/js/vendor/298279967.js
+Method	GET
+Parameter	
+Attack	
+Evidence	Db
+URL	https://the-internet.herokuapp.com/js/vendor/298279967.js
+Method	GET
+Parameter	
+Attack	
+Evidence	from
+URL	https://the-internet.herokuapp.com/js/vendor/298279967.js
+Method	GET
+Parameter	
+Attack	
+Evidence	query
+URL	https://the-internet.herokuapp.com/js/vendor/298279967.js
+Method	GET
+Parameter	
+Attack	
+Evidence	select
+URL	https://the-internet.herokuapp.com/js/vendor/298279967.js
+Method	GET
+Parameter	
+Attack	
+Evidence	user
+URL	https://the-internet.herokuapp.com/js/vendor/298279967.js
+Method	GET
+Parameter	
+Attack	
+Evidence	xxx
+URL	https://the-internet.herokuapp.com/js/vendor/jquery-1.11.3.min.js
+Method	GET
+Parameter	
+Attack	
+Evidence	db
+URL	https://the-internet.herokuapp.com/js/vendor/jquery-1.11.3.min.js
+Method	GET
+Parameter	
+Attack	
+Evidence	select
+URL	https://the-internet.herokuapp.com/js/vendor/jquery-ui-1.11.4/jquery-ui.js
+Method	GET
+Parameter	
+Attack	
+Evidence	bug
+URL	https://the-internet.herokuapp.com/js/vendor/jquery-ui-1.11.4/jquery-ui.js
+Method	GET
+Parameter	
+Attack	
+Evidence	bugs
+URL	https://the-internet.herokuapp.com/js/vendor/jquery-ui-1.11.4/jquery-ui.js
+Method	GET
+Parameter	
+Attack	
+Evidence	from
+URL	https://the-internet.herokuapp.com/js/vendor/jquery-ui-1.11.4/jquery-ui.js
+Method	GET
+Parameter	
+Attack	
+Evidence	later
+URL	https://the-internet.herokuapp.com/js/vendor/jquery-ui-1.11.4/jquery-ui.js
+Method	GET
+Parameter	
+Attack	
+Evidence	select
+URL	https://the-internet.herokuapp.com/js/vendor/jquery-ui-1.11.4/jquery-ui.js
+Method	GET
+Parameter	
+Attack	
+Evidence	TODO
+URL	https://the-internet.herokuapp.com/js/vendor/jquery-ui-1.11.4/jquery-ui.js
+Method	GET
+Parameter	
+Attack	
+Evidence	user
+URL	https://the-internet.herokuapp.com/js/vendor/jquery-ui-1.11.4/jquery-ui.js
+Method	GET
+Parameter	
+Attack	
+Evidence	where
+Instances	43
+Solution	
+Remove all comments that return information that may help an attacker and fix any underlying problems they refer to.
+Reference	
+CWE Id	200
+WASC Id	13
+Plugin Id	10027
+Informational
+Modern Web Application
+Description	
+The application appears to be a modern web application. If you need to explore it automatically then the Ajax Spider may well be more effective than the standard one.
+URL	http://the-internet.herokuapp.com/
+Method	GET
+Parameter	
+Attack	
+Evidence	<a href="#" class="close">&times;</a>
+URL	http://the-internet.herokuapp.com/abtest_cookies
+Method	GET
+Parameter	
+Attack	
+Evidence	<a href=''>Click here</a>
+URL	http://the-internet.herokuapp.com/abtest_manual
+Method	GET
+Parameter	
+Attack	
+Evidence	<a href=''>Click here</a>
+URL	http://the-internet.herokuapp.com/challenging_dom
+Method	GET
+Parameter	
+Attack	
+Evidence	<a id='857865f0-069c-013c-caa2-4e5159806868' href='' class='button'>foo</a>
+URL	http://the-internet.herokuapp.com/challenging_dom
+Method	GET
+Parameter	
+Attack	
+Evidence	<a id='c10f6eb0-069d-013c-cab6-4e5159806868' href='' class='button'>bar</a>
+URL	http://the-internet.herokuapp.com/challenging_dom
+Method	GET
+Parameter	
+Attack	
+Evidence	<a id='cfa78500-069f-013c-caf5-4e5159806868' href='' class='button'>foo</a>
+URL	http://the-internet.herokuapp.com/challenging_dom
+Method	GET
+Parameter	
+Attack	
+Evidence	<a id='dab84280-069e-013c-caca-4e5159806868' href='' class='button'>qux</a>
+URL	http://the-internet.herokuapp.com/challenging_dom
+Method	GET
+Parameter	
+Attack	
+Evidence	<a id='f731b530-06a0-013c-cb0a-4e5159806868' href='' class='button'>foo</a>
+URL	http://the-internet.herokuapp.com/dynamic_content?with_content=static
+Method	GET
+Parameter	
+Attack	
+Evidence	<a href="#" class="close">&times;</a>
+URL	http://the-internet.herokuapp.com/entry_ad
+Method	GET
+Parameter	
+Attack	
+Evidence	<a href="" id="restart-ad">click here</a>
+URL	http://the-internet.herokuapp.com/javascript_error
+Method	GET
+Parameter	
+Attack	
+Evidence	<script> function loadError() { var xx = document.propertyThatDoesNotExist.xyz; } </script>
+URL	http://the-internet.herokuapp.com/jqueryui/menu
+Method	GET
+Parameter	
+Attack	
+Evidence	<a href="#">Disabled</a>
+URL	http://the-internet.herokuapp.com/login
+Method	GET
+Parameter	
+Attack	
+Evidence	<a href="#" class="close">&times;</a>
+URL	http://the-internet.herokuapp.com/redirector
+Method	GET
+Parameter	
+Attack	
+Evidence	<a href="#" class="close">&times;</a>
+URL	http://the-internet.herokuapp.com/slow
+Method	GET
+Parameter	
+Attack	
+Evidence	<a href="#" class="close">&times;</a>
+URL	http://the-internet.herokuapp.com/tables
+Method	GET
+Parameter	
+Attack	
+Evidence	<a href="#" class="close">&times;</a>
+Instances	16
+Solution	
+This is an informational alert and so no changes are required.
+Reference	
+CWE Id	
+WASC Id	
+Plugin Id	10109
+Informational
+Re-examine Cache-control Directives
+Description	
+The cache-control header has not been set properly or is missing, allowing the browser and proxies to cache content. For static assets like css, js, or image files this might be intended, however, the resources should be reviewed to ensure that no sensitive content will be cached.
+URL	https://the-internet.herokuapp.com/login
+Method	GET
+Parameter	Cache-Control
+Attack	
+Evidence	
+URL	https://the-internet.herokuapp.com/robots.txt
+Method	GET
+Parameter	Cache-Control
+Attack	
+Evidence	
+URL	https://the-internet.herokuapp.com/sitemap.xml
+Method	GET
+Parameter	Cache-Control
+Attack	
+Evidence	
+Instances	3
+Solution	
+For secure content, ensure the cache-control HTTP header is set with "no-cache, no-store, must-revalidate". If an asset should be cached consider setting the directives "public, max-age, immutable".
+Reference	https://cheatsheetseries.owasp.org/cheatsheets/Session_Management_Cheat_Sheet.html#web-content-caching
+https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Cache-Control
+https://grayduck.mn/2021/09/13/cache-control-recommendations/
+CWE Id	525
+WASC Id	13
+Plugin Id	10015
+Informational
+Retrieved from Cache
+Description	
+The content was retrieved from a shared cache. If the response data is sensitive, personal or user-specific, this may result in sensitive information being leaked. In some cases, this may even result in a user gaining complete control of the session of another user, depending on the configuration of the caching components in use in their environment. This is primarily an issue where caching servers such as "proxy" caches are configured on the local network. This configuration is typically found in corporate or educational environments, for instance.
+URL	http://edgedl.me.gvt1.com/edgedl/chromewebstore/L2Nocm9tZV9leHRlbnNpb24vYmxvYnMvYjFkQUFWdmlaXy12MHFUTGhWQUViMUVlUQ/0.57.44.2492_hnimpnehoodheedghdeeijklkeaacbdc.crx
+Method	GET
+Parameter	
+Attack	
+Evidence	Age: 13694
+URL	http://edgedl.me.gvt1.com/edgedl/chromewebstore/L2Nocm9tZV9leHRlbnNpb24vYmxvYnMvYjFkQUFWdmlaXy12MHFUTGhWQUViMUVlUQ/0.57.44.2492_hnimpnehoodheedghdeeijklkeaacbdc.crx
+Method	GET
+Parameter	
+Attack	
+Evidence	Age: 14233
+URL	http://edgedl.me.gvt1.com/edgedl/chromewebstore/L2Nocm9tZV9leHRlbnNpb24vYmxvYnMvYjFkQUFWdmlaXy12MHFUTGhWQUViMUVlUQ/0.57.44.2492_hnimpnehoodheedghdeeijklkeaacbdc.crx
+Method	GET
+Parameter	
+Attack	
+Evidence	Age: 14696
+URL	http://edgedl.me.gvt1.com/edgedl/chromewebstore/L2Nocm9tZV9leHRlbnNpb24vYmxvYnMvYjFkQUFWdmlaXy12MHFUTGhWQUViMUVlUQ/0.57.44.2492_hnimpnehoodheedghdeeijklkeaacbdc.crx
+Method	GET
+Parameter	
+Attack	
+Evidence	Age: 15120
+URL	http://edgedl.me.gvt1.com/edgedl/chromewebstore/L2Nocm9tZV9leHRlbnNpb24vYmxvYnMvYjFkQUFWdmlaXy12MHFUTGhWQUViMUVlUQ/0.57.44.2492_hnimpnehoodheedghdeeijklkeaacbdc.crx
+Method	GET
+Parameter	
+Attack	
+Evidence	Age: 15610
+URL	http://edgedl.me.gvt1.com/edgedl/release2/chrome_component/acgvxgnufkgtvajv7dyg33wl5qla_20230710.547975319.14/obedbbhbpmojnkanicioggnmelmoomoc_20230710.547975319.14_all_ENUS500000_acqnbpa3kszbmgaczyrom6fsbh7a.crx3
+Method	GET
+Parameter	
+Attack	
+Evidence	Age: 30738
+URL	http://edgedl.me.gvt1.com/edgedl/release2/chrome_component/acgvxgnufkgtvajv7dyg33wl5qla_20230710.547975319.14/obedbbhbpmojnkanicioggnmelmoomoc_20230710.547975319.14_all_ENUS500000_acqnbpa3kszbmgaczyrom6fsbh7a.crx3
+Method	GET
+Parameter	
+Attack	
+Evidence	Age: 31184
+URL	http://edgedl.me.gvt1.com/edgedl/release2/chrome_component/acgvxgnufkgtvajv7dyg33wl5qla_20230710.547975319.14/obedbbhbpmojnkanicioggnmelmoomoc_20230710.547975319.14_all_ENUS500000_acqnbpa3kszbmgaczyrom6fsbh7a.crx3
+Method	GET
+Parameter	
+Attack	
+Evidence	Age: 31685
+URL	http://edgedl.me.gvt1.com/edgedl/release2/chrome_component/AIZk8O7Cv2UUbxc_aaUykKI_7/ALzUVHP-vRgKCzqwbtGugSE
+Method	GET
+Parameter	
+Attack	
+Evidence	Age: 27015
+URL	http://edgedl.me.gvt1.com/edgedl/release2/chrome_component/AIZk8O7Cv2UUbxc_aaUykKI_7/ALzUVHP-vRgKCzqwbtGugSE
+Method	GET
+Parameter	
+Attack	
+Evidence	Age: 27512
+URL	http://edgedl.me.gvt1.com/edgedl/release2/chrome_component/ANlaTV2JH2WK9RCoHi__mxg_1.0.6/S3ybLvFx94Hgn9pWLt24ug
+Method	GET
+Parameter	
+Attack	
+Evidence	Age: 83633
+URL	http://edgedl.me.gvt1.com/edgedl/release2/chrome_component/ANlaTV2JH2WK9RCoHi__mxg_1.0.6/S3ybLvFx94Hgn9pWLt24ug
+Method	GET
+Parameter	
+Attack	
+Evidence	Age: 84090
+URL	http://edgedl.me.gvt1.com/edgedl/release2/chrome_component/ANlaTV2JH2WK9RCoHi__mxg_1.0.6/S3ybLvFx94Hgn9pWLt24ug
+Method	GET
+Parameter	
+Attack	
+Evidence	Age: 84512
+URL	http://edgedl.me.gvt1.com/edgedl/release2/chrome_component/ANlaTV2JH2WK9RCoHi__mxg_1.0.6/S3ybLvFx94Hgn9pWLt24ug
+Method	GET
+Parameter	
+Attack	
+Evidence	Age: 85017
+URL	http://edgedl.me.gvt1.com/edgedl/release2/chrome_component/fessmlfzcgvxcvvlvzjb5y3pia_9.46.0/gcmjkmgdlgnkkcocmoeiminaijmmjnii_9.46.0_all_j3wc2ia5cvmxcar5vj37bzshkm.crx3
+Method	GET
+Parameter	
+Attack	
+Evidence	Age: 46439
+URL	http://edgedl.me.gvt1.com/edgedl/release2/chrome_component/hdvsj2b3xzu7fnvwx7loaxueoa_400/lmelglejhemejginpboagddgdfbepgmp_400_all_ZZ_acvh4qazatophyq726vvtm27grtq.crx3
+Method	GET
+Parameter	
+Attack	
+Evidence	Age: 50611
+URL	http://edgedl.me.gvt1.com/edgedl/release2/chrome_component/hdvsj2b3xzu7fnvwx7loaxueoa_400/lmelglejhemejginpboagddgdfbepgmp_400_all_ZZ_acvh4qazatophyq726vvtm27grtq.crx3
+Method	GET
+Parameter	
+Attack	
+Evidence	Age: 51110
+URL	http://edgedl.me.gvt1.com/edgedl/release2/chrome_component/n3xmszuzmcp4pxq3qhmant63nm_9.45.0/gcmjkmgdlgnkkcocmoeiminaijmmjnii_9.45.0_all_ecp3yewcq3fuvht5wyi7t7s37y.crx3
+Method	GET
+Parameter	
+Attack	
+Evidence	Age: 80048
+URL	http://edgedl.me.gvt1.com/edgedl/release2/chrome_component/n3xmszuzmcp4pxq3qhmant63nm_9.45.0/gcmjkmgdlgnkkcocmoeiminaijmmjnii_9.45.0_all_ecp3yewcq3fuvht5wyi7t7s37y.crx3
+Method	GET
+Parameter	
+Attack	
+Evidence	Age: 80474
+Instances	19
+Solution	
+Validate that the response does not contain sensitive, personal or user-specific information. If it does, consider the use of the following HTTP response headers, to limit, or prevent the content being stored and retrieved from the cache by another user:
+
+Cache-Control: no-cache, no-store, must-revalidate, private
+
+Pragma: no-cache
+
+Expires: 0
+
+This configuration directs both HTTP 1.0 and HTTP 1.1 compliant caching servers to not store the response, and to not retrieve the response (without validation) from the cache, in response to a similar request.
+Reference	https://tools.ietf.org/html/rfc7234
+https://tools.ietf.org/html/rfc7231
+http://www.w3.org/Protocols/rfc2616/rfc2616-sec13.html (obsoleted by rfc7234)
+CWE Id	
+WASC Id	
+Plugin Id	10050

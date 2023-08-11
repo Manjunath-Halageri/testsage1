@@ -1,0 +1,138 @@
+[INFO] Scanning for projects...
+[WARNING] 
+[WARNING] Some problems were encountered while building the effective model for Opal:OpalDevelopment:jar:0.0.1-SNAPSHOT
+[WARNING] 'dependencies.dependency.(groupId:artifactId:type:classifier)' must be unique: org.json:json:jar -> duplicate declaration of version 20180813 @ line 76, column 13
+[WARNING] 'dependencies.dependency.(groupId:artifactId:type:classifier)' must be unique: commons-io:commons-io:jar -> duplicate declaration of version 2.6 @ line 93, column 13
+[WARNING] 'dependencies.dependency.(groupId:artifactId:type:classifier)' must be unique: com.googlecode.json-simple:json-simple:jar -> version 1.1 vs 1.1.1 @ line 123, column 13
+[WARNING] 'dependencies.dependency.systemPath' for atu.testng.reports.ATUTestRecorder:ATUTestRecorder:jar should not point at files within the project directory, ${basedir}/Jars/ATUTestRecorder_2.1.jar will be unresolvable by dependent projects @ line 182, column 22
+[WARNING] 
+[WARNING] It is highly recommended to fix these problems because they threaten the stability of your build.
+[WARNING] 
+[WARNING] For this reason, future Maven versions might no longer support building such malformed projects.
+[WARNING] 
+[INFO] 
+[INFO] ------------------------< Opal:OpalDevelopment >------------------------
+[INFO] Building OpalDevelopment 0.0.1-SNAPSHOT
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-clean-plugin:2.5:clean (default-clean) @ OpalDevelopment ---
+[INFO] Deleting E:\zap\backend\uploads\opal\manjjpro\manjjpl\projectToRun\target
+[INFO] 
+[INFO] --- maven-resources-plugin:2.6:resources (default-resources) @ OpalDevelopment ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] skip non existing resourceDirectory E:\zap\backend\uploads\opal\manjjpro\manjjpl\projectToRun\src\main\resources
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.1:compile (default-compile) @ OpalDevelopment ---
+[INFO] Changes detected - recompiling the module!
+[INFO] Compiling 7 source files to E:\zap\backend\uploads\opal\manjjpro\manjjpl\projectToRun\target\classes
+[WARNING] /E:/zap/backend/uploads/opal/manjjpro/manjjpl/projectToRun/src/main/java/reuseablePackage/feature/AllActions.java: E:\zap\backend\uploads\opal\manjjpro\manjjpl\projectToRun\src\main\java\reuseablePackage\feature\AllActions.java uses or overrides a deprecated API.
+[WARNING] /E:/zap/backend/uploads/opal/manjjpro/manjjpl/projectToRun/src/main/java/reuseablePackage/feature/AllActions.java: Recompile with -Xlint:deprecation for details.
+[INFO] 
+[INFO] --- maven-resources-plugin:2.6:testResources (default-testResources) @ OpalDevelopment ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] skip non existing resourceDirectory E:\zap\backend\uploads\opal\manjjpro\manjjpl\projectToRun\src\test\resources
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.1:testCompile (default-testCompile) @ OpalDevelopment ---
+[INFO] Changes detected - recompiling the module!
+[INFO] Compiling 1 source file to E:\zap\backend\uploads\opal\manjjpro\manjjpl\projectToRun\target\test-classes
+[INFO] 
+[INFO] --- maven-surefire-plugin:3.0.0-M1:test (default-test) @ OpalDevelopment ---
+[INFO] 
+[INFO] -------------------------------------------------------
+[INFO]  T E S T S
+[INFO] -------------------------------------------------------
+[INFO] Running TestSuite
+./src/test/java/mID637/fID676/
+./src/test/java/mID637/fID676/
+./src/test/java/mID637/fID676/
+./src/test/java/mID637/fID676/
+false
+false
+File is Main
+path is E:\zap\backend\uploads\opal\manjjpro\manjjpl\projectToRun\.\Screenshot\EachStepScreenshot\100_Suite1\sID879
+File is Main
+path1 is E:\zap\backend\uploads\opal\manjjpro\manjjpl\projectToRun\.\Screenshot\FailedScreenshot\100_Suite1\sID879
+./src/test/java/mID637/fID676/
+./src/test/java/mID637/fID676/
+./src/test/java/mID637/fID676/
+./src/test/java/mID637/fID676/
+./src/test/java/mID637/fID676/
+./src/test/java/mID637/fID676/
+./src/test/java/mID637/fID676/
+org.zaproxy.clientapi.core.ClientApi@1a8a8f7c
+///////////////////////////////////////////Proxy///////////////////////////////////////////////////////
+Launching Google browser
+Before setProxyProxy(manual, http=http://192.168.99.254:8081, ssl=http://192.168.99.254:8081)
+Before setProxy
+Capabilities {acceptInsecureCerts: true, browser: Chrome, browserName: chrome, browser_version: 94.0.4606.61, goog:chromeOptions: {args: [--no-sandbox, --disable-dev-shm-usage], extensions: []}, proxy: Proxy(manual, http=http://1...}
+Before RemoteWebDriver
+After RemoteWebDriver
+Successfully Navigated to the URL
+Active Scanning target : https://the-internet.herokuapp.com/secure
+Active Scan progress : 0%
+Active Scan progress : 8%
+Active Scan progress : 43%
+Active Scan progress : 43%
+Active Scan progress : 43%
+Active Scan progress : 43%
+Active Scan progress : 43%
+Active Scan progress : 43%
+Active Scan progress : 43%
+Active Scan progress : 43%
+Active Scan progress : 43%
+Active Scan progress : 43%
+Active Scan progress : 43%
+Active Scan progress : 43%
+Active Scan progress : 43%
+Active Scan progress : 43%
+Active Scan progress : 43%
+Active Scan progress : 43%
+Active Scan progress : 43%
+Active Scan progress : 43%
+Active Scan progress : 43%
+Active Scan progress : 43%
+Active Scan progress : 43%
+Active Scan progress : 43%
+Active Scan progress : 80%
+Active Scan progress : 84%
+Active Scan progress : 84%
+Active Scan progress : 84%
+Active Scan progress : 90%
+Active Scan progress : 90%
+Active Scan progress : 92%
+Active Scan progress : 100%
+Active Scan complete
+Alerts:
+Alert: org.zaproxy.clientapi.core.ApiResponseSet@4d0d9fe7
+Alert: org.zaproxy.clientapi.core.ApiResponseSet@c430e6c
+Alert: org.zaproxy.clientapi.core.ApiResponseSet@312aa7c
+Alert: org.zaproxy.clientapi.core.ApiResponseSet@536f2a7e
+Alert: org.zaproxy.clientapi.core.ApiResponseSet@72bc6553
+Alert: org.zaproxy.clientapi.core.ApiResponseSet@66982506
+Alert: org.zaproxy.clientapi.core.ApiResponseSet@70cf32e3
+Alert: org.zaproxy.clientapi.core.ApiResponseSet@5a59ca5e
+Alert: org.zaproxy.clientapi.core.ApiResponseSet@4bdeaabb
+Alert: org.zaproxy.clientapi.core.ApiResponseSet@6c4906d3
+Alert: org.zaproxy.clientapi.core.ApiResponseSet@65987993
+Alert: org.zaproxy.clientapi.core.ApiResponseSet@71075444
+Connecting....................
+Connected to Mongo Atlas......
+[INFO] Tests run: 7, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 246.807 s - in TestSuite
+[INFO] 
+[INFO] Results:
+[INFO] 
+[INFO] Tests run: 7, Failures: 0, Errors: 0, Skipped: 0
+[INFO] 
+[INFO] 
+[INFO] --- maven-jar-plugin:2.4:jar (default-jar) @ OpalDevelopment ---
+[INFO] Building jar: E:\zap\backend\uploads\opal\manjjpro\manjjpl\projectToRun\target\OpalDevelopment-0.0.1-SNAPSHOT.jar
+[INFO] 
+[INFO] --- maven-install-plugin:2.4:install (default-install) @ OpalDevelopment ---
+[INFO] Installing E:\zap\backend\uploads\opal\manjjpro\manjjpl\projectToRun\target\OpalDevelopment-0.0.1-SNAPSHOT.jar to C:\Users\Dell\.m2\repository\Opal\OpalDevelopment\0.0.1-SNAPSHOT\OpalDevelopment-0.0.1-SNAPSHOT.jar
+[INFO] Installing E:\zap\backend\uploads\opal\manjjpro\manjjpl\projectToRun\pom.xml to C:\Users\Dell\.m2\repository\Opal\OpalDevelopment\0.0.1-SNAPSHOT\OpalDevelopment-0.0.1-SNAPSHOT.pom
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  04:18 min
+[INFO] Finished at: 2023-05-19T17:08:01+05:30
+[INFO] ------------------------------------------------------------------------

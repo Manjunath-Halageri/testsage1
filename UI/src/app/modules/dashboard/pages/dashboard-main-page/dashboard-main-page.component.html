@@ -1,0 +1,102 @@
+<ul class="breadcrumb" style="font-size:15px;background-color: unset;margin:unset">
+  <li class="breadcrumb-item"><a [routerLink]="['/projectdetail']" id="mainheader">Dashboard</a></li>
+  <li class="breadcrumb-item"><a id="subheader">Dashboard All Graphs</a></li>
+
+</ul>
+<hr>
+<br>
+<div class="container-fluid">
+  <div style="display: flex;">
+    <label style="width: 12%;">Select Graphs</label>
+    <select  type="select" [(ngModel)]="moduleSelected" class="form-control" (change)="dropdownData(moduleSelected)" style="width: 20%;">
+      <option>Test Execution</option>
+      <option>TestCase Report</option>
+      <option>Hierarchy Test Execution</option>
+      <option>Defect Progress</option>
+      <option>Defect Hierarchy</option>
+    </select>
+  </div><br>
+<div class="cardLayoutStyle">
+  <div class="row">
+    <div class="col-4">
+      <a  [routerLink]="['/projectdetail/dashboard/progressgraph']" style="color: black;text-decoration: none;"> 
+      <div class="card shadow-nohover" style="height: 200px;">
+        <img class="card-img-top" src="../../../../../assets/images/pie.png" alt="Card image"
+          style="width:100%;height: 95%;">
+        <div class="card text-center shadow-nohover">
+          <div class="card-block">
+            <h4 class="card-title">No of Requirements	</h4>
+          </div>
+        </div>
+      </div>
+      </a>
+    </div>
+    <div class="col-4">
+      <a [routerLink]="['/projectdetail/dashboard/executedreports']" style="color: black;text-decoration: none;">
+      <div class="card shadow-nohover" style="height: 200px;">
+        <img class="card-img-top" src="../../../../../assets/images/bar.jpg" alt="Card image"
+          style="width:100%;height: 95%;">
+        <div class="card text-center shadow-nohover">
+          <div class="card-block">
+            <h4 class="card-title">TestCase Report</h4>
+          </div>
+        </div>
+      </div>
+    </a>
+    </div>
+    <div class="col-4">
+      <a [routerLink]="['/projectdetail/dashboard/detailedreports']" style="color: black;text-decoration: none;"> 
+      <div class="card shadow-nohover" style="height: 200px;">
+        <img class="card-img-top" src="../../../../../assets/images/bar.jpg" alt="Card image"
+          style="width:100%;height: 95%;">
+        <div class="card text-center shadow-nohover">
+          <div class="card-block">
+            <h4 class="card-title">Hierarchy Test Execution</h4>
+          </div>
+        </div>
+      </div>
+      </a>
+    </div>
+  </div>
+  <br><br><br><br>
+  <div class="row">
+    <div class="col-4">
+      <a [routerLink]="['/projectdetail/dashboard/defectProgress']" style="color: black;text-decoration: none;">
+      <div class="card shadow-nohover" style="height: 200px;">
+        <img class="card-img-top" src="../../../../../assets/images/linegraph.jpg" alt="Card image"
+          style="width:100%;height: 95%;">
+        <div class="card text-center shadow-nohover">
+          <div class="card-block">
+            <h4 class="card-title">Defect Progress</h4>
+          </div>
+        </div>
+      </div>
+      </a>
+    </div>
+    <div class="col-4">
+      <a [routerLink]="['/projectdetail/dashboard/defecthierarchy']" style="color: black;text-decoration: none;"> 
+      <div class="card shadow-nohover" style="height: 200px;">
+        <img class="card-img-top" src="../../../../../assets/images/bar.jpg" alt="Card image"
+          style="width:100%;height: 95%;">
+        <div class="card text-center shadow-nohover">
+          <div class="card-block">
+            <h4 class="card-title">Defect Hierarchy</h4>
+          </div>
+        </div>
+      </div>
+      </a>
+    </div>
+    <!-- <div class="col-4">
+      <div class="card" style="height: 200px;">
+        <img class="card-img-top" src="../../../../../assets/images/bar.jpg" alt="Card image"
+          style="width:100%;height: 95%;">
+        <div class="card text-center">
+          <div class="card-block">
+            <h4 class="card-title">Parking Tickets</h4>
+          </div>
+        </div>
+      </div>
+    </div> -->
+  </div>
+</div>
+</div>

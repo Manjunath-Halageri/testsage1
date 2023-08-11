@@ -1,0 +1,1834 @@
+<ul class="breadcrumb" style="font-size:15px;background-color: unset;margin:unset">
+  <li class="breadcrumb-item" style="width: 115px;"><a [routerLink]="['/projectdetail']" id="mainheader">Test
+      Execution</a></li>
+  <li class="breadcrumb-item" id="subheader"><a id="subheader">Performence Test Execution</a></li>
+  <li *ngIf="displayEditPage" class="breadcrumb-item" id="subheader"><a id="subheader">{{scriptName}}</a></li>
+  <li *ngIf="displayUploadPage" class="breadcrumb-item" id="subheader"><a id="subheader"></a>Upload JMX File</li>
+</ul>
+<hr>
+<ul *ngIf="displayEditPage"
+  style="background-color: unset;margin-left: 77%;margin-right: -30%;padding: 1px 0px 0px 0px;font-size:15px;">
+  <button type="button" class="btn btn-sm" (click)="validateThreadGroup()">Save</button>&nbsp;&nbsp;
+  <button type="button" class="btn btn-sm" (click)="execution()">Execute</button>&nbsp;&nbsp;
+  <button type="button" class="btn btn-sm" (click)="openReport()">Open Reports</button>
+</ul>
+<div class="ui-fluid">
+  <div class="ui-g">
+    <div class="ui-g-2 ui-md-2 border">
+      <div class="one">
+        <span class="treeStructureTitle" style="position:sticky;">Testcase</span>
+        <p-tree [value]="displayModuleForTree" (onNodeSelect)="nodeSelect($event)" selectionMode="single"
+          [(selection)]="selectedFile" [filter]="true" [contextMenu]="cm">
+          <ng-template let-node pTemplate="default">
+            <span *ngIf="node.data!=='script'">{{node.label}}</span>
+            <span *ngIf="node.status=='jmxGenerated'"
+              style="background-color:rgb(255, 191, 0);border-radius: 5px;">{{node.label}}</span>
+            <span *ngIf="node.status=='FAIL'"
+              style="width:100%;color:white; background-color:rgb(238, 95, 95);">{{node.label}}</span>
+            <span *ngIf="node.status=='PASS'"
+              style="color:white; background-color:rgb(87, 138, 87);">{{node.label}}</span>
+            <span *ngIf="node.status=='not executed'">{{node.label}}</span>
+          </ng-template>
+        </p-tree>
+        <p-contextMenu #cm appendTo="body" [model]="items"></p-contextMenu>
+      </div>
+      <button id="importJmx" [hidden]="true" data-toggle="modal" data-target="#myModal01"
+        data-backdrop="static"></button>
+    </div>
+
+    <div class="ui-g-10 ui-md-10 border" style="border-top: 1px solid #dee2e6!important;">
+      <button id="openHTTP" [hidden]="true" data-toggle="modal" data-target="#myModal00"
+        data-backdrop="static"></button>
+      <button id="openHeader" [hidden]="true" data-toggle="modal" data-target="#myModal02"
+        data-backdrop="static"></button>
+      <button id="openUniformTimer" [hidden]="true" data-toggle="modal" data-target="#myModal03"
+        data-backdrop="static"></button>
+      <button id="openConstantTimer" [hidden]="true" data-toggle="modal" data-target="#myModal04"
+        data-backdrop="static"></button>
+      <button id="uploadCSV" [hidden]="true" data-toggle="modal" data-target="#myModal05"
+        data-backdrop="static"></button>
+      <button id="controllerEdit" [hidden]="true" data-toggle="modal" data-target="#myModal06"
+        data-backdrop="static"></button>
+      <button id="execute" [hidden]="true" data-toggle="modal" data-target="#containers"
+        data-backdrop="static"></button>
+      <button id="rowSelect" [hidden]="true" data-toggle="modal" data-target="#selectRow"
+        data-backdrop="static"></button>
+      <button id="pasteRow" [hidden]="true" data-toggle="modal" data-target="#rowPaste" data-backdrop="static"></button>
+      <button id="openSampleResult1" [hidden]="true" data-toggle="modal" data-target="#displaySample"
+        data-backdrop="static"></button>
+      <button id="openSampleResult2" [hidden]="true" data-toggle="modal" data-target="#displayControllerResult"
+        data-backdrop="static"></button>
+      <button id="listenerModal" [hidden]="true" data-toggle="modal" data-target="#listener"
+        data-backdrop="static"></button>
+      <button id="openAssertion" [hidden]="true" data-toggle="modal" data-target="#displayAssertion"
+        data-backdrop="static"></button>
+      <button id="assertionModal" [hidden]="true" data-toggle="modal" data-target="#modalAssertion"
+        data-backdrop="static"></button>
+      <button id="openRegEx" [hidden]="true" data-toggle="modal" data-target="#displayRegEx"
+        data-backdrop="static"></button>
+      <div *ngIf="displayEditPage">
+        <div>
+          <br>
+          <h2>&nbsp;<a href="javascript:;" (click)="openForm1()" class="headerClass">Thread Group <span
+                *ngIf="!showForm1" class="glyphicon glyphicon-chevron-right"></span>
+              <span *ngIf="showForm1" class="glyphicon glyphicon-chevron-down"></span></a></h2>
+          <div *ngIf="showForm1 == true">
+            <div class="row" style="margin: unset;padding: unset;">
+              <div class="col-lg-3 col-md-3 col-sm-3" [formGroup]="threadGroupForm">
+                <label>Users</label>
+                <input type="number" class="form-control" formControlName="users" min="1"
+                  [(ngModel)]="threadGroup.intProp[0]['#text']" (change)="changedSomething()">
+                <div *ngIf="threadGroupForm.controls.users.errors!==null">
+                  <label *ngIf="threadGroupForm.controls.users.errors.required" [ngClass]="'error'" style="color: red;">required! </label>
+                  <label *ngIf="threadGroupForm.controls.users.errors.pattern" [ngClass]="'error'" style="color: red;">Should not contain 0 or negative value! </label>
+                </div>
+              </div>
+              <div class="col-lg-3 col-md-3 col-sm-3" [formGroup]="threadGroupForm">
+                <label>Ramp-Up Time</label>
+                <input type="number" class="form-control" formControlName="ramp" min="0" (change)="changedSomething()"
+                  [(ngModel)]="threadGroup.intProp[1]['#text']">
+                  <div *ngIf="threadGroupForm.controls.ramp.errors!==null">
+                    <label *ngIf="threadGroupForm.controls.ramp.errors.required" [ngClass]="'error'" style="color: red;">required! </label>
+                    <label *ngIf="threadGroupForm.controls.ramp.errors.pattern" [ngClass]="'error'" style="color: red;">Should not contain negative value! </label>
+                  </div>
+              </div>
+              <div class="col-lg-3 col-md-3 col-sm-3">
+                <label>Loop Count</label>
+                <input type="number" min="-1" class="form-control" [disabled]="infinitycheck" (change)="changedSomething()"
+                  [(ngModel)]="threadGroup.elementProp.stringProp['#text']">
+                  <!-- <div *ngIf="threadGroupForm.controls.loop.errors!==null">
+                    <label *ngIf="threadGroupForm.controls.loop.errors.pattern" [ngClass]="'error'" style="color: red;">Should not contain 0! </label>
+                  </div> -->
+              </div>
+              <div class="col-lg-3 col-md-3 col-sm-3 form-group">
+                <br><br>
+                <input type="checkbox" [checked]="infinitycheck" (change)="updateLoop($event)" (change)="changedSomething()">&nbsp;&nbsp;
+                <label>Infinity Loop </label>
+              </div>
+              <div class="col-lg-12 col-md-12 col-sm-12 form-group">
+                <input type="checkbox" [(ngModel)]="threadGroup.boolProp[1]['#text']" (change)="changedSomething()">&nbsp;
+                <label>Same User On Each Iteration</label>
+              </div>
+
+              <div class="col-lg-12 col-md-12 col-sm-12 form-group">
+                <input type="checkbox" [(ngModel)]="threadGroup.boolProp[2]['#text']" (change)="changedSomething()">&nbsp;
+                <label>Delay Thread Creation</label>
+              </div>
+
+              <div class="col-lg-12 col-md-12 col-sm-12 form-group">
+                <input type="checkbox" [(ngModel)]="threadGroup.boolProp[0]['#text']" (change)="changedSomething()">&nbsp;
+                <label>Thread Life Time</label>
+              </div>
+              <div *ngIf="threadGroup.boolProp[0]['#text']">
+                <div class="col-lg-6 col-md-6 col-sm-6" [formGroup]="threadGroupForm">
+                  <label>Duration (seconds)</label>
+                  <input type="number" min="0" class="form-control" formControlName="duration" [(ngModel)]="threadGroup.longProp[0]['#text']" (change)="changedSomething()">
+                  <div *ngIf="threadGroupForm.controls.duration.errors!==null">
+                    <label *ngIf="threadGroupForm.controls.duration.errors.required" [ngClass]="'error'" style="color: red;">required! </label>
+                    <label *ngIf="threadGroupForm.controls.duration.errors.pattern" [ngClass]="'error'" style="color: red;">Should not contain 0 or neagtive value! </label>
+                  </div>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-6" [formGroup]="threadGroupForm">
+                  <label>Startup Delay (seconds)</label>
+                  <input type="number" min="0" class="form-control" formControlName="delay" [(ngModel)]="threadGroup.longProp[1]['#text']" (change)="changedSomething()">
+                  <div *ngIf="threadGroupForm.controls.delay.errors!==null">
+                    <label *ngIf="threadGroupForm.controls.delay.errors.required" [ngClass]="'error'" style="color: red;">required! </label>
+                    <label *ngIf="threadGroupForm.controls.delay.errors.pattern" [ngClass]="'error'" style="color: red;">Should not contain neagtive value! </label>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div>
+          <br>
+          <h2>&nbsp;<a href="javascript:;" (click)="openForm2()" class="headerClass">User Defined Variables <span
+                *ngIf="!showForm2" class="glyphicon glyphicon-chevron-right"></span>
+              <span *ngIf="showForm2" class="glyphicon glyphicon-chevron-down"></span></a></h2>
+          <div *ngIf="showForm2 == true">
+            <br>
+            <table class="shadow-lg scroll" style="width: 90%">
+              <thead class="theadColor">
+                <tr>
+                  <th>Sl.No</th>
+                  <th>Name</th>
+                  <th colspan="2">Value</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let var of userVariables; let i = index">
+                  <td>{{i+1}}</td>
+                  <td>
+                    <input type="text" [(ngModel)]="userVariables[i].stringProp[0]['#text']" (change)="changedSomething()"
+                      (ngModelChange)="addVarName(i)" class="form-control">
+                  </td>
+                  <td>
+                    <input type="text" [(ngModel)]="userVariables[i].stringProp[1]['#text']" class="form-control" (change)="changedSomething()">
+                  </td>
+                  <td>
+                    <i class="glyphicon glyphicon-remove" style="cursor: pointer;"  (click)="deleteVariable(i)"></i>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <br>
+            <br>
+            <div style="margin-left: 40%;">
+              <button type="button" class="btn btn-lg" (click)="addVariable()">Add</button>
+            </div>
+
+          </div>
+        </div>
+
+        <div>
+          <br>
+          <h2>&nbsp;<a href="javascript:;" (click)="openForm3()" class="headerClass">Header Manager <span
+                *ngIf="!showForm3" class="glyphicon glyphicon-chevron-right"></span>
+              <span *ngIf="showForm3" class="glyphicon glyphicon-chevron-down"></span></a></h2>
+          <div *ngIf="showForm3 == true">
+            <br>
+            <table class="shadow-lg scroll" style="width: 90%">
+              <thead class="theadColor">
+                <tr>
+                  <th>Sl.No</th>
+                  <th>Name</th>
+                  <th colspan="2">Value</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let var of headerManager; let i = index">
+                  <td>{{i+1}}</td>
+                  <td>
+                    <input type="text" [(ngModel)]="headerManager[i].stringProp[0]['#text']" (change)="changedSomething()"
+                      (ngModelChange)="addHeaderName(i)" class="form-control">
+                  </td>
+                  <td>
+                    <input type="text" [(ngModel)]="headerManager[i].stringProp[1]['#text']" (change)="changedSomething()" class="form-control">
+                  </td>
+                  <td>
+                    <i class="glyphicon glyphicon-remove" style="cursor: pointer;" (click)="deleteHeader(i)"></i>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <br>
+            <br>
+            <div style="margin-left: 40%;">
+              <button type="button" class="btn btn-lg" (click)="addHeader()" >Add</button>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <br>
+          <h2>&nbsp;<a href="javascript:;" (click)="openForm4()" class="headerClass">Config Elements <span
+                *ngIf="!showForm4" class="glyphicon glyphicon-chevron-right"></span>
+              <span *ngIf="showForm4" class="glyphicon glyphicon-chevron-down"></span></a></h2>
+          <div *ngIf="showForm4 == true">
+            <br>
+            <div>
+              <div class="row" style="margin: unset;padding: unset;">
+                <div class="col-lg-10 col-md-10 col-sm-10 form-group">
+                  <h4><a href="javascript:;" (click)="addCSVFile()">Add CSV File</a></h4>
+                </div>
+                <div *ngIf="csvFiles.length!==0" class="col-lg-10 col-md-10 col-sm-10 form-group">
+                  <table class="shadow-lg scroll" style="width: 30% ;">
+                    <thead class="theadColor">
+                      <tr>
+                        <th colspan="2" style="text-align: center;">CSV Files</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let var of csvFiles; let i=index">
+                        <td>
+                          <a href="javascript:;">{{csvFileNames[i]}}</a>
+                        </td>
+                        <td>
+                          <i class="glyphicon glyphicon-remove" style="cursor: pointer;" (click)="removeCSV(i)"></i>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                  <br>
+                </div>
+
+                <div class="col-lg-10 col-md-10 col-sm-10 form-group">
+                  <h4><a href="javascript:;" (click)="openRequestDefaults()">HTTP Request Defaults
+                      <span *ngIf="!displayRequestDefaults" class="glyphicon glyphicon-chevron-right"></span>
+                      <span *ngIf="displayRequestDefaults" class="glyphicon glyphicon-chevron-down"></span>
+                    </a></h4>
+                  <div *ngIf="displayRequestDefaults">
+                    <br>
+                    <table class="shadow-lg scroll" style="width: 60%">
+                      <thead class="theadColor">
+                        <tr>
+                          <th style="text-align: center;">HTTP Request Defaults</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <br>
+                        <tr>
+                          <table class="scroll border" style="width: 80%;margin-left: 5%;">
+                            <thead class="theadColor">
+                              <tr>
+                                <th colspan="2" style="text-align: center;">TimeOuts</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr>
+                                <td>
+                                  <label>Connect (milliseconds)</label>
+                                  <input type="text" class="form-control" (change)="changedSomething()"
+                                    [(ngModel)]="requestDefaults.intProp[1]['#text']">
+                                </td>
+                                <td>
+                                  <label>Response (milliseconds)</label>
+                                  <input type="text" class="form-control" (change)="changedSomething()"
+                                    [(ngModel)]="requestDefaults.intProp[2]['#text']">
+                                </td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </tr>
+                        <br>
+                        <tr>
+                          <td>
+                            <input style="margin-left: 5%;" type="checkbox" (change)="changedSomething()"
+                              [(ngModel)]="requestDefaults.boolProp[0]['#text']">&nbsp;
+                            <label>Parallel Downloads</label>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+
+                <br>
+                <div class="col-lg-10 col-md-10 col-sm-10 form-group" style="margin-top: 1%;">
+                  <input type="checkbox" [(ngModel)]="clearCookie" (change)="changedSomething()">&nbsp;
+                  <label>Clear HTTP Cookie</label>
+                </div>
+                <div class="col-lg-10 col-md-10 col-sm-10 form-group">
+                  <input type="checkbox" [(ngModel)]="clearCache" (change)="changedSomething()">&nbsp;
+                  <label>Clear HTTP Cache</label>
+                </div>
+                <div class="col-lg-10 col-md-10 col-sm-10 form-group">
+                  <input type="checkbox" [(ngModel)]="DNSCache" (change)="changedSomething()">&nbsp;
+                  <label>Clear DNS Cache</label>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <br>
+          <h2>&nbsp;<a href="javascript:;" (click)="openForm5()" class="headerClass" [shAttachMenu]="menu2">HTTP Request
+              <span *ngIf="!showForm5" class="glyphicon glyphicon-chevron-right"></span>
+              <span *ngIf="showForm5" class="glyphicon glyphicon-chevron-down"></span></a></h2>
+          <sh-context-menu #menu2>
+            <ng-template shContextMenuItem>
+              <div class="menuu treeStructureCreate" (click)="addController()">Add Transaction Controller</div>
+            </ng-template>
+            <ng-template *ngIf="!resultTreeBool" shContextMenuItem>
+              <div class="menuu treeStructureCreate" (click)="addResultTree()">Add Result Tree</div>
+            </ng-template>
+            <ng-template shContextMenuItem>
+              <div class="menuu treeStructureCreate" (click)="addAssertion()">Add Response Assertion</div>
+            </ng-template>
+            <ng-template *ngIf="copyCon" shContextMenuItem>
+              <div class="menuu treeStructureCreate" (click)="pasteController()">Paste</div>
+            </ng-template>
+          </sh-context-menu>
+          <div *ngIf="showForm5 == true">
+            <br>
+            <div *ngFor="let val of transactionController; let j =index">
+              <h4><span class="glyphicon glyphicon-list-alt"></span>&nbsp;
+                <a href="javascript:;" (click)="openController(j)" style="text-decoration: none; color: peru;"
+                  [shAttachMenu]="menu5">{{transactionController[j].controllerName}}</a>
+              </h4>
+              <sh-context-menu #menu5>
+                <ng-template shContextMenuItem>
+                  <div class="menuu treeStructureCreate" (click)="addNewSampler(j)">Add HTTP Sampler</div>
+                </ng-template>
+                <ng-template shContextMenuItem>
+                  <div class="menuu treeStructureCreate" (click)="editController(j)">Edit</div>
+                </ng-template>
+                <ng-template shContextMenuItem>
+                  <div class="menuu treeStructureCreate" (click)="addControllerAssertion(j)">Add Response Assertion
+                  </div>
+                </ng-template>
+                <ng-template shContextMenuItem>
+                  <div class="menuu treeStructureCreate" (click)="removeController(j)">Remove</div>
+                </ng-template>
+                <ng-template *ngIf="copySam" shContextMenuItem>
+                  <div class="menuu treeStructureCreate" (click)="pasteHTTP(j)">Paste</div>
+                </ng-template>
+                <ng-template shContextMenuItem>
+                  <div class="menuu treeStructureCreate" (click)="copyController(j)">Copy</div>
+                </ng-template>
+              </sh-context-menu>
+              <br>
+              <div *ngIf="transactionController[j].display" id="scrollDown1"
+                style="max-height: 400px;min-height:5px;overflow-y: auto; overflow-x: hidden;">
+                <table class="table" id="dragTable">
+                  <tr *ngFor="let var of transactionController[j].requests; let i = index" id="hoverHttp"
+                    (click)="highLightRow(i,j)"
+                    [class.editSelected]="i === transactionController[j].rowSelectedForEdit">
+                    <td style="white-space: nowrap;">
+                      <a href="javascript:;" (click)="openHTTPModal(i,j)" [shAttachMenu]="menu1">
+                        {{transactionController[j].requests[i]['-testname']}}</a>
+                      <sh-context-menu #menu1>
+                        <ng-template shContextMenuItem>
+                          <div class="menuu treeStructureCreate" (click)="addRow(i,j)">Add HTTP Sampler</div>
+                        </ng-template>
+                        <ng-template shContextMenuItem
+                          *ngIf="transactionController[j].timers[i]['#item'].timer1==false">
+                          <div class="menuu treeStructureCreate" (click)="addUniformTimer(i,j)">Add Uniform Timer</div>
+                        </ng-template>
+                        <ng-template shContextMenuItem
+                          *ngIf="transactionController[j].timers[i]['#item'].timer2==false">
+                          <div class="menuu treeStructureCreate" (click)="addConstantTimer(i,j)">Add Constant Timer
+                          </div>
+                        </ng-template>
+                        <ng-template shContextMenuItem>
+                          <div class="menuu treeStructureCreate" (click)="addHTTPResponseAssertion(i,j)">Add Response
+                            Assertion</div>
+                        </ng-template>
+                        <ng-template shContextMenuItem>
+                          <div class="menuu treeStructureCreate" (click)="addRegEx(i,j)">Add Regular Expression
+                            Extractor</div>
+                        </ng-template>
+                        <ng-template shContextMenuItem>
+                          <div class="menuu treeStructureCreate" (click)="removeHTTP(i,j)">Remove</div>
+                        </ng-template>
+                        <ng-template shContextMenuItem>
+                          <div class="menuu treeStructureCreate" (click)="copyHTTP(i,j)">Copy</div>
+                        </ng-template>
+                        <ng-template *ngIf="copySam" shContextMenuItem>
+                          <div class="menuu treeStructureCreate" (click)="pasteHTTPSample(i,j)">Paste</div>
+                        </ng-template>
+                      </sh-context-menu>
+                      <ul>
+                        <li>
+                          <a href="javascript:;" (click)="openHeaderManager(i,j)">
+                            Header Manager
+                          </a>
+                        </li>
+                        <li *ngIf="transactionController[j].timers[i]['#item'].timer1">
+                          <a href="javascript:;" (click)="openUniformTimer(i,j)" [shAttachMenu]="menu3">
+                            Uniform Random Timer
+                          </a>
+                          <sh-context-menu #menu3>
+                            <ng-template shContextMenuItem>
+                              <div class="menuu treeStructureCreate" (click)="deleteUniformTimer(i,j)">Delete</div>
+                            </ng-template>
+                          </sh-context-menu>
+                        </li>
+                        <li *ngIf="transactionController[j].timers[i]['#item'].timer2">
+                          <a href="javascript:;" (click)="openConstantTimer(i,j)" [shAttachMenu]="menu4">
+                            Constant Timer
+                          </a>
+                          <sh-context-menu #menu4>
+                            <ng-template shContextMenuItem>
+                              <div class="menuu treeStructureCreate" (click)="deleteConstantTimer(i,j)">Delete</div>
+                            </ng-template>
+                          </sh-context-menu>
+                        </li>
+                        <li *ngFor="let var of transactionController[j].timers[i]['#item'].assertions let p = index">
+                          <a href="javascript:;" [shAttachMenu]="menu8"
+                            (click)="displayHTTPResponseAssertion(i,j,p)">{{transactionController[j].timers[i]['#item'].assertions[p]['#item'].ResponseAssertion['-testname']}}</a>
+                          <sh-context-menu #menu8>
+                            <ng-template shContextMenuItem>
+                              <div class="menuu treeStructureCreate" (click)="deleteHTTPResponseAssertion(i,j,p)">
+                                Delete</div>
+                            </ng-template>
+                          </sh-context-menu>
+                        </li>
+                        <li *ngFor="let var of transactionController[j].timers[i]['#item'].regEx let p = index">
+                          <a href="javascript:;" [shAttachMenu]="menu9"
+                            (click)="openRegEx(i,j,p)">{{transactionController[j].timers[i]['#item'].regEx[p]['#item'].RegexExtractor['-testname']}}</a>
+                          <sh-context-menu #menu9>
+                            <ng-template shContextMenuItem>
+                              <div class="menuu treeStructureCreate" (click)="deleteRegEx(i,j,p)">
+                                Delete</div>
+                            </ng-template>
+                          </sh-context-menu>
+                        </li>
+                      </ul>
+                    </td>
+                  </tr>
+                  <tr *ngFor="let var of transactionController[j].controllerAssertions; let i = index">
+                    <h5 style="margin-left: 2%;"><i class="fa fa-search" style="color:blue"></i>&nbsp;
+                      <a href="javascript:;" [shAttachMenu]="menu7" style="text-decoration: none; color: black;"
+                        (click)="displayControllerAssertion(i,j)">{{transactionController[j].controllerAssertions[i]['#item'].ResponseAssertion['-testname']}}</a>
+                      <sh-context-menu #menu7>
+                        <ng-template shContextMenuItem>
+                          <div class="menuu treeStructureCreate" (click)="deleteControllerAssertion(i,j)">Delete</div>
+                        </ng-template>
+                      </sh-context-menu>
+                    </h5>
+                  </tr>
+                </table>
+              </div>
+            </div>
+            <div *ngIf='resultTreeBool'>
+              <h4><i class="fa fa-area-chart" style="color:blue"></i>&nbsp;
+                <a href="javascript:;" (click)="openResultTree()" [shAttachMenu]="menu10"
+                  style="text-decoration: none; color: black;">{{viewResultTree['#item'].ResultCollector['-testname']}}</a>&nbsp;&nbsp;
+                <span *ngIf="openTree && treeStatus=='executed'" class="glyphicon glyphicon-erase"
+                  style="cursor: pointer;" (click)="clearListener()"></span>&nbsp;&nbsp;
+                  <span  *ngIf="treeStatus=='executed'">
+                  <button style="margin-right:-30%;margin-left:60%;" type="button" class="btn btn-sm" (click)="openViewResults()">Open ViewResultTree</button>
+                </span>
+                <sh-context-menu #menu10>
+                  <ng-template shContextMenuItem>
+                    <div class="menuu treeStructureCreate" (click)="deleteListener()">Delete</div>
+                  </ng-template>
+                </sh-context-menu>
+              </h4>
+              <h4  *ngIf="treeStatus=='executed'">
+                <span>{{actualTree}}</span>
+              </h4>
+              <br>
+              <div *ngIf="openTree && treeStatus=='executed'"
+                style="max-height: 400px;min-height:5px;overflow-y: auto; overflow-x: hidden;">
+                <table class="table">
+                  <tr *ngFor="let var of testResult.httpSample; let i = index">
+                    <td style="white-space: nowrap;">
+
+                      <span
+                        *ngIf="!testResult.httpSample[i].openSubSample && (testResult.httpSample[i].httpSample!==undefined || testResult.httpSample[i].assertionResult!==undefined)"
+                        class="glyphicon glyphicon-chevron-right" style="cursor: pointer;"
+                        (click)="displaySubSample(i)"></span>&nbsp;
+                      <span
+                        *ngIf="testResult.httpSample[i].openSubSample && (testResult.httpSample[i].httpSample!==undefined || testResult.httpSample[i].assertionResult!==undefined)"
+                        (click)="closeSubSample(i)" style="cursor: pointer;"
+                        class="glyphicon glyphicon-chevron-down"></span>&nbsp;
+
+                      <span
+                        *ngIf="testResult.httpSample[i].httpSample==undefined && testResult.httpSample[i].assertionResult==undefined">&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                      <i *ngIf="testResult.httpSample[i].s" class='fas fa-shield-alt'
+                        style='color:green;font-size: 15px;'></i>
+                      <i *ngIf="!testResult.httpSample[i].s" class='fas fa-shield-alt'
+                        style='color:red;font-size: 15px;'></i>
+                      <a href="javascript:;" style="text-decoration: none; color: black;" (click)="openSampleResult(i)">
+                        {{testResult.httpSample[i].lb}}
+                      </a>
+                      <div *ngIf="testResult.httpSample[i].openSubSample" style="margin-left: 0.3%;">
+                        <br>
+                        <table class="table" style="margin-left: 0.4%;">
+                          <tr *ngFor="let var of testResult.httpSample[i].httpSample; let j = index">
+                            <span
+                              *ngIf="testResult.httpSample[i].httpSample[j].assertionResult!==undefined && !testResult.httpSample[i].httpSample[j].openAssertions"
+                              class="glyphicon glyphicon-chevron-right" style="cursor: pointer;"
+                              (click)="displayAssertions(i,j)"></span>&nbsp;
+                            <span
+                              *ngIf="testResult.httpSample[i].httpSample[j].assertionResult!==undefined && testResult.httpSample[i].httpSample[j].openAssertions"
+                              (click)="closeAssertions(i,j)" style="cursor: pointer;"
+                              class="glyphicon glyphicon-chevron-down"></span>&nbsp;
+                            <i *ngIf="testResult.httpSample[i].httpSample[j].s" class='fas fa-shield-alt'
+                              style='color:green;font-size: 15px;'></i>
+                            <i *ngIf="!testResult.httpSample[i].httpSample[j].s" class='fas fa-shield-alt'
+                              style='color:red;font-size: 15px;'></i>
+                            <a href="javascript:;" style="text-decoration: none; color: black;"
+                              (click)="openSubSampleResult(i,j)">
+                              {{testResult.httpSample[i].httpSample[j].lb}}
+                            </a>
+                            <div
+                              *ngIf="testResult.httpSample[i].httpSample[j].assertionResult!==undefined && testResult.httpSample[i].httpSample[j].openAssertions">
+                              <br>
+                              <table class="table" style="margin-left: 1.5%;">
+                                <tr
+                                  *ngFor="let var of testResult.httpSample[i].httpSample[j].assertionResult; let k = index">
+                                  <i *ngIf="!testResult.httpSample[i].httpSample[j].assertionResult[k].failure"
+                                    class='fas fa-shield-alt' style='color:green;font-size: 15px;'></i>
+                                  <i *ngIf="testResult.httpSample[i].httpSample[j].assertionResult[k].failure"
+                                    class='fas fa-shield-alt' style='color:red;font-size: 15px;'></i>
+                                  <a href="javascript:;" style="text-decoration: none; color: black;"
+                                    (click)="openSubSampleAssertion(i,j,k)">
+                                    {{testResult.httpSample[i].httpSample[j].assertionResult[k].name}}
+                                  </a>
+                                </tr>
+                              </table>
+                            </div>
+                          </tr>
+                          <div *ngIf="testResult.httpSample[i].assertionResult!==undefined" style="margin-left: 0.9%;">
+                            <tr *ngFor="let var of testResult.httpSample[i].assertionResult; let p = index">
+                              <i *ngIf="!testResult.httpSample[i].assertionResult[p].failure" class='fas fa-shield-alt'
+                                style='color:green;font-size: 15px;'></i>
+                              <i *ngIf="testResult.httpSample[i].assertionResult[p].failure" class='fas fa-shield-alt'
+                                style='color:red;font-size: 15px;'></i>
+                              <a href="javascript:;" style="text-decoration: none; color: black;"
+                                (click)="openThreadGroupAssertion(i,p)">
+                                {{testResult.httpSample[i].assertionResult[p].name}}
+                              </a>
+                            </tr>
+                          </div>
+                        </table>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr *ngFor="let var of testResult.sample; let j = index">
+                    <td style="white-space: nowrap;">
+                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i *ngIf="testResult.sample[j].s"
+                        class='fas fa-shield-alt' style='color:green;font-size: 15px;'></i>
+                      <i *ngIf="!testResult.sample[j].s" class='fas fa-shield-alt'
+                        style='color:red;font-size: 15px;'></i>
+                      <a href="javascript:;" style="text-decoration: none; color: black;"
+                        (click)="openControllerResult(j)">
+                        {{testResult.sample[j].lb}}
+                      </a>
+                    </td>
+                  </tr>
+                </table>
+              </div>
+            </div>
+            <div *ngIf="threadGroupAssertions.length!==0">
+              <div *ngFor=" let var of threadGroupAssertions let k=index">
+                <h4><i class="fa fa-search" style="color:blue"></i>&nbsp;
+                  <a href="javascript:;" [shAttachMenu]="menu6" style="text-decoration: none; color: black;"
+                    (click)="displayThreadGroupAssertion(k)">{{threadGroupAssertions[k]['#item'].ResponseAssertion['-testname']}}</a>
+                  <sh-context-menu #menu6>
+                    <ng-template shContextMenuItem>
+                      <div class="menuu treeStructureCreate" (click)="deleteThreadGroupAssertion(k)">Delete</div>
+                    </ng-template>
+                  </sh-context-menu>
+                </h4><br>
+              </div>
+            </div>
+          </div>
+        </div>
+        <br>
+        <br>
+        <!-- <div style="margin-left: 40%;">
+          <button type="button" class="btn btn-lg" (click)="saveJMXFile()">Save</button>&nbsp;&nbsp;
+          <button type="button" class="btn btn-lg" (click)="execution()">Execute</button>&nbsp;&nbsp;
+          <button type="button" class="btn btn-lg" (click)="openReport()">Open Report</button>
+        </div> -->
+      </div>
+
+      <div class="container" *ngIf="displayUploadPage">
+        <h3>Upload JMX File</h3>
+        <form [formGroup]='uploadForm' (ngSubmit)="uploadImportedFile(uploadForm.value)">
+
+          <div class="row" style="margin-top: 40px;">
+
+            <div class="col-sm-6 col-md-6 col-lg-6 col-xs-6">
+              <div class="custom-file mb-3">
+
+                <div style="display:flex ;text-align: center;" class="form-group">
+                  <label class="center" style="width: 100%;margin-top: 9px;">Choose File To Upload</label>
+                  <input type="file" (change)="validateUpload($event)" class="form-control" style="height: 100%;"
+                    #myInput  accept=".jmx" placeholder="Upload file..." />
+                </div>
+
+              </div>
+            </div>
+            <div class="col-sm-3 col-md-3 col-lg-3 col-xs-3">
+              <button class="btn btn-lg" [disabled]="uploadForm.invalid" type="submit" value="Submit">Upload</button>
+            </div>
+          </div>
+        </form>
+
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+<div class="modal fade" id="myModal00" role="dialog">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content" style=" margin-top: 10%; margin-left: 30%;">
+      <div class="modal-header">
+        <h1 class="modal-title">HTTP Request</h1>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+      <div class="modal-body" style="min-height: 100%;">
+        <div class="row" style="margin: unset;padding: unset;">
+          <div class="col-lg-11 col-md-11 col-lg-11 col-sm-10col-lg-10 form-group">
+            <label>Name</label>
+            <input type="text" [(ngModel)]="httpRequest['-testname']" class="form-control" (change)="changedSomething()">
+          </div>
+          <div class="col-lg-2 col-md-2 col-sm-2 form-group">
+            <label>Protocol</label>
+            <input type="text" [(ngModel)]="httpRequest.elementProp[2]['#item'].stringProp[0]['#text']"
+            (change)="changedSomething()" class="form-control">
+          </div>
+          <div class="col-lg-7 col-md-7 col-sm-7 form-group">
+            <label>Server Name</label>
+            <input type="text" [(ngModel)]="httpRequest.elementProp[2]['#item'].stringProp[1]['#text']"
+            (change)="changedSomething()"  class="form-control">
+          </div>
+          <div class="col-lg-3 col-md-3 col-sm-3 form-group">
+            <label>Port</label>
+            <input type="text" [(ngModel)]="httpRequest.elementProp[2]['#item'].stringProp[2]['#item'].intProp['#text']"
+            (change)="changedSomething()"  class="form-control">
+          </div>
+        </div>
+        <div class="row" style="margin: unset;padding: unset;">
+          <div class="col-lg-2 col-md-2 col-sm-2 form-group" style="margin-top: 28px;">
+            <select [(ngModel)]="httpRequest.elementProp[2]['#item'].stringProp[4]['#text']" class="form-control" (change)="changedSomething()">
+              <option>{{httpRequest.elementProp[2]['#item'].stringProp[4]['#text']}}</option>
+              <option *ngIf="httpRequest.elementProp[2]['#item'].stringProp[4]['#text']!=='GET'">GET</option>
+              <option *ngIf="httpRequest.elementProp[2]['#item'].stringProp[4]['#text']!=='POST'">POST</option>
+              <option *ngIf="httpRequest.elementProp[2]['#item'].stringProp[4]['#text']!=='PUT'">PUT</option>
+              <option *ngIf="httpRequest.elementProp[2]['#item'].stringProp[4]['#text']!=='DELETE'">DELETE</option>
+              <option *ngIf="httpRequest.elementProp[2]['#item'].stringProp[4]['#text']!=='PATCH'">PATCH</option>
+            </select>
+          </div>
+          <div class="col-lg-7 col-md-7 col-sm-7 form-group">
+            <label>Path</label>
+            <input type="text" [(ngModel)]="httpRequest.elementProp[2]['#item'].stringProp[3]['#text']"
+            (change)="changedSomething()" class="form-control">
+          </div>
+          <div class="col-lg-3 col-md-3 col-sm-3 form-group" style="margin-top: 28px;">
+            <input type="checkbox" [(ngModel)]="httpRequest.elementProp[1]['#item'].boolProp[1]['#text']" (change)="changedSomething()"> &nbsp;
+            <label>Use Keep Alive</label>
+          </div>
+        </div>
+        <hr>
+        <mat-tab-group animationDuration="0ms">
+          <mat-tab label="Parameters">
+            <br>
+            <div id="scrollDown" style="min-height:10px;max-height: 250px; overflow-y: auto;">
+              <table class="shadow-lg scroll" style="width: 100%">
+                <thead class="theadColor">
+                  <tr>
+                    <th>Sl.No</th>
+                    <th>Name</th>
+                    <th colspan="2">Value</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let var of httpRequest.elementProp[0].collectionProp.elementProp; let i = index">
+                    <td>{{i+1}}</td>
+                    <td>
+                      <input type="text" (change)="changedSomething()"
+                        [(ngModel)]="httpRequest.elementProp[0].collectionProp.elementProp[i].stringProp[0]['#text']"
+                        (ngModelChange)="addParamName(i)" class="form-control">
+                    </td>
+                    <td>
+                      <input type="text" (change)="changedSomething()"
+                        [(ngModel)]="httpRequest.elementProp[0].collectionProp.elementProp[i].stringProp[1]['#text']"
+                        class="form-control">
+                    </td>
+                    <td>
+                      <i class="glyphicon glyphicon-remove" style="cursor: pointer;" (click)="deleteReqParam(i)"></i>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <br>
+            <div style="margin-left: 48%;">
+              <button type="button" class="btn btn-lg" (click)="addReqParams()">Add</button>
+            </div>
+          </mat-tab>
+          <!-- <mat-tab label="Body Data">
+            <br>
+            <textarea name="body" id="" cols="100"
+              rows="15">{{httpRequest.elementProp[0].collectionProp.elementProp.stringProp[0]['#text']}}</textarea>
+          </mat-tab> -->
+          <mat-tab label="Files Upload">
+            <br>
+            <div id="scrollDown" style="height: 250px; overflow-y: auto;">
+              <table class="shadow-lg scroll" style="width: 100%">
+                <thead class="theadColor">
+                  <tr>
+                    <th>Sl.No</th>
+                    <th>File Name</th>
+                    <th colspan="2">Parameter</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>1</td>
+                    <td>
+                      <input type="file" style="height: 55%;">
+                    </td>
+                    <td>
+                      <input type="text">
+                    </td>
+                    <td>
+                      <i class="glyphicon glyphicon-remove" style="cursor: pointer;"></i>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </mat-tab>
+        </mat-tab-group>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-lg" type="button" data-dismiss="modal" (click)="saveRequest()">Save</button>
+        <button type="button" class="btn btn-lg btn-cancel" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- <div class="modal fade" id="myModal01" role="dialog" data-backdrop="static">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content" style="width: 60%; margin-top: 10%; margin-left: 30%;">
+      <div class="modal-header">
+        <h1 class="modal-title">Upload JMX File</h1>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+      <div class="modal-body" style="min-height: 100%;">
+        <form action="" [formGroup]='uploadForm'>
+          <div style="display:flex ;text-align: center;">
+            <label class="center" style="width: 100%;margin-top: 9px;">Choose File To Upload</label>
+
+            <input type="file" (change)="validateUpload($event)" class="form-control" style="height: 100%;" #myInput
+              formControlName="importFile" accept=".jmx" placeholder="Upload file..." [(ngModel)]="fileName" />
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-lg" [disabled]="uploadForm.invalid" type="button" (click)="uploadImportedFile(fileName)"
+          data-dismiss="modal">Upload</button>
+        <button type="button" class="btn btn-lg btn-cancel" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div> -->
+
+
+<div class="modal fade" id="myModal02" role="dialog" data-backdrop="static">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content" style="width: 90%; margin-top: 30%; margin-left: 30%;">
+      <div class="modal-header">
+        <h1 class="modal-title">Header Manager</h1>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+      <div class="modal-body" style="min-height: 100%;">
+        <br>
+        <div id="scrollDown1" style="height: 200px; overflow-y: auto;">
+          <table class="shadow-lg scroll" style="width: 90%">
+            <thead class="theadColor">
+              <tr>
+                <th>Sl.No</th>
+                <th>Name</th>
+                <th colspan="2">Value</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let var of httpHeader.collectionProp.elementProp; let i = index">
+                <td>{{i+1}}</td>
+                <td>
+                  <input type="text" [(ngModel)]="httpHeader.collectionProp.elementProp[i].stringProp[0]['#text']"
+                  (ngModelChange)="addHTTPHeaderName(i)" class="form-control">
+                </td>
+                <td>
+                  <input type="text" [(ngModel)]="httpHeader.collectionProp.elementProp[i].stringProp[1]['#text']"
+                  (change)="changedSomething()" class="form-control">
+                </td>
+                <td>
+                  <i class="glyphicon glyphicon-remove" style="cursor: pointer;" (click)="deleteHTTPHeader(i)"></i>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <br>
+        <div style="margin-left: 48%;">
+          <button type="button" class="btn btn-lg" (click)="addHTTPHeader()">Add</button>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-lg" type="button" data-dismiss="modal" (click)="saveHTTPHeader()">Save</button>
+        <button type="button" class="btn btn-lg btn-cancel" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+<div class="modal fade" id="myModal03" role="dialog" data-backdrop="static">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content" style="width: 90%; margin-top: 30%; margin-left: 30%;">
+      <div class="modal-header">
+        <h1 class="modal-title">Uniform Random Timer</h1>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+      <div class="modal-body" style="min-height: 100%;">
+        <br>
+        <div class="row" style="margin: unset;padding: unset;">
+          <div class="col-lg-12 col-md-12 col-sm-12 form-group">
+            <label>Random Delay Maximum (in milliseconds) </label>
+            <input type="text" class="form-control" (change)="changedSomething()"
+              [(ngModel)]="uniformTimer['#item'].UniformRandomTimer.doubleProp.value">
+          </div>
+          <div class="col-lg-12 col-md-12 col-sm-12 form-group">
+            <label>Constant Delay Offset (in milliseconds) </label>
+            <input type="text" class="form-control" (change)="changedSomething()"
+              [(ngModel)]="uniformTimer['#item'].UniformRandomTimer.stringProp[0]['#text']">
+          </div>
+
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-lg" type="button" data-dismiss="modal" (click)="saveUniformTimer()">Save</button>
+        <button type="button" class="btn btn-lg btn-cancel" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div class="modal fade" id="myModal04" role="dialog" data-backdrop="static">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content" style="width: 90%; margin-top: 30%; margin-left: 30%;">
+      <div class="modal-header">
+        <h1 class="modal-title">Constant Timer</h1>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+      <div class="modal-body" style="min-height: 100%;">
+        <br>
+        <div class="row" style="margin: unset;padding: unset;">
+          <div class="col-lg-12 col-md-12 col-sm-12 form-group">
+            <label>Thread Delay (in milliseconds) </label>
+            <input type="text" class="form-control" (change)="changedSomething()"
+              [(ngModel)]="constantTimer['#item'].ConstantTimer.stringProp['#text']">
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-lg" type="button" data-dismiss="modal" (click)="saveConstantTimer()">Save</button>
+        <button type="button" class="btn btn-lg btn-cancel" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div class="modal fade" id="myModal05" role="dialog" data-backdrop="static">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content" style="width: 60%; margin-top: 10%; margin-left: 30%;">
+      <div class="modal-header">
+        <h1 class="modal-title">Upload CSV File</h1>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+      <div class="modal-body" style="min-height: 100%;">
+        <form action="" [formGroup]='uploadCSV'>
+          <div style="display:flex ;text-align: center;">
+            <label class="center" style="width: 100%;margin-top: 9px;">Choose File To Upload</label>
+
+            <!-- <div class="col-md-6"> -->
+            <input type="file" (change)="validateUpload($event)" class="form-control" style="height: 100%;" #myInput1
+              formControlName="importFile1" accept=".csv" placeholder="Upload file..." [(ngModel)]="fileName1" />
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-lg" [disabled]="uploadCSV.invalid" type="button" (click)="uploadCSVFile(fileName1)"
+          data-dismiss="modal">Upload</button>
+        <button type="button" class="btn btn-lg btn-cancel" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div class="modal fade" id="myModal06" role="dialog" data-backdrop="static">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content" style="width: 90%; margin-top: 30%; margin-left: 30%;">
+      <div class="modal-header">
+        <h1 class="modal-title">Transaction Controller</h1>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+      <div class="modal-body" style="min-height: 100%;">
+        <br>
+        <div class="row" style="margin: unset;padding: unset;">
+          <div class="col-lg-12 col-md-12 col-sm-12 form-group">
+            <label>Name: </label>
+            <input type="text" class="form-control" [(ngModel)]="controllerName" (change)="changedSomething()">
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-lg" type="button" data-dismiss="modal" (click)="saveController()">Save</button>
+        <button type="button" class="btn btn-lg btn-cancel" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div class="modal fade" id="listener" role="dialog" data-backdrop="static">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content" style="width: 90%; margin-top: 30%; margin-left: 30%;">
+      <div class="modal-header">
+        <h1 class="modal-title">View Result Tree</h1>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+      <div class="modal-body" style="min-height: 100%;">
+        <br>
+        <div class="row" style="margin: unset;padding: unset;">
+          <div class="col-lg-12 col-md-12 col-sm-12 form-group">
+            <label>Name: </label>
+            <input type="text" class="form-control" [(ngModel)]="listenerName" (change)="changedSomething()">
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-lg" type="button" data-dismiss="modal" (click)="saveListener()">Save</button>
+        <button type="button" class="btn btn-lg btn-cancel" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div class="modal fade" id="selectRow" role="dialog">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content" style="width: 90%; margin-top: 90%; margin-left: 30%;">
+      <div class="modal-header">
+        <h1 class="modal-title">Adding New Request</h1>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+      <div class="modal-body" style="height:auto;">
+        <div class="row">
+          <div class="col-md-4 col-lg-4 col-sm-4 col-sx-4">
+            <button type="button" class="btn btn-lg " data-dismiss="modal" (click)="addSamplerAbove()">Above</button>
+          </div>
+          <div class="col-md-4 col-lg-4 col-sm-4 col-sx-4">
+            <button type="button" class="btn btn-lg" data-dismiss="modal" (click)="addSamplerBelow()">Below</button>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-lg btn-cancel" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="rowPaste" role="dialog">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content" style="width: 90%; margin-top: 90%; margin-left: 30%;">
+      <div class="modal-header">
+        <h1 class="modal-title">Paste Request</h1>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+      <div class="modal-body" style="height:auto;">
+        <div class="row">
+          <div class="col-md-4 col-lg-4 col-sm-4 col-sx-4">
+            <button type="button" class="btn btn-lg " data-dismiss="modal" (click)="pasteAbove()">Above</button>
+          </div>
+          <div class="col-md-4 col-lg-4 col-sm-4 col-sx-4">
+            <button type="button" class="btn btn-lg" data-dismiss="modal" (click)="pasteBelow()">Below</button>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-lg btn-cancel" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="modal fade" id="containers" role="dialog" data-backdrop="static">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content" style="width: 80%;margin-top: 10%; margin-left: 30%;">
+      <div class="modal-header">
+        <h1 class="modal-title">Master and Slave selection</h1>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+      <div class="modal-body" style="min-height: 100%;">
+        <br>
+        <!-- <div class="example-container shadow-lg table-container">
+            <div class="container" > -->
+        <div style="height: 250px; overflow-y: auto;width: 100%;">
+          <table class="shadow-lg scroll" style="width: 100%;margin-right: 10px;">
+            <thead class="theadColor">
+              <th>
+                <h4>Master Container</h4>
+              </th>
+              <th>
+                <h4>Slave Container</h4>
+              </th>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+                  <select id="select" class="custom-select mr-sm-2" (change)="masterFunction(master)"
+                    [(ngModel)]="master">
+                    <option id="option" *ngFor="let master of mastersData1 let i=index; " [ngValue]="master">
+                      {{master.name}}</option>
+                  </select>
+                </td>
+                <td>
+              <tr *ngFor="let slave of slavesData1;let i=index;">
+                <td>
+                  <input type="checkbox" name="slavecheck"
+                    (click)='slaveFunction(i,slave,slavesData)'>&nbsp;&nbsp;{{slave.name}}
+                </td>
+              </tr>
+              </td>
+              </tr>
+            </tbody>
+          </table>
+
+        </div>
+        <div>
+          <h1 style="font-size: 14px;color: red;text-align: center;">{{resultmsgActual}}</h1>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" (click)='jmeterExecuteCall()'>Proceed</button>
+        <button type="button" (click)='closeExecutionModal()' id="close" class="btn btn-default btn-cancel"
+          data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<button id="trailTest" [hidden]="true" data-toggle="modal" data-target="#containerStart"
+  data-backdrop="static"></button>
+<button id="reportDisplay" [hidden]="true" data-toggle="modal" data-target="#reportCall"
+  data-backdrop="static"></button>
+<button id="popReport" [hidden]="true" data-toggle="modal" data-target="#reportPopUp" data-backdrop="static"></button>
+<button id="searchReport" [hidden]="true" data-toggle="modal" data-target="#searchReportModal"
+  data-backdrop="static"></button>
+  <button id="searchViewResults" [hidden]="true" data-toggle="modal" data-target="#searchViewModal"
+  data-backdrop="static"></button>
+
+<div class="modal fade" id="containerStart" role="document" data-backdrop="static">
+  <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-content" style="width: 50%;text-align: center;margin-left: 30%;">
+      <div class="modal-header">
+        <h1 class="modal-title">Trail Test</h1>
+        <!-- <button type="button" class="close" data-dismiss="modal">&times;</button> -->
+      </div>
+      <div class="modal-body" style="min-height: 100%;">
+        <br>
+        <span>Please click on <label>Run</label> to start Trail Test</span>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" disable
+          (click)='trailExecution()'>Run</button>
+        <button type="button" class="btn btn-default btn-cancel" data-dismiss="modal"
+          (click)='deleteTrailFolder()'>Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div class="modal" id="reportCall">
+  <div class="modal-dialog modal-lg modal-dialog-scrollable">
+    <div class="modal-content" style="overflow-x: auto;max-width: 900px;">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h3 class="modal-title">Trailtest Report</h3>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body">
+
+        <table class="shadow-lg scroll">
+          <thead class="theadColor">
+            <tr>
+              <th>Sl.No</th>
+              <th>Steps</th>
+              <th>Status</th>
+              <th>Response</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let object of trailResult; let i = index">
+              <td>{{i+1}}</td>
+              <td style="column-width:100px;overflow:hidden;white-space:nowrap;">
+                {{object.label}}
+              </td>
+              <td>
+                <span [ngClass]="object.status=='PASS' ? 'text-success':'text-danger'">{{object.status}}</span>
+              </td>
+              <td>
+                <span [ngClass]="object.status=='PASS' ? 'text-success':'text-danger'">{{object.response}}</span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-lg btn-cancel" data-dismiss="modal">Close</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="reportPopUp" role="document" data-backdrop="static">
+  <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title">{{actualReport}}</h1>
+      </div>
+      <div class="modal-body" style="min-height: 100%;">
+        <br>
+        <div class="text border pull-right" style="width: 100%;">
+          <iframe [src]="dockerPath09" id="myvideo" style="width:100%;height:350px"> </iframe>
+          <div><i class="fas fa-expand pull-right" (click)="openFullscreen();"
+              style="margin-right: 5px;cursor: pointer;" matTooltip="Maximize" matTooltipPosition="after"></i>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default btn-cancel" data-dismiss="modal"
+          (click)='removeUserFolder()'>Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div class="modal fade" id="searchReportModal" role="dialog" data-backdrop="static">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title">Reports</h1>
+      </div>
+      <div class="modal-body" style="min-height: 100%;">
+        <br>
+        <div style="text-align: end;padding-right: 10px;">
+          <label for="excelInput">Select Date</label>&nbsp;<input type="Date" class="excelInput"
+            [(ngModel)]="selectedDate" data-toggle="modal">&nbsp;&nbsp;
+          <button type="button" class="btn btn-primary" (click)="searchCall()">Search</button>
+        </div>
+
+        <!-- <div class="example-container shadow-lg table-container">
+            <div class="container" > -->
+        <!-- <div style="height: 250px; overflow-y: auto;width: 100%;"> -->
+        <div class="container-fluid" style="margin-top: 2%;padding: 10px;">
+          <div class="example-container shadow-lg table-container" style="height: 250px; overflow-y: auto;">
+            <table mat-table [dataSource]="dataSource" id="table" matSort (matSortChange)="announceSortChange($event)"
+              class="mat-elevation-z8">
+
+              <ng-container matColumnDef="Sl_No">
+                <th mat-header-cell *matHeaderCellDef class="angulartheadColor" mat-sort-header
+                  sortActionDescription="Sort by number"> Sl No. </th>
+                <td mat-cell *matCellDef="let element; let i = index;"> {{i+1}} </td>
+              </ng-container>
+
+              <ng-container matColumnDef="jmxFileName">
+                <th mat-header-cell *matHeaderCellDef class="angulartheadColor" mat-sort-header
+                  sortActionDescription="Sort by jmxFileName"> jmxFileName </th>
+                <td mat-cell *matCellDef="let element"> {{element.jmxFileName}}</td>
+              </ng-container>
+
+              <ng-container matColumnDef="jmxReportId">
+                <th mat-header-cell *matHeaderCellDef class="angulartheadColor" mat-sort-header
+                  sortActionDescription="Sort by reportId">jmxReportId </th>
+                <td mat-cell *matCellDef="let element; let i = index;"><a href="javascript:;" style="color: #0000FF;"
+                    class="headerClass" (click)=reportSearch(element,i)>{{element.jmxReportId}}</a> </td>
+              </ng-container>
+
+              <ng-container matColumnDef="status">
+                <th mat-header-cell *matHeaderCellDef class="angulartheadColor" mat-sort-header
+                  sortActionDescription="Sort by status"> status </th>
+                <td mat-cell *matCellDef="let element">
+                  <span [ngClass]="element.status=='PASS' ? 'text-success':'text-danger'">{{element.status}}</span>
+                </td>
+              </ng-container>
+
+              <ng-container matColumnDef="date">
+                <th mat-header-cell *matHeaderCellDef class="angulartheadColor" mat-sort-header
+                  sortActionDescription="Sort by date"> Date </th>
+                <td mat-cell *matCellDef="let element"> {{element.date| date : "dd/MM/yy"}} </td>
+              </ng-container>
+
+              <ng-container matColumnDef="time">
+                <th mat-header-cell *matHeaderCellDef class="angulartheadColor" mat-sort-header
+                  sortActionDescription="Sort by time"> Time </th>
+                <td mat-cell *matCellDef="let element"> {{element.time}} </td>
+              </ng-container>
+
+              <ng-container matColumnDef="Delete">
+                <th mat-header-cell *matHeaderCellDef class="angulartheadColor"> Delete</th>
+                <td mat-cell *matCellDef="let element; let i = index;">
+                  <i class="fa fa-trash-o" style="font-size:30px;color:red;cursor: pointer;"
+                    (click)='removeJmxReport(element,i)'></i>
+                </td>
+              </ng-container>
+
+              <tr mat-header-row *matHeaderRowDef="performanceReportsTable"></tr>
+              <tr mat-row *matRowDef="let row; columns: performanceReportsTable;"></tr>
+            </table>
+          </div>
+        </div>
+
+        <!-- </div> -->
+        <div>
+          <h1 style="font-size: 14px;color: red;text-align: center;">{{resultmsgActual}}</h1>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" id="reportClose" (click)='closeReports()' class="btn btn-default btn-cancel"
+          data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+<div class="modal fade" id="searchViewModal" role="dialog" data-backdrop="static">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title">ViewResultTree</h1>
+      </div>
+      <div class="modal-body" style="min-height: 100%;">
+        <br>
+        <div style="text-align: end;padding-right: 10px;">
+          <label for="excelInput">Select Date</label>&nbsp;<input type="Date" class="excelInput"
+            [(ngModel)]="selectedDate1" data-toggle="modal">&nbsp;&nbsp;
+          <button type="button" class="btn btn-primary" (click)="searchViewCall()">Search</button>
+        </div>
+
+        <div class="container-fluid" style="margin-top: 2%;padding: 10px;">
+          <div class="example-container shadow-lg table-container" style="height: 250px; overflow-y: auto;">
+            <table mat-table [dataSource]="treeDataSource" id="table"
+              class="mat-elevation-z8">
+
+              <ng-container matColumnDef="Sl_No">
+                <th mat-header-cell *matHeaderCellDef class="angulartheadColor" > Sl No. </th>
+                <td mat-cell *matCellDef="let element; let i = index;"> {{i+1}} </td>
+              </ng-container>
+
+              <ng-container matColumnDef="jmxFileName">
+                <th mat-header-cell *matHeaderCellDef class="angulartheadColor" > jmxFileName </th>
+                <td mat-cell *matCellDef="let element"> {{element.jmxFileName}}</td>
+              </ng-container>
+
+              <ng-container matColumnDef="jmxReportId">
+                <th mat-header-cell *matHeaderCellDef class="angulartheadColor" >ReportId </th>
+                <td mat-cell *matCellDef="let element; let i = index;"><a href="javascript:;" style="color: #0000FF;"
+                    class="headerClass" (click)=resultSearch(element,i)>{{element.jmxReportId}}</a> </td>
+              </ng-container>
+
+              <ng-container matColumnDef="date">
+                <th mat-header-cell *matHeaderCellDef class="angulartheadColor" > Date </th>
+                <td mat-cell *matCellDef="let element"> {{element.date| date : "dd/MM/yy"}} </td>
+              </ng-container>
+
+              <ng-container matColumnDef="time">
+                <th mat-header-cell *matHeaderCellDef class="angulartheadColor" > Time </th>
+                <td mat-cell *matCellDef="let element"> {{element.time}} </td>
+              </ng-container>
+
+              <ng-container matColumnDef="Delete">
+                <th mat-header-cell *matHeaderCellDef class="angulartheadColor"> Delete</th>
+                <td mat-cell *matCellDef="let element; let i = index;">
+                  <i class="fa fa-trash-o" style="font-size:30px;color:red;cursor: pointer;"
+                    (click)='removeTreeReport(element,i)'></i>
+                </td>
+              </ng-container>
+
+              <tr mat-header-row *matHeaderRowDef="performanceTreeTable"></tr>
+              <tr mat-row *matRowDef="let row; columns: performanceTreeTable;"></tr>
+            </table>
+          </div>
+        </div>
+
+        <div>
+          <h1 style="font-size: 14px;color: red;text-align: center;">{{resultmsgActual}}</h1>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" id="viewResultClose" (click)='closeViewResult()'  class="btn btn-default btn-cancel"
+          data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div class="modal fade" id="displaySample" role="document" data-backdrop="static">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content" style=" margin-top: 10%; margin-left: 30%;">
+      <div class="modal-header">
+        <h1 class="modal-title">View Result</h1>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+      <div class="modal-body" style="min-height: 100%;">
+        <mat-tab-group animationDuration="0ms">
+          <mat-tab label="Sampler Result">
+            <br>
+            <div style="height: 350px; overflow-y: auto;">
+              <h5>
+                <p>Thread Name: {{samplerResult.tn}}</p>
+                <p>Sample Start: {{samplerResult.date}}</p>
+                <p>Load Time: {{samplerResult.t}}</p>
+                <p>Connect Time: {{samplerResult.ct}}</p>
+                <p>Latency: {{samplerResult.lt}}</p>
+                <p>Size in Bytes: {{samplerResult.by}}</p>
+                <p>Sent Bytes: {{samplerResult.sby}}</p>
+                <p>Sample Count: {{samplerResult.sc}}</p>
+                <p>Error Count: {{samplerResult.ec}}</p>
+                <p>Data type ("text"|"bin"|"") : {{samplerResult.dt}}</p>
+                <p>Response Code: {{samplerResult.rc}}</p>
+                <p>Response Message: {{samplerResult.rm}}</p>
+              </h5>
+            </div>
+          </mat-tab>
+          <mat-tab label="Request">
+            <mat-tab-group>
+              <mat-tab label="Request Body">
+                <br>
+                <div style="height: 400px;overflow: auto;background-color: #f5f5f5;word-break: break-word;">
+                  <h4>
+                    <p>
+                      {{samplerResult.method.content}} <span
+                        style="color: green;font-size: smaller;">{{samplerResult['java.net.URL']}}</span>
+                      <br><br>{{samplerResult.method.content}} data: <span
+                        style="font-size: smaller;">{{samplerResult.queryString.content}}</span><br>
+                      <br><br>
+                      <span *ngIf="samplerResult.cookies.content==undefined">[no Cookies]</span>
+                      <span *ngIf="samplerResult.cookies.content!=undefined">Cookie Data: <span
+                          style="font-size: smaller;">{{samplerResult.cookies.content}}</span></span>
+                    </p>
+                  </h4>
+                </div>
+              </mat-tab>
+              <mat-tab label="Request Headers">
+                <br>
+                <pre style="height: 400px;">{{samplerResult.requestHeader.content}}</pre>
+              </mat-tab>
+            </mat-tab-group>
+          </mat-tab>
+          <mat-tab label="Response Data">
+            <mat-tab-group>
+              <mat-tab label="Response Body">
+                <br>
+                <pre style="height: 400px;">{{samplerResult.responseData.content}}</pre>
+              </mat-tab>
+              <mat-tab label="Response Headers">
+                <br>
+                <pre style="height: 400px;">{{samplerResult.responseHeader.content}}</pre>
+              </mat-tab>
+            </mat-tab-group>
+          </mat-tab>
+        </mat-tab-group>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default btn-cancel" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div class="modal fade" id="displayControllerResult" role="document" data-backdrop="static">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content" style=" margin-top: 10%; margin-left: 30%;">
+      <div class="modal-header">
+        <h1 class="modal-title">View Result</h1>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+      <div class="modal-body" style="min-height: 100%;">
+        <mat-tab-group animationDuration="0ms">
+          <mat-tab label="Sampler Result">
+            <br>
+            <div style="height: 350px; overflow-y: auto;">
+              <h5>
+                <p>Thread Name: {{controllerResult.tn}}</p>
+                <p>Sample Start: {{controllerResult.date}}</p>
+                <p>Load Time: {{controllerResult.t}}</p>
+                <p>Connect Time: {{controllerResult.ct}}</p>
+                <p>Latency: {{controllerResult.lt}}</p>
+                <p>Size in Bytes: {{controllerResult.by}}</p>
+                <p>Sent Bytes: {{controllerResult.sby}}</p>
+                <p>Sample Count: {{controllerResult.sc}}</p>
+                <p>Error Count: {{controllerResult.ec}}</p>
+                <p>Data type ("text"|"bin"|"") : {{controllerResult.dt}}</p>
+                <p>Response Code: {{controllerResult.rc}}</p>
+                <p>Response Message: {{controllerResult.rm}}</p>
+              </h5>
+            </div>
+          </mat-tab>
+        </mat-tab-group>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default btn-cancel" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="displayAssertion" role="dialog">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content" style=" margin-top: 10%; margin-left: 30%;">
+      <div class="modal-header">
+        <h1 class="modal-title">Response Assertion</h1>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+      <div class="modal-body" style="min-height: 100%;">
+        <div class="row" style="margin: unset;padding: unset;">
+          <div class="col-lg-11 col-md-11 col-lg-11 col-sm-10 col-lg-10 form-group">
+            <label>Name</label>
+            <input type="text" [(ngModel)]="responseAssertionObj['#item'].ResponseAssertion['-testname']"
+            (change)="changedSomething()"  class="form-control">
+          </div>
+
+          <div class="container">
+            <span id='line'>Apply To: </span>
+            <div class="row" style="padding: 5px;">
+              <div class="col-md-auto">
+                <input type="radio" name="applyTo" value="all" (change)="changedSomething()"
+                  [(ngModel)]="responseAssertionObj['#item'].ResponseAssertion.stringProp[2]['#text']">&nbsp;
+                <label>Main sample and sub-samples </label>
+              </div>
+              <div class="col-md-auto">
+                <input type="radio" name="applyTo" value="parent" (change)="changedSomething()"
+                  [(ngModel)]="responseAssertionObj['#item'].ResponseAssertion.stringProp[2]['#text']">&nbsp;
+                <label>Main sample only </label>
+              </div>
+              <div class="col-md-auto">
+                <input type="radio" name="applyTo" value="children" (change)="changedSomething()"
+                  [(ngModel)]="responseAssertionObj['#item'].ResponseAssertion.stringProp[2]['#text']">&nbsp;
+                <label>Sub-sample only </label>
+              </div>
+            </div>
+          </div>
+
+          <div class="container">
+            <span id='line'>Field To Test </span>
+            <div class="row" style="padding: 5px;">
+              <div class="col-6 col-md-3">
+                <input type="radio" name="fieldTo" value="Assertion.response_data" (change)="changedSomething()"
+                  [(ngModel)]="responseAssertionObj['#item'].ResponseAssertion.stringProp[1]['#text']">&nbsp;
+                <label>Text Response </label>
+              </div>
+              <div class="col-6 col-md-3">
+                <input type="radio" name="fieldTo" value="Assertion.response_code" (change)="changedSomething()"
+                  [(ngModel)]="responseAssertionObj['#item'].ResponseAssertion.stringProp[1]['#text']">&nbsp;
+                <label>Response Code </label>
+              </div>
+              <div class="col-6 col-md-3">
+                <input type="radio" name="fieldTo" value="Assertion.response_message" (change)="changedSomething()"
+                  [(ngModel)]="responseAssertionObj['#item'].ResponseAssertion.stringProp[1]['#text']">&nbsp;
+                <label>Response Message </label>
+              </div>
+              <div class="col-6 col-md-3">
+                <input type="radio" name="fieldTo" value="Assertion.response_headers" (change)="changedSomething()"
+                  [(ngModel)]="responseAssertionObj['#item'].ResponseAssertion.stringProp[1]['#text']">&nbsp;
+                <label>Response Headers</label>
+              </div>
+              <div class="col-6 col-md-3">
+                <input type="radio" name="fieldTo" value="Assertion.request_headers" (change)="changedSomething()"
+                  [(ngModel)]="responseAssertionObj['#item'].ResponseAssertion.stringProp[1]['#text']">&nbsp;
+                <label>Request Headers </label>
+              </div>
+              <div class="col-6 col-md-3">
+                <input type="radio" name="fieldTo" value="Assertion.sample_label" (change)="changedSomething()"
+                  [(ngModel)]="responseAssertionObj['#item'].ResponseAssertion.stringProp[1]['#text']">&nbsp;
+                <label>URL Sampled </label>
+              </div>
+              <div class="col-6 col-md-3">
+                <input type="radio" name="fieldTo" value="Assertion.response_data_as_document" (change)="changedSomething()"
+                  [(ngModel)]="responseAssertionObj['#item'].ResponseAssertion.stringProp[1]['#text']">&nbsp;
+                <label>Document (Text) </label>
+              </div>
+              <div class="col-6 col-md-3">
+                <input type="radio" name="fieldTo" value="Assertion.request_data" (change)="changedSomething()"
+                  [(ngModel)]="responseAssertionObj['#item'].ResponseAssertion.stringProp[1]['#text']">&nbsp;
+                <label>Request Data </label>
+              </div>
+              <div class="col-6 col-md-3">
+                <input type="checkbox" (change)="changedSomething()"
+                  [checked]="responseAssertionObj['#item'].ResponseAssertion.boolProp['#text']=='true'"
+                  (change)="updateCheckBox($event)">&nbsp;<label>Ignore
+                  Status </label>
+              </div>
+            </div>
+          </div>
+
+          <div class="container">
+            <span id='line'>Pattern Matching Rules </span>
+            <div class="row" style="padding: 5px;align-items: center;">
+              <div class="col-md-auto">
+                <input type="radio" name="matchings" value=2 (change)="updatePatternValue($event)" (change)="changedSomething()"
+                  [checked]="patternValue=='2'||patternValue=='6'||patternValue=='34'||patternValue=='38'">&nbsp;
+                <label for="mainAndSub">Contains </label>
+              </div>
+              <div class="col-md-auto">
+                <input type="radio" name="matchings" value=1 (change)="updatePatternValue($event)" (change)="changedSomething()"
+                  [checked]="patternValue=='1'||patternValue=='5'||patternValue=='33'||patternValue=='37'">&nbsp;
+                <label>Matches </label>
+              </div>
+              <div class="col-md-auto">
+                <input type="radio" name="matchings" value=8 (change)="updatePatternValue($event)" (change)="changedSomething()"
+                  [checked]="patternValue=='8'||patternValue=='12'||patternValue=='40'||patternValue=='44'">&nbsp;
+                <label>Equals </label>
+              </div>
+              <div class="col-md-auto">
+                <input type="radio" name="matchings" value=16 (change)="updatePatternValue($event)" (change)="changedSomething()"
+                  [checked]="patternValue=='16'||patternValue=='20'||patternValue=='48'||patternValue=='52'">&nbsp;
+                <label>Substring </label>
+              </div>
+
+              <div class="col-md-auto">
+                <input type="checkbox" (change)="updatePatternNot($event)" [checked]="patternValue=='6'||patternValue=='5'||patternValue=='12'||patternValue=='20'||
+                patternValue=='38'||patternValue=='37'||patternValue=='44'||patternValue=='52'" (change)="changedSomething()">&nbsp;<label>Not
+                </label>
+              </div>
+              <div class="col-md-auto">
+                <input type="checkbox" (change)="updatePatternOr($event)" [checked]="patternValue=='34'||patternValue=='33'||patternValue=='48'||patternValue=='40'||
+                patternValue=='38'||patternValue=='37'||patternValue=='44'||patternValue=='52'" (change)="changedSomething()">&nbsp;<label>Or
+                </label>
+              </div>
+            </div>
+          </div>
+
+          <div class="container">
+            <span id='line'>Pattern to Test </span>
+            <div class="row" style="padding: 1px;align-items: center;">
+              <mat-tab-group animationDuration="0ms" style="width: 100%" mat-align-tabs="center">
+                <mat-tab label="Patterns to Test" style="align-items: center;">
+                  <br>
+                  <div id="scrollDown" style="min-height:10px;max-height:150px;overflow-y: auto;">
+                    <table class="shadow-lg scroll" style="width: 100%">
+                      <thead class="theadColor">
+                        <tr>
+                          <th>Sl.No</th>
+                          <th>Value</th>
+                          <th>Delete</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr
+                          *ngFor="let var of responseAssertionObj['#item'].ResponseAssertion.collectionProp.stringProp; let i = index">
+                          <td>{{i+1}}</td>
+                          <td>
+                            <input type="text" (change)="changedSomething()"
+                              [(ngModel)]="responseAssertionObj['#item'].ResponseAssertion.collectionProp.stringProp[i]['#text']"
+                              class="form-control">
+                          </td>
+
+                          <td>
+                            <i class="glyphicon glyphicon-remove" style="cursor: pointer;"
+                              (click)="deleteResParam(i)"></i>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                  <br>
+                  <div style="margin-left: 48%;">
+                    <button type="button" class="btn btn-lg" (click)="addResParams()">Add</button>
+                  </div>
+                </mat-tab>
+              </mat-tab-group>
+
+            </div>
+          </div>
+
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-lg" type="button" data-dismiss="modal" (click)="saveAssertion()">Save</button>
+        <button type="button" class="btn btn-lg btn-cancel" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div class="modal fade" id="modalAssertion" role="document" data-backdrop="static">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content" style=" margin-top: 10%; margin-left: 30%;">
+      <div class="modal-header">
+        <h1 class="modal-title">Assertion Result</h1>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+      <div class="modal-body" style="min-height: 100%;">
+        <mat-tab-group animationDuration="0ms">
+          <mat-tab label="Assertion Result">
+            <br>
+            <div style="height: 350px; overflow-y: auto;">
+              <h4>
+                <p><b>Assertion Error :</b> {{assertionObj.error}}</p><br>
+                <p><b>Assertion Failure :</b> {{assertionObj.failure}}</p><br>
+                <pre
+                  *ngIf="assertionObj.failureMessage!==undefined"><b>Assertion Failure Message :</b> {{assertionObj.failureMessage}}</pre>
+              </h4>
+            </div>
+          </mat-tab>
+        </mat-tab-group>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default btn-cancel" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="modal fade" id="displayRegEx" role="dialog">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content" style=" margin-top: 10%; margin-left: 30%;">
+      <div class="modal-header">
+        <h1 class="modal-title">Regular Expression Extractor</h1>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+      <div class="modal-body" style="min-height: 100%;">
+        <div class="row" style="margin: unset;padding: unset;">
+          <div class="col-lg-11 col-md-11 col-lg-11 col-sm-10 col-lg-10 form-group">
+            <label>Name</label>
+            <input type="text" [(ngModel)]="regExObj['#item'].RegexExtractor['-testname']" (change)="changedSomething()" class="form-control">
+          </div>
+
+          <div class="container">
+            <span id='line'>Apply To: </span>
+            <div class="row" style="padding: 5px;">
+              <div class="col-md-auto">
+                <input type="radio" name="applyTo1" value="all" (change)="changedSomething()"
+                  [(ngModel)]="regExObj['#item'].RegexExtractor.stringProp[6]['#text']">&nbsp;
+                <label>Main sample and sub-samples </label>
+              </div>
+              <div class="col-md-auto">
+                <input type="radio" name="applyTo1" value="parent" (change)="changedSomething()"
+                  [(ngModel)]="regExObj['#item'].RegexExtractor.stringProp[6]['#text']">&nbsp;
+                <label>Main sample only </label>
+              </div>
+              <div class="col-md-auto"> 
+                <input type="radio" name="applyTo1" value="children" (change)="changedSomething()"
+                  [(ngModel)]="regExObj['#item'].RegexExtractor.stringProp[6]['#text']">&nbsp;
+                <label>Sub-sample only </label>
+              </div>
+            </div>
+          </div>
+
+          <div class="container">
+            <span id='line'>Field To Check </span>
+            <div class="row" style="padding: 5px;">
+              <div class="col-6 col-md-3">
+                <input type="radio" name="fieldTo1" value="false" (change)="changedSomething()"
+                  [(ngModel)]="regExObj['#item'].RegexExtractor.stringProp[0]['#text']">&nbsp;
+                <label>Body </label>
+              </div>
+              <div class="col-6 col-md-3">
+                <input type="radio" name="fieldTo1" value="unescaped" (change)="changedSomething()"
+                  [(ngModel)]="regExObj['#item'].RegexExtractor.stringProp[0]['#text']">&nbsp;
+                <label>Body(Unescaped) </label>
+              </div>
+              <div class="col-6 col-md-3">
+                <input type="radio" name="fieldTo1" value="as_document" (change)="changedSomething()"
+                  [(ngModel)]="regExObj['#item'].RegexExtractor.stringProp[0]['#text']">&nbsp;
+                <label>Body as a Document </label>
+              </div>
+              <div class="col-6 col-md-3"> 
+                <input type="radio" name="fieldTo1" value="true" (change)="changedSomething()"
+                  [(ngModel)]="regExObj['#item'].RegexExtractor.stringProp[0]['#text']">&nbsp;
+                <label>Response Headers</label>
+              </div>
+              <div class="col-6 col-md-3">
+                <input type="radio" name="fieldTo1" value="request_headers" (change)="changedSomething()"
+                  [(ngModel)]="regExObj['#item'].RegexExtractor.stringProp[0]['#text']">&nbsp;
+                <label>Request Headers </label>
+              </div>
+              <div class="col-6 col-md-3">
+                <input type="radio" name="fieldTo1" value="URL" (change)="changedSomething()"
+                  [(ngModel)]="regExObj['#item'].RegexExtractor.stringProp[0]['#text']">&nbsp;
+                <label>URL </label>
+              </div>
+              <div class="col-6 col-md-3">
+                <input type="radio" name="fieldTo1" value="code" (change)="changedSomething()"
+                  [(ngModel)]="regExObj['#item'].RegexExtractor.stringProp[0]['#text']">&nbsp;
+                <label>Response Code </label>
+              </div>
+              <div class="col-6 col-md-3">
+                <input type="radio" name="fieldTo1" value="message" (change)="changedSomething()"
+                  [(ngModel)]="regExObj['#item'].RegexExtractor.stringProp[0]['#text']">&nbsp;
+                <label>Response Message </label>
+              </div><br><br>
+              <div class="col-lg-12 col-md-12 col-lg-12 col-sm-10 col-lg-10 form-group">
+                <label class="col-lg-5 col-md-5 col-lg-5">Name of Created Variable:</label>
+                <input type="text" class="col-lg-6 col-md-6 col-lg-6 form-control" (change)="changedSomething()"
+                  [(ngModel)]="regExObj['#item'].RegexExtractor.stringProp[1]['#text']">
+              </div>
+              <div class="col-lg-12 col-md-12 col-lg-12 col-sm-10 col-lg-10 form-group">
+                <label class="col-lg-5 col-md-5 col-lg-5">Regular Expression:</label>
+                <input type="text" class="col-lg-6 col-md-6 col-lg-6 form-control" (change)="changedSomething()"
+                  [(ngModel)]="regExObj['#item'].RegexExtractor.stringProp[2]['#text']">
+              </div>
+              <div class="col-lg-12 col-md-12 col-lg-12 col-sm-10 col-lg-10 form-group">
+                <label class="col-lg-5 col-md-5 col-lg-5">Template($i$ where i is capturing group number, starts at
+                  1):</label>
+                <input type="text" class="col-lg-6 col-md-6 col-lg-6 form-control" (change)="changedSomething()"
+                  [(ngModel)]="regExObj['#item'].RegexExtractor.stringProp[3]['#text']">
+              </div>
+              <div class="col-lg-12 col-md-12 col-lg-12 col-sm-10 col-lg-10 form-group">
+                <label class="col-lg-5 col-md-5 col-lg-5">Match No.(0 for Random):</label>
+                <input type="text" class="col-lg-6 col-md-6 col-lg-6 form-control" (change)="changedSomething()"
+                  [(ngModel)]="regExObj['#item'].RegexExtractor.stringProp[5]['#text']">
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-lg" type="button" data-dismiss="modal" (click)="saveRegEx()">Save</button>
+        <button type="button" class="btn btn-lg btn-cancel" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<button id="saveResult" [hidden]="true" data-toggle="modal" data-target="#ViewResultTree" data-backdrop="static"></button>
+
+<div class="modal fade" id="ViewResultTree" role="document" data-backdrop="static">
+  <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-content" style="width: 50%;text-align: center;margin-left: 30%;">
+      <div class="modal-header">
+        <h1 class="modal-title">View Result Tree</h1>
+      </div>
+      <div class="modal-body" style="min-height: 100%;">
+        <br>
+        <span>Please click on <label>Save</label> to save Result Tree.</span>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" disable
+          (click)='saveResultTree()'>Save</button>
+        <button type="button" class="btn btn-default btn-cancel" (click)='cancelResultTree()' data-dismiss="modal">Cancel</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ngx-spinner bdColor="rgba(51, 51, 51, 0.8)" size="medium" color="#fff"  [fullScreen]="false">
+  
+  <div style="margin-top:-10%;text-align: center;">
+    <h3>
+      <p style="color: white;text-align: center;"> {{spinnerPercent}} </p>
+      <p style="color: white"> Please Wait... {{spinnerVal}} </p>
+      <p class="timer" *ngIf="ExeTime">Execution Start Time: {{executeTime}}</p>
+      <span class="timer" *ngIf="Rtime">Remaining Time left:
+        <span id="days"> {{daysToDday}} </span>Day(s)
+        <span id="hours"> {{hoursToDday}} </span>Hrs 
+        <span id="minutes"> {{minutesToDday}} </span>Min
+        <span id="seconds"> {{secondsToDday}} </span>S
+      </span>
+    </h3>
+  
+    <button mat-raised-button color="accent" *ngIf="stopbutton" style="text-align: center;"
+     matTooltip="stop execution" matTooltipPosition="after" (click)="stopExecution()"> Stop </button>
+     <pre style="height: 200px;font-size: medium;text-align: justify;"*ngIf="ExeTime&&consoleLog!=''">{{consoleLog}}</pre>
+  </div>
+  
+</ngx-spinner>

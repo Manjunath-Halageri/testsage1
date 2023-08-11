@@ -1,0 +1,67 @@
+ tbody {
+    display:block;
+    height:200px;
+    overflow:auto;
+}
+
+  thead, tbody tr {
+    display:table;
+    width:100%;
+    table-layout:fixed;
+}
+
+	.main{
+		text-align:center;
+		width: auto;
+		height:auto;
+    font-size:25px;
+  }
+	
+.selected09 {
+    background-color: #006699;
+    color: white;
+}
+
+tr td input{
+      color: black;
+}
+
+.startLab{
+    border-radius: 20px;
+    font-size: 16px;
+    font-weight: 700;
+    width:100px;
+    margin-left: 15px;
+}
+.modal {
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+}
+.scriptImport{
+    margin-left: 18%;
+    margin-top: -42%;
+
+}
+#file{
+    font-size: 16px;
+    width:auto;
+    overflow-x:hidden;
+
+}
+
+.modelstyle{
+    padding-left: 45px
+  }
+hr {
+  margin: 3px;
+}
+.header{
+  font-size: 16px;
+  font-weight: 700;
+}
+.welcome{
+  font-size: 20px;
+  font-weight: 700;
+}

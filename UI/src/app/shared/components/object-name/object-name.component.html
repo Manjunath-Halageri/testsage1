@@ -1,0 +1,86 @@
+<style>
+ 
+  th{
+  
+    width:210px
+  }
+  
+  </style>
+  
+  
+  <div class="container-fluid" style="font-size: 15px">
+  <br>
+  <div >
+    <label class="opalLabel" for="classes">ObjectName:</label>
+    <input type="text" [(ngModel)]="objectName" >
+    <a href="#" class="btn btn-info btn-lg" [hidden]="clickObject!=undefined">
+        <span class="glyphicon glyphicon-plus-sign"></span> Add
+  </a>
+  </div>
+    
+  <br>
+  <div style="width:100%;height: 150px;border:1px solid black;" >
+     
+      <table class="table table-bordered">
+      <thead>
+      <tr style="background-color: lightgray"   >
+      <th >Locator</th>
+      <th >Value</th>
+      <th >Url</th>
+      </tr>
+      </thead>
+      <tbody>
+          <tr *ngFor="let displayNewObject of  tableData" style="font-size:18px"  >
+                       
+              <td  >{{displayNewObject.name}}</td>
+           
+            
+              <td  >{{displayNewObject.value}}</td>
+           
+  
+               <td  >{{displayNewObject.url}}</td> 
+             
+         
+              
+            </tr>
+  
+      </tbody>
+      </table>
+      
+      </div>
+      <br><br>
+  
+      <div style="background-color: lightgray">
+        <div class="row">
+            <div class="col-lg-3 col-md-3 col-sm-3">
+                <label class="opalLabel" for="classes">Locators:</label>
+                <select type="text" [(ngModel)]="locators" style="width:150px;height: 28px"> 
+                    <option >Css</option>
+                    <option >Xpath</option>
+                    <option >Link</option>
+                    <option >Id</option>
+                 </select> &nbsp;&nbsp;&nbsp;
+            </div> 
+            <div class="col-lg-3 col-md-3 col-sm-3">
+                <label class="opalLabel" for="classes">Name</label>
+                <input type="text" style="width:150px" [(ngModel)]="name">
+              </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-3 col-md-3 col-sm-3">
+                <label class="opalLabel" for="classes">Value:</label>
+                <input type="text" style="width:150px" [(ngModel)]="value">              
+              </div>
+              <div class="col-lg-3 col-md-3 col-sm-3">
+                  <label class="opalLabel" for="classes">URL:</label>
+                  <input type="text" style="width:150px" [(ngModel)]="url">
+              </div>
+        </div>
+        <br>
+       
+         <a class="btn btn-info btn-lg" (click)="objectData(name,value,url,locators)" style="margin-left: 45%">Save </a>
+  
+         </div>
+  
+      <router-outlet></router-outlet>
+  

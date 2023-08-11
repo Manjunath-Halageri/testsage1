@@ -1,0 +1,321 @@
+tbody {
+  display: block;
+  /* height:400px; */
+  overflow: auto;
+}
+thead,
+tbody tr {
+  display: table;
+  width: 100%;
+  table-layout: fixed;
+}
+
+thead {
+  width: calc(101.4% - 0.6em);
+}
+
+.selected {
+  background-color: green !important;
+  color: white;
+  border: none;
+  outline: none;
+}
+
+.example-container {
+  overflow: auto;
+  margin-top: 30px;
+  padding: 10px;
+}
+table {
+  width: 100%;
+}
+.ExecutionSummary {
+  text-align: center;
+  font-weight: 700;
+  width: 100%;
+  font-size: 14px;
+}
+.bg-secondary {
+  font-size: 14px;
+  text-align: center;
+}
+
+.bodyHighlitedtext {
+  font-size: 14px;
+  font-weight: 700;
+}
+.labelHighlited {
+  font-size: 12px;
+  font-weight: 500;
+}
+@media screen and (min-device-width: 1024px) and (max-device-width: 1440px) {
+  .container-fluid {
+    overflow-y: visible;
+    overflow-x: hidden;
+    height: 85vh;
+  }
+
+  .table-container {
+    margin-top: 10px;
+    max-height: 400px;
+    overflow: auto;
+    height: 310px;
+  }
+
+  .totaltable {
+    width: 180px;
+    font-size: 14px;
+    height: auto;
+    margin-left: 25% !important;
+    /* margin-top: 10%; */
+  }
+  .pieChart {
+    width: 50%;
+    font-size: 14px;
+    height: auto;
+    margin-left: 28%;
+    margin-top: 4%;
+  }
+  .col6headings {
+    margin: 10px;
+    display: flex;
+    text-align: center;
+    margin-left: 25%;
+  }
+  .testcaseName {
+    display: flex !important;
+    font-size: 14px;
+    text-align: center;
+    margin-left: 24%;
+  }
+  .totalSteps {
+    margin-left: 30%;
+    text-align: left;
+  }
+}
+
+/* @media screen and (min-device-width: 992px) and (max-device-width: 1023px) {
+    .table-container {
+      margin-top: 10px;
+      max-height: 400px;
+      overflow: auto;
+      height: 350px;
+      }
+    .totaltable {
+        width: 180px;
+        font-size: 14px;
+        height: auto;
+        margin-left: 6px;
+    }
+    }	
+ */
+
+@media screen and (min-device-width: 768px) and (max-device-width: 991px) {
+  .container-fluid {
+    overflow-y: visible;
+    overflow-x: hidden;
+    height: 85vh;
+  }
+
+  .table-container {
+    margin-top: 10px;
+    max-height: 400px;
+    overflow: auto;
+    height: 316px;
+  }
+  .totaltable {
+    font-size: 14px;
+    height: auto;
+    margin-left: 25%;
+    margin-top: 13%;
+  }
+  .pieChart {
+    width: 50%;
+    font-size: 14px;
+    height: auto;
+    margin-left: 20%;
+  }
+}
+@media screen and (min-device-width: 992px) and (max-device-width: 1199px) {
+  .table-container {
+    margin-top: 10px;
+    max-height: 400px;
+    overflow: auto;
+    height: 290px;
+  }
+  .totaltable {
+    width: 180px;
+    font-size: 14px;
+    height: auto;
+    margin-left: 25%;
+    margin-top: 10%;
+  }
+  .pieChart {
+    width: 50%;
+    font-size: 14px;
+    height: auto;
+    margin-left: 27%;
+  }
+}
+@media screen and (min-device-width: 426px) and (max-device-width: 575px) {
+  .container-fluid {
+    overflow-y: visible;
+    overflow-x: hidden;
+    height: 85vh;
+  }
+  .totaltable {
+    width: 100%;
+    font-size: 14px;
+    height: auto;
+    margin-left: 25%;
+  }
+  .pieChart {
+    width: 100%;
+    font-size: 14px;
+    height: auto;
+    margin-left: 20%;
+  }
+  .table-container {
+    margin-top: 10px;
+    max-height: 333px;
+    overflow: auto;
+    height: 350px;
+  }
+  .totalSteps {
+    margin-left: 30%;
+    text-align: left;
+  }
+  .col6headings {
+    margin: 10px;
+    display: flex;
+    text-align: center;
+    margin-left: 12%;
+  }
+}
+@media screen and (min-device-width: 576px) and (max-device-width: 767px) {
+  .container-fluid {
+    overflow-y: visible;
+    overflow-x: hidden;
+    height: 85vh;
+  }
+  .totaltable {
+    width: 100%;
+    font-size: 14px;
+    height: auto;
+    margin-left: 25%;
+    margin-top: 20%;
+  }
+  .pieChart {
+    width: 100%;
+    font-size: 14px;
+    height: auto;
+    margin-left: 10%;
+  }
+  .table-container {
+    margin-top: 10px;
+    max-height: 333px;
+    overflow: auto;
+    height: 350px;
+  }
+  .totalSteps {
+    margin-left: 30%;
+    text-align: left;
+  }
+}
+
+@media screen and (min-device-width: 0px) and (max-device-width: 425px) {
+  .container-fluid {
+    overflow-y: visible;
+    overflow-x: hidden;
+    height: 85vh;
+  }
+
+  .table-container {
+    margin-top: 10px;
+    max-height: 333px;
+    overflow: auto;
+    height: 350px;
+  }
+  .totaltable {
+    width: 100%;
+    font-size: 14px;
+    height: auto;
+    margin-left: 25% !important;
+  }
+  .pieChart {
+    width: 100%;
+    font-size: 14px;
+    height: auto;
+    margin-left: 22% !important;
+  }
+  .totalSteps {
+    margin-left: 30%;
+    text-align: left;
+  }
+  .startEndTime {
+    text-align: center !important;
+  }
+  .resultData {
+    text-align: center !important;
+    font-size: 14px;
+    font-weight: bolder;
+  }
+  .col6headings {
+    margin: 10px;
+    display: flex;
+    text-align: center;
+    margin-left: 12%;
+  }
+}
+@media screen and (min-device-width: 1441px) and (max-device-width: 2560px) {
+  .table-container {
+    margin-top: 10px;
+    max-height: 400px;
+    overflow: auto;
+    height: 310px;
+  }
+
+  .totaltable {
+    width: 100%;
+    font-size: 14px;
+    height: auto;
+    margin-left: 25%;
+    margin-top: 10%;
+  }
+  .pieChart {
+    width: 100%;
+    font-size: 14px;
+    height: auto;
+    margin-left: 34% !important;
+  }
+  tbody tr th {
+    font-size: 12px;
+    font-family: "lato", sans-serif;
+    width: 30%;
+  }
+}
+
+@media (min-device-width: 2560px) and (max-device-width: 3060px) {
+  .table-container1 {
+    margin-top: 22%;
+    width: 100%;
+    margin-top: 10px;
+    max-height: 400px;
+    overflow: auto;
+    height: 266px !important;
+  }
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+  width: 100%;
+}
+th,
+td {
+  text-align: left;
+  padding: 8px;
+}
+.theadColor > tr > th {
+  line-height: initial;
+}

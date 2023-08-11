@@ -1,0 +1,38 @@
+tbody {
+    display:block;
+    /* height:200px; */
+    overflow:auto;
+  }
+  thead, tbody tr {
+    display:table;
+    width:100%;
+    table-layout:fixed;
+  }
+  thead {
+    width: calc( 101% - 0.6em )
+  }
+.sticky {
+  position: sticky;
+  top: 0;
+  z-index: 9999; 
+  }
+ .container-fluid{
+  height: 90vh;
+  overflow-x: hidden;
+  overflow-y: visible;
+ }
+  .example-container {
+    overflow: auto;
+    margin-top: 30px;
+    padding: 10px;
+    
+  }   
+  table {
+    width: 100%;
+  }
+  .table-container {
+    margin-top: 10px;
+    max-height: 400px;
+    overflow: auto;
+    height: 310px;
+    }

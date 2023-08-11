@@ -1,0 +1,13 @@
+<div>
+  <!-- <div class="content-container">
+    <mat-icon id="close-icon" (click)=closeDialog()>close</mat-icon>
+  </div> -->
+  <div style="text-align:center">
+      <span class="content-span full-width " style="font-size: 15px">{{data.message}}</span>
+  </div>
+  <br>
+  <div style="text-align:center">
+      <button class="btn  btn-lg " [mat-dialog-close]="true" style="margin-right: 10px;color: white;">Ok</button>
+      <button class="btn  btn-lg btn-cancel" [hidden] = "data.alert" mat-dialog-close>Cancel</button>
+  </div>  
+</div>

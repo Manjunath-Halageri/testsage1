@@ -1,0 +1,51 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-2" style="border-right:1px solid #dee2e6!important;height: 676px;">
+      <form [formGroup]="lineGraphForm">
+        <div style="margin-top: 50px;">
+          <div>
+            <label>Release</label>
+            <select type="select" class="form-control" formControlName="releaseField" [(ngModel)]="releaseId" (click)="allProjectData($event)">
+              <option></option>
+              <option *ngFor="let release of getAllReleasesVersions" value="{{release.releaseId}}">{{release.releaseVersion}}</option>
+            </select>
+          </div><br>
+          <div>
+            <mat-form-field>
+              <mat-label>Report</mat-label>
+              <mat-select [formControl]="toppings" multiple [(ngModel)]="reportData"  formControlName="reportField">
+                <mat-option *ngFor="let topping of toppingList" [value]="topping" >{{topping}}</mat-option>
+              </mat-select>
+            </mat-form-field>
+
+          </div><br>
+          <div >
+            <label>From Date</label>
+            <input type="date" class="form-control" formControlName="startdate" [(ngModel)]="startDate" >
+          <br>
+          
+            <label>To Date</label>
+            <input type="date" class="form-control" formControlName="enddate" [(ngModel)]="endDate">
+          </div><br>
+          <div style="text-align: center">
+            <button class="btn btn-lg"
+              (click)="fetchLineData(releaseId,reportData,startDate,endDate)">Search</button>
+            <!-- (click)="fetchLineGraphData(releaseVersion,reportData,startDate,endDate)" -->
+          </div>
+
+        </div>
+      </form>
+    </div>
+    <div class="col-1"></div>
+    <div class="col-8" *ngIf="sideCol3 === true">
+    <div >
+      <div class="shadow-lg" style="margin-top: 30px;">
+        <highcharts-chart [Highcharts]="highcharts" [options]="chartOptions"
+          style="width: 100%; height: 400px; display: block;">
+        </highcharts-chart>
+      </div>
+      </div>
+    </div>
+  </div>
+
+</div>

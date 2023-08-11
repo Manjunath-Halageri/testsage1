@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite verbose="0" name="Failed suite [Suite]">
+  <test name="Test(failed)">
+    <classes>
+      <class name="mID638.fID677.sID880">
+        <methods>
+          <include name="step_3"/>
+          <include name="step_2"/>
+          <include name="step_1"/>
+          <include name="step_0"/>
+        </methods>
+      </class> <!-- mID638.fID677.sID880 -->
+    </classes>
+  </test> <!-- Test(failed) -->
+</suite> <!-- Failed suite [Suite] -->

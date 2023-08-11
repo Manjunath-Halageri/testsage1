@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testng-results skipped="0" failed="0" total="4" passed="4">
+  <reporter-output>
+    <line>
+      <![CDATA[Chrome]]>
+    </line>
+    <line>
+      <![CDATA[94.0.4606.61]]>
+    </line>
+    <line>
+      <![CDATA[E:\zap\backend\uploads\opal\owaspzap1pro\owaspzap1pl\projectToRun\.\Screenshot\EachStepScreenshot\100_Suite1\sID887\step_0.png]]>
+    </line>
+    <line>
+      <![CDATA[Chrome]]>
+    </line>
+    <line>
+      <![CDATA[94.0.4606.61]]>
+    </line>
+    <line>
+      <![CDATA[E:\zap\backend\uploads\opal\owaspzap1pro\owaspzap1pl\projectToRun\.\Screenshot\EachStepScreenshot\100_Suite1\sID887\step_1.png]]>
+    </line>
+    <line>
+      <![CDATA[Chrome]]>
+    </line>
+    <line>
+      <![CDATA[94.0.4606.61]]>
+    </line>
+    <line>
+      <![CDATA[E:\zap\backend\uploads\opal\owaspzap1pro\owaspzap1pl\projectToRun\.\Screenshot\EachStepScreenshot\100_Suite1\sID887\step_2.png]]>
+    </line>
+    <line>
+      <![CDATA[Chrome]]>
+    </line>
+    <line>
+      <![CDATA[94.0.4606.61]]>
+    </line>
+    <line>
+      <![CDATA[E:\zap\backend\uploads\opal\owaspzap1pro\owaspzap1pl\projectToRun\.\Screenshot\EachStepScreenshot\100_Suite1\sID887\step_3.png]]>
+    </line>
+  </reporter-output>
+  <suite name="Suite" duration-ms="205018" started-at="2023-08-01T11:27:37Z" finished-at="2023-08-01T11:31:02Z">
+    <groups>
+    </groups>
+    <test name="Test" duration-ms="205018" started-at="2023-08-01T11:27:37Z" finished-at="2023-08-01T11:31:02Z">
+      <class name="mID643.fID682.sID887">
+        <test-method status="PASS" signature="step_0()[pri:0, instance:mID643.fID682.sID887@4566e5bd]" name="step_0" duration-ms="15746" started-at="2023-08-01T16:57:37Z" finished-at="2023-08-01T16:57:52Z">
+          <reporter-output>
+            <line>
+              <![CDATA[Chrome]]>
+            </line>
+            <line>
+              <![CDATA[94.0.4606.61]]>
+            </line>
+            <line>
+              <![CDATA[E:\zap\backend\uploads\opal\owaspzap1pro\owaspzap1pl\projectToRun\.\Screenshot\EachStepScreenshot\100_Suite1\sID887\step_0.png]]>
+            </line>
+          </reporter-output>
+        </test-method> <!-- step_0 -->
+        <test-method status="PASS" signature="step_1()[pri:0, instance:mID643.fID682.sID887@4566e5bd]" name="step_1" duration-ms="19453" started-at="2023-08-01T16:57:52Z" finished-at="2023-08-01T16:58:12Z">
+          <reporter-output>
+            <line>
+              <![CDATA[Chrome]]>
+            </line>
+            <line>
+              <![CDATA[94.0.4606.61]]>
+            </line>
+            <line>
+              <![CDATA[E:\zap\backend\uploads\opal\owaspzap1pro\owaspzap1pl\projectToRun\.\Screenshot\EachStepScreenshot\100_Suite1\sID887\step_1.png]]>
+            </line>
+          </reporter-output>
+        </test-method> <!-- step_1 -->
+        <test-method status="PASS" signature="step_2()[pri:0, instance:mID643.fID682.sID887@4566e5bd]" name="step_2" duration-ms="109920" started-at="2023-08-01T16:58:12Z" finished-at="2023-08-01T17:00:02Z">
+          <reporter-output>
+            <line>
+              <![CDATA[Chrome]]>
+            </line>
+            <line>
+              <![CDATA[94.0.4606.61]]>
+            </line>
+            <line>
+              <![CDATA[E:\zap\backend\uploads\opal\owaspzap1pro\owaspzap1pl\projectToRun\.\Screenshot\EachStepScreenshot\100_Suite1\sID887\step_2.png]]>
+            </line>
+          </reporter-output>
+        </test-method> <!-- step_2 -->
+        <test-method status="PASS" signature="step_3()[pri:0, instance:mID643.fID682.sID887@4566e5bd]" name="step_3" duration-ms="59865" started-at="2023-08-01T17:00:02Z" finished-at="2023-08-01T17:01:02Z">
+          <reporter-output>
+            <line>
+              <![CDATA[Chrome]]>
+            </line>
+            <line>
+              <![CDATA[94.0.4606.61]]>
+            </line>
+            <line>
+              <![CDATA[E:\zap\backend\uploads\opal\owaspzap1pro\owaspzap1pl\projectToRun\.\Screenshot\EachStepScreenshot\100_Suite1\sID887\step_3.png]]>
+            </line>
+          </reporter-output>
+        </test-method> <!-- step_3 -->
+      </class> <!-- mID643.fID682.sID887 -->
+    </test> <!-- Test -->
+  </suite> <!-- Suite -->
+</testng-results>

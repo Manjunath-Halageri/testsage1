@@ -1,0 +1,171 @@
+<ul class="breadcrumb topHeadingNames " style="background-color: #fff;">
+  <li class="breadcrumb-item"><a [routerLink]="['/projectdetail']" id="mainheader">projectDetail</a></li>
+</ul>
+<div class="container">
+      <div >
+        <form>
+          <div class="card createCard shadow-lg">
+            <div class="card-header">User Profile</div>
+            <div class="card-body">
+              <!-- <div> -->
+              <div class="row fieldStyle">
+                <div class="col-lg-5 col-md-4 col-sm-5 col-xs-6 labelClass">
+                  <label>UserName</label>
+                </div>
+                <div class="col-lg-7 col-md-8 col-sm-7 col-xs-6" >
+                  <div class="row">
+                    <div class="col-lg-11 col-md-11 col-sm-11 col-xs-11" >
+               
+                  <input class="form-control" name="userName"  [(ngModel)]="userName" [readonly] = "inputClickedUserName">
+                  </div>
+                  <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1" >
+                  <span class="glyphicon glyphicon-pencil" style="font: 20px; color:blue" (click)="clickEditUserName()"></span>
+                  </div>
+                  </div>
+                </div>
+              </div>
+              <br>
+            
+              <div class="row fieldStyle">
+                <div class="col-lg-5 col-md-4 col-sm-5 col-xs-6 labelClass">
+                  <label>EmailId</label>
+                </div>
+                <div class="col-lg-7 col-md-8 col-sm-7 col-xs-6">
+                  <div class="row">
+                    <div class="col-lg-11 col-md-11 col-sm-11 col-xs-11" >
+                  <input class="form-control" name="e" [(ngModel)]="email"  [readonly] = "inputClickedEmail">
+                </div>
+      
+                <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1" >
+                  <span class="glyphicon glyphicon-pencil" style="font: 20px; color:blue" (click)="clickEditEmail()"></span>
+                  </div>
+                </div>
+              </div>
+              </div>
+              <br>
+              <div class="row fieldStyle">
+                <div class="col-lg-5 col-md-4 col-sm-5 col-xs-6 labelClass">
+                  <label>OrganizationName</label>
+                </div>
+                <div class="col-lg-7 col-md-8 col-sm-7 col-xs-6">
+                  <div class="row">
+                    <div class="col-lg-11 col-md-11 col-sm-11 col-xs-11" >
+                  
+                  <input class="form-control" name="org" [(ngModel)]="organizationName" readonly>
+                  </div>
+                  <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1" >
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+              <br>
+              <div class="row fieldStyle">
+                <div class="col-lg-5 col-md-4 col-sm-5 col-xs-6 labelClass">
+                  <label>Password</label>
+                </div>
+                <div class="col-lg-7 col-md-8 col-sm-7 col-xs-6">
+                  <div class="row">
+                    <div class="col-lg-11 col-md-11 col-sm-11 col-xs-11" >
+                  <input class="form-control" name="password" [(ngModel)]="password"  [readonly] = "inputClickedPassword">
+                </div>
+                <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1" >
+                  </div>
+                </div>
+              </div>
+              </div>
+              <br>
+            </div>
+            <div class="card-footer fieldStyle">
+              <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Change Password</button>
+              &nbsp;&nbsp;&nbsp;
+              <button type="submit" class="btn btn-lg"  data-dismiss="modal" (click)="updateUserDetails(userName,email)">Update</button>
+              &nbsp;&nbsp;&nbsp;
+              <button type="submit" class="btn btn-lg btn-cancel" 
+                data-dismiss="modal" (click)="clearAll()">Cancel</button>
+            </div>
+          </div>
+        </form>
+      </div>
+     
+  </div>
+
+   <!-- The Modal -->
+   <div class="modal" id="myModal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+      
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title">Change Password</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        
+        <!-- Modal body -->
+        <div class="modal-body">
+          <div class="row fieldStyle">
+            <div class="col-lg-5 col-md-4 col-sm-5 col-xs-6 labelClass">
+              <label>Current Password</label>
+            </div>
+            <div class="col-lg-7 col-md-8 col-sm-7 col-xs-6" >
+              <div class="row">
+                <div class="col-lg-11 col-md-11 col-sm-11 col-xs-11" >
+           
+              <input class="form-control" name="currentPass"  [(ngModel)]="currentPass" >
+              </div>
+              <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1" >
+              </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="row fieldStyle">
+            <div class="col-lg-5 col-md-4 col-sm-5 col-xs-6 labelClass">
+              <label>New Password</label>
+            </div>
+            <div class="col-lg-7 col-md-8 col-sm-7 col-xs-6" >
+              <div class="row">
+                <div class="col-lg-11 col-md-11 col-sm-11 col-xs-11" >
+           
+              <input class="form-control" name="newPass"  [(ngModel)]="newPass" >
+              </div>
+              <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1" >
+              </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="row fieldStyle">
+            <div class="col-lg-5 col-md-4 col-sm-5 col-xs-6 labelClass">
+              <label>Confirm Password</label>
+            </div>
+            <div class="col-lg-7 col-md-8 col-sm-7 col-xs-6" >
+              <div class="row">
+                <div class="col-lg-11 col-md-11 col-sm-11 col-xs-11" >
+           
+              <input class="form-control" name="confirmPass"  [(ngModel)]="confirmPass">
+              </div>
+              <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1" >
+              </div>
+              </div>
+            </div>
+          </div>
+          <br>
+        </div>
+        
+        <!-- Modal footer -->
+
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-lg"  data-dismiss="modal" (click)="updatePassword(currentPass,newPass,confirmPass)">Update</button>
+          &nbsp;&nbsp;&nbsp;
+          <button type="submit" class="btn btn-lg btn-cancel" 
+            data-dismiss="modal" (click)="clearAll()">Cancel</button>
+        </div>
+        
+      </div>
+    </div>
+  </div>
+
+
+
+

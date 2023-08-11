@@ -1,0 +1,88 @@
+@media screen and (min-device-width: 1024px) and (max-device-width: 1440px) {
+ 
+  .createCard {
+    width: 45% !important;
+    margin-top: 14% !important;
+    margin-left: 25% !important;
+  }
+  .createTestCard{
+    width: 45% !important;
+    margin-left: 25% !important;
+    margin-top: 3%;
+  }
+  .divpadding{
+    padding: 10px;
+  }
+ 
+}
+
+@media screen and (min-device-width: 768px) and (max-device-width: 991px) {
+  .createCard {
+    width: 70%;
+    margin-left: 15%;
+    margin-top: 20%;
+  }
+  .createTestCard{
+    width: 70%;
+    margin-left: 15%;
+    margin-top: 8%;
+  }
+  .divpadding{
+    padding: 10px;
+  }
+}
+
+@media screen and (min-device-width: 992px) and (max-device-width: 1199px) {
+ 
+  .createCard {
+    width: 55% !important;
+    margin-top: 16% !important;
+    margin-left: 21% !important;
+  }
+  .createTestCard{
+    width: 55% !important;
+    margin-left: 21% !important;
+    margin-top: 5% !important;
+  }
+  .divpadding{
+    padding: 10px;
+  }
+  
+}
+
+@media screen and (min-device-width: 375px) and (max-device-width: 767px) {
+  .createCard {
+		margin-top: 10% !important;
+  }
+  .createTestCard{
+    margin-top: 10% !important;
+
+  }
+  .one {
+		width: 100%;
+		overflow-y: visible;
+		overflow-x: scroll;
+		height: 45vh;
+  }
+  .divpadding{
+    padding: 10px;
+  }
+}
+
+@media screen and (min-device-width: 0px) and (max-device-width: 375px) {
+ 
+  .createCard {
+    margin-top: 10% !important;
+  }
+  .divpadding{
+    padding: 10px;
+  }
+}
+
+@media screen and (min-device-width: 1441px) and (max-device-width: 2560px) {
+  .createCard {
+    width: 60% !important;
+    margin-top: 14% !important;
+    margin-left: 16% !important;
+  }
+   }

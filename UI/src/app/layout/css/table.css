@@ -1,0 +1,73 @@
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px #CCCCCC;
+  /* border-radius: 5px; */
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #CCCCCC;
+  border-radius: 10px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #beb5b5;
+}
+
+.theadColor {
+  background-color: #d9d9d9;
+  /* border-radius: 10px 10px 0px 0px; */
+  font-size: 12px;
+  line-height: 20px;
+  text-align: left;
+  padding: unset;
+  color: black;
+  font-weight: unset;
+}
+.theadColor>th{
+  border: 1px solid #d0c0c0;
+  padding: 3px;
+  }
+  .theadColor>tr>th{
+  border: 1px solid #d0c0c0;
+  font-size: 12px;
+  color: black;
+}
+.angulartheadColor{
+  background-color: #d9d9d9;
+  font-size: 12px;
+  line-height: 20px;
+  text-align: left;
+  padding: 5px;
+  color: black;
+  font-weight: unset;
+  border: 1px solid #d0c0c0;
+  }
+  
+  tr.mat-header-row {
+  border: 1px solid #d0c0c0;
+  /* font-weight: bold; */
+  height: 10px !important;
+  }
+/* .shadow-lg {
+  border-collapse: collapse;
+  border-spacing: 100%;
+  border-radius: 10px;
+} */
+
+/* .thdata {
+  font-size: 16px;
+  line-height: 30px;
+  text-align: left;
+  padding: unset;
+  color: white;
+} */
+
+.block {
+  display: block;
+}

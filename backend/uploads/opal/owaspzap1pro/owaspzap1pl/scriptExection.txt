@@ -1,0 +1,401 @@
+[INFO] Scanning for projects...
+[WARNING] 
+[WARNING] Some problems were encountered while building the effective model for Opal:OpalDevelopment:jar:0.0.1-SNAPSHOT
+[WARNING] 'dependencies.dependency.(groupId:artifactId:type:classifier)' must be unique: org.json:json:jar -> duplicate declaration of version 20180813 @ line 76, column 13
+[WARNING] 'dependencies.dependency.(groupId:artifactId:type:classifier)' must be unique: commons-io:commons-io:jar -> duplicate declaration of version 2.6 @ line 93, column 13
+[WARNING] 'dependencies.dependency.(groupId:artifactId:type:classifier)' must be unique: com.googlecode.json-simple:json-simple:jar -> version 1.1 vs 1.1.1 @ line 123, column 13
+[WARNING] 'dependencies.dependency.systemPath' for atu.testng.reports.ATUTestRecorder:ATUTestRecorder:jar should not point at files within the project directory, ${basedir}/Jars/ATUTestRecorder_2.1.jar will be unresolvable by dependent projects @ line 182, column 22
+[WARNING] 
+[WARNING] It is highly recommended to fix these problems because they threaten the stability of your build.
+[WARNING] 
+[WARNING] For this reason, future Maven versions might no longer support building such malformed projects.
+[WARNING] 
+[INFO] 
+[INFO] ------------------------< Opal:OpalDevelopment >------------------------
+[INFO] Building OpalDevelopment 0.0.1-SNAPSHOT
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-clean-plugin:2.5:clean (default-clean) @ OpalDevelopment ---
+[INFO] Deleting E:\zap\backend\uploads\opal\owaspzap1pro\owaspzap1pl\projectToRun\target
+[INFO] 
+[INFO] --- maven-resources-plugin:2.6:resources (default-resources) @ OpalDevelopment ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] skip non existing resourceDirectory E:\zap\backend\uploads\opal\owaspzap1pro\owaspzap1pl\projectToRun\src\main\resources
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.1:compile (default-compile) @ OpalDevelopment ---
+[INFO] Changes detected - recompiling the module!
+[INFO] Compiling 6 source files to E:\zap\backend\uploads\opal\owaspzap1pro\owaspzap1pl\projectToRun\target\classes
+[WARNING] /E:/zap/backend/uploads/opal/owaspzap1pro/owaspzap1pl/projectToRun/src/main/java/reuseablePackage/feature/AllActions.java: E:\zap\backend\uploads\opal\owaspzap1pro\owaspzap1pl\projectToRun\src\main\java\reuseablePackage\feature\AllActions.java uses or overrides a deprecated API.
+[WARNING] /E:/zap/backend/uploads/opal/owaspzap1pro/owaspzap1pl/projectToRun/src/main/java/reuseablePackage/feature/AllActions.java: Recompile with -Xlint:deprecation for details.
+[INFO] 
+[INFO] --- maven-resources-plugin:2.6:testResources (default-testResources) @ OpalDevelopment ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] skip non existing resourceDirectory E:\zap\backend\uploads\opal\owaspzap1pro\owaspzap1pl\projectToRun\src\test\resources
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.1:testCompile (default-testCompile) @ OpalDevelopment ---
+[INFO] Changes detected - recompiling the module!
+[INFO] Compiling 1 source file to E:\zap\backend\uploads\opal\owaspzap1pro\owaspzap1pl\projectToRun\target\test-classes
+[INFO] 
+[INFO] --- maven-surefire-plugin:3.0.0-M1:test (default-test) @ OpalDevelopment ---
+[INFO] 
+[INFO] -------------------------------------------------------
+[INFO]  T E S T S
+[INFO] -------------------------------------------------------
+[INFO] Running TestSuite
+./src/test/java/mID643/fID682/
+./src/test/java/mID643/fID682/
+./src/test/java/mID643/fID682/
+./src/test/java/mID643/fID682/
+false
+false
+File is Main
+type is true
+path is E:\zap\backend\uploads\opal\owaspzap1pro\owaspzap1pl\projectToRun\.\Screenshot\EachStepScreenshot\100_Suite1\sID887
+File is Main
+type is true
+path1 is E:\zap\backend\uploads\opal\owaspzap1pro\owaspzap1pl\projectToRun\.\Screenshot\FailedScreenshot\100_Suite1\sID887
+./src/test/java/mID643/fID682/
+./src/test/java/mID643/fID682/
+./src/test/java/mID643/fID682/
+./src/test/java/mID643/fID682/
+./src/test/java/mID643/fID682/
+./src/test/java/mID643/fID682/
+./src/test/java/mID643/fID682/
+org.zaproxy.clientapi.core.ClientApi@1a8a8f7c
+///////////////////////////////////////////Proxy///////////////////////////////////////////////////////
+Launching Google browser
+Before setProxyProxy(manual, http=http://192.168.99.253:8080, ssl=http://192.168.99.253:8080)
+Before setProxy
+Capabilities {acceptInsecureCerts: true, browser: Chrome, browserName: chrome, browser_version: 94.0.4606.61, goog:chromeOptions: {args: [--no-sandbox, --disable-dev-shm-usage], extensions: []}, proxy: Proxy(manual, http=http://1...}
+Before RemoteWebDriver
+After RemoteWebDriver
+Successfully Navigated to the URL
+Spidering target : https://the-internet.herokuapp.com/login
+Spider progress : 33%
+Spider progress : 21%
+Spider progress : 28%
+Spider progress : 47%
+Spider progress : 70%
+Spider progress : 22%
+Spider progress : 26%
+Spider progress : 27%
+Spider progress : 32%
+Spider progress : 39%
+Spider progress : 46%
+Spider progress : 50%
+Spider progress : 25%
+Spider progress : 28%
+Spider progress : 29%
+Spider progress : 31%
+Spider progress : 33%
+Spider progress : 36%
+Spider progress : 39%
+Spider progress : 42%
+Spider progress : 43%
+Spider progress : 45%
+Spider progress : 46%
+Spider progress : 48%
+Spider progress : 48%
+Spider progress : 49%
+Spider progress : 50%
+Spider progress : 50%
+Spider progress : 50%
+Spider progress : 51%
+Spider progress : 52%
+Spider progress : 53%
+Spider progress : 55%
+Spider progress : 55%
+Spider progress : 55%
+Spider progress : 59%
+Spider progress : 61%
+Spider progress : 62%
+Spider progress : 63%
+Spider progress : 64%
+Spider progress : 65%
+Spider progress : 66%
+Spider progress : 67%
+Spider progress : 69%
+Spider progress : 69%
+Spider progress : 69%
+Spider progress : 69%
+Spider progress : 70%
+Spider progress : 70%
+Spider progress : 71%
+Spider progress : 71%
+Spider progress : 72%
+Spider progress : 73%
+Spider progress : 74%
+Spider progress : 74%
+Spider progress : 74%
+Spider progress : 75%
+Spider progress : 76%
+Spider progress : 77%
+Spider progress : 77%
+Spider progress : 77%
+Spider progress : 77%
+Spider progress : 77%
+Spider progress : 80%
+Spider progress : 80%
+Spider progress : 81%
+Spider progress : 82%
+Spider progress : 83%
+Spider progress : 83%
+Spider progress : 83%
+Spider progress : 84%
+Spider progress : 84%
+Spider progress : 84%
+Spider progress : 85%
+Spider progress : 85%
+Spider progress : 85%
+Spider progress : 85%
+Spider progress : 85%
+Spider progress : 85%
+Spider progress : 85%
+Spider progress : 85%
+Spider progress : 86%
+Spider progress : 87%
+Spider progress : 88%
+Spider progress : 88%
+Spider progress : 89%
+Spider progress : 92%
+Spider progress : 92%
+Spider progress : 92%
+Spider progress : 94%
+Spider progress : 96%
+Spider progress : 99%
+Spider progress : 100%
+Spider completed
+Spider Result URL: http://the-internet.herokuapp.com/download/Day7.xlsx
+Spider Result URL: http://the-internet.herokuapp.com/download/handbag.jpg
+Spider Result URL: http://the-internet.herokuapp.com/broken_images
+Spider Result URL: http://the-internet.herokuapp.com/download/22.png
+Spider Result URL: http://the-internet.herokuapp.com/download/myfile.doc
+Spider Result URL: http://the-internet.herokuapp.com/img/avatars/Original-Facebook-Geek-Profile-Avatar-6.jpg
+Spider Result URL: https://the-internet.herokuapp.com/js/vendor/jquery-ui-1.11.4/jquery-ui.js
+Spider Result URL: http://the-internet.herokuapp.com/shifting_content/image
+Spider Result URL: http://the-internet.herokuapp.com/download/webdriverIO.png
+Spider Result URL: http://the-internet.herokuapp.com/status_codes/404
+Spider Result URL: http://the-internet.herokuapp.com/horizontal_slider
+Spider Result URL: http://the-internet.herokuapp.com/download/png-transparent-head-the-dummy-avatar-man-tie-jacket-user.png
+Spider Result URL: http://the-internet.herokuapp.com/download/dummy.docx
+Spider Result URL: http://the-internet.herokuapp.com/basic_auth
+Spider Result URL: http://the-internet.herokuapp.com/download/java%20(1).pdf
+Spider Result URL: http://the-internet.herokuapp.com/download/jqueryui/menu/menu.csv
+Spider Result URL: https://the-internet.herokuapp.com/robots.txt
+Spider Result URL: http://the-internet.herokuapp.com/javascript_error
+Spider Result URL: http://the-internet.herokuapp.com/geolocation
+Spider Result URL: http://the-internet.herokuapp.com/status_codes/301
+Spider Result URL: http://the-internet.herokuapp.com/shifting_content/menu?mode=random&pixel_shift=100
+Spider Result URL: http://the-internet.herokuapp.com/nested_frames
+Spider Result URL: http://the-internet.herokuapp.com/download/DanteDMC5.jpg
+Spider Result URL: http://the-internet.herokuapp.com/dynamic_controls
+Spider Result URL: http://the-internet.herokuapp.com/download/jqueryui/menu/menu.xls
+Spider Result URL: http://the-internet.herokuapp.com/large
+Spider Result URL: http://the-internet.herokuapp.com/download/file_example_JPG_2500kB.jpg
+Spider Result URL: http://the-internet.herokuapp.com/shifting_content/image?mode=random
+Spider Result URL: http://the-internet.herokuapp.com/download/c.jpg
+Spider Result URL: http://the-internet.herokuapp.com/windows
+Spider Result URL: http://the-internet.herokuapp.com/typos
+Spider Result URL: http://the-internet.herokuapp.com/img/forkme_right_green_007200.png
+Spider Result URL: http://the-internet.herokuapp.com/img/avatars/Original-Facebook-Geek-Profile-Avatar-2.jpg
+Spider Result URL: https://the-internet.herokuapp.com/css/font-awesome.css
+Spider Result URL: http://the-internet.herokuapp.com/frame_top
+Spider Result URL: http://the-internet.herokuapp.com/download/sample.png
+Spider Result URL: http://the-internet.herokuapp.com/download/tes_img_3.jpg
+Spider Result URL: https://the-internet.herokuapp.com/js/vendor/298279967.js
+Spider Result URL: http://the-internet.herokuapp.com/dynamic_loading/1
+Spider Result URL: http://the-internet.herokuapp.com/dynamic_loading/2
+Spider Result URL: http://the-internet.herokuapp.com/download/WhatsApp%20Image%202023-03-13%20at%208.31.47%20PM.jpeg
+Spider Result URL: http://the-internet.herokuapp.com/forgot_password
+Spider Result URL: http://the-internet.herokuapp.com/download/Screen.jpg
+Spider Result URL: http://the-internet.herokuapp.com/dynamic_loading
+Spider Result URL: http://the-internet.herokuapp.com/frame_bottom
+Spider Result URL: http://the-internet.herokuapp.com/img/avatar.jpg
+Spider Result URL: http://the-internet.herokuapp.com/tables
+Spider Result URL: http://the-internet.herokuapp.com/download/foto2.jpeg
+Spider Result URL: http://the-internet.herokuapp.com/download/2455018.jpg
+Spider Result URL: http://the-internet.herokuapp.com/download/5mb%20script.xml
+Spider Result URL: http://the-internet.herokuapp.com/download/person.png
+Spider Result URL: http://the-internet.herokuapp.com/download/file_example_MP4_480_1_5MG.mp4
+Spider Result URL: http://the-internet.herokuapp.com/download/test-file.txt
+Spider Result URL: http://the-internet.herokuapp.com/key_presses
+Spider Result URL: http://the-internet.herokuapp.com/frame_left
+Spider Result URL: http://the-internet.herokuapp.com/challenging_dom
+Spider Result URL: http://the-internet.herokuapp.com/js/vendor/dropzone.js
+Spider Result URL: http://the-internet.herokuapp.com/download/FileUpload2.txt
+Spider Result URL: http://the-internet.herokuapp.com/download/File1.txt
+Spider Result URL: http://the-internet.herokuapp.com/download/dummy.txt
+Spider Result URL: http://the-internet.herokuapp.com/download/SingleUpload.txt
+Spider Result URL: http://the-internet.herokuapp.com/abtest
+Spider Result URL: http://the-internet.herokuapp.com/download/example.json
+Spider Result URL: http://the-internet.herokuapp.com/download/sample_media_file.png
+Spider Result URL: https://the-internet.herokuapp.com/img/forkme_right_green_007200.png
+Spider Result URL: http://the-internet.herokuapp.com/context_menu
+Spider Result URL: http://the-internet.herokuapp.com/js/vendor/stickyfloat.js
+Spider Result URL: http://the-internet.herokuapp.com/download/TT1.xlsx
+Spider Result URL: http://the-internet.herokuapp.com/download/Sample%20doc.doc
+Spider Result URL: http://the-internet.herokuapp.com/abtest_cookies
+Spider Result URL: http://the-internet.herokuapp.com/jqueryui
+Spider Result URL: http://the-internet.herokuapp.com/img/ajax-loader.gif
+Spider Result URL: http://the-internet.herokuapp.com/download/report.html
+Spider Result URL: http://the-internet.herokuapp.com/contact-us/
+Spider Result URL: http://the-internet.herokuapp.com/shifting_content
+Spider Result URL: http://the-internet.herokuapp.com/download/trim.F755739B-847F-4B63-B012-77D7DC973F92.MOV
+Spider Result URL: http://the-internet.herokuapp.com/status_codes/500
+Spider Result URL: http://the-internet.herokuapp.com/download/trim.E5377C50-016E-4A38-99C6-EE1E164F1E96.MOV
+Spider Result URL: http://the-internet.herokuapp.com/frames
+Spider Result URL: http://the-internet.herokuapp.com/download/download.jpeg
+Spider Result URL: http://the-internet.herokuapp.com/download/chromedriver.exe
+Spider Result URL: http://the-internet.herokuapp.com/download/coverletter.txt
+Spider Result URL: http://the-internet.herokuapp.com/download/picture.jpg
+Spider Result URL: http://the-internet.herokuapp.com/download/some-file.txt
+Spider Result URL: http://the-internet.herokuapp.com/download/Text.txt
+Spider Result URL: http://the-internet.herokuapp.com/download/islam.png
+Spider Result URL: http://the-internet.herokuapp.com/download/b.jpg
+Spider Result URL: http://the-internet.herokuapp.com/status_codes
+Spider Result URL: http://the-internet.herokuapp.com/infinite_scroll
+Spider Result URL: http://the-internet.herokuapp.com/shifting_content/list
+Spider Result URL: https://the-internet.herokuapp.com/js/vendor/jquery-1.11.3.min.js
+Spider Result URL: http://the-internet.herokuapp.com/javascript_alerts
+Spider Result URL: http://the-internet.herokuapp.com/img/avatars/Original-Facebook-Geek-Profile-Avatar-1.jpg
+Spider Result URL: http://the-internet.herokuapp.com/js/vendor/ouibounce.min.js
+Spider Result URL: http://the-internet.herokuapp.com/download/test.jpg
+Spider Result URL: http://the-internet.herokuapp.com/inputs
+Spider Result URL: http://the-internet.herokuapp.com/slow
+Spider Result URL: http://the-internet.herokuapp.com/about/
+Spider Result URL: http://the-internet.herokuapp.com/disappearing_elements
+Spider Result URL: http://the-internet.herokuapp.com/entry_ad
+Spider Result URL: http://the-internet.herokuapp.com/download/?6??.png
+Spider Result URL: http://the-internet.herokuapp.com/download/OOPS.docx
+Spider Result URL: https://the-internet.herokuapp.com/login
+Spider Result URL: http://the-internet.herokuapp.com/download/dummy.pdf
+Spider Result URL: https://the-internet.herokuapp.com/js/foundation/foundation.js
+Spider Result URL: http://the-internet.herokuapp.com/download/luminoslogo.png
+Spider Result URL: http://the-internet.herokuapp.com/dropdown
+Spider Result URL: http://the-internet.herokuapp.com/tinymce
+Spider Result URL: http://the-internet.herokuapp.com/download/jqueryui/menu/menu.pdf
+Spider Result URL: http://the-internet.herokuapp.com/shifting_content/image?image_type=simple
+Spider Result URL: http://the-internet.herokuapp.com/shadowdom
+Spider Result URL: http://the-internet.herokuapp.com/exit_intent
+Spider Result URL: http://the-internet.herokuapp.com/gallery/
+Spider Result URL: http://the-internet.herokuapp.com/shifting_content/image?pixel_shift=100
+Spider Result URL: http://the-internet.herokuapp.com/frame_middle
+Spider Result URL: http://the-internet.herokuapp.com/download/trim.3FE212D1-E3D0-4D30-B997-8AE93360B536.MOV
+Spider Result URL: http://the-internet.herokuapp.com/css/font-awesome.css
+Spider Result URL: http://the-internet.herokuapp.com/js/foundation/foundation.alerts.js
+Spider Result URL: http://the-internet.herokuapp.com/img/avatar-blank.jpg
+Spider Result URL: http://the-internet.herokuapp.com/css/styles.css
+Spider Result URL: http://the-internet.herokuapp.com/js/vendor/jquery-ui-1.11.4/jquery-ui.js
+Spider Result URL: http://the-internet.herokuapp.com/download/abc.pdf
+Spider Result URL: http://the-internet.herokuapp.com/
+Spider Result URL: http://the-internet.herokuapp.com/abtest_manual
+Spider Result URL: http://the-internet.herokuapp.com/notification_message_rendered
+Spider Result URL: https://the-internet.herokuapp.com/css/app.css
+Spider Result URL: http://the-internet.herokuapp.com/download/exemplo.txt
+Spider Result URL: http://the-internet.herokuapp.com/jqueryui/menu
+Spider Result URL: http://the-internet.herokuapp.com/js/foundation/foundation.js
+Spider Result URL: http://the-internet.herokuapp.com/iframe
+Spider Result URL: http://the-internet.herokuapp.com/portfolio/
+Spider Result URL: http://the-internet.herokuapp.com/download/58F9F269-B530-46A3-BD30-CBC0179C1815.png
+Spider Result URL: http://the-internet.herokuapp.com/download/a.jpg
+Spider Result URL: http://the-internet.herokuapp.com/download/tes_img_1.jpg
+Spider Result URL: http://the-internet.herokuapp.com/js/vendor/298279967.js
+Spider Result URL: http://the-internet.herokuapp.com/download/Project%20Details%20(2).xlsx
+Spider Result URL: http://the-internet.herokuapp.com/shifting_content/image?mode=random&pixel_shift=100
+Spider Result URL: http://the-internet.herokuapp.com/download_secure
+Spider Result URL: http://the-internet.herokuapp.com/download/myfile.txt
+Spider Result URL: http://the-internet.herokuapp.com/download/data1.jpg
+Spider Result URL: http://the-internet.herokuapp.com/download/comp.pdf
+Spider Result URL: http://the-internet.herokuapp.com/download/sample.java
+Spider Result URL: http://the-internet.herokuapp.com/redirect
+Spider Result URL: http://the-internet.herokuapp.com/download/LambdaTest.txt
+Spider Result URL: http://the-internet.herokuapp.com/download
+Spider Result URL: http://the-internet.herokuapp.com/css/app.css
+Spider Result URL: http://the-internet.herokuapp.com/download/C37030C7-865D-436F-A16A-A5CE22214B78.png
+Spider Result URL: http://the-internet.herokuapp.com/upload
+Spider Result URL: http://the-internet.herokuapp.com/hjkl.jpg
+Spider Result URL: http://the-internet.herokuapp.com/download/Test-Driven.xlsx
+Spider Result URL: http://the-internet.herokuapp.com/floating_menu
+Spider Result URL: http://the-internet.herokuapp.com/download/test1.txt
+Spider Result URL: http://the-internet.herokuapp.com/download/aun.png
+Spider Result URL: http://the-internet.herokuapp.com/download/%E9%BE%993%20%E6%82%9F%E8%83%BD.png
+Spider Result URL: http://the-internet.herokuapp.com/js/vendor/jquery-1.11.3.min.js
+Spider Result URL: http://the-internet.herokuapp.com/dynamic_content
+Spider Result URL: http://the-internet.herokuapp.com/frame_right
+Spider Result URL: http://the-internet.herokuapp.com/download/RegTest.xlsx
+Spider Result URL: http://the-internet.herokuapp.com/users/3
+Spider Result URL: http://the-internet.herokuapp.com/users/1
+Spider Result URL: http://the-internet.herokuapp.com/users/2
+Spider Result URL: http://the-internet.herokuapp.com/digest_auth
+Spider Result URL: http://the-internet.herokuapp.com/css/jqueryui/menu/menu.css
+Spider Result URL: http://the-internet.herokuapp.com/shifting_content/menu
+Spider Result URL: http://the-internet.herokuapp.com/download/?2??.png
+Spider Result URL: http://the-internet.herokuapp.com/download/file_example_MP3_700KB.mp3
+Spider Result URL: http://the-internet.herokuapp.com/download/QR%20Scanner_%20Barcode%20Scanner_2.5.3_Apkpure.apk
+Spider Result URL: http://the-internet.herokuapp.com/drag_and_drop
+Spider Result URL: http://the-internet.herokuapp.com/add_remove_elements/
+Spider Result URL: http://the-internet.herokuapp.com/download/Screenshot%20(1).png
+Spider Result URL: http://the-internet.herokuapp.com/authenticate
+Spider Result URL: https://the-internet.herokuapp.com/sitemap.xml
+Spider Result URL: http://the-internet.herokuapp.com/download/gh.PNG
+Spider Result URL: https://the-internet.herokuapp.com/js/foundation/foundation.alerts.js
+Spider Result URL: http://the-internet.herokuapp.com/infinite_scroll/3
+Spider Result URL: http://the-internet.herokuapp.com/infinite_scroll/2
+Spider Result URL: http://the-internet.herokuapp.com/infinite_scroll/1
+Spider Result URL: http://the-internet.herokuapp.com/js/vendor/jquery.tablesorter.min.js
+Spider Result URL: http://the-internet.herokuapp.com/download/upload_file.xlsx
+Spider Result URL: http://the-internet.herokuapp.com/download/hello%20folks.jpg
+Spider Result URL: http://the-internet.herokuapp.com/download/EmpAgreementForm.pdf
+Spider Result URL: http://the-internet.herokuapp.com/download/F04-IrrevocableLC.xlsx
+Spider Result URL: http://the-internet.herokuapp.com/download/0530_RESOURCE_UserStoryMapping_ANSWERKEY.pdf
+Spider Result URL: http://the-internet.herokuapp.com/download/megadyneBladeHero.jpg
+Spider Result URL: http://the-internet.herokuapp.com/download/upload.png
+Spider Result URL: http://the-internet.herokuapp.com/download/?5??.png
+Spider Result URL: https://the-internet.herokuapp.com/authenticate
+Spider Result URL: http://the-internet.herokuapp.com/notification_message
+Spider Result URL: http://the-internet.herokuapp.com/download/tryuploading.txt
+Spider Result URL: http://the-internet.herokuapp.com/asdf.jpg
+Spider Result URL: http://the-internet.herokuapp.com/download/tes_img_2.jpg
+Spider Result URL: http://the-internet.herokuapp.com/download/data2.jpg
+Spider Result URL: http://the-internet.herokuapp.com/shifting_content/menu?pixel_shift=100
+Spider Result URL: http://the-internet.herokuapp.com/download/sampleTest.txt
+Spider Result URL: http://the-internet.herokuapp.com/windows/new
+Spider Result URL: http://the-internet.herokuapp.com/download/playwrightAndroid.png
+Spider Result URL: http://the-internet.herokuapp.com/redirector
+Spider Result URL: http://the-internet.herokuapp.com/download/FileUpload.txt
+Spider Result URL: http://the-internet.herokuapp.com/download/waktu.png
+Spider Result URL: http://the-internet.herokuapp.com/dynamic_content?with_content=static
+Spider Result URL: http://the-internet.herokuapp.com/shifting_content/menu?mode=random
+Spider Result URL: http://the-internet.herokuapp.com/login
+Spider Result URL: http://the-internet.herokuapp.com/hovers
+Spider Result URL: http://the-internet.herokuapp.com/download/data1%20(1).jpg
+Spider Result URL: http://the-internet.herokuapp.com/download/auditb2.txt
+Spider Result URL: http://the-internet.herokuapp.com/download/q.JPG
+Spider Result URL: http://the-internet.herokuapp.com/download/icon.png
+Spider Result URL: http://the-internet.herokuapp.com/js/vendor/jquery.jscroll.min.js
+Spider Result URL: http://the-internet.herokuapp.com/status_codes/200
+Spider Result URL: http://the-internet.herokuapp.com/download/sample-zip-file.zip
+Spider Result URL: http://the-internet.herokuapp.com/download/Hello,.txt
+Spider Result URL: http://the-internet.herokuapp.com/checkboxes
+Spider Result URL: http://the-internet.herokuapp.com/download/test1.jpg
+Connecting....................
+Connected to Mongo Atlas......
+[INFO] Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 206.355 s - in TestSuite
+[INFO] 
+[INFO] Results:
+[INFO] 
+[INFO] Tests run: 4, Failures: 0, Errors: 0, Skipped: 0
+[INFO] 
+[INFO] 
+[INFO] --- maven-jar-plugin:2.4:jar (default-jar) @ OpalDevelopment ---
+[INFO] Building jar: E:\zap\backend\uploads\opal\owaspzap1pro\owaspzap1pl\projectToRun\target\OpalDevelopment-0.0.1-SNAPSHOT.jar
+[INFO] 
+[INFO] --- maven-install-plugin:2.4:install (default-install) @ OpalDevelopment ---
+[INFO] Installing E:\zap\backend\uploads\opal\owaspzap1pro\owaspzap1pl\projectToRun\target\OpalDevelopment-0.0.1-SNAPSHOT.jar to C:\Users\Dell\.m2\repository\Opal\OpalDevelopment\0.0.1-SNAPSHOT\OpalDevelopment-0.0.1-SNAPSHOT.jar
+[INFO] Installing E:\zap\backend\uploads\opal\owaspzap1pro\owaspzap1pl\projectToRun\pom.xml to C:\Users\Dell\.m2\repository\Opal\OpalDevelopment\0.0.1-SNAPSHOT\OpalDevelopment-0.0.1-SNAPSHOT.pom
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  03:39 min
+[INFO] Finished at: 2023-08-01T17:01:03+05:30
+[INFO] ------------------------------------------------------------------------

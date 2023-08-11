@@ -1,0 +1,168 @@
+
+
+@media only screen and (min-width: 768px) {
+  /* For desktop: */
+  .col-1 {width: 8.33%;}
+  .col-2 {width: 16.66%;}
+  .col-3 {width: 25%;}
+  .col-4 {width: 33.33%;}
+  .col-5 {width: 41.66%;}
+  .col-6 {width: 50%;}
+  .col-7 {width: 58.33%;}
+  .col-8 {width: 66.66%;}
+  .col-9 {width: 75%;}
+  .col-10 {width: 83.33%;}
+  .col-11 {width: 91.66%;}
+  .col-12 {width: 100%;}
+}
+@media only screen and (min-width: 600px) {
+  /* For tablets: */
+  .col-s-1 {width: 8.33%;}
+  .col-s-2 {width: 16.66%;}
+  .col-s-3 {width: 25%;}
+  .col-s-4 {width: 33.33%;}
+  .col-s-5 {width: 41.66%;}
+  .col-s-6 {width: 50%;}
+  .col-s-7 {width: 58.33%;}
+  .col-s-8 {width: 66.66%;}
+  .col-s-9 {width: 75%;}
+  .col-s-10 {width: 83.33%;}
+  .col-s-11 {width: 91.66%;}
+  .col-s-12 {width: 100%;}
+}
+
+#toolbarMenu {
+  cursor: pointer;
+  margin-right: 20px;
+}
+#mainToolbar .toolbar-spacer {
+  flex: 1 1 auto;
+}
+
+#mainToolbar .toolbar-icon {
+  cursor: pointer;
+  margin: 0 8px;
+}
+#mainToolbar{
+  background-color: #006699;
+  color: white;
+}
+
+#sidenavContainer {
+  margin-top: 40px;
+}
+
+#sidenav {
+  width: 260px;
+  background-color: #1c2331;
+  color: white;
+  /* width: 100%; */
+  height: 100%;
+  overflow: hidden;
+  display: flex;
+}
+
+#sidenav.menu-close {
+  width: 56px;
+}
+
+
+
+#sidenav .mat-list-item-content {
+  padding: 0;
+  
+}
+
+
+.dash-list h3 {
+  padding: 12px;
+}
+
+.menu-item{
+  color: white;
+}
+
+.mat-list-item{
+  text-decoration: none;;
+}
+
+#sidenav .menu-item:hover {
+  background-color: #c2cad8 !important;
+  color: white;
+  cursor: pointer;
+}
+/* ::-webkit-scrollbar {
+  width: 8px;
+} */
+#sidenav .menu-item mat-icon {
+  margin-right: 10px;
+}
+
+/* .mat-drawer-inner-container{
+  height: 100vh;
+  width: 100%;
+  overflow: scroll;
+} */
+
+button:focus {outline:0;}
+
+.mat-nav{
+  padding-left: 30px !important;
+  font-size: 14px;
+  color: white;
+  background-color: #1c2331;
+  text-decoration: none;
+  padding: unset;
+}
+.mat-nav:hover{
+  background-color:  #555f74;
+  color: white;
+}
+.menues>a{
+  background-color: #700505;
+  color: white;
+}
+
+/* ---------------------------------------------------------------- */
+
+/* .navbar {
+  color: #fff;
+  padding: 5px 16px;
+  border-radius: 0;
+  border: none;
+  overflow: visible;
+  z-index: 1;
+} */
+
+.navbar img {
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  margin-right: 10px;
+}
+
+.navbar .nav > li a {
+  color: white;
+  padding: 8px 15px;
+  font-size: 14px;    
+}
+
+.navbar .dropdown-item .material-icons {
+  font-size: 21px;
+  line-height: 16px;
+  vertical-align: middle;
+  margin-top: -2px; 
+
+}
+.navbar .nav-item.open > a, .navbar .nav-item.open > a:hover, .navbar .nav-item.open > a:focus {
+background-color: unset;
+}
+
+.navbar .dropdown-menu li a {
+  padding: 8px 20px;
+  line-height: normal;
+}
+
+.testSageIconInner{
+  font-size: 13px;
+}

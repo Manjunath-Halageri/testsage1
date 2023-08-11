@@ -1,0 +1,2 @@
+CONTAINER ID   IMAGE                                          COMMAND                  CREATED          STATUS        PORTS                                             NAMES
+2f32e6e39667   selenium/node-chrome-debug:3.141.59-20210929   "/opt/bin/entry_poin…"   34 minutes ago   Up 1 second   0.0.0.0:5551->4001/tcp, 0.0.0.0:32768->5900/tcp   chrome_1

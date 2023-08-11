@@ -1,0 +1,71 @@
+tbody {
+  display:block;
+  /* height:200px; */
+  /* min-height: 100px;
+  max-height: 300px; */
+  overflow:auto;
+}
+.EditBrowsers{
+  min-height: auto;
+  max-height: 200px;
+  overflow-y: scroll;
+}
+thead, tbody tr {
+  display:table;
+  width:100%;
+  table-layout:fixed;
+}
+thead {
+  width: calc( 101% - 0.6em )
+}
+
+
+form {
+  padding: 10px;
+  max-width: 320px;
+}
+
+label {
+  margin-top: 16px;
+  display: block;
+}
+
+input {
+  display: block;
+}
+
+input, textarea {
+    display: block;
+   
+    height: 27px;
+    padding: 2px 12px;
+    font-size: 14px;
+    color: #555;
+    background-color: #fff;
+    background-image: none;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+textarea {
+  min-height: 100px;
+  padding: 12px;
+}
+.equalheight{
+height:30px;
+}
+
+  .excelTable {
+  height: 50px;
+  font-weight: bold;
+
+  }
+  .excelTable1 {
+    height: 50px;
+    /* font-weight: bold; */
+  
+    }
+
+.setpadding{
+  padding-left: 81px;
+}

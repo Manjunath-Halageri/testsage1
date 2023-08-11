@@ -1,0 +1,90 @@
+{"testng-results": {
+          "reporter-output": {"line": [
+                    "Chrome",
+                    "94.0.4606.61",
+                    "E:\\zap\\backend\\uploads\\opal\\owaspzap1pro\\owaspzap1pl\\projectToRun\\.\\Screenshot\\EachStepScreenshot\\100_Suite1\\sID887\\step_0.png",
+                    "Chrome",
+                    "94.0.4606.61",
+                    "E:\\zap\\backend\\uploads\\opal\\owaspzap1pro\\owaspzap1pl\\projectToRun\\.\\Screenshot\\EachStepScreenshot\\100_Suite1\\sID887\\step_1.png",
+                    "Chrome",
+                    "94.0.4606.61",
+                    "E:\\zap\\backend\\uploads\\opal\\owaspzap1pro\\owaspzap1pl\\projectToRun\\.\\Screenshot\\EachStepScreenshot\\100_Suite1\\sID887\\step_2.png",
+                    "Chrome",
+                    "94.0.4606.61",
+                    "E:\\zap\\backend\\uploads\\opal\\owaspzap1pro\\owaspzap1pl\\projectToRun\\.\\Screenshot\\EachStepScreenshot\\100_Suite1\\sID887\\step_3.png"
+          ]},
+          "total": 4,
+          "suite": {
+                    "test": {
+                              "started-at": "2023-08-01T11:27:37Z",
+                              "name": "Test",
+                              "finished-at": "2023-08-01T11:31:02Z",
+                              "class": {
+                                        "test-method": [
+                                                  {
+                                                            "reporter-output": {"line": [
+                                                                      "Chrome",
+                                                                      "94.0.4606.61",
+                                                                      "E:\\zap\\backend\\uploads\\opal\\owaspzap1pro\\owaspzap1pl\\projectToRun\\.\\Screenshot\\EachStepScreenshot\\100_Suite1\\sID887\\step_0.png"
+                                                            ]},
+                                                            "signature": "step_0()[pri:0, instance:mID643.fID682.sID887@4566e5bd]",
+                                                            "started-at": "2023-08-01T16:57:37Z",
+                                                            "name": "step_0",
+                                                            "finished-at": "2023-08-01T16:57:52Z",
+                                                            "status": "PASS",
+                                                            "duration-ms": 15746
+                                                  },
+                                                  {
+                                                            "reporter-output": {"line": [
+                                                                      "Chrome",
+                                                                      "94.0.4606.61",
+                                                                      "E:\\zap\\backend\\uploads\\opal\\owaspzap1pro\\owaspzap1pl\\projectToRun\\.\\Screenshot\\EachStepScreenshot\\100_Suite1\\sID887\\step_1.png"
+                                                            ]},
+                                                            "signature": "step_1()[pri:0, instance:mID643.fID682.sID887@4566e5bd]",
+                                                            "started-at": "2023-08-01T16:57:52Z",
+                                                            "name": "step_1",
+                                                            "finished-at": "2023-08-01T16:58:12Z",
+                                                            "status": "PASS",
+                                                            "duration-ms": 19453
+                                                  },
+                                                  {
+                                                            "reporter-output": {"line": [
+                                                                      "Chrome",
+                                                                      "94.0.4606.61",
+                                                                      "E:\\zap\\backend\\uploads\\opal\\owaspzap1pro\\owaspzap1pl\\projectToRun\\.\\Screenshot\\EachStepScreenshot\\100_Suite1\\sID887\\step_2.png"
+                                                            ]},
+                                                            "signature": "step_2()[pri:0, instance:mID643.fID682.sID887@4566e5bd]",
+                                                            "started-at": "2023-08-01T16:58:12Z",
+                                                            "name": "step_2",
+                                                            "finished-at": "2023-08-01T17:00:02Z",
+                                                            "status": "PASS",
+                                                            "duration-ms": 109920
+                                                  },
+                                                  {
+                                                            "reporter-output": {"line": [
+                                                                      "Chrome",
+                                                                      "94.0.4606.61",
+                                                                      "E:\\zap\\backend\\uploads\\opal\\owaspzap1pro\\owaspzap1pl\\projectToRun\\.\\Screenshot\\EachStepScreenshot\\100_Suite1\\sID887\\step_3.png"
+                                                            ]},
+                                                            "signature": "step_3()[pri:0, instance:mID643.fID682.sID887@4566e5bd]",
+                                                            "started-at": "2023-08-01T17:00:02Z",
+                                                            "name": "step_3",
+                                                            "finished-at": "2023-08-01T17:01:02Z",
+                                                            "status": "PASS",
+                                                            "duration-ms": 59865
+                                                  }
+                                        ],
+                                        "name": "mID643.fID682.sID887"
+                              },
+                              "duration-ms": 205018
+                    },
+                    "started-at": "2023-08-01T11:27:37Z",
+                    "name": "Suite",
+                    "groups": "",
+                    "finished-at": "2023-08-01T11:31:02Z",
+                    "duration-ms": 205018
+          },
+          "failed": 0,
+          "passed": 4,
+          "skipped": 0
+}}

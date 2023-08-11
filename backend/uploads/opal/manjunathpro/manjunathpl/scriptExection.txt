@@ -1,0 +1,153 @@
+[INFO] Scanning for projects...
+[WARNING] 
+[WARNING] Some problems were encountered while building the effective model for Opal:OpalDevelopment:jar:0.0.1-SNAPSHOT
+[WARNING] 'dependencies.dependency.(groupId:artifactId:type:classifier)' must be unique: org.json:json:jar -> duplicate declaration of version 20180813 @ line 76, column 13
+[WARNING] 'dependencies.dependency.(groupId:artifactId:type:classifier)' must be unique: commons-io:commons-io:jar -> duplicate declaration of version 2.6 @ line 93, column 13
+[WARNING] 'dependencies.dependency.(groupId:artifactId:type:classifier)' must be unique: com.googlecode.json-simple:json-simple:jar -> version 1.1 vs 1.1.1 @ line 123, column 13
+[WARNING] 'dependencies.dependency.systemPath' for atu.testng.reports.ATUTestRecorder:ATUTestRecorder:jar should not point at files within the project directory, ${basedir}/Jars/ATUTestRecorder_2.1.jar will be unresolvable by dependent projects @ line 182, column 22
+[WARNING] 
+[WARNING] It is highly recommended to fix these problems because they threaten the stability of your build.
+[WARNING] 
+[WARNING] For this reason, future Maven versions might no longer support building such malformed projects.
+[WARNING] 
+[INFO] 
+[INFO] ------------------------< Opal:OpalDevelopment >------------------------
+[INFO] Building OpalDevelopment 0.0.1-SNAPSHOT
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-clean-plugin:2.5:clean (default-clean) @ OpalDevelopment ---
+[INFO] Deleting E:\zap\backend\uploads\opal\manjunathpro\manjunathpl\projectToRun\target
+[INFO] 
+[INFO] --- maven-resources-plugin:2.6:resources (default-resources) @ OpalDevelopment ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] skip non existing resourceDirectory E:\zap\backend\uploads\opal\manjunathpro\manjunathpl\projectToRun\src\main\resources
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.1:compile (default-compile) @ OpalDevelopment ---
+[INFO] Changes detected - recompiling the module!
+[INFO] Compiling 7 source files to E:\zap\backend\uploads\opal\manjunathpro\manjunathpl\projectToRun\target\classes
+[WARNING] /E:/zap/backend/uploads/opal/manjunathpro/manjunathpl/projectToRun/src/main/java/reuseablePackage/feature/AllActions.java: E:\zap\backend\uploads\opal\manjunathpro\manjunathpl\projectToRun\src\main\java\reuseablePackage\feature\AllActions.java uses or overrides a deprecated API.
+[WARNING] /E:/zap/backend/uploads/opal/manjunathpro/manjunathpl/projectToRun/src/main/java/reuseablePackage/feature/AllActions.java: Recompile with -Xlint:deprecation for details.
+[INFO] 
+[INFO] --- maven-resources-plugin:2.6:testResources (default-testResources) @ OpalDevelopment ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] skip non existing resourceDirectory E:\zap\backend\uploads\opal\manjunathpro\manjunathpl\projectToRun\src\test\resources
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.1:testCompile (default-testCompile) @ OpalDevelopment ---
+[INFO] Changes detected - recompiling the module!
+[INFO] Compiling 1 source file to E:\zap\backend\uploads\opal\manjunathpro\manjunathpl\projectToRun\target\test-classes
+[INFO] 
+[INFO] --- maven-surefire-plugin:3.0.0-M1:test (default-test) @ OpalDevelopment ---
+[INFO] 
+[INFO] -------------------------------------------------------
+[INFO]  T E S T S
+[INFO] -------------------------------------------------------
+[INFO] Running TestSuite
+./src/test/java/mID642/fID681/
+./src/test/java/mID642/fID681/
+./src/test/java/mID642/fID681/
+./src/test/java/mID642/fID681/
+false
+false
+File is Main
+type is true
+path is E:\zap\backend\uploads\opal\manjunathpro\manjunathpl\projectToRun\.\Screenshot\EachStepScreenshot\100_Suite1\sID886
+File is Main
+type is true
+path1 is E:\zap\backend\uploads\opal\manjunathpro\manjunathpl\projectToRun\.\Screenshot\FailedScreenshot\100_Suite1\sID886
+./src/test/java/mID642/fID681/
+./src/test/java/mID642/fID681/
+./src/test/java/mID642/fID681/
+./src/test/java/mID642/fID681/
+./src/test/java/mID642/fID681/
+./src/test/java/mID642/fID681/
+./src/test/java/mID642/fID681/
+org.zaproxy.clientapi.core.ClientApi@6a1aab78
+///////////////////////////////////////////Proxy///////////////////////////////////////////////////////
+Launching Google browser
+Before setProxyProxy(manual, http=http://192.168.99.254:8080, ssl=http://192.168.99.254:8080)
+Before setProxy
+Capabilities {acceptInsecureCerts: true, browser: Chrome, browserName: chrome, browser_version: 94.0.4606.61, goog:chromeOptions: {args: [--no-sandbox, --disable-dev-shm-usage], extensions: []}, proxy: Proxy(manual, http=http://1...}
+Before RemoteWebDriver
+After RemoteWebDriver
+Successfully Navigated to the URL
+Spidering target : https://the-internet.herokuapp.com/secure
+Spider progress : 50%
+Spider progress : 26%
+Spider progress : 33%
+Spider progress : 38%
+Spider progress : 50%
+Spider progress : 66%
+Spider progress : 21%
+Spider progress : 29%
+Spider progress : 31%
+Spider progress : 36%
+Spider progress : 26%
+Spider progress : 29%
+Spider progress : 30%
+Spider progress : 32%
+Spider progress : 33%
+Spider progress : 36%
+Spider progress : 37%
+Spider progress : 38%
+Spider progress : 40%
+Spider progress : 44%
+Spider progress : 47%
+Spider progress : 51%
+Spider progress : 52%
+Spider progress : 54%
+Spider progress : 55%
+Spider progress : 56%
+Spider progress : 58%
+Spider progress : 58%
+Spider progress : 61%
+Spider progress : 62%
+Spider progress : 63%
+Spider progress : 64%
+Spider progress : 66%
+Spider progress : 66%
+Spider progress : 66%
+Spider progress : 66%
+Spider progress : 66%
+Spider progress : 68%
+Spider progress : 69%
+Spider progress : 72%
+Spider progress : 74%
+Spider progress : 75%
+Spider progress : 76%
+Spider progress : 76%
+Spider progress : 77%
+Spider progress : 77%
+Spider progress : 79%
+Spider progress : 79%
+Spider progress : 80%
+Spider progress : 81%
+Spider progress : 83%
+Spider progress : 86%
+Spider progress : 90%
+Spider progress : 91%
+Spider progress : 90%
+Spider progress : 93%
+Spider progress : 96%
+Spider progress : 100%
+Spider completed
+Connecting....................
+Connected to Mongo Atlas......
+[INFO] Tests run: 7, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 125.599 s - in TestSuite
+[INFO] 
+[INFO] Results:
+[INFO] 
+[INFO] Tests run: 7, Failures: 0, Errors: 0, Skipped: 0
+[INFO] 
+[INFO] 
+[INFO] --- maven-jar-plugin:2.4:jar (default-jar) @ OpalDevelopment ---
+[INFO] Building jar: E:\zap\backend\uploads\opal\manjunathpro\manjunathpl\projectToRun\target\OpalDevelopment-0.0.1-SNAPSHOT.jar
+[INFO] 
+[INFO] --- maven-install-plugin:2.4:install (default-install) @ OpalDevelopment ---
+[INFO] Installing E:\zap\backend\uploads\opal\manjunathpro\manjunathpl\projectToRun\target\OpalDevelopment-0.0.1-SNAPSHOT.jar to C:\Users\Dell\.m2\repository\Opal\OpalDevelopment\0.0.1-SNAPSHOT\OpalDevelopment-0.0.1-SNAPSHOT.jar
+[INFO] Installing E:\zap\backend\uploads\opal\manjunathpro\manjunathpl\projectToRun\pom.xml to C:\Users\Dell\.m2\repository\Opal\OpalDevelopment\0.0.1-SNAPSHOT\OpalDevelopment-0.0.1-SNAPSHOT.pom
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  02:19 min
+[INFO] Finished at: 2023-08-01T11:49:28+05:30
+[INFO] ------------------------------------------------------------------------

@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round" rel="stylesheet">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<div class="container-fluid" style="padding:unset">
+  <div class="d-flex topColor" style="font-size: 18px">
+    <div class="p-2 mr-auto ">Test Sage</div>
+    <div class="p-2 ">{{newRole}}</div>
+    <div class="p-2 ml-auto navbar " style="margin:unset">
+      <div class="navbar-header col">
+        <ul class="nav navbar-nav navbar-right ml-auto">
+          <li class="nav-item dropdown"> <a href="#" data-toggle="dropdown" class="nav-link dropdown-toggle user-action"
+              style="background-color: unset;"><i class="img fa fa-user-o"></i> {{newUserName}}</a>
+            <ul class="dropdown-menu " style="position:absolute">
+              <li><a class="dropdown-item"><i class="fa fa-user-o"></i> Profile</a>
+              </li>
+              <li><a class="dropdown-item"><i class="fa fa-calendar-o"></i> Calendar</a>
+              </li>
+              <li><a class="dropdown-item"><i class="fa fa-sliders"></i> Settings</a>
+              </li>
+              <li class="divider dropdown-divider"></li>
+              <li><a href="#" class="dropdown-item" (click)="logoutDocker()"><i class="material-icons">&#xE8AC;</i>
+                  Logout</a></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-sm-1">
+
+      </div>
+      <div class="col-sm-10">
+        <div>
+          <button type="button" class="btn  but1   some-text" data-toggle="modal" data-target="#myModalORG">Create
+            Projects / Admin</button>
+
+
+          <span style="float: right">
+            <!-- <input type="text" list="browsers" [(ngModel)]="project" class="fa fa-search" placeholder="Search  "> -->
+            <input type="text" class="form-control" placeholder="Search Here" [(ngModel)]="term">
+
+            <!-- <button style="height:43px" class="btn btn-secondary" type="button" (click)="getProject(project)">
+              <i class="fa fa-search"></i>
+            </button> -->
+          </span>
+        </div>
+
+        <datalist id="browsers">
+          <option></option>
+          <option *ngFor="let admin123 of SelProjects">{{admin123.projectSelection}}</option>
+        </datalist>
+      </div> <br>
+      <div class="col-md-8 col-sm-8 col-lg-8 col-xs-8 col8">
+        <table class="shadow-lg table-striped scroll" style="border:unset;width:140%;margin:auto;margin-left:6%">
+          <thead class="block theadColor">
+            <tr>
+              <th class="thdata" style="width:20%;padding: 8px">Project</th>
+              <th class="thdata" style="width:20%;padding: 8px">Project Type </th>
+              <th class="thdata" style="width:20%;padding: 8px">Project Admin</th>
+              <th class="thdata" style="width:20%;padding: 8px">Date </th>
+              <th class="thdata" style="width:20%;padding: 8px">Edit</th>
+              <th class="thdata" style="width:20%;padding: 8px">Delete</th>
+            </tr>
+          </thead>
+          <tbody class="block bodyHeight">
+            <tr *ngFor="let admin of allOrgWithProjects | filter:term">
+              <td style="width:20%">{{admin.projectSelection}}</td>
+              <td style="width:20%">{{admin.projectType}}</td>
+              <td style="width:20%">{{admin.projectAdmin}}</td>
+              <td style="width:20%;padding: 8px">{{admin.CreatedDate | date:'dd-MM-yy'}}</td>
+              <td style="width:25%;padding: 8px" data-toggle="modal" data-target="#myMo" (click)="editProjects(admin)">
+                <span class="glyphicon glyphicon-pencil btn btn-info btn-lg"></span>
+              </td>
+              <td style="width:25%" (click)="deleteProjects(admin)">
+                <span class="glyphicon glyphicon-trash btn btn-info btn-lg"></span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="col-sm-1">
+      </div>
+    </div>
+
+    <div class="modal fade " id="myModalORG" role="dialog">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header ">
+            <h1 class="modal-title"></h1>
+          </div>
+          <div class="modal-body">
+            <div>
+              <label>Project Details</label>
+              <br>
+              <br>
+              <div>
+                <div> <span class="excelSpan"> </span>
+                  <div class=" col-sm-6 col-sm-6 col-sm-6 colFont">
+                    <br>
+                    <input type="radio" name="Button" [(ngModel)]="checkedValue" value="1" class="ButtonState" checked
+                      id="Button1" />
+                    <label class="Button btn btn-lg" style="border-radius: 25px;" type="button" for="Button1"
+                      (click)="CreateOrganization()">Create Project</label>
+                    <br>
+                    <br>
+                    <input type="radio" name="Button" [(ngModel)]="checkedValue" value="2" class="ButtonState"
+                      id="Button2" />
+                    <label class="Button btn btn-lg" type="button" style="border-radius: 25px;" for="Button2"
+                      (click)="CreateAdmin()">Create Project Admin</label>
+                  </div>
+                  <div class=" col-sm-6 col-sm-6 col-sm-6 colFont">
+                    <div style="height:542px;border:1px solid black;width:640px;margin-left:-16px"
+                      *ngIf="CreateOrg==true">
+                      <div class="row">
+                        <div class="col-sm-6">&nbsp; &nbsp; &nbsp; &nbsp;
+                          <label>Create Project Details</label>
+                          <div class="row excelTable">&nbsp; &nbsp; &nbsp; &nbsp;
+                            <label>Project Name</label> <span class="starSpan">*</span>
+                          </div>
+                          <div class="row excelTable">&nbsp; &nbsp; &nbsp; &nbsp;
+                            <label>Description</label> <span class="starSpan">*</span>
+                          </div>
+                          <div class="row excelTable">&nbsp; &nbsp; &nbsp; &nbsp;
+                            <label>Framework</label> <span class="starSpan">*</span>
+                          </div>
+                          <div class="row excelTable">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                            <label>Project Type</label> <span class="starSpan">*</span>
+                          </div>
+                          <div class="row excelTable">&nbsp; &nbsp; &nbsp; &nbsp;&nbsp;
+                            <label>Set Time Out </label> <span class="starSpan">*</span>
+                          </div>
+                          <div class="row excelTable">&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;
+                            <label>Browser Name</label> <span class="starSpan">*</span>
+                          </div>
+                          <div class="row excelTable">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                            <label>Browser Version</label> <span class="starSpan">*</span>
+                          </div>
+                        </div>
+                        <div class="col-sm-6">
+                          <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+                            <div class="form-group row excelTable">
+                              <input type="text" maxlength="30" [(ngModel)]="projectDetails.ProjectNameNew"
+                                formControlName="ProjectNameNew" style="margin-top: 25px"
+                                class="form-control row excelInput" />
+                              <control-messages [control]="registerForm.controls.ProjectNameNew"></control-messages>
+                            </div>
+                            <div class="form-group row excelTable">
+                              <input type="text" maxlength="30" [(ngModel)]="projectDetails.description"
+                                formControlName="description" style="margin-top: 25px"
+                                class="form-control row excelInput" />
+                              <control-messages [control]="registerForm.controls.description"></control-messages>
+                            </div>
+                            <div class="form-group row excelTable">
+                              <select style="height:39px;margin-top: 5px" [(ngModel)]="projectDetails.framework"
+                                [ngClass]="{ 'is-invalid': submitted && f.framework.errors }"
+                                formControlName="framework" class=" form-control row excelInput">
+                                <option value="" style="display:none;"></option>
+                                <option *ngFor="let framework of framework" [ngValue]="framework">
+                                  {{framework.frameworkType}}</option>
+                              </select>
+                              <control-messages [control]="registerForm.controls.framework"></control-messages>
+                            </div>
+                            <div class="form-group row excelTable">
+                              <select class=" form-control row excelInput" formControlName="type"
+                                [(ngModel)]="projectDetails.type"
+                                [ngClass]="{ 'is-invalid': submitted && f.type.errors }"
+                                style="height:39px;margin-top: 5px">
+                                <option></option>
+                                <option>Web Application</option>
+                                <option> Mobile Web Application</option>
+                                <option> Android Native Application</option>
+                                <option> Ios Native Application</option>
+                              </select>
+                              <control-messages [control]="registerForm.controls.type"></control-messages>
+                            </div>
+                            <div class="form-group row excelTable">
+                              <input formControlName="setOut" [(ngModel)]="projectDetails.setOut"
+                                class="form-control row excelInput"
+                                [ngClass]="{ 'is-invalid': submitted && f.setOut.errors }" />
+                              <control-messages [control]="registerForm.controls.setOut"></control-messages>
+                            </div>
+                            <div class="form-group row excelTable" style="margin-top:-20px;">
+                              <select class=" form-control row excelInput" formControlName="defaultBrowser"
+                                [ngClass]="{ 'is-invalid': submitted && f.defaultBrowser.errors }"
+                                [(ngModel)]="projectDetails.defaultBrowser"
+                                (ngModelChange)="getversion(projectDetails.defaultBrowser)"
+                                style="height:39px;margin-top: 5px;">
+                                <option></option>
+                                <option *ngFor="let b of dbrowsers">{{b.browserName}}</option>
+                              </select>
+                              <control-messages [control]="registerForm.controls.defaultBrowser"></control-messages>
+                            </div>
+                            <div class="form-group row excelTable">
+                              <select [(ngModel)]="projectDetails.defaultVersion" class=" form-control row excelInput"
+                                formControlName="defaultVersion" style="height:39px;margin-top: 5px;"
+                                [ngClass]="{ 'is-invalid': submitted && f.defaultVersion.errors }">
+                                <option>{{defaultVersion}}</option>
+                                <option *ngFor="let v of selectionversion">{{v.versionName}}</option>
+                              </select>
+                              <control-messages [control]="registerForm.controls.defaultVersion"></control-messages>
+                            </div>
+                            <div class="form-group ">
+                              <button class="btn btn-lg" [disabled]="!registerForm.valid">Create</button>
+                              <!-- <button type="button"  class="btn btn-default">Create</button> -->
+                              <button type="button" style="margin-left:100px" class="btn btn-default btn-lg"
+                                (click)="clearFileds()" data-dismiss="modal">Cancel</button>
+                            </div>
+                          </form>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div style="height:540px;border:1px solid black;width:640px;margin-left:-16px"
+                      *ngIf="CreateOrgAdmin==true">
+                      <button class="btn btn-lg" style="float:right" (click)="addNewUSER()">NEW ADMIN</button>
+                      <div class="row">
+                        <div class="col-sm-6">&nbsp; &nbsp; &nbsp; &nbsp;
+                          <label>Create Project Admin</label>
+                          <div class="row excelTable">&nbsp; &nbsp; &nbsp; &nbsp;
+                            <label>Project Name</label> <span class="starSpan">*</span>
+                          </div>
+                          <div class="row excelTable">&nbsp; &nbsp; &nbsp; &nbsp;
+                            <label>Username</label> <span class="starSpan">*</span>
+                          </div>
+                          <div class="row excelTable">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                            <label>Password</label> <span class="starSpan">*</span>
+                          </div>
+                          <div class="row excelTable">&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;
+                            <label>Work Email</label> <span class="starSpan">*</span>
+                          </div>
+                        </div>
+                        <div class="col-sm-6">
+                          <form [formGroup]="registerFormAdmin" (ngSubmit)="onSubmit1()">
+                            <div class="form-group row excelTable">
+                              <input type="text" maxlength="30" disabled [(ngModel)]="newOrgName"
+                                formControlName="ProjectName" style="margin-top: 25px"
+                                class="form-control row excelInput" />
+                              <control-messages [control]="registerFormAdmin.controls.ProjectName"></control-messages>
+                            </div>
+                            <div class="form-group row excelTable">
+                              <input type="text" (change)="selUser(newUser)" list="usersList" maxlength="30"
+                                [(ngModel)]="newUser" formControlName="Username" (click)="foo" style="margin-top: 16px"
+                                class="form-control row excelInput" />
+                              <control-messages [control]="registerFormAdmin.controls.Username"></control-messages>
+                            </div>
+                            <div class="form-group row excelTable">
+                              <input type="Password" maxlength="30" [(ngModel)]="newPassword" (click)="foo"
+                                formControlName="Password" style="margin-top: 4px"
+                                class="form-control row excelInput" />
+                              <control-messages [control]="registerFormAdmin.controls.Password"></control-messages>
+                            </div>
+                            <div class="form-group row excelTable">
+                              <input type="mail" maxlength="30" [(ngModel)]="newEmail" (click)="foo"
+                                formControlName="WorkEmail" style="margin-top: -5px"
+                                class="form-control row excelInput" />
+                              <control-messages [control]="registerFormAdmin.controls.WorkEmail"></control-messages>
+                            </div>
+                            <div class="form-group ">
+                              <button class="btn btn-lg" (click)="saveAdminWithProjects()"
+                                [disabled]="!registerFormAdmin.valid">Create</button>
+                              <button type="button" style="margin-left:100px" class="btn btn-default btn-lg"
+                                data-dismiss="modal" (click)="cancel()">Cancel</button>
+                            </div>
+                          </form>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal fade " id="myMo" role="dialog">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header ">
+            <h1 class="modal-title"></h1>
+          </div>
+          <div class="modal-body">
+            <div>
+              <label>Update project Details</label>
+              <br>
+              <br>
+              <div>
+                <div> <span class="excelSpan"> </span>
+                  <div class=" col-sm-6 col-sm-6 col-sm-6 colFont">
+                    <br>
+                    <input type="radio" name="Button123" [(ngModel)]="checkedEditValue" value="1"
+                      class="ButtonStateEdit" checked id="ButtonEdit1" />
+                    <label class="Button btn btn-lg" style="border-radius: 25px;" type="button" for="ButtonEdit1"
+                      (click)="CreateOrganizationEdit()">Update Project</label>
+                    <br>
+                    <br>
+                    <input type="radio" name="Button123" [(ngModel)]="checkedEditValue" value="2"
+                      class="ButtonStateEdit" id="ButtonEdit2" />
+                    <label class="Button btn btn-lg" type="button" style="border-radius: 25px;" for="Button2"
+                      (click)="CreateAdminEdit()">Update Project Admin</label>
+                  </div>
+                  <div class=" col-sm-6 col-sm-6 col-sm-6 colFont">
+                    <div style="height:542px;border:1px solid black;width:640px;margin-left:-16px"
+                      *ngIf="CreateOrgEdit==true">
+                      <div class="row">
+                        <div class="col-sm-6">&nbsp; &nbsp; &nbsp; &nbsp;
+                          <label>Update Project Details</label>
+                          <div class="row excelTable">&nbsp; &nbsp; &nbsp; &nbsp;
+                            <label>Project Name</label> <span class="starSpan">*</span>
+                          </div>
+                          <div class="row excelTable">&nbsp; &nbsp; &nbsp; &nbsp;
+                            <label>Description</label> <span class="starSpan">*</span>
+                          </div>
+                          <div class="row excelTable">&nbsp; &nbsp; &nbsp; &nbsp;
+                            <label>Framework</label> <span class="starSpan">*</span>
+                          </div>
+                          <div class="row excelTable">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                            <label>Project Type</label> <span class="starSpan">*</span>
+                          </div>
+                          <div class="row excelTable">&nbsp; &nbsp; &nbsp; &nbsp;&nbsp;
+                            <label>Set Time Out </label> <span class="starSpan">*</span>
+                          </div>
+                          <div class="row excelTable">&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;
+                            <label>Browser Name</label> <span class="starSpan">*</span>
+                          </div>
+                          <div class="row excelTable">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                            <label>Browser Version</label> <span class="starSpan">*</span>
+                          </div>
+                        </div>
+                        <div class="col-sm-6" *ngFor="let project of editProjectDetails">
+                          <div class="row excelTable">
+                            <input type="text" maxlength="30" class="form-control row excelInput"
+                              [(ngModel)]="project.projectSelection" style="margin-top: 25px" />
+                          </div>
+                          <div class="row excelTable">
+                            <input type="text" maxlength="30" [(ngModel)]="project.description" style="margin-top: 25px"
+                              class="form-control row excelInput" />
+                          </div>
+
+                          <div class="row excelTable">
+                            <select style="height:39px;margin-top: 5px" [(ngModel)]="project.framework"
+                              class=" form-control row excelInput">
+                              <option></option>
+                              <option>Test NG</option>
+                              <option>Cypress</option>
+                              <option>Appium</option>
+                            </select>
+                          </div>
+                          <div class="row excelTable">
+                            <select class=" form-control row excelInput" [(ngModel)]="project.projectType"
+                              style="height:39px;margin-top: 5px">
+                              <option></option>
+                              <option>Web Application</option>
+                              <option> Mobile Web Application</option>
+                            </select>
+                          </div>
+                          <div class="row excelTable">
+                            <input type="number" [(ngModel)]="project.projectConfigdata.settimeOut" maxlength="12"
+                              class=" form-control row excelInput" />
+                          </div>
+                          <div class="row excelTable" style="margin-top:-20px;">
+                            <select class=" form-control row excelInput" [(ngModel)]="proBrowsrName"
+                              (ngModelChange)="getversion(proBrowsrName)" style="height:39px;margin-top: 5px;">
+                              <option></option>
+                              <option *ngFor="let b of dbrowsers">{{b.browserName}}</option>
+                            </select>
+                          </div>
+                          <div class=" row excelTable">
+                            <select class=" form-control row excelInput"
+                              [(ngModel)]="project.projectConfigdata.defaultVersion"
+                              style="height:39px;margin-top: 5px;">
+                              <option>{{project.projectConfigdata.defaultVersion}}</option>
+                              <option *ngFor="let v of selectionversion">{{v.versionName}}</option>
+                            </select>
+                          </div>
+                          <div>
+                            <button class="btn btn-lg" (click)="updateProjects(project)">Update</button>
+                            <button type="button" style="margin-left:100px" class="btn btn-default btn-lg"
+                              data-dismiss="modal">Cancel</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div style="height:540px;border:1px solid black;width:640px;margin-left:-16px"
+                      *ngIf="CreateOrgAdminEdit==true">
+                      <div class="row">
+                        <div class="col-sm-6">&nbsp; &nbsp; &nbsp; &nbsp;
+                          <label>Update Project Admin</label>
+                          <div class="row excelTable">&nbsp; &nbsp; &nbsp; &nbsp;
+                            <label>Project Name</label> <span class="starSpan">*</span>
+                          </div>
+                          <div class="row excelTable">&nbsp; &nbsp; &nbsp; &nbsp;
+                            <label>UsernameSEcond</label> <span class="starSpan">*</span>
+                          </div>
+                          <div class="row excelTable">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                            <label>Password</label> <span class="starSpan">*</span>
+                          </div>
+                          <div class="row excelTable">&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;
+                            <label>Work Email</label> <span class="starSpan">*</span>
+                          </div>
+                        </div>
+                        <div class="col-sm-6" *ngFor="let ad of projectAdmins">
+                          <div class=" row excelTable">
+                            <input type="text" maxlength="30" [(ngModel)]="GlobalProject" style="margin-top: 25px"
+                              class="form-control row excelInput" />
+                          </div>
+                          <div class=" row excelTable">
+                            <input type="text" list="usersList" maxlength="30" [(ngModel)]="ad.userName"
+                              style="margin-top: 16px" class="form-control row excelInput" />
+                          </div>
+                          <div class="row excelTable">
+                            <input type="Password" maxlength="30" [(ngModel)]="ad.password" style="margin-top: 4px"
+                              class="form-control row excelInput" />
+                          </div>
+                          <div class="form-group row excelTable">
+                            <input type="mail" maxlength="30" [(ngModel)]="ad.Email" style="margin-top: -5px"
+                              class="form-control row excelInput" />
+                          </div>
+                          <div>
+                            <button class="btn btn-lg" (click)="updateWithProjects(ad)"
+                              data-dismiss="modal">Update</button>
+                            <button type="button" style="margin-left:100px" class="btn btn-default btn-lg"
+                              data-dismiss="modal" (click)="cancel()">Cancel</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>

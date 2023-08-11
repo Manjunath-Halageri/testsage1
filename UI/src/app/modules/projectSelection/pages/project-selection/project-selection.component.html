@@ -1,0 +1,235 @@
+<div  style="padding:unset">
+  <div class="d-flex topColor topNav" style="height: 42px;">
+    <div class="p-3 mr-auto ">Test Sage</div>
+    <div class="p-3 ">Project Selection</div>
+    <div class="ml-auto navbar " style="margin:unset;justify-content: unset;">
+      <div class="navbar-header">
+        <ul class="nav navbar-nav navbar-right">
+          <li class="nav-item dropdown">
+            <a href="#" data-toggle="dropdown" class="nav-link dropdown-toggle user-action topColor"
+              style="background-color: unset;"><i class="fas fa-user-circle topColor"></i> {{newUserName}}</a>
+            <ul class="dropdown-menu dropdownlogout" style="position:absolute">
+              <li><a [routerLink]="['/userProfile']" class="dropdown-item"><i class="fas fa-user" ></i>Profile</a></li>
+              <li><a class="dropdown-item"><i class="fa fa-calendar-o"></i> Calendar</a></li>
+              <li><a class="dropdown-item"><i class="fas fa-cogs"></i> Settings</a></li>
+              <li class="divider dropdown-divider"></li>
+              <li><a routerLink='/' class="dropdown-item" (click)="logoutDocker()"><i class="fas fa-sign-out-alt">&#xE8AC;</i>
+                  Logout</a></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <br><br>
+
+  <!-- <div>
+    
+    <label style="text-align: center"> Select Project </label>&nbsp;&nbsp;
+    <select [(ngModel)]="moduleSelected" id="pro" class="selectpicker " data-live-search="true"
+      (change)="dropdownData(moduleSelected)">
+      <option value="" style="display:none;"></option>
+      <option *ngFor="let data of allProjects">{{data.projectSelection}}</option>
+    </select>
+    <button type="button" *ngIf="pedit != 1 && create==true && disableButton !== true" class="btn btn-lg"
+      (click)="createNewProject()" style="margin-left:25px">New project</button>
+  </div> -->
+  <br><br>
+  <form [formGroup]='searchForm'>
+    <div class="container" style="width:300px;">
+      <div>
+        <div class="input-group">
+          <input type="text" class="form-control form-control-lg" name="defect" formControlName="defectForm"
+            placeholder="Enter project name" [(ngModel)]="value">
+          <!-- <control-messages [control]="searchForm.controls.defectForm"></control-messages> -->
+
+          <button class="btn btn-success" type="submit" style="font-size: small;" [disabled]="!searchForm.valid"
+            (click)="function()">Quick Search</button>
+        </div>
+      </div>
+    </div>
+  </form>
+  <div class="container-fluid">
+    <div class="row">
+      <!-- <router-outlet></router-outlet> -->
+      <div class="col-md-8 col-sm-8 col-lg-8 col-xs-7" *ngIf="read==true">
+        <div class="example-container shadow-lg table-container">
+          <table mat-table [dataSource]="allProjects" matSort class="mat-elevation-z8">
+            <!-- Position Column -->
+            <ng-container matColumnDef="Sl.No">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header class="angulartheadColor"> Sl.No </th>
+              <td mat-cell *matCellDef="let i=index;">{{i + 1}}
+              </td>
+            </ng-container>
+
+            <!-- Position Column -->
+            <ng-container matColumnDef="Project Name">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header class="angulartheadColor"> Project Name </th>
+              <td mat-cell *matCellDef="let element;">{{element.projectSelection}}
+              </td>
+            </ng-container>
+
+            <!-- Name Column -->
+            <ng-container matColumnDef="ConfigFile">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header class="angulartheadColor"> ConfigFile </th>
+              <td mat-cell *matCellDef="let element">ConfigFile</td>
+            </ng-container>
+
+            <!-- Weight Column -->
+            <ng-container matColumnDef="Edit">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header class="angulartheadColor">Edit</th>
+              <td mat-cell *matCellDef="let element;let i = index">
+                <span style="margin-left: 5px">
+                  <span *ngIf="edit==true" class="glyphicon glyphicon-pencil btn btn-info btn-lg"
+                    (click)="editProject(i,element.projectSelection,element.framework,element)"></span>
+                </span>
+              </td>
+            </ng-container>
+
+            <!-- Weight Column -->
+            <ng-container matColumnDef="Delete">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header class="angulartheadColor">Delete </th>
+              <td mat-cell *matCellDef="let element;let i = index">
+                <span style="margin-left: 5px">
+                  <span *ngIf="delete==true" class="glyphicon glyphicon-trash btn btn-info btn-lg"
+                    (click)="deleteProject(i,element)"></span>
+                </span>
+              </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns;sticky: true" class="angulartheadColor"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="dropdownData(row)"></tr>
+          </table>
+        </div>
+      </div>
+
+      <!-- <div class="col-md-4 col-sm-4 col-lg-4 col-xs-4">
+        <br>
+        <div [hidden]="createNewProject09==false">
+          <form [formGroup]="userForm" novalidate>
+            <div id="disable" *ngIf="disable != 1" class="heightsetup">
+              <label>Project Name </label>
+              <input type="text" formControlName="ProjectNameNew" id="projectname" class="form-control textFieldStyle"
+                name="newProjectName">
+              <control-messages [control]="userForm.controls.ProjectNameNew"></control-messages>
+            </div>
+            <br>
+            <div *ngIf="disable != 1" class="heightsetup " name="madhu">
+              <label>Frame Works </label>
+              <select formControlName="fname" id="fname" class="form-control textFieldStyle" [(ngModel)]="newProjectFrame"
+                id="disable" *ngIf="disable != 1" (change)="frameChange(newProjectFrame)">
+                <option value="" style="display:none;"></option>
+                <option *ngFor="let framework of framework" [ngValue]="framework">{{framework.frameworkType}}</option>
+              </select>
+              <control-messages [control]="userForm.controls.fname"></control-messages>
+            </div>
+            <br>
+            <div *ngIf="!disableConfigForApi">
+              <label id="disable" *ngIf="disable != 1 ">Config File &nbsp;&nbsp;&nbsp;</label>
+              <button type="submit" class="btn btn-link configButton" [disabled]="!userForm.valid" (click)="openpopup()"
+                *ngIf="pedit != 1" data-toggle="modal" data-target="#myModal">
+                <h3><u style="font-size: small">CreateConfigLink</u></h3>
+              </button>
+            </div>
+          </form>
+
+          <form [formGroup]="userForm3" novalidate>
+            <div id="disable" *ngIf="disable != 0" class="heightsetup">
+              <label>Project Name </label>
+              <input type="text" formControlName="editpagename" id="projectname" class="form-control textFieldStyle"
+                [(ngModel)]="newProjectName" name="newProjectName">
+              <control-messages [control]="userForm3.controls.editpagename"></control-messages>
+            </div>
+            <button type="submit" class="btn btn-link" [disabled]="!userForm3.valid" id="link1"
+              (click)="editPopUp(newProjectName)" *ngIf="pedit == 1" data-toggle="modal" data-target="#myModal"
+              style="background-color: unset;color: #007bff !important;font-weight: bolder;border: unset">
+              <h3><u style="font-size:small">EditConfigLink</u></h3>
+            </button>
+          </form>
+          <br>
+          <div class="col-12" style="display: flex;">
+            <div class="col-4">
+              <button type="button" *ngIf="disablebutton == true && disableConfigForApi == false"
+                [disabled]="!userForm.valid" class="btn btn-default"
+                (click)="createConfig(time,defaultBrowser,defaultVersion)">Save</button>
+            </div>
+            <div class="col-4">
+              <button *ngIf="disableConfigForApi" type="button" class="btn btn-lg"
+                (click)="createApiProject()">Create</button>
+            </div>
+            <div class="col-4">
+              <button type="button" class="btn btn-lg btn-cancel" (click)="cancelProject()">Cancel</button>
+            </div>
+          </div>
+        </div>
+      </div> -->
+
+    </div>
+  </div>
+
+</div>
+
+
+<form [formGroup]="userForm1" novalidate>
+  <div>
+    <div>
+      <div class="modal show" data-backdrop="false" *ngIf="modal1 == 1" id="myModal" role="dialog">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title">Configuration for Project</h1>
+            </div>
+            <div class="modal-body">
+              <div class="row modelheight">
+                <div class="col-4">
+                  <label>SetTimeOut </label>
+                </div>
+                <div class="col-5">
+                  <input formControlName="timenew" [(ngModel)]="time" #timenew class="form-control textFieldStyle">
+                  <control-messages [control]="userForm1.controls.timenew"></control-messages>
+                </div>
+              </div>
+              <br>
+              <div class="row modelheight">
+                <div class="col-4">
+                  <label> Browser Name</label>
+                </div>
+                <div class="col-5">
+                  <select class="m" formControlName="browser" [(ngModel)]="defaultBrowser"
+                    (ngModelChange)="getversion(defaultBrowser)" class="form-control textFieldStyle">
+                    <option value="" style="display:none;"></option>
+                    <option *ngFor="let b of dbrowsers">{{b.browserName}}</option>
+                  </select>
+                  <control-messages [control]="userForm1.controls.browser"></control-messages>
+                </div>
+              </div>
+              <br>
+              <div class="row modelheight">
+                <div class="col-4">
+                  <label>Browser Version </label>
+                </div>
+                <div class="col-5 ">
+                  <select class="m" formControlName="VersionNew" [(ngModel)]="defaultVersion" class="form-control textFieldStyle">
+                    <option>{{defaultVersion}}</option>
+                    <option value="" style="display:none;"></option>
+                    <option *ngFor="let v of selectionversion">{{v.versionName}}</option>
+                  </select>
+                  <control-messages [control]="userForm1.controls.VersionNew"></control-messages>
+                </div>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" [disabled]="!userForm1.valid" *ngIf="pedit != 1" class="btn btn-default" mat-button
+                (click)="createConfig(time,defaultBrowser,defaultVersion)" data-dismiss="modal">Save</button>
+              <button type="button" [disabled]="!userForm1.valid" *ngIf="pedit == 1" class="btn btn-default" mat-button
+                (click)="updateProject(newProjectName,time,defaultBrowser,defaultVersion)"
+                data-dismiss="modal">Update</button>
+              <button type="button" class="btn btn-default btn-cancel" data-dismiss="modal"
+                (click)="cancelProject()">Close</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>

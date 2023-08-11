@@ -1,0 +1,445 @@
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<mat-toolbar id="mainToolbar" style="height: 42px;padding-right: unset;">
+  <mat-icon (click)="onToolbarMenuToggle()" id="toolbarMenu">subject</mat-icon> 
+  <a style="background-color: #006699; color:white;font-size: 19px;" [routerLink]="['/projectSelection']">TestSage</a>
+  <div class="p-3 mr-auto "></div>
+  <div class="p-3 selectProject">
+    <!-- <label class="selectprojectLabel">Select Project</label>
+    <select [(ngModel)]="moduleSelected" id="pro" class="form-control selectInput"
+      (change)="dropdownData(moduleSelected)">
+
+      <option value="" style="display:none;"></option>
+
+      <option *ngFor="let data of Allprojects">{{data.projectSelection}}</option>
+    </select> -->
+  </div>
+  <div class="p-3 ">{{projectName}}</div>
+  <div class="p-2 ml-auto navbar" style="margin: unset;">
+    <div class="navbar-header d-flex col">
+      <ul class="nav navbar-nav nadropdownvbar-right ml-auto main-navigation">
+        <li class="nav-item">
+          <a href="#" data-toggle="dropdown" class="nav-link dropdown-toggle user-action "
+            style="background-color: unset;font-size: 16px;"><i class="img fa fa-user-o"></i> {{newUserName}}</a>
+          <ul class="dropdown-menu dropdownlogout"
+            style="position:absolute;background-color: white;border:1px solid #ccc;width: 112px;">
+            <li><a [routerLink]="['/userProfile']" class="dropdown-item"><i class="fas fa-user" ></i>Profile</a></li>            <li><a class="dropdown-item"><i class="fa fa-calendar-o"></i> Calendar</a></li>
+            <li><a class="dropdown-item"><i class="fa fa-sliders"></i> Settings</a></li>
+            <li class="divider dropdown-divider"></li>
+            <li><a routerLink='/' class="dropdown-item" (click)="logoutDocker()"><i class="material-icons">&#xE8AC;</i>
+                Logout</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
+</mat-toolbar>
+
+<mat-sidenav-container id="sidenavContainer" fullscreen>
+  <mat-sidenav mode="side" *ngIf="apiFrameworkId==1" #sidenav id="sidenav" [class.menu-open]="isMenuOpen"
+    [class.menu-close]="!isMenuOpen" opened>
+
+    <mat-list id="menus">
+
+      <a mat-list-item (click)="toggleMenu1()">
+        <span class="menu-item" style="display: contents;">
+          <mat-icon mat-list-icon class="fa fa-share-alt-square testSageIcon"> </mat-icon>Release
+          <mat-icon *ngIf="!showMenu1==true">chevron_right</mat-icon>
+          <mat-icon *ngIf="showMenu1==true">expand_more</mat-icon>
+        </span>
+      </a>
+      <mat-nav-list class="sidenamenu" *ngIf="showMenu1==true">
+        <a class="mat-nav" mat-list-item [routerLink]="['/projectdetail/release/createrelease']">
+          <i class="fa fa-arrow-right testSageIconInner" aria-hidden="true"></i>&nbsp;&nbsp;Manage Release</a>
+        <a class="mat-nav" mat-list-item [routerLink]="['/projectdetail/release/releasescope']">
+          <i class="fa fa-arrow-right testSageIconInner" aria-hidden="true"></i>&nbsp;&nbsp;Release Scope</a>
+      </mat-nav-list>
+
+      <a mat-list-item (click)="toggleMenu2()">
+        <span class="menu-item" style="display: contents;">
+          <mat-icon mat-list-icon class="fa fa-file-text-o testSageIcon"></mat-icon>Requirement
+          <mat-icon *ngIf="!showMenu2">chevron_right</mat-icon>
+          <mat-icon *ngIf="showMenu2">expand_more</mat-icon>
+        </span>
+      </a>
+      <mat-nav-list *ngIf="showMenu2">
+        <a class="mat-nav" mat-list-item [routerLink]="['/projectdetail/requirement/managerequirement']">
+          <i class="fa fa-arrow-right testSageIconInner" aria-hidden="true"></i>&nbsp;&nbsp;Manage Requirement</a>
+        <a class="mat-nav" mat-list-item [routerLink]="['/projectdetail/requirement/traceability']">
+          <i class="fa fa-arrow-right testSageIconInner" aria-hidden="true"></i>&nbsp;&nbsp;Traceability</a>
+      </mat-nav-list>
+      <a mat-list-item (click)="toggleMenu3()">
+        <span class="menu-item" style="display: contents;">
+          <mat-icon mat-list-icon class="fa fa-blind testSageIcon"></mat-icon>Test Planning
+          <mat-icon style="text-align: end;" *ngIf="!showMenu3">chevron_right</mat-icon>
+          <mat-icon *ngIf="showMenu3">expand_more</mat-icon>
+        </span>
+      </a>
+      <mat-nav-list *ngIf="showMenu3">
+        <a class="mat-nav" mat-list-item [routerLink]="['/projectdetail/testplanning/CreateTestCase']">
+          <i class="fa fa-arrow-right testSageIconInner" aria-hidden="true"></i>&nbsp;&nbsp;Manage Testcase</a>
+        <a class="mat-nav" mat-list-item [routerLink]="['/projectdetail/testplanning/CreateReusableFunction']">
+          <i class="fa fa-arrow-right testSageIconInner" aria-hidden="true"></i>&nbsp;&nbsp;Manage Reuseable</a>
+        <a class="mat-nav" mat-list-item [routerLink]="['/projectdetail/testplanning/objRepo']">
+          <i class="fa fa-arrow-right testSageIconInner" aria-hidden="true"></i>&nbsp;&nbsp;Object Repository</a>
+
+      </mat-nav-list>
+      <a mat-list-item (click)="toggleMenu4()">
+        <span class="menu-item" style="display: contents;">
+          <mat-icon mat-list-icon class="fa fa-street-view testSageIcon"></mat-icon>Test Execution
+          <mat-icon style="text-align: end;" *ngIf="!showMenu4">chevron_right</mat-icon>
+          <mat-icon *ngIf="showMenu4">expand_more</mat-icon>
+        </span>
+      </a>
+      <mat-nav-list *ngIf="showMenu4">
+        <a class="mat-nav" mat-list-item [routerLink]="['/projectdetail/testExecution/testExcecutionComponent']">
+          <i class="fa fa-arrow-right testSageIconInner" aria-hidden="true"></i>&nbsp;&nbsp;Selection</a>
+        <a class="mat-nav" mat-list-item [routerLink]="['/projectdetail/testExecution/createsuitecomponent']">
+          <i class="fa fa-arrow-right testSageIconInner" aria-hidden="true"></i>&nbsp;&nbsp;Suite</a>
+        <a class="mat-nav" mat-list-item [routerLink]="['/projectdetail/testExecution/executionComponent']">
+          <i class="fa fa-arrow-right testSageIconInner" aria-hidden="true"></i>&nbsp;&nbsp;Execution</a>
+      </mat-nav-list>
+
+      <a mat-list-item>
+        <span class="menu-item" [routerLink]="['/projectdetail/reports/suitelevel']" style="display: contents;">
+          <mat-icon mat-list-icon class="fa fa-line-chart testSageIcon"></mat-icon>Reports
+        </span>
+      </a>
+      <a mat-list-item (click)="toggleMenu6()">
+        <span class="menu-item" style="display: contents;">
+          <mat-icon mat-list-icon class="fa fa-tachometer testSageIcon"></mat-icon>Dashboard
+          <mat-icon style="text-align: end;" *ngIf="!showMenu6">chevron_right</mat-icon>
+          <mat-icon *ngIf="showMenu6">expand_more</mat-icon>
+        </span>
+      </a>
+      <mat-nav-list *ngIf="showMenu6">
+        <a class="mat-nav" mat-list-item [routerLink]="['/projectdetail/dashboard/progressgraph']">
+          <i class="fa fa-arrow-right testSageIconInner" aria-hidden="true"></i>&nbsp;&nbsp;Test Execution</a>
+        <a class="mat-nav" mat-list-item [routerLink]="['/projectdetail/dashboard/executedreports']">
+          <i class="fa fa-arrow-right testSageIconInner" aria-hidden="true"></i>&nbsp;&nbsp;Testcase Report</a>
+        <a class="mat-nav" mat-list-item [routerLink]="['/projectdetail/dashboard/detailedreports']">
+          <i class="fa fa-arrow-right testSageIconInner" aria-hidden="true"></i>&nbsp;&nbsp;Hierarchy Test Execution</a>
+        <a class="mat-nav" mat-list-item [routerLink]="['/projectdetail/dashboard/defectProgress']">
+          <i class="fa fa-arrow-right testSageIconInner" aria-hidden="true"></i>&nbsp;&nbsp;Defect Progress</a>
+        <a class="mat-nav" mat-list-item [routerLink]="['/projectdetail/dashboard/defecthierarchy']">
+          <i class="fa fa-arrow-right testSageIconInner" aria-hidden="true"></i>&nbsp;&nbsp;Defect Hierarchy</a>
+      </mat-nav-list>
+      <a mat-list-item (click)="toggleMenu7()">
+        <span class="menu-item" style="display: contents;">
+          <mat-icon mat-list-icon class="fa fa-bug testSageIcon"></mat-icon>Defect Management
+          <mat-icon style="text-align: end;" *ngIf="!showMenu7">chevron_right</mat-icon>
+          <mat-icon *ngIf="showMenu7">expand_more</mat-icon>
+        </span>
+      </a>
+      <mat-nav-list *ngIf="showMenu7">
+        <a class="mat-nav" mat-list-item [routerLink]="['/projectdetail/defectManagement/fileADefect']">
+          <i class="fa fa-arrow-right testSageIconInner" aria-hidden="true"></i>&nbsp;&nbsp;File a Defect</a>
+        <a class="mat-nav" mat-list-item [routerLink]="['/projectdetail/defectManagement/searchADefect']">
+          <i class="fa fa-arrow-right testSageIconInner" aria-hidden="true"></i>&nbsp;&nbsp;Search a Defect</a>
+      </mat-nav-list>
+      <a mat-list-item>
+        <span class="menu-item" [routerLink]="['/projectdetail/docker/dockerComponent']" style="display: contents;">
+          <mat-icon mat-list-icon class="fa fa-hdd-o testSageIcon"></mat-icon>Infrastructure Management
+        </span>
+      </a>
+      <a mat-list-item>
+        <span class="menu-item" [routerLink]="['/projectdetail/MobileComponent']" style="display: contents;">
+          <mat-icon mat-list-icon>smartphone</mat-icon>Mobile Labs
+        </span>
+      </a>
+      <a mat-list-item>
+        <span class="menu-item" [routerLink]="['/projectdetail/SearchComponent']" style="display: contents;">
+          <mat-icon mat-list-icon>search</mat-icon>Search
+        </span>
+      </a>
+
+    </mat-list>
+    <div fxLayout="row" *ngIf="maticondown== true" fxLayoutAlign="end center"
+      style="padding: 0px 10px;text-align: end;">
+      <span mat-icon-button (click)="onToolbarMenuToggle()">
+        <mat-icon matBadgePosition="after"> arrow_left</mat-icon>
+      </span>
+    </div>
+    <div fxLayout="row" *ngIf="maticonright== true" fxLayoutAlign="end center"
+      style="padding: 0px 10px;text-align: center;">
+      <span mat-icon-button (click)="onToolbarMenuToggle()">
+        <mat-icon matBadgePosition="after"> arrow_right</mat-icon>
+      </span>
+    </div>
+  </mat-sidenav>
+
+  <!-- /////////////////////////////////////////////web/////////////////////////////////////////////////// -->
+  <mat-sidenav mode="side" *ngIf="apiFrameworkId==2" #sidenav id="sidenav" [class.menu-open]="isMenuOpen"
+    [class.menu-close]="!isMenuOpen" opened>
+
+    <mat-list id="menus">
+
+      <a mat-list-item (click)="toggleMenu1()">
+        <span class="menu-item" style="display: contents;">
+          <mat-icon mat-list-icon class="fa fa-share-alt-square testSageIcon"> </mat-icon>Release
+          <mat-icon *ngIf="!showMenu1==true">chevron_right</mat-icon>
+          <mat-icon *ngIf="showMenu1==true">expand_more</mat-icon>
+        </span>
+      </a>
+      <mat-nav-list class="sidenamenu" *ngIf="showMenu1==true">
+        <a class="mat-nav" mat-list-item [routerLink]="['/projectdetail/release/createrelease']">
+          <i class="fa fa-arrow-right testSageIconInner" aria-hidden="true"></i>&nbsp;&nbsp;Manage Release</a>
+        <a class="mat-nav" mat-list-item [routerLink]="['/projectdetail/release/releasescope']">
+          <i class="fa fa-arrow-right testSageIconInner" aria-hidden="true"></i>&nbsp;&nbsp;Release Scope</a>
+      </mat-nav-list>
+
+      <a mat-list-item (click)="toggleMenu2()">
+        <span class="menu-item" style="display: contents;">
+          <mat-icon mat-list-icon class="fa fa-file-text-o testSageIcon"></mat-icon>Requirement
+          <mat-icon *ngIf="!showMenu2">chevron_right</mat-icon>
+          <mat-icon *ngIf="showMenu2">expand_more</mat-icon>
+        </span>
+      </a>
+      <mat-nav-list *ngIf="showMenu2">
+        <a class="mat-nav" mat-list-item [routerLink]="['/projectdetail/requirement/managerequirement']">
+          <i class="fa fa-arrow-right testSageIconInner" aria-hidden="true"></i>&nbsp;&nbsp;Manage Requirement</a>
+        <a class="mat-nav" mat-list-item [routerLink]="['/projectdetail/requirement/traceability']">
+          <i class="fa fa-arrow-right testSageIconInner" aria-hidden="true"></i>&nbsp;&nbsp;Traceability</a>
+      </mat-nav-list>
+      <a mat-list-item (click)="toggleMenu3()">
+        <span class="menu-item" style="display: contents;">
+          <mat-icon mat-list-icon class="fa fa-blind testSageIcon"></mat-icon>Test Planning
+          <mat-icon style="text-align: end;" *ngIf="!showMenu3">chevron_right</mat-icon>
+          <mat-icon *ngIf="showMenu3">expand_more</mat-icon>
+        </span>
+      </a>
+      <mat-nav-list *ngIf="showMenu3">
+        <a class="mat-nav" mat-list-item [routerLink]="['/projectdetail/testplanning/CreateTestCase']">
+          <i class="fa fa-arrow-right testSageIconInner" aria-hidden="true"></i>&nbsp;&nbsp;Manage Testcase</a>
+        <a class="mat-nav" mat-list-item [routerLink]="['/projectdetail/testplanning/CreateReusableFunction']">
+          <i class="fa fa-arrow-right testSageIconInner" aria-hidden="true"></i>&nbsp;&nbsp;Manage Reuseable</a>
+        <a class="mat-nav" mat-list-item [routerLink]="['/projectdetail/testplanning/objRepo']">
+          <i class="fa fa-arrow-right testSageIconInner" aria-hidden="true"></i>&nbsp;&nbsp;Object Repository</a>
+        <a class="mat-nav" mat-list-item [routerLink]="['/projectdetail/testplanning/ScriptExportComponent']">
+          <i class="fa fa-arrow-right testSageIconInner" aria-hidden="true"></i>&nbsp;&nbsp;Export</a>
+
+      </mat-nav-list>
+      <a mat-list-item (click)="toggleMenu4()">
+        <span class="menu-item" style="display: contents;">
+          <mat-icon mat-list-icon class="fa fa-street-view testSageIcon"></mat-icon>Test Execution
+          <mat-icon style="text-align: end;" *ngIf="!showMenu4">chevron_right</mat-icon>
+          <mat-icon *ngIf="showMenu4">expand_more</mat-icon>
+        </span>
+      </a>
+      <mat-nav-list *ngIf="showMenu4">
+        <a class="mat-nav" mat-list-item [routerLink]="['/projectdetail/testExecution/testExcecutionComponent']">
+          <i class="fa fa-arrow-right testSageIconInner" aria-hidden="true"></i>&nbsp;&nbsp;Selection</a>
+        <a class="mat-nav" mat-list-item [routerLink]="['/projectdetail/testExecution/createsuitecomponent']">
+          <i class="fa fa-arrow-right testSageIconInner" aria-hidden="true"></i>&nbsp;&nbsp;Suite</a>
+        <a class="mat-nav" mat-list-item [routerLink]="['/projectdetail/testExecution/browserSelection']">
+          <i class="fa fa-arrow-right testSageIconInner" aria-hidden="true"></i>&nbsp;&nbsp;Browser Selection</a>
+        <a class="mat-nav" mat-list-item [routerLink]="['/projectdetail/testExecution/executionComponent']">
+          <i class="fa fa-arrow-right testSageIconInner" aria-hidden="true"></i>&nbsp;&nbsp;Execution</a>
+          <a class="mat-nav" mat-list-item [routerLink]="['/projectdetail/testExecution/performance']">
+            <i class="fa fa-arrow-right testSageIconInner" aria-hidden="true"></i>&nbsp;&nbsp;Performance</a>
+        <a class="mat-nav" mat-list-item [routerLink]="['/projectdetail/testExecution/Schedulerlist']">
+          <i class="fa fa-arrow-right testSageIconInner" aria-hidden="true"></i>&nbsp;&nbsp;Scheduler List</a>
+        <a class="mat-nav" mat-list-item [routerLink]="['/projectdetail/testExecution/AutoCorrectionComponent']">
+          <i class="fa fa-arrow-right testSageIconInner" aria-hidden="true"></i>&nbsp;&nbsp;Auto-Correction</a>
+        <a class="mat-nav" mat-list-item [routerLink]="['/projectdetail/testExecution/Tracking']">
+          <i class="fa fa-arrow-right testSageIconInner" aria-hidden="true"></i>&nbsp;&nbsp;Tracking</a>
+      </mat-nav-list>
+
+      <a mat-list-item>
+        <span class="menu-item" [routerLink]="['/projectdetail/reports/suitelevel']" style="display: contents;">
+          <mat-icon mat-list-icon class="fa fa-line-chart testSageIcon"></mat-icon>Reports
+        </span>
+      </a>
+      <a mat-list-item (click)="toggleMenu6()">
+        <span class="menu-item" style="display: contents;">
+          <mat-icon mat-list-icon class="fa fa-tachometer testSageIcon"></mat-icon>Dashboard
+          <mat-icon style="text-align: end;" *ngIf="!showMenu6">chevron_right</mat-icon>
+          <mat-icon *ngIf="showMenu6">expand_more</mat-icon>
+        </span>
+      </a>
+      <mat-nav-list *ngIf="showMenu6">
+        <a class="mat-nav" mat-list-item [routerLink]="['/projectdetail/dashboard/progressgraph']">
+          <i class="fa fa-arrow-right testSageIconInner" aria-hidden="true"></i>&nbsp;&nbsp;Test Execution</a>
+        <a class="mat-nav" mat-list-item [routerLink]="['/projectdetail/dashboard/executedreports']">
+          <i class="fa fa-arrow-right testSageIconInner" aria-hidden="true"></i>&nbsp;&nbsp;Testcase Report</a>
+        <a class="mat-nav" mat-list-item [routerLink]="['/projectdetail/dashboard/detailedreports']">
+          <i class="fa fa-arrow-right testSageIconInner" aria-hidden="true"></i>&nbsp;&nbsp;Hierarchy Test Execution</a>
+        <a class="mat-nav" mat-list-item [routerLink]="['/projectdetail/dashboard/defectProgress']">
+          <i class="fa fa-arrow-right testSageIconInner" aria-hidden="true"></i>&nbsp;&nbsp;Defect Progress</a>
+        <a class="mat-nav" mat-list-item [routerLink]="['/projectdetail/dashboard/defecthierarchy']">
+          <i class="fa fa-arrow-right testSageIconInner" aria-hidden="true"></i>&nbsp;&nbsp;Defect Hierarchy</a>
+      </mat-nav-list>
+      <a mat-list-item (click)="toggleMenu7()">
+        <span class="menu-item" style="display: contents;">
+          <mat-icon mat-list-icon class="fa fa-bug testSageIcon"></mat-icon>Defect Management
+          <mat-icon style="text-align: end;" *ngIf="!showMenu7">chevron_right</mat-icon>
+          <mat-icon *ngIf="showMenu7">expand_more</mat-icon>
+        </span>
+      </a>
+      <mat-nav-list *ngIf="showMenu7">
+        <a class="mat-nav" mat-list-item [routerLink]="['/projectdetail/defectManagement/fileADefect']">
+          <i class="fa fa-arrow-right testSageIconInner" aria-hidden="true"></i>&nbsp;&nbsp;File a Defect</a>
+        <a class="mat-nav" mat-list-item [routerLink]="['/projectdetail/defectManagement/searchADefect']">
+          <i class="fa fa-arrow-right testSageIconInner" aria-hidden="true"></i>&nbsp;&nbsp;Search a Defect</a>
+      </mat-nav-list>
+      <a mat-list-item>
+        <span class="menu-item" [routerLink]="['/projectdetail/docker/dockerComponent']" style="display: contents;">
+          <mat-icon mat-list-icon class="fa fa-hdd-o testSageIcon"></mat-icon>Infrastructure Management
+        </span>
+      </a>
+      <a mat-list-item>
+        <span class="menu-item" [routerLink]="['/projectdetail/MobileComponent']" style="display: contents;">
+          <mat-icon mat-list-icon>smartphone</mat-icon>Mobile Labs
+        </span>
+      </a>
+      <a mat-list-item>
+        <span class="menu-item" [routerLink]="['/projectdetail/SearchComponent']" style="display: contents;">
+          <mat-icon mat-list-icon>search</mat-icon>Search
+        </span>
+      </a>
+
+    </mat-list>
+    <div fxLayout="row" *ngIf="maticondown== true" fxLayoutAlign="end center"
+      style="padding: 0px 10px;text-align: end;">
+      <span mat-icon-button (click)="onToolbarMenuToggle()">
+        <mat-icon matBadgePosition="after"> arrow_left</mat-icon>
+      </span>
+    </div>
+    <div fxLayout="row" *ngIf="maticonright== true" fxLayoutAlign="end center"
+      style="padding: 0px 10px;text-align: center;">
+      <span mat-icon-button (click)="onToolbarMenuToggle()">
+        <mat-icon matBadgePosition="after"> arrow_right</mat-icon>
+      </span>
+    </div>
+  </mat-sidenav>
+
+  <!-- ////////////////////////////////////Api/////////////////////////////////////////////////// -->
+  <mat-sidenav mode="side" *ngIf="apiFrameworkId==3" #sidenav id="sidenav" [class.menu-open]="isMenuOpen"
+    [class.menu-close]="!isMenuOpen" opened>
+
+    <mat-list id="menus">
+
+      <a mat-list-item (click)="toggleMenu1()">
+        <span class="menu-item" style="display: contents;">
+          <mat-icon mat-list-icon class="fa fa-share-alt-square testSageIcon"> </mat-icon>Release
+          <mat-icon *ngIf="!showMenu1==true">chevron_right</mat-icon>
+          <mat-icon *ngIf="showMenu1==true">expand_more</mat-icon>
+        </span>
+      </a>
+      <mat-nav-list class="sidenamenu" *ngIf="showMenu1==true">
+        <a class="mat-nav" mat-list-item [routerLink]="['/projectdetail/release/createrelease']">
+          <i class="fa fa-arrow-right testSageIconInner" aria-hidden="true"></i>&nbsp;&nbsp;Manage Release</a>
+        <a class="mat-nav" mat-list-item [routerLink]="['/projectdetail/release/releasescope']">
+          <i class="fa fa-arrow-right testSageIconInner" aria-hidden="true"></i>&nbsp;&nbsp;Release Scope</a>
+      </mat-nav-list>
+
+      <a mat-list-item (click)="toggleMenu2()">
+        <span class="menu-item" style="display: contents;">
+          <mat-icon mat-list-icon class="fa fa-file-text-o testSageIcon"></mat-icon>Requirement
+          <mat-icon *ngIf="!showMenu2">chevron_right</mat-icon>
+          <mat-icon *ngIf="showMenu2">expand_more</mat-icon>
+        </span>
+      </a>
+      <mat-nav-list *ngIf="showMenu2">
+        <a class="mat-nav" mat-list-item [routerLink]="['/projectdetail/requirement/managerequirement']">
+          <i class="fa fa-arrow-right testSageIconInner" aria-hidden="true"></i>&nbsp;&nbsp;Manage Requirement</a>
+        <a class="mat-nav" mat-list-item [routerLink]="['/projectdetail/requirement/traceability']">
+          <i class="fa fa-arrow-right testSageIconInner" aria-hidden="true"></i>&nbsp;&nbsp;Traceability</a>
+      </mat-nav-list>
+      <a mat-list-item (click)="toggleMenu3()">
+        <span class="menu-item" style="display: contents;">
+          <mat-icon mat-list-icon class="fa fa-blind testSageIcon"></mat-icon>Test Planning
+          <mat-icon style="text-align: end;" *ngIf="!showMenu3">chevron_right</mat-icon>
+          <mat-icon *ngIf="showMenu3">expand_more</mat-icon>
+        </span>
+      </a>
+      <mat-nav-list *ngIf="showMenu3">
+        <a class="mat-nav" mat-list-item [routerLink]="['/projectdetail/restAssured/apiTreeStructure']">
+          <i class="fa fa-arrow-right testSageIconInner" aria-hidden="true"></i>&nbsp;&nbsp;Manage Testcase</a>
+
+      </mat-nav-list>
+      <a mat-list-item (click)="toggleMenu4()">
+        <span class="menu-item" style="display: contents;">
+          <mat-icon mat-list-icon class="fa fa-street-view testSageIcon"></mat-icon>Test Execution
+          <mat-icon style="text-align: end;" *ngIf="!showMenu4">chevron_right</mat-icon>
+          <mat-icon *ngIf="showMenu4">expand_more</mat-icon>
+        </span>
+      </a>
+      <mat-nav-list *ngIf="showMenu4">
+        <a class="mat-nav" mat-list-item [routerLink]="['/projectdetail/testExecution/testExcecutionComponent']">
+          <i class="fa fa-arrow-right testSageIconInner" aria-hidden="true"></i>&nbsp;&nbsp;Selection</a>
+        <a class="mat-nav" mat-list-item [routerLink]="['/projectdetail/testExecution/createsuitecomponent']">
+          <i class="fa fa-arrow-right testSageIconInner" aria-hidden="true"></i>&nbsp;&nbsp;Suite</a>
+        <a class="mat-nav" mat-list-item [routerLink]="['/projectdetail/testExecution/executionComponent']">
+          <i class="fa fa-arrow-right testSageIconInner" aria-hidden="true"></i>&nbsp;&nbsp;Execution</a>
+      </mat-nav-list>
+
+      <a mat-list-item>
+        <span class="menu-item" [routerLink]="['/projectdetail/reports/suitelevel']" style="display: contents;">
+          <mat-icon mat-list-icon class="fa fa-line-chart testSageIcon"></mat-icon>Reports
+        </span>
+      </a>
+      <a mat-list-item (click)="toggleMenu6()">
+        <span class="menu-item" style="display: contents;">
+          <mat-icon mat-list-icon class="fa fa-tachometer testSageIcon"></mat-icon>Dashboard
+          <mat-icon style="text-align: end;" *ngIf="!showMenu6">chevron_right</mat-icon>
+          <mat-icon *ngIf="showMenu6">expand_more</mat-icon>
+        </span>
+      </a>
+      <mat-nav-list *ngIf="showMenu6">
+        <a class="mat-nav" mat-list-item [routerLink]="['/projectdetail/dashboard/progressgraph']">
+          <i class="fa fa-arrow-right testSageIconInner" aria-hidden="true"></i>&nbsp;&nbsp;Test Execution</a>
+        <a class="mat-nav" mat-list-item [routerLink]="['/projectdetail/dashboard/executedreports']">
+          <i class="fa fa-arrow-right testSageIconInner" aria-hidden="true"></i>&nbsp;&nbsp;Testcase Report</a>
+        <a class="mat-nav" mat-list-item [routerLink]="['/projectdetail/dashboard/detailedreports']">
+          <i class="fa fa-arrow-right testSageIconInner" aria-hidden="true"></i>&nbsp;&nbsp;Hierarchy Test Execution</a>
+        <a class="mat-nav" mat-list-item [routerLink]="['/projectdetail/dashboard/defectProgress']">
+          <i class="fa fa-arrow-right testSageIconInner" aria-hidden="true"></i>&nbsp;&nbsp;Defect Progress</a>
+        <a class="mat-nav" mat-list-item [routerLink]="['/projectdetail/dashboard/defecthierarchy']">
+          <i class="fa fa-arrow-right testSageIconInner" aria-hidden="true"></i>&nbsp;&nbsp;Defect Hierarchy</a>
+      </mat-nav-list>
+      <a mat-list-item (click)="toggleMenu7()">
+        <span class="menu-item" style="display: contents;">
+          <mat-icon mat-list-icon class="fa fa-bug testSageIcon"></mat-icon>Defect Management
+          <mat-icon style="text-align: end;" *ngIf="!showMenu7">chevron_right</mat-icon>
+          <mat-icon *ngIf="showMenu7">expand_more</mat-icon>
+        </span>
+      </a>
+      <mat-nav-list *ngIf="showMenu7">
+        <a class="mat-nav" mat-list-item [routerLink]="['/projectdetail/defectManagement/fileADefect']">
+          <i class="fa fa-arrow-right testSageIconInner" aria-hidden="true"></i>&nbsp;&nbsp;File a Defect</a>
+        <a class="mat-nav" mat-list-item [routerLink]="['/projectdetail/defectManagement/searchADefect']">
+          <i class="fa fa-arrow-right testSageIconInner" aria-hidden="true"></i>&nbsp;&nbsp;Search a Defect</a>
+      </mat-nav-list>
+
+      <a mat-list-item>
+        <span class="menu-item" [routerLink]="['/projectdetail/docker/dockerComponent']" style="display: contents;">
+          <mat-icon mat-list-icon class="fa fa-hdd-o testSageIcon"></mat-icon>Infrastructure Management
+        </span>
+      </a>
+      <a mat-list-item>
+        <span class="menu-item" [routerLink]="['/projectdetail/MobileComponent']" style="display: contents;">
+          <mat-icon mat-list-icon>smartphone</mat-icon>Mobile Labs
+        </span>
+      </a>
+
+    </mat-list>
+    <div fxLayout="row" *ngIf="maticondown== true" fxLayoutAlign="end center"
+      style="padding: 0px 10px;text-align: end;">
+      <span mat-icon-button (click)="onToolbarMenuToggle()">
+        <mat-icon matBadgePosition="after"> arrow_left</mat-icon>
+      </span>
+    </div>
+    <div fxLayout="row" *ngIf="maticonright== true" fxLayoutAlign="end center"
+      style="padding: 0px 10px;text-align: center;">
+      <span mat-icon-button (click)="onToolbarMenuToggle()">
+        <mat-icon matBadgePosition="after"> arrow_right</mat-icon>
+      </span>
+    </div>
+  </mat-sidenav>
+
+  <mat-sidenav-content [ngStyle]="{ 'margin-left.px': contentMargin }" style="overflow:unset">
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container>

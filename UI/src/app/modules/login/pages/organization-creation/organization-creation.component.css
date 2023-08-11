@@ -1,0 +1,288 @@
+.tableWidth {
+  width:130%;
+  margin-top:4%;
+  border: unset;
+  border-radius: 10px;
+  margin-left:70px
+ 
+}
+
+.bodyHeight {
+  height: 400px;
+  overflow-y: auto;
+  overflow-x: auto;
+  border-radius: 10px;
+}
+
+#s1 {
+  margin-left: 50px;
+}
+
+#s2 {
+  margin-left: 31px;
+  width: 240px;
+  font-size: small;
+}
+
+#s3 {
+  margin-left: 19px;
+  width: 240px;
+  font-size: small;
+}
+
+#pro {
+  font-size: 15px;
+  size: 2;
+}
+
+#link1 {
+  font-size: 18px;
+  width: 0px;
+}
+
+input {
+  height: 47px;
+  font-size: 14px;
+  width: 200px;
+  border-radius: 5px;
+}
+
+col8 {
+
+
+  height: 400px;
+  max-width: 100%;
+}
+
+
+
+.gradient-button {
+  margin: 10px;
+  font-family: "Arial Black", Gadget, sans-serif;
+  font-size: 20px;
+  padding: 15px;
+  text-align: center;
+  text-transform: uppercase;
+  transition: 0.5s;
+  background-size: 200% auto;
+  color: #FFF;
+  box-shadow: 0 0 20px #eee;
+  border-radius: 10px;
+  width: auto;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+  transition: all 0.3s cubic-bezier(.25, .8, .25, 1);
+  cursor: pointer;
+  display: inline-block;
+  border-radius: 25px;
+}
+
+.gradient-button:hover {
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+  margin: 8px 10px 12px;
+}
+
+.gradient-button-1 {
+  background-image: linear-gradient(to right, #DD5E89 0%, #F7BB97 51%, #DD5E89 100%)
+}
+
+.gradient-button-1:hover {
+  background-position: right center;
+}
+
+a.button4 {
+  display: inline-block;
+  padding: 0.3em 1.2em;
+  margin: 0 0.1em 0.1em 0;
+  border: 0.16em solid rgba(255, 255, 255, 0);
+  border-radius: 2em;
+  box-sizing: border-box;
+  text-decoration: none;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 300;
+  color: #FFFFFF;
+  text-shadow: 0 0.04em 0.04em rgba(0, 0, 0, 0.35);
+  text-align: center;
+  transition: all 0.2s;
+}
+
+a.button4:hover {
+  border-color: rgb(230, 24, 24);
+}
+
+@media all and (max-width:30em) {
+  a.button4 {
+    display: block;
+    margin: 0.2em auto;
+  }
+}
+
+/*------------------------------------------------*/
+
+.navbar {
+  color: #fff;
+  padding: 5px 16px;
+  border-radius: 0;
+  border: none;
+}
+
+.navbar img {
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  margin-right: 10px;
+}
+
+.navbar .nav > li a {
+  color: #0c0000;
+  padding: 8px 15px;
+  font-size: 14px;    
+}
+
+.navbar .dropdown-item .material-icons {
+  font-size: 21px;
+  line-height: 16px;
+  vertical-align: middle;
+  margin-top: -2px;
+}
+.navbar .nav-item.open > a, .navbar .nav-item.open > a:hover, .navbar .nav-item.open > a:focus {
+background-color: unset
+}
+
+.navbar .dropdown-menu li a {
+  /* color: #777 !important; */
+  padding: 8px 20px;
+  line-height: normal;
+}
+#mm{
+  font-family: 'Varela Round', sans-serif;
+}
+.but1{
+  
+   
+   height:50px;
+   font-size:large;
+   margin-left:-5%;
+   border-radius: 10px;
+  
+}
+
+.but2{
+  
+ float:right;
+  
+  font-size:large;
+  height:50px;
+  font-size:30px;
+  border-radius: 5px;
+  
+}
+.lateSpan{
+width:10%;
+font-size:180%;
+
+
+
+}
+
+@media screen and (max-width: 400px) {
+.lateSpan {
+    
+    font-size:10px;
+    left: 5%;
+   
+}
+}
+.modal-body {
+height: 650px;
+
+}
+.modal-content{
+width: 151%;
+
+margin-left: -200px;
+height:631px
+}
+
+.modalCont{
+width: 250%;
+
+ 
+height:631px
+}
+
+.excelTable {
+
+height: 69px;
+font-weight: bold;
+margin-left: 10px;
+
+}
+.excelTable1 {
+
+height: 83px;
+font-weight: bold;
+margin-left: 10px;
+
+}
+
+.excelRadio {
+margin-left: 40%
+}
+
+.excelInput {
+
+height: 40px;
+font-weight: bold;
+width: 123%;
+
+}
+.excelInputEdit {
+
+height: 40px;
+font-weight: bold;
+width: 99%;
+
+}
+
+.excelSpan {
+margin-left: 30%;
+font-weight: bold;
+}
+
+.starSpan {
+color: red
+}
+.errTag{
+margin-left: -13px;
+}
+
+
+
+.ButtonState{display:none}
+.Button{padding:3px; margin:4px;   cursor:pointer; width:400px;border-radius: 25px;}
+.ButtonState:checked + .Button{background:#007BFF;}
+
+
+.ButtonStateEdit{display:none}
+.Button{padding:3px; margin:4px;   cursor:pointer; width:400px;border-radius: 25px;}
+.ButtonStateEdit:checked + .Button{background:#007BFF;}
+
+.form-control.is-invalid{
+border-color: #dc3545;
+width: 300px;
+font-size: 15px;
+}
+
+.form-control.is-invalid {
+width: 300px;
+}
+
+.form-control {
+width:300px
+}
+.error{
+ 
+font-size: small;
+
+}
+

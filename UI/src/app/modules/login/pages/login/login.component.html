@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Bootstrap Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css"
+    integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+  <div class="container-fluid mainDiv">
+    <div class="login-header text-center">
+      <h1 style="color: white;">Welcome to Testsage</h1>
+    </div>
+    <div class="border" style="border: 1px solid #ccc;border-radius: 5px;padding: 20px;box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);" >
+      <div class="row justify-content-center " style="padding: 5px">
+        <span class="dot">
+          <i class='fas fa-home'></i>
+        </span>
+      </div>
+      <div class="mainFormDiv">
+        <div class="container formDiv">
+          <form>
+
+            <div class="input-group">
+              <div class="input-group-prepend inputDiv" [class.has-error]="usernameControl.invalid">
+                <i style="padding: 10px;" class='fas fa-user'></i>
+                <input type="text" placeholder="Enter Username" id="username" name="username"
+                  [(ngModel)]="userNameDetails" #usernameControl="ngModel" >
+                <span class="help-block" *ngIf="usernameControl.invalid">
+                  Fullname req
+                </span>
+              </div>
+
+            </div>
+            <div class="input-group mb-3 ">
+              <div class="input-group-prepend inputDiv">
+                <i class='fas fa-key'></i>
+                <input [type]="show ? 'text' : 'password'" id="pwd"   placeholder="Enter Password" name="password" 
+                  [(ngModel)]="passwordDetails" />
+                <i class='fas fa-eye' id="eye" (click)="password()"></i>
+              </div>
+
+            </div>
+            <div *ngIf="wrongCredential==true" class="alert alert-danger">
+              <strong>Invalid Username or Password !</strong> Please Try Again
+            </div>
+            <div *ngIf="empty==true" class="alert alert-danger">
+              <strong>Username & Password is required !</strong> Please Try Again
+            </div>
+            <div *ngIf="userNameDetailsValid==true" class="alert alert-danger">
+              <strong>Username is required !</strong> Please Try Again
+            </div>
+            <div *ngIf="passwordDetailsValid==true" class="alert alert-danger">
+              <strong>Password is required !</strong> Please Try Again
+            </div>
+            <div *ngIf="invalidAttempt==true" class="alert alert-danger">
+              <strong>Machine is not Ready !</strong> Please Try Again Later
+            </div>
+            <div class="row justify-content-center">
+              <button type="submit" class="btn btn-info"
+                (click)="checkLoginDetails(userNameDetails,passwordDetails)">Login</button>
+            </div>
+          </form>
+        </div>
+        <div class="text-center signupDiv">
+
+          <a  [routerLink]="['/forgotPassword']" class="pull-right" href="forgotPassword()">Forgot your password?</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>

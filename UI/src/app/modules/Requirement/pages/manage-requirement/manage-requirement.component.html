@@ -1,0 +1,200 @@
+<ul class="breadcrumb" style="font-size:15px;background-color: unset;margin:unset">
+  <li class="breadcrumb-item"><a id="mainheader">Requirement</a></li>
+  <li class="breadcrumb-item"><a id="subheader">Manage Requirement</a></li>
+
+</ul>
+<div class="ui-fluid">
+  <div class="ui-g">
+
+    <div class="ui-g-2 ui-md-2 border" >
+      <div class="one">
+        <div>
+          <span class="treeStructureTitle" (click)="pass()" [shAttachMenu]="menu1"
+            style="position:sticky;">Requirement</span>
+          <p-tree [value]="displayModuleForTree" (onNodeSelect)="nodeSelect($event)" selectionMode="single"
+            [(selection)]="selectedFile" [filter]="true" [contextMenu]="cm">sfsfsfsfs</p-tree>
+          <p-contextMenu #cm appendTo="body" [model]="items"></p-contextMenu>
+        </div>
+        <div>
+          <sh-context-menu #menu1 style="background-color:white">
+            <ng-template shContextMenuItem let-data style="background-color:white">
+              <div (click)="landModulePage()" class="menuu treeStructureCreate" *ngIf="create==true"> Create New
+                Module</div>
+            </ng-template>
+          </sh-context-menu>
+        </div>
+      </div>
+      <!-- class one Ends -->
+    </div>
+
+    <div class="ui-g-10 ui-md-10" *ngIf="displayTestData===false" style="border-top: 1px solid #dee2e6!important;">
+      <!-- for module -->
+      <div *ngIf="showmoduleData==true || editModule==true">
+        <form [formGroup]='rForm'>
+          <div class="card createCard  shadow-lg">
+            <div class="card-header">Module Configuration</div>
+            <div class="card-body">
+              <div class="form-group ">
+                <div class="col-sm-5 col-md-6 col-lg-4 col-xs-4">
+                <label>Module</label>
+                </div>
+                <div class="col-sm-7 col-md-6 col-lg-8 col-xs-8" style="height: 37px;">
+                  <input type="text" name="modNameData" class="form-control" [(ngModel)]="moduleData"
+                    formControlName="modName">
+                  <control-messages [control]="rForm.controls.modName"></control-messages>
+                </div>
+              </div>
+            </div>
+            <div class="card-footer" style="text-align: end;">
+              <button *ngIf="showmoduleData==true" class="btn btn-lg" [disabled]="!rForm.valid"
+                (click)="saveModuleData(moduleData)">Save</button>
+              <button *ngIf="editModule==true" class="btn btn-lg" [disabled]="!rForm.valid"
+                (click)="updateModuleData(moduleData)">update</button>&nbsp;&nbsp;&nbsp;
+              <button class="btn btn-lg btn-cancel" (click)="closeModule()">Cancel</button>
+            </div>
+          </div>
+        </form>
+      </div>
+
+      <!-- for module -->
+
+
+      <!-- for feature -->
+      <div *ngIf="showFeatureData==true || editFeature==true">
+        <form [formGroup]='featForm'>
+          <div class="card createCard shadow-lg">
+            <div class="card-header">Feature Configuration</div>
+            <div class="card-body">
+              <div class="form-group ">
+                <div class="col-sm-5 col-md-6 col-lg-4 col-xs-4">
+                  <label>Feature</label>
+                </div>
+                <div class="col-sm-7 col-md-6 col-lg-8 col-xs-8" style="height: 37px;">
+                  <input type="text" name="featureData" class="form-control" [(ngModel)]="featureData"
+                  formControlName="featName">
+                <control-messages [control]="featForm.controls.featName"></control-messages>
+                </div>
+              </div>
+            </div>
+            <div class="card-footer">
+              <button *ngIf="showFeatureData==true" class="btn btn-lg" [disabled]="!featForm.valid"
+                (click)="saveFeatureData(featureData)">Save</button>
+              <button class="btn btn-lg" *ngIf="editFeature==true" [disabled]="!featForm.valid"
+                (click)="updateFeatureData(featureData)">update</button>&nbsp;&nbsp;&nbsp;
+              <button class="btn btn-lg btn-cancel" (click)="closeFeature()">Cancel</button>
+            </div>
+          </div>
+        </form>
+      </div>
+      <!-- for feature -->
+
+
+      <!-- for requirement -->
+      <div style="padding-top:15px;" *ngIf="showScriptData==true || showEditData==true">
+        <form [formGroup]='RequirementForm'>
+          <div class="card RequirementcreateCard shadow-lg">
+            <div class="card-header opalLabel  text-center">Requirement Configuration</div>
+            <div class="card-body">
+
+              <div class="row reqInput">
+                <div class="col-lg-5 col-md-5 col-sm-5 mb-3 mr-sm-3 mt3">
+                  <label for="module">Requirement Name</label>
+                  <input type="text" name="myname" class="form-control" formControlName="RequirementNameField"
+                    [(ngModel)]="requireUpdateObj.requirementName">
+                  <control-messages [control]="RequirementForm.controls.RequirementNameField"></control-messages>
+                </div>
+                <div class="col-lg-5 col-md-5 col-sm-5 mb-3 mr-sm-3">
+                  <label for="module">Status</label>
+                  <select type="select" class="form-control" formControlName="statusField"
+                    [(ngModel)]="requireUpdateObj.requirementstatus">
+                    <option></option>
+                    <option *ngFor="let Statusoptions of StatusName " value="{{Statusoptions.sname}}">
+                      {{Statusoptions.sname}}</option>
+                  </select>
+                  <control-messages [control]="RequirementForm.controls.statusField"></control-messages>
+                </div>
+              </div>
+
+
+              <div class="row reqInput">
+                <div class="col-lg-5 col-md-5 col-sm-5 mb-3 mr-sm-3">
+                  <label for="feature">Priority</label>
+                  <select class="form-control" formControlName="priorityField"
+                    [(ngModel)]="requireUpdateObj.requirementpriority">
+                    <option></option>
+                    <option *ngFor="let priority of PriorityName" value="{{priority.pname}}"
+                      [selected]="requireUpdateObj.requirementpriority == priority.pname">
+                      {{priority.pname}}
+                    </option>
+                  </select>
+                  <control-messages [control]="RequirementForm.controls.priorityField"></control-messages>
+                </div>
+                <div class="col-lg-5 col-md-5 col-sm-5 mb-3 mr-sm-3">
+                  <label for="type">Type</label>
+                  <select class="form-control" [(ngModel)]="requireUpdateObj.requirementtype"
+                    formControlName="typeField">
+                    <option></option>
+                    <option *ngFor="let type of TypeName" value="{{type.tname}}"
+                      [selected]="requireUpdateObj.requirementtype == type.tname">{{type.tname}}</option>
+                  </select>
+                  <control-messages [control]="RequirementForm.controls.typeField"></control-messages>
+                </div>
+              </div>
+
+
+              <div class="row reqInput">
+                <div class="col-lg-5 col-md-5 col-sm-5 mb-3 mr-sm-3">
+                  <label for="feature">Target Release/Build</label><br>
+                  <select class="form-control" [(ngModel)]="requireUpdateObj.requirementrelease"
+                    formControlName="releaseField">
+                    <option></option>
+                    <option *ngFor="let Releaserec of getAllReleasesVersions" value="{{Releaserec.releaseVersion}}"
+                      [selected]="requireUpdateObj.requirementrelease == Releaserec.releaseVersion">
+                      {{Releaserec.releaseVersion}}</option>
+                  </select>
+                  <control-messages [control]="RequirementForm.controls.releaseField"></control-messages>
+                </div>
+                <br>
+                <div class="col-lg-5 col-md-5 col-sm-5 mb-3 mr-sm-3">
+                  <label for="type">Assigned To</label>
+                  <select class="form-control" [(ngModel)]="requireUpdateObj.requirementassigned"
+                    formControlName="assignedField">
+                    <option></option>
+                    <option *ngFor="let Assignedrec of Assigned" value="{{Assignedrec}}"
+                      [selected]="requireUpdateObj.requirementassigned == Assignedrec">{{Assignedrec}}</option>
+                  </select>
+                  <control-messages [control]="RequirementForm.controls.assignedField"></control-messages>
+                </div>
+              </div><br>
+
+
+              <div class="col-lg-12 col-md-12 col-sm-12">
+                <label>Description</label>
+                <angular-editor class="angular-editor-button" formControlName="descriptionField" id="myEditor"
+                  [(ngModel)]="requireUpdateObj.descriptiondata" [config]="editorConfig">
+                  {{requireUpdateObj.descriptiondata}}
+                </angular-editor>
+              </div>
+            </div>
+            <div class="card-footer">
+              <div class="col-lg-12 col-md-12 col-sm-12">
+                <button type="button" class="btn btn-lg" *ngIf="showScriptData==true && disableButton !== true" (click)=CreateRequirement()
+                  [disabled]="!RequirementForm.valid">Save</button>
+                <button type="button" class="btn btn-lg" [disabled]="!RequirementForm.valid"
+                  *ngIf="showEditData==true && disableButton !== true"
+                  (click)=updateRequirementPage()>Update</button>&nbsp;&nbsp;&nbsp;
+                <button class="btn btn-lg btn-cancel" (click)="closeRequirement()">Cancel</button>
+
+              </div>
+            </div>
+          </div>
+
+
+        </form>
+      </div>
+      <!-- for requirement -->
+
+    </div>
+    <!--////////////////////////////////////// class-10-end/////////////////////////////////////////////-->
+  </div>
+</div>

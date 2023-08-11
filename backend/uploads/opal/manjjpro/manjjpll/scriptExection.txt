@@ -1,0 +1,162 @@
+[INFO] Scanning for projects...
+[WARNING] 
+[WARNING] Some problems were encountered while building the effective model for Opal:OpalDevelopment:jar:0.0.1-SNAPSHOT
+[WARNING] 'dependencies.dependency.(groupId:artifactId:type:classifier)' must be unique: org.json:json:jar -> duplicate declaration of version 20180813 @ line 76, column 13
+[WARNING] 'dependencies.dependency.(groupId:artifactId:type:classifier)' must be unique: commons-io:commons-io:jar -> duplicate declaration of version 2.6 @ line 93, column 13
+[WARNING] 'dependencies.dependency.(groupId:artifactId:type:classifier)' must be unique: com.googlecode.json-simple:json-simple:jar -> version 1.1 vs 1.1.1 @ line 123, column 13
+[WARNING] 'dependencies.dependency.systemPath' for atu.testng.reports.ATUTestRecorder:ATUTestRecorder:jar should not point at files within the project directory, ${basedir}/Jars/ATUTestRecorder_2.1.jar will be unresolvable by dependent projects @ line 182, column 22
+[WARNING] 
+[WARNING] It is highly recommended to fix these problems because they threaten the stability of your build.
+[WARNING] 
+[WARNING] For this reason, future Maven versions might no longer support building such malformed projects.
+[WARNING] 
+[INFO] 
+[INFO] ------------------------< Opal:OpalDevelopment >------------------------
+[INFO] Building OpalDevelopment 0.0.1-SNAPSHOT
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-clean-plugin:2.5:clean (default-clean) @ OpalDevelopment ---
+[INFO] Deleting E:\zap\backend\uploads\opal\manjjpro\manjjpll\projectToRun\target
+[INFO] 
+[INFO] --- maven-resources-plugin:2.6:resources (default-resources) @ OpalDevelopment ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] skip non existing resourceDirectory E:\zap\backend\uploads\opal\manjjpro\manjjpll\projectToRun\src\main\resources
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.1:compile (default-compile) @ OpalDevelopment ---
+[INFO] Changes detected - recompiling the module!
+[INFO] Compiling 7 source files to E:\zap\backend\uploads\opal\manjjpro\manjjpll\projectToRun\target\classes
+[WARNING] /E:/zap/backend/uploads/opal/manjjpro/manjjpll/projectToRun/src/main/java/reuseablePackage/feature/AllActions.java: E:\zap\backend\uploads\opal\manjjpro\manjjpll\projectToRun\src\main\java\reuseablePackage\feature\AllActions.java uses or overrides a deprecated API.
+[WARNING] /E:/zap/backend/uploads/opal/manjjpro/manjjpll/projectToRun/src/main/java/reuseablePackage/feature/AllActions.java: Recompile with -Xlint:deprecation for details.
+[INFO] 
+[INFO] --- maven-resources-plugin:2.6:testResources (default-testResources) @ OpalDevelopment ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] skip non existing resourceDirectory E:\zap\backend\uploads\opal\manjjpro\manjjpll\projectToRun\src\test\resources
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.1:testCompile (default-testCompile) @ OpalDevelopment ---
+[INFO] Changes detected - recompiling the module!
+[INFO] Compiling 1 source file to E:\zap\backend\uploads\opal\manjjpro\manjjpll\projectToRun\target\test-classes
+[INFO] 
+[INFO] --- maven-surefire-plugin:3.0.0-M1:test (default-test) @ OpalDevelopment ---
+[INFO] 
+[INFO] -------------------------------------------------------
+[INFO]  T E S T S
+[INFO] -------------------------------------------------------
+[INFO] Running TestSuite
+./src/test/java/mID636/fID675/
+./src/test/java/mID636/fID675/
+./src/test/java/mID636/fID675/
+./src/test/java/mID636/fID675/
+false
+false
+File is Main
+type is true
+path is E:\zap\backend\uploads\opal\manjjpro\manjjpll\projectToRun\.\Screenshot\EachStepScreenshot\100_Suite1\sID878
+File is Main
+type is true
+path1 is E:\zap\backend\uploads\opal\manjjpro\manjjpll\projectToRun\.\Screenshot\FailedScreenshot\100_Suite1\sID878
+./src/test/java/mID636/fID675/
+./src/test/java/mID636/fID675/
+./src/test/java/mID636/fID675/
+./src/test/java/mID636/fID675/
+./src/test/java/mID636/fID675/
+./src/test/java/mID636/fID675/
+./src/test/java/mID636/fID675/
+org.zaproxy.clientapi.core.ClientApi@6a1aab78
+///////////////////////////////////////////Proxy///////////////////////////////////////////////////////
+Launching Google browser
+Before setProxyProxy(manual, http=http://192.168.99.254:8080, ssl=http://192.168.99.254:8080)
+Before setProxy
+Capabilities {acceptInsecureCerts: true, browser: Chrome, browserName: chrome, browser_version: 94.0.4606.61, goog:chromeOptions: {args: [--no-sandbox, --disable-dev-shm-usage], extensions: []}, proxy: Proxy(manual, http=http://1...}
+Before RemoteWebDriver
+After RemoteWebDriver
+Successfully Navigated to the URL
+E:\zap\backend\uploads\opal\manjjpro\manjjpll\projectToRun\.\Screenshot\EachStepScreenshot\100_Suite1\sID878
+sID878
+Connecting....................
+Connected to Mongo Atlas......
+Exception : Session ID is null. Using WebDriver after calling quit()?
+Build info: version: '3.11.0', revision: 'e59cfb3', time: '2018-03-11T20:26:55.152Z'
+System info: host: 'DESKTOP-BSP7K24', ip: '192.168.99.1', os.name: 'Windows 10', os.arch: 'amd64', os.version: '10.0', java.version: '1.8.0_231'
+Driver info: driver.version: RemoteWebDriver
+[ERROR] Tests run: 7, Failures: 6, Errors: 0, Skipped: 0, Time elapsed: 17.395 s <<< FAILURE! - in TestSuite
+[ERROR] step_1(mID636.fID675.sID878)  Time elapsed: 7.479 s  <<< FAILURE!
+org.openqa.selenium.WebDriverException: 
+unknown error: net::ERR_PROXY_CONNECTION_FAILED
+  (Session info: chrome=94.0.4606.61)
+Build info: version: '3.11.0', revision: 'e59cfb3', time: '2018-03-11T20:26:55.152Z'
+System info: host: 'DESKTOP-BSP7K24', ip: '192.168.99.1', os.name: 'Windows 10', os.arch: 'amd64', os.version: '10.0', java.version: '1.8.0_231'
+Driver info: org.openqa.selenium.remote.RemoteWebDriver
+Capabilities {acceptInsecureCerts: true, browserName: chrome, browserVersion: 94.0.4606.61, chrome: {chromedriverVersion: 94.0.4606.61 (418b78f5838ed..., userDataDir: /tmp/.com.google.Chrome.mpUgqY}, goog:chromeOptions: {debuggerAddress: localhost:40953}, javascriptEnabled: true, networkConnectionEnabled: false, pageLoadStrategy: normal, platform: LINUX, platformName: LINUX, proxy: Proxy(manual, http=http://1..., setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:virtualAuthenticators: true, webdriver.remote.sessionid: 5f830bb48501b822ceac9646c69...}
+Session ID: 5f830bb48501b822ceac9646c6998938
+	at mID636.fID675.sID878.step_1(sID878.java:87)
+
+[ERROR] step_2(mID636.fID675.sID878)  Time elapsed: 0.042 s  <<< FAILURE!
+org.openqa.selenium.NoSuchSessionException: 
+Session ID is null. Using WebDriver after calling quit()?
+Build info: version: '3.11.0', revision: 'e59cfb3', time: '2018-03-11T20:26:55.152Z'
+System info: host: 'DESKTOP-BSP7K24', ip: '192.168.99.1', os.name: 'Windows 10', os.arch: 'amd64', os.version: '10.0', java.version: '1.8.0_231'
+Driver info: driver.version: RemoteWebDriver
+	at mID636.fID675.sID878.step_2(sID878.java:138)
+
+[ERROR] step_3(mID636.fID675.sID878)  Time elapsed: 0.003 s  <<< FAILURE!
+org.openqa.selenium.NoSuchSessionException: 
+Session ID is null. Using WebDriver after calling quit()?
+Build info: version: '3.11.0', revision: 'e59cfb3', time: '2018-03-11T20:26:55.152Z'
+System info: host: 'DESKTOP-BSP7K24', ip: '192.168.99.1', os.name: 'Windows 10', os.arch: 'amd64', os.version: '10.0', java.version: '1.8.0_231'
+Driver info: driver.version: RemoteWebDriver
+	at mID636.fID675.sID878.step_3(sID878.java:173)
+
+[ERROR] step_4(mID636.fID675.sID878)  Time elapsed: 0.002 s  <<< FAILURE!
+org.openqa.selenium.NoSuchSessionException: 
+Session ID is null. Using WebDriver after calling quit()?
+Build info: version: '3.11.0', revision: 'e59cfb3', time: '2018-03-11T20:26:55.152Z'
+System info: host: 'DESKTOP-BSP7K24', ip: '192.168.99.1', os.name: 'Windows 10', os.arch: 'amd64', os.version: '10.0', java.version: '1.8.0_231'
+Driver info: driver.version: RemoteWebDriver
+	at mID636.fID675.sID878.step_4(sID878.java:208)
+
+[ERROR] step_5(mID636.fID675.sID878)  Time elapsed: 0.017 s  <<< FAILURE!
+org.openqa.selenium.NoSuchSessionException: 
+Session ID is null. Using WebDriver after calling quit()?
+Build info: version: '3.11.0', revision: 'e59cfb3', time: '2018-03-11T20:26:55.152Z'
+System info: host: 'DESKTOP-BSP7K24', ip: '192.168.99.1', os.name: 'Windows 10', os.arch: 'amd64', os.version: '10.0', java.version: '1.8.0_231'
+Driver info: driver.version: RemoteWebDriver
+	at mID636.fID675.sID878.step_5(sID878.java:243)
+
+[ERROR] step_6(mID636.fID675.sID878)  Time elapsed: 0.002 s  <<< FAILURE!
+org.openqa.selenium.NoSuchSessionException: 
+Session ID is null. Using WebDriver after calling quit()?
+Build info: version: '3.11.0', revision: 'e59cfb3', time: '2018-03-11T20:26:55.152Z'
+System info: host: 'DESKTOP-BSP7K24', ip: '192.168.99.1', os.name: 'Windows 10', os.arch: 'amd64', os.version: '10.0', java.version: '1.8.0_231'
+Driver info: driver.version: RemoteWebDriver
+	at mID636.fID675.sID878.step_6(sID878.java:283)
+
+[INFO] 
+[INFO] Results:
+[INFO] 
+[ERROR] Failures: 
+[ERROR]   sID878.step_1:87->AllActions.EnterApplicationURL:640 » WebDriver unknown error...
+[ERROR]   sID878.step_2:138->AllActions.CaptureOnFailure:1569 » NoSuchSession Session ID...
+[ERROR]   sID878.step_3:173->AllActions.CaptureOnFailure:1569 » NoSuchSession Session ID...
+[ERROR]   sID878.step_4:208->AllActions.CaptureOnFailure:1569 » NoSuchSession Session ID...
+[ERROR]   sID878.step_5:243->AllActions.CaptureOnFailure:1569 » NoSuchSession Session ID...
+[ERROR]   sID878.step_6:283->AllActions.CaptureOnFailure:1569 » NoSuchSession Session ID...
+[INFO] 
+[ERROR] Tests run: 7, Failures: 6, Errors: 0, Skipped: 0
+[INFO] 
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD FAILURE
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  26.347 s
+[INFO] Finished at: 2023-05-16T13:52:20+05:30
+[INFO] ------------------------------------------------------------------------
+[ERROR] Failed to execute goal org.apache.maven.plugins:maven-surefire-plugin:3.0.0-M1:test (default-test) on project OpalDevelopment: There are test failures.
+[ERROR] 
+[ERROR] Please refer to E:\zap\backend\uploads\opal\manjjpro\manjjpll\projectToRun\target\surefire-reports for the individual test results.
+[ERROR] Please refer to dump files (if any exist) [date].dump, [date]-jvmRun[N].dump and [date].dumpstream.
+[ERROR] -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException

@@ -1,0 +1,20 @@
+-------------------------------------------------------------------------------
+Test set: TestSuite
+-------------------------------------------------------------------------------
+Tests run: 4, Failures: 4, Errors: 0, Skipped: 0, Time elapsed: 2.882 s <<< FAILURE! - in TestSuite
+step_0(mID638.fID677.sID880)  Time elapsed: 1.634 s  <<< FAILURE!
+java.lang.NullPointerException
+	at mID638.fID677.sID880.step_0(sID880.java:69)
+
+step_1(mID638.fID677.sID880)  Time elapsed: 0.002 s  <<< FAILURE!
+java.lang.NullPointerException
+	at mID638.fID677.sID880.step_1(sID880.java:102)
+
+step_2(mID638.fID677.sID880)  Time elapsed: 0.17 s  <<< FAILURE!
+java.lang.NullPointerException
+	at mID638.fID677.sID880.step_2(sID880.java:137)
+
+step_3(mID638.fID677.sID880)  Time elapsed: 0 s  <<< FAILURE!
+java.lang.NullPointerException
+	at mID638.fID677.sID880.step_3(sID880.java:177)
+

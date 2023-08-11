@@ -1,0 +1,30 @@
+tbody {
+  display:block;
+  height:200px;
+  overflow:auto;
+}
+thead, tbody tr {
+  display:table;
+  width:100%;
+  table-layout:fixed;
+}
+thead {
+  width: calc( 101% - 0.6em )
+}
+
+  .setup{
+    width: auto;
+    margin-top: 2px;
+    height: 20px;
+    font-size: small;
+    font-weight: bolder;
+  }
+
+  .fixedheight{
+    height: 35px;
+    position: relative;
+  }
+
+  .mat-progress-spinner circle, .mat-spinner circle {
+    stroke:white;
+}

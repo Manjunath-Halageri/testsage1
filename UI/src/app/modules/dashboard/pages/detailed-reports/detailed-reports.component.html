@@ -1,0 +1,33 @@
+<ul class="breadcrumb" style="font-size:15px;background-color: unset;margin:unset">
+  <li class="breadcrumb-item"><a id="mainheader">Dashboard</a></li>
+  <li class="breadcrumb-item"><a  [routerLink]="['/projectdetail/dashboard/detailedreports']" id="subheader">Hierarchy Test Execution</a></li>
+  <li class="breadcrumb-item" id="subheader" *ngIf="releaseVersionn!==undefined"><a [routerLink]="['/projectdetail/dashboard/detailedreports/modulereports']" id="subheader">{{releaseVersionn}}</a></li>
+  <li class="breadcrumb-item" id="subheader" *ngIf="moduleName!==undefined"><a [routerLink]="['/projectdetail/dashboard/detailedreports/modulereports/featurereports']" id="subheader">{{moduleName}}</a></li>
+  <li class="breadcrumb-item" id="subheader" *ngIf="featureName!==undefined"><a  id="subheader">{{featureName}}</a></li>
+
+</ul>
+<hr>
+<div class="container-fluid">
+  <div class="rows">
+    <form [formGroup]='releaseVersionForm'>
+     <div class="col-lg-2 col-md-2 col-sm-2 mb-3 mr-sm-3">
+      <label for="module">Release</label>
+      <select class="form-control" formControlName="releaseVersion" [(ngModel)]="releaseVersion" >
+        <option value="Select Release" hidden >Select Release</option>
+        <option *ngFor="let release of getAllReleasesVersions ">{{release.releaseVersion}}</option>
+      </select>
+      <control-messages [control]="releaseVersionForm.controls.releaseVersion"></control-messages>
+    </div>
+    
+    <div class="col-lg-2 col-md-2 col-sm-2 sreachButton">
+      <button type="button" [disabled]="!releaseVersionForm.valid" class="btn btn-lg"
+        (click)=searchData(releaseVersion)>Search</button>
+    </div>
+  </form>
+  </div>
+</div>
+
+<div>
+  <router-outlet></router-outlet>
+</div>
+

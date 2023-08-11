@@ -1,0 +1,69 @@
+<ul class="breadcrumb" style="font-size:15px;background-color: unset;margin:unset">
+  <li class="breadcrumb-item"><a id="mainheader">Dashboard</a></li>
+  <li class="breadcrumb-item"><a id="subheader">Testcase Report</a></li>
+</ul>
+<hr>
+<div class="container-fluid">
+  <div class="rows">
+    <form [formGroup]='releaseVersionForm'>
+      <div class="col-lg-2 col-md-2 col-sm-2 mb-3 mr-sm-3">
+        <label for="module">Release</label>
+        <select class="form-control" formControlName="releaseVersion" [(ngModel)]="releaseVersion">
+          <option value="Select Release" hidden>Select Release</option>
+          <option *ngFor="let release of getAllReleasesVersions ">{{release.releaseVersion}}</option>
+        </select>
+        <control-messages [control]="releaseVersionForm.controls.releaseVersion"></control-messages>
+      </div>
+
+      <div class="col-lg-2 col-md-2 col-sm-2 sreachButton">
+        <button type="button" [disabled]="!releaseVersionForm.valid" class="btn btn-lg"
+          (click)=searchData(releaseVersion)>Search</button>
+      </div>
+    </form>
+  </div>
+</div>
+<div *ngIf = "tableData">
+  <div class="example-container shadow-lg table-container">
+    <table mat-table [dataSource]="displayAllData" class="mat-elevation-z8">
+      <ng-container matColumnDef="Sl.No">
+        <th mat-header-cell *matHeaderCellDef class="angulartheadColor">Sl.No</th>
+        <td mat-cell *matCellDef="let element; let i = index;"> {{i+1}}</td>
+        <td mat-footer-cell *matFooterCellDef> Total </td>
+      </ng-container>
+
+      <ng-container matColumnDef="Testcase">
+        <th mat-header-cell *matHeaderCellDef class="angulartheadColor"> Testcase </th>
+        <td mat-cell *matCellDef="let element"> {{element.testCaseName}}</td>
+        <td mat-footer-cell *matFooterCellDef></td>
+      </ng-container>
+
+      <ng-container matColumnDef="Executed">
+        <th mat-header-cell *matHeaderCellDef class="angulartheadColor"> Executed </th>
+        <td mat-cell *matCellDef="let element"> {{element.testCaseCount}} </td>
+        <td mat-footer-cell *matFooterCellDef> {{totalExecutedCount}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="Pass">
+        <th mat-header-cell *matHeaderCellDef class="angulartheadColor"> Pass </th>
+        <td mat-cell *matCellDef="let element"> {{element.pass}} </td>
+        <td mat-footer-cell *matFooterCellDef>{{totalPassCount}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="Fail">
+        <th mat-header-cell *matHeaderCellDef class="angulartheadColor"> Fail </th>
+        <td mat-cell *matCellDef="let element"> {{element.fail}} </td>
+        <td mat-footer-cell *matFooterCellDef> {{totalFailCount}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="Pass Percentage">
+        <th mat-header-cell *matHeaderCellDef class="angulartheadColor"> Pass Percentage </th>
+        <td mat-cell *matCellDef="let element"> {{element.percent | number:'1.0-0'}} </td>
+        <td mat-footer-cell *matFooterCellDef> </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="executedreports"></tr>
+      <tr mat-row *matRowDef="let row; columns: executedreports;"></tr>
+      <tr mat-footer-row *matFooterRowDef="executedreports"></tr>
+    </table>
+  </div>
+</div>

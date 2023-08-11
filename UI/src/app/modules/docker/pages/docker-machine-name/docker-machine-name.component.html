@@ -1,0 +1,206 @@
+<ul class="breadcrumb" style="font-size:15px;background-color: unset;margin:unset">
+  <li class="breadcrumb-item"><a [routerLink]="['/projectdetail']" id="mainheader">ProjectDetails</a></li>
+  <li class="breadcrumb-item"><a [routerLink]="['/projectdetail/dockerComponent']" id="subheader">docker</a></li>
+  <li class="breadcrumb-item"><a id="subheader">{{dbmachine[0].machine}}</a></li>
+</ul>
+<hr>
+<mat-tab-group animationDuration="0ms" mat-align-tabs="center"
+  style="height: 100%;position: fixed;width: -webkit-fill-available;">
+  <mat-tab label="Details" style="overflow:hidden;">
+    <br><br>
+    <div>
+      <p class="text-center" style="font-size:15px">
+        Machine Details
+      </p>
+    </div>
+    <br><br>
+    <div class="container" style="width:400px;margin:auto">
+      <div class="card">
+        <div class="card-body shadow-lg">
+          <form class="form-horizontal" *ngFor="let data of dbmachine">
+            <div class="form-group">
+              <label class="col-xs-3 col-sm-6">Name </label>
+              <div class="col-xs-9 col-sm-6" style="margin:auto">
+                <p class="form-control-static" style="font-size:medium">{{data.machine}}</p>
+              </div>
+              <label class="col-xs-3 col-sm-6">Ip Address </label>
+              <div class="col-xs-9 col-sm-6" style="margin:auto">
+                <p class="form-control-static" style="font-size:medium">{{data.IPAddress}}</p>
+              </div>
+              <label class="col-xs-3 col-sm-6">Config Version </label>
+              <div class="col-xs-9 col-sm-6" style="margin:auto">
+                <p class="form-control-static" style="font-size:medium">{{data.configVersion}}</p>
+              </div>
+              <label class="col-xs-3 col-sm-6">Swarm Master </label>
+              <div class="col-xs-9 col-sm-6" style="margin:auto">
+                <p class="form-control-static" style="font-size:medium">{{data.swarmMaster}}</p>
+              </div>
+              <label class="col-xs-3 col-sm-6">Swarm Host </label>
+              <div class="col-xs-9 col-sm-6" style="margin:auto">
+                <p class="form-control-static" style="font-size:medium">{{data.swarmHost}}</p>
+              </div>
+              <label class="col-xs-3 col-sm-6">Memory </label>
+              <div class="col-xs-9 col-sm-6" style="margin:auto">
+                <p class="form-control-static" style="font-size:medium">{{data.memory}}</p>
+              </div>
+              <label class="col-xs-3 col-sm-6">Disk Size </label>
+              <div class="col-xs-9 col-sm-6" style="margin:auto">
+                <p class="form-control-static" style="font-size:medium">{{data.diskSize}}</p>
+              </div>
+              <label class="col-xs-3 col-sm-6">Dns Proxy </label>
+              <div class="col-xs-9 col-sm-6" style="margin:auto">
+                <p class="form-control-static" style="font-size:medium">{{data.dnxProxy}}</p>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+
+    </div>
+
+  </mat-tab>
+  <mat-tab label="Images">
+    <br><br>
+    <div>
+      <p class="text-center" style="font-size:15px">
+        Machine Name Images
+      </p>
+    </div>
+    <br><br>
+    <table class="shadow-lg scroll" style="border:unset;width:900px;margin:auto;margin-top:1%;margin-bottom: 2%">
+      <thead class="theadColor">
+        <tr>
+          <th class="col-xs-2">Name</th>
+          <th class="col-xs-2">Tag</th>
+          <th class="col-xs-2">Version</th>
+          <th class="col-xs-2">Size</th>
+          <th class="col-xs-2">Run</th>
+          <th class="col-xs-2">Delete</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let data of machineImages">
+          <td class="col-xs-2">{{data.name}}</td>
+          <td class="col-xs-2">{{data.tag}}</td>
+          <td class="col-xs-2">{{data.version}}</td>
+          <td class="col-xs-2">{{data.size}}</td>
+          <td class="col-xs-2" (click)=runImage2(data)>
+            <span class="glyphicon glyphicon-play btn btn-info btn-lg" style="margin-left: 5px"></span>
+          </td>
+          <td class="col-xs-2" (click)=deleteImage(data)>
+            <span class="glyphicon glyphicon-trash btn btn-info btn-lg" style="margin-left: 5px"></span>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="text-center">
+      <button type="button" class="btn btn-lg" data-toggle="modal" data-target="#myModal">
+        Upload New Image</button>
+    </div>
+
+
+  </mat-tab>
+  <mat-tab label="Container">
+    <br><br>
+    <div>
+      <p class="text-center" style="font-size:15px">
+        Machine Name Container
+      </p>
+    </div>
+    <br><br>
+    <table class="shadow-lg scroll" style="border:unset;width:900px;margin:auto;margin-top:1%;margin-bottom: 2%">
+      <thead class="theadColor">
+        <tr>
+          <th>Name</th>
+          <th>Image</th>
+          <th>Status</th>
+          <th>Port</th>
+          <th>Start/Stop</th>
+          <!-- <th>Stop</th> -->
+          <th>Delete</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let data of machineContainer ;let i = index">
+          <td>{{data.name}}</td>
+          <td>{{data.image}}</td>
+          <td>{{data.status}}</td>
+          <td>{{data.port}}</td>
+          <td>
+            <span *ngIf="data.status=='stopped'">
+              <span style="margin-left: 3px" class="glyphicon glyphicon-play btn btn-info btn-lg"
+                (click)=containerStart(i,data.name)>
+              </span>
+            </span>
+            <span *ngIf="data.status=='running'">
+              <span style="margin-left: 3px" class="glyphicon glyphicon-pause btn btn-info btn-lg"
+                (click)=containerStop(i,data.name)></span>
+            </span>
+
+          <td>
+            <span style="margin-left: 3px" class="glyphicon glyphicon-trash btn btn-info btn-lg"
+              (click)=containerDelete(i,data.name)></span>
+          </td>
+        </tr>
+
+
+
+      </tbody>
+    </table>
+  </mat-tab>
+</mat-tab-group>
+
+<div class="modal" id="myModal" data-backdrop="static">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">Select Any Image</h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+
+      <!-- Modal body -->
+      <form [formGroup]="userForm" novalidate>
+        <div class="modal-body">
+          <div class="container">
+            <div class="row">
+              <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 col-xl-3">
+                <label>Name</label>
+              </div>
+              <div class="fixedheight">
+                <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9 col-xl-9">
+                  <div>
+                    <select class="setup" [(ngModel)]="name" formControlName="imagename" (change)="checkFormValues()">
+                      <option></option>
+                      <option>selenium/hub</option>
+                      <option> Chrome_Version_75.0</option>
+                      <option>Chrome_Version_56.0</option>
+                      <option>Firefox_version_51.0.1</option>
+                      <option>Firefox_version_58.0.2</option>
+                    </select>
+                    <control-messages [control]="userForm.controls.imagename"></control-messages>
+                  </div>
+                  <br>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
+        <!-- Modal footer -->
+        <div class="modal-footer">
+          <!-- <button type="button" [disabled]="!userForm.valid" class="btn btn-lg" data-dismiss="modal"
+            (click)=pullImages(name)>Pull</button> -->
+          <mat-spinner-button [options]="spinnerButtonOptions" (btnClick)=pullImages(name)> </mat-spinner-button>
+          <button type="button" class="btn btn-lg btn-cancel" data-dismiss="modal"
+            (click)=cancelUploadImage(name)>Cancel</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<router-outlet></router-outlet>

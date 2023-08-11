@@ -1,0 +1,240 @@
+<ul class="breadcrumb" style="margin:unset;background-color: unset;margin:unset">
+  <!-- [routerLink]="['/projectdetail']" -->
+    <li class="breadcrumb-item" style="width: 154px;"><a  id="mainheader">Defect Management</a></li>
+    <li class="breadcrumb-item" id="subheader" *ngIf="form==true"><a id="subheader">File a Defect</a></li>
+    <li class="breadcrumb-item" id="subheader" *ngIf="confirmation==true"><a id="subheader">Edit Defect</a></li>
+  </ul>
+  <hr style="margin: unset;"><br>
+  
+  <section class="container-fluid" *ngIf="showForm">
+  
+    <div style="text-align: end;">
+      <button type="button" class="btn btn-lg" *ngIf="confirmation==true" (click)="newDefect()">New Defect</button>
+    </div>
+    <div>
+      <form [formGroup]="defectForm" (ngSubmit)="onSubmitDefectDetails()" #dfForm="ngForm">
+  
+        <div class="row" style="margin: unset;padding: unset;">
+          <div class="col-lg-3 col-md-3 col-sm-3 form-group">
+            <label for="email" style="font-weight: 600;">Defect Id</label>
+            <input type="text" class="form-control" [value]="defectId.defectId" disabled>
+          </div>
+          <div class="col-lg-3 col-md-3 col-sm-3 form-group">
+            <label for="module">Module</label>
+            <select class="form-control" [(ngModel)]="moduleId" name="hjbzdh" (change)="moduleIndex(moduleId)"
+              formControlName="moduleId">
+              <option value="" style="display:none;"></option>
+              <option *ngFor="let m of allModule" value="{{m.moduleId}}">{{m.moduleName}}</option>
+            </select>
+          </div>
+          <div class="col-lg-3 col-md-3 col-sm-3 form-group">
+            <label for="feature">Feature</label>
+            <select class="form-control" [(ngModel)]="featureId" name="f" (change)="featureIndex(moduleId,featureId)"
+              formControlName="featureId">
+              <option value="" style="display:none;"></option>
+              <option *ngFor="let f of featureNames" value="{{f.featureId}}">{{f.featureName}}</option>
+            </select>
+          </div>
+          <div class="col-lg-3 col-md-3 col-sm-3 form-group">
+            <label for="script">Test Case</label>
+            <select class="form-control" [(ngModel)]="scriptId" name="sss" formControlName="scriptId">
+              <option value="" style="display:none;"></option>
+              <option *ngFor="let s of scriptNames" value="{{s.scriptId}}">{{s.scriptName}}</option>
+            </select>
+          </div>
+  
+          <div class="col-lg-3 col-md-3 col-sm-3 form-group">
+            <label for="date">Date</label>
+            <input type="date" class="form-control" formControlName="date">
+          </div>
+  
+  
+          <div class="col-lg-3 col-md-3 col-sm-3 form-group">
+            <label for="priority">Priority</label>
+            <select class="form-control" formControlName="priorityId">
+              <option value="" style="display:none;"></option>
+              <option *ngFor="let p of priority" value="{{p.priorityId}}">{{p.priorityName}}</option>
+            </select>
+          </div>
+          <div class="col-lg-3 col-md-3 col-sm-3 form-group">
+            <label for="severity">Severity</label>
+            <select class="form-control" formControlName="severityId">
+              <option value="" style="display:none;"></option>
+              <option *ngFor="let s of severity" value="{{s.severityId}}">{{s.severityName}}</option>
+            </select>
+          </div>
+          <div class="col-lg-3 col-md-3 col-sm-3 form-group">
+            <label for="status">Status</label>
+            <select class="form-control" formControlName="statusId">
+              <option value="" style="display:none;"></option>
+              <option *ngFor="let s of status" value="{{s.statusId}}">{{s.status}}</option>
+            </select>
+          </div>
+          <div class="col-lg-3 col-md-3 col-sm-3 form-group">
+            <label for="time">Time</label>
+            <input type="time" class="form-control" formControlName="time">
+          </div>
+          <div class="col-lg-3 col-md-3 col-sm-3 form-group">
+            <label for="version">Version</label>
+            <select class="form-control" formControlName="releaseId">
+              <option value="" style="display:none;"></option>
+              <option *ngFor="let rv of releaseVer" value="{{rv.releaseId}}">{{rv.releaseVersion}}</option>
+            </select>
+          </div>
+        </div>
+  
+        <br>
+  
+        <section>
+          <div class="row" style="margin: unset;padding: unset;">
+            <div class="col-lg-12 col-md-12 col-sm-12 form-group">
+              <label for="summary">Summary</label>
+              <input type="text" class="form-control" formControlName="summary">
+            </div>
+          </div>
+        </section>
+        <br>
+        <section>
+          <div class="row" style="margin: unset;padding: unset;">
+            <div class="col-lg-4 col-md-4 col-sm-4 form-group">
+              <label for="description">Description</label>
+              <textarea name="description" rows="10" cols="10" class="form-control"
+                formControlName="description"></textarea>
+            </div>
+            <div class="col-lg-8 col-md-8 col-sm-8 form-group" style="padding:unset">
+              <div class="col-lg-4 col-md-4 col-sm-4 form-group">
+                <label for="device">Device</label>
+                <select class="form-control" formControlName="deviceId">
+                  <option value="" style="display:none;"></option>
+                  <option *ngFor="let d of device" value="{{d.deviceId}}">{{d.deviceName}}</option>
+                </select>
+              </div>
+              <div class="col-lg-4 col-md-4 col-sm-4 form-group">
+                <label for="browser">Browser Name</label>
+                <select class="form-control" formControlName="browserName" [(ngModel)]="browsername" 
+                (change)="getVersions(browsername)">
+                  <option value="" style="display:none;"></option>
+                  <option *ngFor="let b of browserName">{{b.browserName}}</option>
+                </select>
+              </div>
+              <div class="col-lg-4 col-md-4 col-sm-4 form-group">
+                <label for="assigned">Assigned To</label>
+                <select class="form-control" formControlName="assignedTo">
+                  <option value="" style="display:none;"></option>
+                  <option *ngFor="let a of assign">{{a.name}}</option>
+                </select>
+              </div>
+  
+              <div class="col-lg-4 col-md-4 col-sm-4 form-group">
+                <label for="os">OS</label>
+                <select class="form-control" formControlName="osId">
+                  <option value="" style="display:none;"></option>
+                  <option *ngFor="let o of os" value="{{o.osId}}">{{o.osName}}</option>
+                </select>
+              </div>
+              <br>
+              <br>
+              <div class="col-lg-4 col-md-4 col-sm-4 form-group">
+                <label for="browserVersion">Browser Version</label>
+                <select class="form-control" formControlName="browserVersion">
+                  <option value="" style="display:none;"></option>
+                  <option *ngFor="let v of version">{{v.versionName}}</option>
+                </select>
+              </div>
+              <div class="col-lg-4 col-md-4 col-sm-4 form-group">
+                <label for="qaContact">QA Contact</label>
+                <select class="form-control" formControlName="qaContact">
+                  <option value="" style="display:none;"></option>
+                  <option *ngFor="let q of contactTo">{{q.name}}</option>
+                </select>
+              </div>
+              <br>
+  <!-- accept="video/*" -->
+              <form [formGroup]="uploadVideoForm" >
+              <div class="col-lg-6 col-md-6 col-sm-6 form-group">
+                <label for="video">Video</label>
+                <input type="file" name="video" id="video" [(ngModel)]="manualVideo"  accept="video/x-flv,video/mp4,video/3gpp,video/x-msvideo,video/quicktime,video/x-ms-wmv"
+                  (change)="videoFileSave($event)" #vdo [ngModelOptions]="{standalone: true}" class="form-control" style="height:100%;padding:0px;"><br>
+                <button type="button" class="btn btn-lg " *ngIf="activeVideoUpload == 1"  [disabled]="uploadVideoForm.invalid"
+                  (click)="uploadvideo()">Upload</button>
+                <br>
+              </div>
+            </form>
+  <!--  accept="image/*"  -->
+            <form [formGroup]="uploadImageForm">
+              <div class="col-lg-6 col-md-6 col-sm-6 form-group">
+                <label for="screenshot">ScreenShot</label>
+                <input type="file" name="pic"  accept="image/apng,image/jpeg,image/png" (change)="onSelectFile($event)"
+                 class="form-control" [(ngModel)]="manualscreenShot" #screen [ngModelOptions]="{standalone: true}"  style="height:100%;padding:0px;" >
+                 <br>
+                <button type="button" class="btn btn-lg" *ngIf="activeScreenUpload == 1" [disabled]="uploadImageForm.invalid"
+              (click)="uploadScreenShot()">Upload</button>
+              </div>
+            </form>
+  
+            </div>
+          </div>
+        </section>
+  <!--  data-target="#submitModal" data-target="#updateModal"-->
+        <section>
+          <div class="row" style="margin: unset;padding: unset;">
+            <!-- <button type="button" (click)="FormValidate(defectForm)">Validate Form</button> -->
+            <div class="col-lg-12 col-md-12 col-sm-12 form-group" style="text-align: end;">
+              <button type="submit" class="btn btn-lg" (click)="submit(defectForm)" *ngIf="form==true" data-toggle="modal"
+                [disabled]="!defectForm.valid">Submit</button>
+              <button type="button" class="btn btn-lg" (click)="updateDefectDetails(defectForm)"
+                *ngIf="confirmation==true" data-toggle="modal" 
+                [disabled]="!defectForm.valid">Update</button>
+            </div>
+          </div>
+        </section>
+      </form>
+    </div>
+  </section>
+  <!-- confimation modal starts here -->
+  <div class="modal" id="submitModal">
+    <div class="modal-dialog modal-lg modal-dialog-centered" style="font-size: medium;">
+      <div class="modal-content">
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title">Defect Save summary</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        <!-- Modal body -->
+        <div class="modal-body">
+          Defect 1 has been successfully created
+        </div>
+        <!-- Modal footer -->
+        <div class="modal-footer">
+          <button type="button" class="btn btn-success btn-lg" data-dismiss="modal">OK</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- confimation modal ends here -->
+  <!-- update confimation modal starts here -->
+  <div class="modal" id="updateModal">
+    <div class="modal-dialog modal-lg modal-dialog-centered" style="font-size: medium;">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Defect Update summary</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        <!-- Modal body -->
+        <div class="modal-body">
+          Defect 1 has been successfully updated
+        </div>
+        <!-- Modal footer -->
+        <div class="modal-footer">
+          <button type="button" class="btn btn-success btn-lg" data-dismiss="modal">OK</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- update confimation modal ends here -->
+  
+  <ngx-spinner bdColor="rgba(51, 51, 51, 0.8)" size="medium" color="#fff"  [fullScreen]="false">
+    <div style="margin-top:-10%;text-align: center;">
+      <h2 style="color: white"> Please Wait... uploading Video </h2>
+      </div>
+  </ngx-spinner>

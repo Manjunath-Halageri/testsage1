@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round" rel="stylesheet">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<div class="container-fluid" style="padding:unset">
+	<div class="d-flex topColor" style="font-size: 18px">
+		<!-- <div class="p-4  "><span data-toggle="modal" data-target="#sidenavModal"><i class="fa fa-fw fa-navicon"></i></span></div> -->
+		<div class="p-2 mr-auto ">Test Sage</div>
+		<div class="p-2 ">{{newUserName}}</div>
+		<!-- <div class="p-3 ml-auto "><i class="fa fa-fw fa-user-circle"></i></div> -->
+		<div class="p-2 ml-auto navbar " style="margin:unset">
+			<div class="navbar-header col">
+				<ul class="nav navbar-nav navbar-right ml-auto">
+					<li class="nav-item dropdown"> <a href="#" data-toggle="dropdown"
+							class="nav-link dropdown-toggle user-action" style="background-color: unset;"><i
+								class="img fa fa-user-o"></i> {{newUserName}}</a>
+						<ul class="dropdown-menu " style="position:absolute">
+							<li><a class="dropdown-item"><i class="fa fa-user-o"></i> Profile</a>
+							</li>
+							<li><a class="dropdown-item"><i class="fa fa-calendar-o"></i> Calendar</a>
+							</li>
+							<li><a class="dropdown-item"><i class="fa fa-sliders"></i> Settings</a>
+							</li>
+							<li class="divider dropdown-divider"></li>
+							<li><a href="#" class="dropdown-item" (click)="logoutDocker()"><i
+										class="material-icons">&#xE8AC;</i> Logout</a></li>
+							<!-- <li><a href="#" class="dropdown-item"><i class="material-icons">&#xE8AC;</i> Logout</a> -->
+
+						</ul>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+
+
+
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-sm-1">
+
+			</div>
+			<div class="col-sm-10">
+				<div>
+					<button type="button" disabled class="btn  but1   some-text" (click)="newEntry()"
+						data-toggle="modal" data-target="#myModalORG">Create Organization / Admin</button>
+
+					<span style="float: right">
+						<input type="text" list="browsers" [(ngModel)]="orgName" class="fa fa-search"
+							placeholder="Search by OrganizationName">
+
+						<button style="height:43px" class="btn btn-secondary" type="button"
+							(click)="searchOrgName(orgName)">
+							<i class="fa fa-search"></i>
+						</button>
+					</span>
+
+				</div>
+
+
+				<datalist id="browsers">
+					<option></option>
+					<option *ngFor="let admin123 of allOrgWithAdminSearch">{{admin123.Organization}}</option>
+
+				</datalist>
+			</div> <br>
+			<div class="col-md-8 col-sm-8 col-lg-8 col-xs-8 col8">
+				<table class="shadow-lg table-striped scroll"
+					style="border:unset;width:140%;margin:auto;margin-left:6%">
+					<thead class="block theadColor">
+						<tr>
+							<th class="thdata" style="width:20%;padding: 8px">Organization</th>
+							<th class="thdata" style="width:20%;padding: 8px">Admin</th>
+
+							<th class="thdata" style="width:20%;padding: 8px">CreatedBy</th>
+							<th class="thdata" style="width:20%;padding: 8px">Start Date</th>
+							<th class="thdata" style="width:20%;padding: 8px">End Date</th>
+							<th class="thdata" style="width:20%;padding: 8px">Edit</th>
+							<th class="thdata" style="width:20%;padding: 8px">Delete</th>
+
+						</tr>
+					</thead>
+					<tbody class="block bodyHeight">
+						<tr *ngFor="let admin of allOrgWithAdmin">
+							<td style="width:20%" data-toggle="modal" data-target="#myModal"
+								(click)="LicOrgAdmin(admin)">{{admin.Organization}}</td>
+							<td style="width:20%">{{admin.docs[0].userName}}</td>
+							<td style="width:20%">{{admin.ContactPerson}}</td>
+							<td style="width:20%;padding: 8px">{{admin.planType.starDtate | date:'dd-MM-yy'}}</td>
+
+							<td style="width:25%;padding: 8px">{{admin.planType.endDate | date:'dd-MM-yy'}}</td>
+
+							<td style="width:25%;padding: 8px" (click)="editOrgAdmin(admin)" data-toggle="modal"
+								data-target="#myModalshiva"><span
+									class="glyphicon glyphicon-pencil btn btn-info btn-lg"></span>
+							</td>
+							<td style="width:25%" (click)="deleteOrgAdmin(admin)">
+								<span class="glyphicon glyphicon-trash btn btn-info btn-lg"></span>
+							</td>
+
+
+						</tr>
+
+
+
+					</tbody>
+				</table>
+			</div>
+			<div class="col-sm-1">
+
+			</div>
+
+		</div>
+
+
+
+
+	</div>
+
+
+	<div class="modal fade" data-backdrop="false" id="myModalORG" role="dialog">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header ">
+					<h1 class="modal-title">Organazation Details</h1>
+				</div>
+				<div class="modal-body">
+					<div>
+						<!-- <label></label>
+						<br>
+						<br> -->
+						<div>
+							<span class="excelSpan"> </span>
+							<div class=" col-sm-4 col-sm-4 col-sm-4 colFont">
+								<br>
+
+								<input type="radio" name="Button" [(ngModel)]="checkedValue" value="1"
+									class="ButtonState" checked id="Button1" />
+
+								<label class="Button btn btn-lg" style="border-radius: 25px; font-size: 15px"
+									type="button" for="Button1" (click)="CreateOrganization()">Create
+									Organization</label>
+								<br>
+								<br>
+								<input type="radio" name="Button" [(ngModel)]="checkedValue" value="2"
+									class="ButtonState" id="Button2" />
+
+
+								<label class="Button btn btn-lg" type="button"
+									style="border-radius: 25px;font-size: 15px" for="Button2"
+									(click)="CreateAdmin(Organization)"> Create Organization Admin</label>
+
+							</div>
+							<div class=" col-sm-8 col-sm-8 col-sm-8 colFont" style="border:1px solid black;height:547px"
+								*ngIf="CreateOrg==true">
+
+								<div class="row" style="width:81%"><label>Create Organization Details</label>
+									<div class="col-sm-6">&nbsp; &nbsp; &nbsp; &nbsp;
+
+										<div class="row excelTable">
+											<label>Organization</label> <span class="starSpan">*</span>
+										</div>
+										<div class="row excelTable">
+											<label>Office Address</label> <span class="starSpan">*</span>
+										</div>
+										<div class="row excelTable">
+											<label>Contact Person</label> <span class="starSpan">*</span>
+										</div>
+										<div class="row excelTable">
+											<label>Phone Number</label> <span class="starSpan">*</span>
+										</div>
+										<div class="row excelTable">
+											<label>Email</label> <span class="starSpan">*</span>
+										</div>
+										<div class="row excelTable">
+											<label>Start Date</label> <span class="starSpan">*</span>
+										</div>
+										<div class="row excelTable">
+											<label>End Date</label> <span class="starSpan">*</span>
+										</div>
+									</div>
+									<div class="col-sm-6">
+										<form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+											<div class="form-group row excelTable">
+												<input type="text" maxlength="30" [(ngModel)]="Organization"
+													formControlName="Organization" style="margin-top: 4px"
+													class="form-control row excelInput"
+													[ngClass]="{ 'is-invalid': submitted && f.Organization.errors }" />
+												<control-messages [control]="registerForm.controls.Organization">
+												</control-messages>
+
+											</div>
+											<div class="form-group row excelTable">
+												<input type="text" maxlength="30" style="margin-top: -11px"
+													[(ngModel)]="OfficeAddress" formControlName="OfficeAddress"
+													class="form-control row excelInput"
+													[ngClass]="{ 'is-invalid': submitted && f.OfficeAddress.errors }" />
+												<control-messages [control]="registerForm.controls.OfficeAddress">
+												</control-messages>
+
+											</div>
+											<div class="form-group row excelTable">
+												<input type="text" maxlength="30" style="margin-top: -23px"
+													[(ngModel)]="ContactPerson" formControlName="ContactPerson"
+													class="form-control row excelInput"
+													[ngClass]="{ 'is-invalid': submitted && f.ContactPerson.errors }" />
+												<control-messages [control]="registerForm.controls.ContactPerson">
+												</control-messages>
+
+											</div>
+											<div class="form-group row excelTable">
+												<input type="text" formControlName="PhoneNumber"
+													style="margin-top: -42px;" [(ngModel)]="PhoneNumber"
+													class="form-control row excelInput"
+													[ngClass]="{ 'is-invalid': submitted && f.PhoneNumber.errors }" />
+												<control-messages [control]="registerForm.controls.PhoneNumber">
+												</control-messages>
+
+											</div>
+											<div class="form-group row excelTable">
+												<input type="text" formControlName="email" style="margin-top:-50px;"
+													class="form-control row excelInput" [(ngModel)]="email">
+												<control-messages [control]="registerForm.controls.email"
+													style="margin-top:-30px">
+												</control-messages>
+
+											</div>
+											<div class="form-group row excelTable">
+												<input type="date" formControlName="StartDate" style="margin-top:-66px;"
+													[(ngModel)]="StartDate" class="form-control row excelInput"
+													[ngClass]="{ 'is-invalid': submitted && f.StartDate.errors }" />
+												<div *ngIf="submitted && f.StartDate.errors" class="invalid-feedback">
+													<div *ngIf="f.StartDate.errors.required" class="error errTag"
+														style="margin-top:-42px;">Start
+														Date is required</div>
+												</div>
+											</div>
+											<div class="form-group row excelTable">
+												<input type="date" formControlName="EndDate" style="margin-top:-80px;"
+													[(ngModel)]="EndDate" class="form-control row excelInput"
+													[ngClass]="{ 'is-invalid': submitted && f.EndDate.errors }" />
+												<div *ngIf="submitted && f.EndDate.errors" class="invalid-feedback">
+													<div *ngIf="f.EndDate.errors.required" class="error errTag"
+														style="margin-top:-59px;">End
+														Date is required</div>
+												</div>
+											</div>
+											<div class="form-group ">
+												<button class="btn btn-lg" style="margin-top:-132px"
+													[disabled]="!registerForm.valid">Create</button>
+												<button type="button" style="margin-left:161px;margin-top:-179px"
+													class="btn btn-default btn-lg" (click)="clearFileds()"
+													data-dismiss="modal">Cancel</button>
+											</div>
+										</form>
+									</div>
+								</div>
+							</div>
+							<!-- </div> -->
+							<!-- 
+							<div class=" col-sm-8 col-sm-8 col-sm-8 colFont" style="border:1px solid black;height:510px"
+								*ngIf="CreateOrgAdmin==true">
+
+								
+									<label>Create Organization Admin</label>
+								<div class="row" style="margin-top:35px">
+									<div class="col-sm-6">
+										
+										<div class="row excelTable1">&nbsp; &nbsp; &nbsp; &nbsp;
+											<label>Organization</label> <span class="starSpan">*</span>
+										</div>
+										<div class="row excelTable1">&nbsp; &nbsp; &nbsp; &nbsp;
+											<label>Username</label> <span class="starSpan">*</span>
+										</div>
+										<div class="row excelTable1">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+											<label>Password</label> <span class="starSpan">*</span>
+										</div>
+
+										<div class="row excelTable1">&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;
+											<label>Work Email</label> <span class="starSpan">*</span>
+										</div>
+
+
+									</div>
+									<div class="col-sm-6"> -->
+							<!-- <form [formGroup]="registerFormAdmin" (ngSubmit)="onSubmit1()">
+											<div class="form-group row excelTable">
+												<input type="text" maxlength="30" disabled [(ngModel)]="newOrgName"
+													formControlName="OrganizationName"
+													style="width:231px"
+													class="form-control row excelInput"
+													[ngClass]="{ 'is-invalid': submitAdmin && adminForm.OrganizationName.errors }" />
+											
+											</div>
+											<div class="form-group row excelTable">
+												<input type="text" maxlength="30" formControlName="Username"
+												[(ngModel)]="Username"
+													style="width:231px"
+													class="form-control row excelInput"
+													[ngClass]="{ 'is-invalid': submitAdmin && adminForm.Username.errors }" />
+												<control-messages [control]="registerFormAdmin.controls.Username">
+												</control-messages>
+											
+											</div>
+											<div class="form-group row excelTable">
+												<input type="Password" maxlength="30" formControlName="Password"
+												[(ngModel)]="Password"
+													style="width:231px"
+													class="form-control row excelInput"
+													[ngClass]="{ 'is-invalid': submitAdmin && adminForm.Password.errors }" />
+												<control-messages [control]="registerFormAdmin.controls.Password">
+												</control-messages>
+												
+											</div>
+											<div class="form-group row excelTable">
+												<input type="mail" maxlength="30" formControlName="WorkEmail"
+												[(ngModel)]="WorkEmail"
+
+													style="width:231px"
+													class="form-control row excelInput"
+													[ngClass]="{ 'is-invalid': submitAdmin && adminForm.WorkEmail.errors }" />
+												<control-messages [control]="registerFormAdmin.controls.WorkEmail">
+												</control-messages>
+											
+											</div>
+
+
+
+											<div class="form-group ">
+												<button class="btn btn-lg" (click)="saveAdminWithOrganization()"
+													data-dismiss="modal"
+													[disabled]="!registerFormAdmin.valid">Create</button>
+												<button type="button" style="margin-left:156px;margin-top:-61px"
+													class="btn btn-default btn-lg" data-dismiss="modal">Close</button>
+											</div>
+										</form> -->
+							<!-- </div>
+								</div>
+							</div> -->
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!--ffffffffffffffffffffffffffffff Creattion of ADMIN END WILL BE HERE kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk-->
+
+
+<div class="modal fade " data-backdrop="false" id="myModalshiva" role="dialog">
+	<div class="modal-dialog">
+		<div class="modal-content modalCont">
+			<div class="modal-header ">
+				<h1 class="modal-title"></h1>
+			</div>
+			<div class="modal-body">
+				<div>
+					<label>Organazation Details</label>
+					<br>
+					<br>
+					<div>
+						<div> <span class="excelSpan"> </span>
+							<div class=" col-sm-4 col-sm-4 col-sm-4 colFont">
+								<br>
+
+								<input type="radio" name="Button123" [(ngModel)]="updateValue" value="1"
+									class="ButtonStateEdit" checked id="ButtonEdit" />
+								<!-- <button class="Button" for="Button1">  Create Organization</button> -->
+								<label class="Button btn btn-lg" style="border-radius: 25px;" type="button"
+									for="ButtonEdit" (click)="CreateOrganization()">Update Organization</label>
+								<br>
+								<br>
+								<input type="radio" name="Button123" [(ngModel)]="updateValue" value="2"
+									class="ButtonStateEdit" id="ButtonEdit2" />
+								<!-- <button class="Button" for="Button2">  Create Organization</button> -->
+								<label class="Button btn btn-lg" type="button" style="border-radius: 25px;"
+									for="ButtonEdit2" (click)="CreateAdmin1()">Update Organization Admin</label>
+
+							</div>
+							<div class=" col-sm-8 col-sm-8 col-sm-8 colFont">
+								<div style="height:545px;border:1px solid black;width:507px;margin-left:-16px"
+									*ngIf="CreateOrg==true">
+									<div class="row">
+										<div class="col-sm-6">&nbsp; &nbsp; &nbsp; &nbsp;
+											<label>Update Organization Details</label>
+											<div class="row excelTable">&nbsp; &nbsp; &nbsp; &nbsp;
+												<label>Organization</label> <span class="starSpan">*</span>
+											</div>
+											<div class="row excelTable">&nbsp; &nbsp; &nbsp; &nbsp;
+												<label>Office Address</label> <span class="starSpan">*</span>
+											</div>
+											<div class="row excelTable">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+												<label>Contact Person</label> <span class="starSpan">*</span>
+											</div>
+											<div class="row excelTable">&nbsp; &nbsp; &nbsp; &nbsp;&nbsp;
+												<label>Phone Number</label> <span class="starSpan">*</span>
+											</div>
+											<div class="row excelTable">&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;
+												<label>Email</label> <span class="starSpan">*</span>
+											</div>
+											<div class="row excelTable">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+												<label>Start Date</label> <span class="starSpan">*</span>
+											</div>
+											<div class="row excelTable">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+												<label>End Date</label> <span class="starSpan">*</span>
+											</div>
+										</div>
+										<div class="col-sm-6" *ngFor="let oneOrg of oneOrganization ">
+											<div class="row excelTable">
+												<input type="text" maxlength="30" [(ngModel)]="oneOrg.Organization"
+													style="margin-top: 25px" class="row excelInputEdit" />
+
+											</div>
+											<div class="row excelTable">
+												<input type="text" maxlength="30" style="margin-top: 16px"
+													[(ngModel)]="oneOrg.OfficeAddress" class="row excelInputEdit" />
+
+											</div>
+											<div class="row excelTable">
+												<input type="text" maxlength="30" style="margin-top: 16px"
+													[(ngModel)]="oneOrg.ContactPerson" class="row excelInputEdit" />
+
+											</div>
+											<div class="row excelTable">
+												<input type="text" [(ngModel)]="oneOrg.PhoneNumber"
+													class="row excelInputEdit" />
+
+											</div>
+											<div class="row excelTable" style="margin-top:-20px;">
+												<input type="text" [(ngModel)]="oneOrg.Email"
+													class="row excelInputEdit" />
+											</div>
+											<div class="row excelTable">
+												<input type="date" class="row excelInputEdit"
+													[ngModel]="oneOrg.StartDate| date:'yyyy-MM-dd'"
+													(ngModelChange)="oneOrg.StartDate = $event" />
+											</div>
+											<div class=" row excelTable">
+												<input type="date" [ngModel]="oneOrg.EndDate | date:'yyyy-MM-dd'"
+													(ngModelChange)="oneOrg.EndDate = $event"
+													class="row excelInputEdit" />
+											</div>
+											<div>
+												<button class="btn btn-lg"
+													(click)="updateOrganization(oneOrg)">Update</button>
+												<!-- <button type="button"  class="btn btn-default">Create</button> -->
+												<button type="button" style="margin-left:100px"
+													class="btn btn-default btn-lg" (click)="clearFileds()"
+													data-dismiss="modal">Cancel</button>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div style="height:545px;border:1px solid black;width:575px;margin-left:-16px"
+									*ngIf="CreateOrgAdmin==true">
+									<div class="row">
+										<div class="col-sm-6">&nbsp; &nbsp; &nbsp; &nbsp;
+											<label>Update Organization Admin</label>
+											<div class="row excelTable">&nbsp; &nbsp; &nbsp; &nbsp;
+												<label>Organization</label> <span class="starSpan">*</span>
+											</div>
+											<div class="row excelTable">&nbsp; &nbsp; &nbsp; &nbsp;
+												<label>Username</label> <span class="starSpan">*</span>
+											</div>
+											<div class="row excelTable">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+												<label>Password</label> <span class="starSpan">*</span>
+											</div>
+											<div class="row excelTable">&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;
+												<label>Work Email</label> <span class="starSpan">*</span>
+											</div>
+										</div>
+										<div class="col-sm-6" *ngFor="let upAdmin of oneAdmin">
+											<div class="row excelTable">
+												<input type="text" maxlength="30" disabled
+													[(ngModel)]="upAdmin.Organization" style="margin-top: 25px"
+													class="row excelInputEdit" />
+											</div>
+											<div class="row excelTable">
+												<input type="text" maxlength="30" [(ngModel)]="upAdmin.userName"
+													style="margin-top: 16px" class="row excelInputEdit" />
+											</div>
+											<div class="row excelTable">
+												<input type="Password" maxlength="30" [(ngModel)]="upAdmin.password"
+													style="margin-top: 16px;width:270px"
+													class="form-control row excelInputEdit"
+													[ngClass]="{ 'is-invalid': submitAdmin && adminForm.Password.errors }" />
+											</div>
+											<div class="  row excelTable">
+												<input type="mail" maxlength="30" [(ngModel)]="upAdmin.Email"
+													style="margin-top: 16px" class="row excelInputEdit" />
+											</div>
+											<div>
+												<button class="btn btn-lg" data-dismiss="modal"
+													(click)="updateAdmin(upAdmin)">Update</button>
+												<button type="button" style="margin-left:100px"
+													class="btn btn-default btn-lg" data-dismiss="modal">Later</button>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<form [formGroup]="orgAdminForm">
+	<!-- The Modal -->
+	<div class="modal fade" id="myModal" role="dialog" data-backdrop="static">
+		<div class="modal-dialog">
+			<div class="modal-content" style="width: 64%; height: 292px; margin-left:unset;">
+				<!-- Modal Header -->
+				<div class="modal-header">
+					<h4 class="modal-title">Create Organization Admin</h4>
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+				</div>
+				<!-- Modal body -->
+				<div class="modal-body">
+					<div class="form-group">
+						<label for="usr">Admin Name</label>
+						<input type="text" class="form-control" formControlName="adminNameOrg" name="admin"
+							placeholder="Name" [(ngModel)]="adminName">
+						<control-messages [control]="orgAdminForm.controls.adminNameOrg"></control-messages>
+					</div>
+					<div class="form-group">
+						<label for="pwd">Password</label>
+						<input type="text" class="form-control" formControlName="adminPasswordOrg" name="pass"
+							placeholder="Password" [(ngModel)]="adminPassword">
+						<control-messages [control]="orgAdminForm.controls.adminPasswordOrg"></control-messages>
+					</div>
+				</div>
+				<!-- Modal footer -->
+				<div class="modal-footer">
+					<button type="button" class="btn btn-lg" data-dismiss="modal"
+						(click)="SaveLicAdmin(adminName,adminPassword)">Save</button>
+					<button type="button" class="btn btn-lg" data-dismiss="modal">Close</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</form>

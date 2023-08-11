@@ -1,0 +1,892 @@
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+.editManualSelected {
+  background-color: lightgray;
+}
+
+.footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  margin-bottom:25px;
+}
+/* Track */
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px #CCCCCC;
+  /* border-radius: 5px; */
+}
+.tableHeader{
+  font-weight: bolder;
+  font-size: 12px !important;
+  font-family: 'lato', sans-serif;
+  background-color: #d0c0c0;
+  color: black;
+  border: 1px solid #d0c0c0;
+  /* position: fixed;
+  top: 0px;  */
+}
+.tableHeader>td{
+  font-size: 12px;
+  font-family: 'lato', sans-serif;
+}
+#spreedSheet{
+  font-weight: 700;
+  font-size: 14px;
+  font-family: 'lato', sans-serif;
+  text-decoration: underline;
+}
+
+.one{
+  height: 45vh !important;
+  overflow: scroll;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #CCCCCC;
+  border-radius: 10px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #beb5b5;
+}
+
+.modal-footer p {
+  font-size: 20px;
+  font-weight: 700;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+
+}
+
+.dockerClose:hover {
+  outline: none;
+
+}
+
+.dockerClose {
+  font-size: 20px;
+  font-weight: 700;
+  width: auto;
+  overflow-x: hidden;
+  background-color: #ffffff;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+.hero {
+  margin: auto;
+  margin-top: 10%;
+}
+
+.modal-body>table>thead {
+  font-size: 15px;
+  font-weight: bolder;
+}
+
+.modal-body>table>tbody {
+  font-size: 15px;
+  font-weight: 600px;
+}
+
+
+.dockerFooter {
+ 
+  height: 45px;
+}
+
+.modal-full {
+  min-width: 100%;
+  margin: 0;
+}
+.dockerBody {
+  margin-top: 3%;
+  padding: 0px;
+  overflow: hidden;
+  height: 100%;
+  position: fixed;
+  width: -webkit-fill-available;
+}
+
+.modal-full .modal-content {
+  min-height: 100vh;
+}
+
+#notepad,
+#featureMenu,
+#scriptMenu {
+  position: absolute;
+  ;
+}
+
+#notepad:hover {
+  color: var(--main-bg-color);
+}
+
+#notepad {
+  font-weight: 600;
+}
+
+#ctxMenu,
+#feaMenu,
+#scrMenu {
+  display: none;
+  z-index: 100;
+
+}
+
+#featureMenu li {
+  font-size: 20px;
+  font-weight: 700;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+
+}
+
+.selected {
+  color: blue;
+}
+
+
+h4:hover {
+  color: rgb(166, 243, 11);
+}
+
+h1:hover,
+h2:hover {
+  color: blue;
+}
+
+.opalSelect {
+  border: 0px;
+  font-size: 12px;
+  background: transparent;
+  height: 25px;
+}
+
+.opalSelect:focus {
+  outline: none;
+}
+
+.row.no-gutter [class*='col-']:not(:first-child),
+.row.no-gutter [class*='col-']:not(:last-child) {
+    padding-right:0;
+    padding-left:0;
+}
+
+.row.no-gutter {
+    margin-left: 0;
+    margin-right: 0;
+}
+
+.no-gutters{
+  margin-left: 0;
+  margin-right: 0;
+}
+.no-gutters > [class*="col-"] {
+  padding-right: 0;
+  padding-left: 0;
+}
+.upload
+{
+  font-size: 12px;
+  /* font-weight: 700; */
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+
+}
+.opalLabelForConfig {
+  width: 165px;
+  font-size: 14px;
+  font-weight: 700;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+
+}
+.modal-backdrop.fade {
+
+  z-index: -1 !important;
+}
+.modalExcelValue {
+  width: 389px;
+  height: 28px;
+  font-size: 15px;
+  font-weight: 500;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+
+}
+
+#modalExcelValue09 {
+  min-width: 134px;
+  width: 134px;
+  height: 28px;
+  font-size: 15px;
+  font-weight: 500;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+
+}
+
+.opalLabelForExcel {
+  width: 89px;
+  font-size: 15px;
+  font-weight: 700;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+
+}
+
+#s1 {
+  width: 150px;
+  font-size: 15px;
+  font-weight: 500;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+.tableOuterDiv {
+  height: 370px;
+  width: 100%;
+}
+
+.tableOuterDiv01 {
+  height: 165px;
+  width: 100%;
+}
+
+:root {
+  --first-color: #488cff;
+}
+
+.if {
+  color: #39bce4;
+  font-size: 15px;
+}
+
+.for {
+  color: #1ae2b7;
+  font-size: 15px;
+}
+
+.validation {
+  color: #0aeb42;
+  font-size: 15px;
+}
+
+.function {
+  color: rgb(255, 174, 0);
+  font-size: 15px;
+}
+
+.selectedFunction {
+  color: rgb(255, 174, 0);
+  font-size: 15px;
+}
+
+.selectedValidation {
+  color: #0aeb42;
+  ;
+}
+
+.selectedIf {
+  color: #39bce4;
+
+}
+.selectedFor {
+  color: #1ae2b7;
+}
+
+.hero h1 {
+  margin-top: 20px;
+}
+
+.button1 {
+  border: none;
+  border-radius: 20px;
+  font-size: 15px;
+  font-weight: 700;
+  width: 150px;
+  background-color: #39bce4;
+  overflow-x: hidden;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+/* .table-striped>tbody>tr:nth-child(2n+2)>td,
+.table-striped>tbody>tr:nth-child(2n+2)>th {
+  background-color: #86cfda;
+} */
+
+.button2 {
+  border-radius: 15px;
+  font-size: 15px;
+  font-weight: 700;
+  width: auto;
+  overflow-x: hidden;
+  background-color: #39bce4;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+.check{margin-top: 10px;}
+
+
+.modal-header {
+  background-color: rgb(166, 243, 11);
+  height: 50px;
+}
+
+.opalLabel {
+  font-size: 15px;
+  font-weight: 700;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+
+.innerDiv1 {
+  height: 300px;
+  overflow-x: scroll;
+
+  width: 100%;
+}
+
+.bulletsTemplateForNLP{
+  float: right;
+}
+
+.innerDiv2 {
+  overflow-x: scroll;
+  height: 118px;
+  width: 100%;
+
+}
+
+.myClass {
+  width: 100%;
+  height: 85vh;
+  overflow-y: auto;
+  overflow-x: hidden;
+  font-size: 15px;
+  font-weight: bolder;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+
+ul,
+#myUL {
+  list-style-type: none;
+
+}
+
+#myUL {
+  margin: 0;
+  padding: 0;
+
+}
+
+.tbodydiv {
+  overflow: auto;
+  overflow-x: hidden;
+  height: 280px;
+
+}
+
+.modalInput {
+  border: none;
+
+}
+
+.inputtext {
+  border: none;
+  overflow-x: auto;
+}
+
+option {
+  border: none;
+}
+
+.excelTable {
+
+  height: 70px;
+  font-weight: bold;
+
+}
+
+.excelRadio {
+  margin-left: 40%
+}
+
+.excelInput {
+
+  height: 40px;
+  font-weight: bold;
+  width: 100%;
+}
+
+.excelSpan {
+  margin-left: 30%;
+  font-weight: bold;
+}
+.version > thead{
+  font-size: 18px;font-weight: bolder;font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+
+}
+.scriptUsed{
+  height: 35vh;
+}
+.formSteps{
+  height: 35vh;
+  width:100%;
+  overflow-y: auto;
+}
+td.break{
+  word-wrap: break-word;         
+  overflow-wrap: break-word;  
+  width: 600px;
+  float: left;
+}
+.version > tbody{
+  font-size: 15px;font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+
+}
+#bottomButtons{
+  bottom: 0;
+  align-content: right;
+  position: fixed;
+  width: 83.3333%;
+  margin-bottom: 10px;
+  right: 0px; 
+  /* background-color:#eaeaea; */
+}
+.comm{
+  color: red;font-size: 15px;font-weight: bolder;font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+.starSpan {
+  color: red
+}
+
+.excelBtn {
+  margin-top: -50px;
+
+}
+
+.modelTable {
+  border: 1px solid black
+}
+
+.colFont {
+  font-size: small
+}
+
+
+
+.tableWidth {
+  width: 100%;
+  border: unset;
+  border-radius: 10px;
+}
+
+.bodyHeight {
+  height: 300px;
+  overflow-y: auto;
+  overflow-x: auto;
+  border-radius: 10px;
+}
+
+.devMouseOver:hover{
+background-color: blue;
+color: white;
+cursor: pointer;
+}
+
+
+
+
+.devRow{
+  /* border-bottom: 1px solid black; */
+  margin: unset
+}
+
+:host::ng-deep.uiElement{
+  color: blue;
+  font-weight: 400;
+  outline: none;
+}
+
+:host ::ng-deep.highlightText   {
+  -webkit-user-modify: read-write;
+  color: orangered;
+  font-weight: 400;
+  outline: none;
+ word-wrap: break-word;         
+  overflow-wrap: break-word;  
+  text-align: right; 
+  width: 100%; 
+  /* float: left; */
+  /* padding-top: 0;
+   padding-left: 0; */
+   line-height: 1em 
+  }
+
+  :host ::ng-deep.condition   {
+    -webkit-user-modify: read-write;
+    color: rgb(249, 4, 186) ;
+    font-weight: 400;
+    outline: none;
+    }
+
+  :host::ng-deep.variable{
+    -webkit-user-modify: read-write;
+    color: purple;
+    font-weight: 400;
+    outline: none;
+  }
+
+  .editSelected{
+    background-color: lightgray;
+  }
+.objectUpdates{
+  background-color: #7a7a52;
+  color:white
+}
+
+  .editManualSelected {
+    background-color: lightgray;
+  }
+
+  #displayNlp{
+    height: 70px;
+    font-size: 15px;
+    overflow: auto;
+    font-family: 'Times New Roman', Times, serif;
+  }
+
+  .nlpUiElement{
+    color: blue;
+    font-size: 15px;
+  }
+  .nlpVariable{
+    color: purple;
+    font-size: 15px;
+  }
+  .nlpInput{
+    color: orangered;
+    font-size: 15px;
+  } 
+  .nlpCondition{
+    color: rgb(249, 4, 186);
+    font-size: 15px;
+  }
+
+
+
+  .table-fixed thead {
+    width: 97%;
+  }
+  .table-fixed tbody {
+    height: 230px;
+    overflow-y: auto;
+    width: 100%;
+  }
+  .table-fixed thead, .table-fixed tbody, .table-fixed tr, .table-fixed td, .table-fixed th {
+    display: block;
+  }
+  .table-fixed tbody td, .table-fixed thead > tr> th {
+    float: left;
+    border-bottom-width: 0;
+  }
+
+  .theadColor {
+    background-color: #6C7AE0;
+    border-radius: 10px 10px 0px 0px;
+  }
+  
+  .shadow-lg {
+    border-collapse: collapse;
+    border-spacing: 100%;
+    border-radius: 10px;
+  }
+  
+  .thdata {
+    font-size: 16px;
+    line-height: 30px;
+    text-align: left;
+    padding: unset;
+    color: white;
+  }
+  
+  .block {
+    display: block;
+  }
+
+  .text{
+    position: relative;
+    height: 0px;
+    width: 500px;  
+  }
+  .devRowIcon{
+    padding:2px 4px;
+  }
+  .body {
+    overflow: hidden;
+    position:fixed;
+    width: 100%;
+    height: 100%;
+}
+
+#buttomButtons{
+  bottom: 0;
+  align-content: right;
+  position: fixed;
+  width: auto;
+  margin-bottom: 27px;
+  right: 0px; 
+  }
+  @media screen and (min-device-width: 768px) and (max-device-width: 1023px) {
+    .ui-md-2 {
+      width: 25%;
+      height: 100vh;
+    }
+    .ui-md-10 {
+      width: 75%;
+      height: 100vh;
+    }
+    .table-container {
+      margin-top: 10px;
+      max-height: 400px;
+      overflow: auto;
+    }
+    .topSection {
+      height: 380px;
+    }
+
+    .sectionTwo{
+      height: 340px;
+    }
+  }
+  
+  @media screen and (min-device-width: 1024px) and (max-device-width: 1440px) {
+    .ui-md-2 {
+      width: 20%;
+      height: 100vh;
+    }
+    .ui-md-10 {
+      width: 80%;
+      height: 100vh;
+      overflow-y: visible;
+      overflow-x: hidden;
+    }
+    .table-container {
+      margin-top: 4%;
+      max-height: 400px;
+      overflow: auto;
+    }
+    .topSection {
+      height: 380px;
+    }
+
+    .sectionTwo{
+      height: 300px;
+    }
+    .nlpOuterDiv {
+      height: 274px;
+      width: 100%;
+    }
+    .buttetsSubDiv {
+      margin-top: 5px;
+    }
+    .tableDiv {
+      overflow-y: visible;
+      height: 270px;
+      overflow-x: hidden;
+    }
+    
+    .bottomSection {
+      height: 250px;
+      overflow-y: visible;
+      overflow-x: hidden;
+    }
+  }
+  
+  @media screen and (min-device-width: 768px) and (max-device-width: 991px) {
+    .table-container {
+      margin-top: 10px;
+      max-height: 400px;
+      overflow: auto;
+    }
+    .ui-md-2 {
+      width: 20%;
+      height: 100vh;
+    }
+    .ui-md-10 {
+      width: 80%;
+      height: 100vh;
+      overflow-y: visible;
+      overflow-x: hidden;
+    }
+    .topSection {
+      height: 364px;
+    }
+
+    .sectionTwo{
+      height: 320px;
+    }
+    .nlpOuterDiv {
+      height: 220px;
+      width: 100%;
+    }
+    .buttetsSubDiv {
+      margin-top: 5px;
+    }
+    .tableDiv {
+      overflow-y: visible;
+      height: 215px;
+      overflow-x: hidden;
+    }
+    .returnAlign {
+      display: grid;
+    }
+    .Parameters {
+      margin-bottom: 25px;
+    }
+    .returnValue {
+      display: flex;
+    }
+    .divHeight {
+      height: 102px;
+    }
+  }
+  
+  @media screen and (min-device-width: 992px) and (max-device-width: 1199px) {
+    .table-container {
+      margin-top: 10px;
+      max-height: 400px;
+      overflow: auto;
+    }
+    .ui-md-2 {
+      width: 20%;
+      height: 100vh;
+    }
+    .ui-md-10 {
+      width: 80%;
+      height: 100vh;
+      overflow-y: visible;
+      overflow-x: hidden;
+    }
+    .topSection {
+      height: 380px;
+    }
+    .sectionTwo{
+      height: 320px;
+    }
+    .nlpOuterDiv {
+      height: 260px;
+      width: 100%;
+    }
+    .buttetsSubDiv {
+      margin-top: 5px;
+    }
+    .tableDiv {
+      overflow-y: visible;
+      height: 255px;
+      overflow-x: hidden;
+    }
+   
+  }
+  
+  @media screen and (min-device-width: 375px) and (max-device-width: 767px) {
+    .ui-md-2 {
+      width: 100%;
+      height: 50vh;
+    }
+    .ui-md-10 {
+      width: 100%;
+      height: 100vh;
+    }
+    
+    .table-container {
+      margin-top: 10px;
+      max-height: 333px;
+      overflow: auto;
+    }
+    
+    .topSection {
+      height: 462px;
+    }
+    .sectionTwo{
+      height: 420px;
+    }
+    .nlpOuterDiv {
+      height: 260px;
+      width: 100%;
+    }
+    .buttetsSubDiv {
+      margin-top: 5px;
+    }
+    .tableDiv {
+      overflow-y: visible;
+      height: 255px;
+      overflow-x: scroll;
+    }
+    
+  }
+  
+  @media screen and (min-device-width: 0px) and (max-device-width: 375px) {
+    .ui-md-2 {
+      width: 100%;
+      height: 100%;
+    }
+    .ui-md-10 {
+      width: 100%;
+      height: 100vh;
+    }
+
+    .topSection{
+      height: 480px;
+    }
+    .sectionTwo{
+      height: 380px;
+    }
+    .ui-fluid {
+      height: 85vh;
+      overflow-y: auto;
+      overflow-x: hidden;
+    }
+    .table-container {
+      margin-top: 10px;
+      max-height: 333px;
+      overflow: auto;
+    }
+   
+  }
+  
+  @media screen and (min-device-width: 1441px) and (max-device-width: 2560px) {
+    .ui-md-2 {
+      width: 20%;
+      height: 100%;
+    }
+    .ui-md-10 {
+      width: 80%;
+      height: 100vh;
+    }
+    .table-container {
+      margin-top: 10px;
+      max-height: 400px;
+      overflow: auto;
+    }
+    .topSection {
+      height: 550px;
+    }
+    .sectionTwo {
+      height: 450px;
+    }
+    .nlpOuterDiv {
+      height: 445px;
+      width: 100%;
+    }
+    .buttetsSubDiv {
+      margin-top: 5px;
+    }
+    .tableDiv {
+      overflow-y: visible;
+      height: 440px;
+      overflow-x: hidden;
+    }
+    
+  }
+    
+
+ 

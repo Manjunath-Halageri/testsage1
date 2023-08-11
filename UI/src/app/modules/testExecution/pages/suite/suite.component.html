@@ -1,0 +1,214 @@
+<ul class="breadcrumb" style="font-size:15px;background-color: unset;margin:unset">
+  <li class="breadcrumb-item" style="width: 115px;"><a  id="mainheader">Test
+    Execution</a></li><!--[routerLink]="['/projectdetail']"-->
+  <li class="breadcrumb-item" id="subheader"><a id="subheader">Suite</a></li>
+</ul>
+<div class="ui-fluid">
+  <div class="ui-g">
+
+    <div class="ui-g-2 ui-md-2 border">
+      <div class="one">
+        <div >
+          <span class="treeStructureTitle"  [shAttachMenu]="menu1"
+            style="position:sticky;">Suite</span>
+          <p-tree [value]="displayModuleForTree" (onNodeSelect)="nodeSelect($event)" selectionMode="single"
+            [(selection)]="selectedFile" [filter]="true" [contextMenu]="cm">sfsfsfsfs</p-tree>
+          <p-contextMenu #cm appendTo="body"  [model]="items"></p-contextMenu>
+        </div>
+        <div>
+          <sh-context-menu #menu1 style="background-color:white">
+            <ng-template shContextMenuItem let-data style="background-color:white" *ngIf="create==true">
+              <div (click)="createSuites()" class="menuu treeStructureCreate" >Create Suite</div>
+            </ng-template>
+            <ng-template shContextMenuItem let-data style="background-color:white" *ngIf="read==true">
+              <div (click)="createsuiteTable()" class="menuu treeStructureCreate" >show All Suite
+              </div>
+            </ng-template>
+          </sh-context-menu>
+        </div>
+      </div>
+    </div>
+
+    <div class="ui-g-10 ui-md-10" style="height:90vh;border-top: 1px solid #dee2e6!important;overflow: scroll;">
+
+      <div *ngIf="create==true &&suiteCreate == true || suiteupdate == true" style="padding: 10px;margin: auto;width: auto;height:auto;margin-top: 3%">
+        <form [formGroup]="userForm" novalidate style="text-align: -webkit-center;">
+          <div class="card createCard">
+            <div class="card-header">
+              <div class="text-center">
+                <label *ngIf="suiteCreate" style="margin: unset;padding: 5px" for="suiteName">Create Suite</label>
+                <label *ngIf="suiteupdate" style="margin: unset;padding: 5px" for="suiteName">Edit Suite</label>
+              </div>
+            </div>
+            <div class="card-body">
+              <div class="form-group " style="height: 52px;">
+                <label for="suiteName" style="float: left;">Suite</label>
+                <input type="text" formControlName="Suitecreation" autocomplete="off" class="form-control" name="suite"
+                  [(ngModel)]="suite">
+                <control-messages [control]="userForm.controls.Suitecreation"></control-messages>
+              </div>
+              <div class="form-group" style="height: 68px;">
+                <label for="desc" style="float: left;">Description</label>
+                <textarea formControlName="Description" class="form-control" name="desc" rows="2" cols="21.99" maxlength="100" [(ngModel)]="desc"></textarea>
+                <control-messages [control]="userForm.controls.Description"></control-messages>
+              </div>
+              <div class="form-group" style="height: 52px;">
+                <label for="release" style="float: left;">Release</label>
+                <select class="form-control" [(ngModel)]="releaseId" formControlName="releaseId"
+                (focusin)="spliceDefault(releaseId)" (blur)="addDefault(releaseId)" >
+                  <!-- [attr.disabled]="nonEdit ? '' : null" -->
+                 <!-- <option hidden></option> -->
+                 <option value="Select Release" [hidden]="releaseclicked" >Select Release</option>
+                  <option *ngFor="let activeVersion of activeReleaseVer">{{activeVersion.releaseVersion}}</option>
+                </select>
+                <control-messages [control]="userForm.controls.releaseId"></control-messages>
+              </div>
+              <div *ngIf="suiteupdate != 1" class="form-group" style="height: 52px;">
+                <label for="copySuite" style="float: left;">Copy Suite from</label>
+                <select class="form-control" [(ngModel)]="suiteName" (change)="fromToSuite(suiteName)"
+                  formControlName="copySuite">
+                  <option value="" style="display:none;"[value]="suitename" ></option>
+                  <option *ngFor="let suiteNames of displayModuleForTree" >{{suiteNames.label}}</option>
+                </select>
+              </div>
+            </div>
+            <div class="card-footer">
+              <div *ngIf="apiConfig == true" class="form-group">
+                <label>Config File &nbsp;&nbsp;&nbsp;&nbsp;</label>
+                <button [disabled]="!userForm.valid" class="btn btn-link configButton"
+                  (click)="createSuiteConfig(suite,desc)" *ngIf="suiteconfig == 1" data-toggle="modal"
+                  data-target="#myModalConfig">SuiteConfigLink</button>
+                <button [disabled]="!userForm.valid" type="submit" class="btn btn-link configButton" (click)="editPopUp(suite,desc)"
+                  *ngIf="suiteupdate == 1" id="elink" data-toggle="modal"
+                  data-target="#myModalConfig">EditConfigLink</button>
+                <div>
+                  <button [disabled]="!userForm.valid||suiteSave==true" *ngIf="suiteupdate != 1 && copyFrom == true" type="button"
+                    class="btn btn-lg" (click)="testSuite(suite,desc,time,defaultBrowser,defaultVersion,releaseId)"
+                    data-dismiss="modal">SaveSuite</button>&nbsp;&nbsp;
+                    <!-- <button [disabled]="!userForm1.valid" *ngIf="suiteupdate != 1" type="button" class="btn btn-lg" 
+            (click)="testSuite(suite,desc,time,defaultBrowser,defaultVersion,releaseId)" data-dismiss="modal">Save
+            Suite</button> -->
+          <button type="button"[disabled]="!userForm.valid||suiteSave==true" *ngIf="suiteupdate == 1"
+            (click)="updateSuite(suite,desc,time,defaultBrowser,defaultVersion)" class="btn  btn-lg"
+            data-dismiss="modal">Update Suite</button>
+                  <button type="button" [disabled]="!userForm.valid||suiteSave==true" class="btn btn-lg"
+                    *ngIf="suiteupdate != 1 && copyFroms == true" (click)="copytestSuite(suite,suiteName,desc)"
+                    data-dismiss="modal">Copy
+                    Suite</button>&nbsp;&nbsp;
+
+
+                  <button type="submit" class="btn btn-lg btn-cancel" (click)="cancel(suite,desc)">Cancel</button>
+                </div>
+              </div>
+              <div *ngIf='apiConfig==false' style="text-align: end;">
+                <button type="button" class="btn btn-lg" [disabled]="!userForm.valid" *ngIf="suiteupdate != 1 && copyFrom == true"
+                  (click)="apitestSuite(suite,desc,releaseId)" data-dismiss="modal">Save
+                  Suite</button>&nbsp;&nbsp;
+                  <button [disabled]="!userForm.valid" *ngIf="suiteconfig != 1" type="button" class="btn btn-lg" 
+                                  (click)="updatesuites(suite,desc,releaseId)"data-dismiss="modal">Update
+                                 Suite</button>&nbsp;&nbsp;
+                <button type="button" [disabled]="!userForm.valid" class="btn btn-lg"
+                  *ngIf="suiteupdate != 1 && copyFroms == true" (click)="copytestSuite(suite,suiteName,desc)"
+                  data-dismiss="modal">Copy
+                  Suite</button>&nbsp;&nbsp;
+                <button type="reset" class="btn btn-lg btn-cancel" (click)="cancel(suite,desc)">Cancel</button>
+              </div>
+            </div>
+   
+          </div>
+
+
+        </form>
+      </div>
+
+      <div *ngIf="read==true && displaySuitesTable ==true" style="padding: 10px;">
+        <table class="shadow-lg scroll">
+          <thead class="theadColor">
+            <th class="col-xs-1">Sl.No</th>
+            <th class="col-xs-3">Suite</th>
+            <th class="col-xs-3">Description</th>
+            <th class="col-xs-3">ConfigFile</th>
+            <th class="col-xs-3">Release Version</th>
+
+          </thead>
+          <tbody>
+            <tr *ngFor="let data of editdata; let i=index">
+              <td class="col-xs-1">{{i+1}}</td>
+              <td class="col-xs-3">{{data.testsuitename}}</td>
+              <td class="col-xs-3">{{data.Description}}</td>
+              <td class="col-xs-3"><span style="margin-left: 3px">ConfigFile</span></td>
+              <td class="col-xs-3">{{data.releaseVersion}}</td>
+            </tr>
+
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<form [formGroup]="userForm1" novalidate>
+  <div class="modal fade" *ngIf="editmodal != 1" id="myModalConfig" role="dialog" data-backdrop="static">
+    <div class="modal-dialog">
+
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title">Configuration for Suite</h1>
+          <!-- <button type="button" class="close" data-dismiss="modal">&times;</button> -->
+        </div>
+        <div class="row modal-body">
+          <div class="col-4">
+            <div><label>Set TimeOut</label></div><br>
+            <div><label>Browser Name</label></div><br>
+            <label>Browser Version</label>
+          </div>
+          <div class="col-4 text-left">
+            <div>
+              <input type="number" formControlName="createtime" min="10" max="25" id="s1" name="time" step="1"
+               (keyup)="onKeyUp($event)"  id="time" (keydown)="inputBox($event)"
+              [(ngModel)]="time">
+              <control-messages [control]="userForm1.controls.createtime"></control-messages>
+            </div><br>
+            <div>
+              <select id="s2" [(ngModel)]="defaultBrowser" formControlName="createbrowser"
+                (ngModelChange)="getversion(defaultBrowser)" style="font-size:small">
+                <option disabled>{{defaultBrowser}}</option>
+                <option></option>
+                <option *ngFor="let b of dbrowsers">{{b.browserName}}</option>
+              </select>
+              <control-messages [control]="userForm1.controls.createbrowser"></control-messages>
+            </div><br>
+            <div>
+              <select id="s3" [(ngModel)]="defaultVersion" formControlName="createversion" style="font-size:small" >
+                <option disabled>{{defaultVersion}}</option>
+                <!-- <option [hidden]="selct">{{defaultVersion}}</option>(click)="versionFun()" -->
+                <option *ngFor="let v of version">{{v.versionName}}</option>
+              </select>
+              <control-messages [control]="userForm1.controls.createversion"></control-messages>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <!-- <button [disabled]="!userForm1.valid" *ngIf="suiteupdate != 1" type="button" class="btn btn-lg"
+            (click)="testSuite(suite,desc,time,defaultBrowser,defaultVersion,releaseId)" data-dismiss="modal">Save
+            Suite</button>
+          <button type="button" *ngIf="suiteupdate == 1"
+            (click)="updateSuite(suite,desc,time,defaultBrowser,defaultVersion)" class="btn  btn-lg"
+            data-dismiss="modal">Update Suite</button> -->
+            <button type="button" class="btn  btn-lg" [disabled]="!userForm1.valid"
+            data-dismiss="modal" (click)="saveConfig()">Save</button>
+          <button type="button" class="btn  btn-lg btn-cancel" 
+            data-dismiss="modal">Close</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</form>
+<ngx-spinner bdColor="rgba(51, 51, 51, 0.8)" size="medium" color="#fff" type="ball-clip-rotate" [fullScreen]="false">
+  <h3><br>
+    <p style="color: white"> Please Wait... {{spinnerVal}} </p>
+  </h3>
+</ngx-spinner>

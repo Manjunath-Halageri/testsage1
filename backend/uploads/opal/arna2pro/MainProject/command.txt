@@ -1,0 +1,1 @@
+mvn exec:java -Dexec.mainClass=reuseablePackage.feature.XMLtoJSON1 -e

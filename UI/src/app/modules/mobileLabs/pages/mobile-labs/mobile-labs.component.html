@@ -1,0 +1,138 @@
+<ul class="breadcrumb" style="font-size:15px;background-color: unset;margin:unset">
+  <li class="breadcrumb-item" style="width: 97px;"><a [routerLink]="['/projectdetail']" id="mainheader">Mobile Labs</a></li>
+  <li class="breadcrumb-item" id="subheader"><a id="subheader">Mobile</a></li>
+</ul>
+<hr>
+<!-- <br> -->
+<div class="container-fluid">
+  <div class="container well" *ngIf="dvc!=true">
+    <div class="col-md-12 col-sm-12 col-xs-12">
+      <h1 class="welcome">Welcome to Mobile Labs</h1>
+    </div>
+    <button type="button" class="btn btn-lg startLab" (click)="connect()">Connect</button>
+  </div>
+
+  <div class="container" *ngIf="dvc==true">
+    <div class="col-md-12 col-sm-12 col-xs-12" [hidden]="bookedSlot==true">
+      <div>
+        <span class="header">Available Devices</span>
+      </div><br>
+      <table class="shadow-lg scroll">
+        <thead class="theadColor">
+          <tr>
+            <th style="width: 100px;">Check</th>
+            <th>Devices Name</th>
+            <th>Devices Id</th>
+            <th>Date</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let data of mobileDetails; let i = index" [class.selected]="data.DevicesId == selectedRownew">
+            <td style="width: 100px;">
+              <span *ngIf="blockTdData==true">
+                <input type="checkbox" [disabled]="blockTdData==true" [class.selected]="blockTdData == true"
+                  (click)="setClickedRow(data.DevicesId);checkFun(data.DevicesId,$event.target.checked)">
+              </span>
+              <span *ngIf="blockTdData==false">
+                <input type="checkbox" style="background-color: null" [disabled]="blockTdData==true"
+                  [class.selected]="blockTdData == true"
+                  (click)="setClickedRow(data.DevicesId);checkFun(data.DevicesId,$event.target.checked)">
+              </span>
+            </td>
+            <td>{{data.DevicesName}}</td>
+            <td>{{data.DevicesId}}</td>
+            <td><input type="date"  readonly [(ngModel)]="todaydate">
+            </td>
+            <td><button type="button" class="btn btn-lg" data-toggle="modal" data-target="#myModal"
+                (click)="somethingChanged(currentTime,toTime,data.DevicesId,todaydate)">Check</button></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="col-md-12 col-sm-12 col-xs-12" [hidden]="bookedSlot==false">
+      <div>
+        <span class="header">Booked Devices</span>
+      </div><br>
+      <table class="shadow-lg scroll" style="width: 100%">
+        <thead class="theadColor">
+          <tr>
+            <th style="width: 100px;">Check</th>
+            <th>Devices Name</th>
+            <th>Devices Id</th>
+            <th>Date</th>
+            <!-- <th></th> -->
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let data of bookedslot009; let i = index"
+            [class.selected09]="data.result.DevicesId == selectBookedDevices">
+            <td style="width: 100px;"><input type="checkbox"
+                (click)="bookClickedRow(data.result.DevicesId);checkFun(data.result.DevicesId,$event.target.checked)">
+            </td>
+            <td>{{data.result.DevicesName}}</td>
+            <td>{{data.result.DevicesId}}</td>
+            <td><input type="date" readonly displayFormat="dd/mm/YYYY" [(ngModel)]="todaydate">
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="modal fade" id="myModal" role="dialog">
+      <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header">
+            <h2 class="modal-title">Avaliable Slot</h2>
+          </div>
+          <div class="modal-body ">
+            <table class="shadow-lg scroll">
+              <thead class="theadColor">
+                <tr>
+                  <th>Start Time</th>
+                  <th>End Time</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let list of filtered">
+                  <td>{{list.StartingTime}}</td>
+                  <td><input type="time" [(ngModel)]="list.toTime"></td>
+                  <td><button type="button" class="btn btn-lg "
+                      (click)="blockDevices(final,todaydate,list.StartingTime,list.toTime)">Block</button></td>
+                </tr>
+              </tbody>
+            </table>
+
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-lg  btn-cancel" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div><br>
+
+  <div *ngIf="dvc==true">
+    <div class="col-md-1 col-sm-1 col-xs-1"></div>
+    <div class="col-md-8 col-sm-8 col-xs-8">
+
+
+
+      
+      <input type="file" id="file" [disabled]="blockInstall==true" (change)="fileChangeEvent($event)"
+        placeholder="Upload file..." /><br>
+      <button type="button" class="btn btn-lg" [disabled]="blockInstall==true" (click)="upload()">Upload</button>
+    </div>
+    <!-- <div class="col-md-4 col-sm-4 col-xs-4"></div> -->
+    <div class="col-md-2 col-sm-2 col-xs-2" style="text-align: end;">
+      <button type="button" class="btn btn-lg " (click)="installApk()" [disabled]="blockInstall==true">Install</button>
+    </div>
+  </div>
+
+
+
+</div>

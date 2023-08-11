@@ -1,0 +1,134 @@
+<ul class="breadcrumb" style="font-size:15px;background-color: unset;margin:unset">
+  <li class="breadcrumb-item" style="width: 115px;"><a  id="mainheader">Test
+    Execution</a></li><!--[routerLink]="['/projectdetail']"-->
+  <li class="breadcrumb-item"><a id="subheader">Selection</a></li>
+
+</ul>
+<hr style="margin:3px">
+<div class="container-fluid">
+  <div class="col-sm-12 col-lg-12 col-md-12 shadow-lg border" >
+    <div style="margin: 10px">
+      <div class="row" style="margin: unset">
+        <div class="col-lg-2 col-md-2 col-sm-2 mb-3 mr-sm-3" style="padding: unset">
+          <label for="release">Release</label>
+          <select class="form-control" [(ngModel)]="releaseId" (change)="selectedRelease(releaseId)" 
+          (focusin)="spliceDefault(releaseId)" (blur)="addDefault(releaseId)" >
+            <option value="Select Release" [hidden]="releaseclicked" >Select Release</option>
+            <!-- <option></option>  (focusin)="spliceDefault(releaseId)" (blur)="addDefault(releaseId)"-->
+            <option *ngFor="let activeVersion of activeReleaseVer">
+              {{activeVersion.releaseVersion}}</option>
+          </select>
+        </div>
+        <br>
+        <div class="col-lg-2 col-md-2 col-sm-2 mb-3 mr-sm-3" style="padding: unset">
+          <label for="module">Module</label>
+          <select class="form-control" [(ngModel)]="moduleId" (change)="moduleIndex(moduleId,releaseId)">
+            <!-- <option value="" ></option> -->
+            <option *ngFor="let var_moduleName of moduleNames" value="{{var_moduleName.moduleId}}">
+              {{var_moduleName.moduleName}}</option>
+          </select>
+        </div>
+        <br>
+        <div class="col-lg-2 col-md-2 col-sm-2 mb-3 mr-sm-3" style="padding: unset">
+          <label for="feature">Feature</label>
+          <select class="form-control" [(ngModel)]="featureId">
+            <!-- <option value="" ></option> -->
+            <option *ngFor="let var2_featureName of featureNames" value="{{var2_featureName.featureId}}">
+              {{var2_featureName.featureName}}</option>
+          </select>
+        </div>
+        <br>
+        <div class="col-lg-2 col-md-2 col-sm-2 mb-3 mr-sm-3" style="padding: unset">
+          <label for="type">Type</label>
+          <select class="form-control" [(ngModel)]="selectedType">
+            <!-- <option [ngValue]='All'>All</option> -->
+            <option *ngFor="let type of typeArray" value="{{type.typeId}}">{{type.typeName}}</option>
+          </select>
+        </div>
+        <br>
+        <div class="col-lg-2 col-md-2 col-sm-2 mb-3 mr-sm-3" style="padding: unset">
+          <label for="priority">Priority</label>
+          <select class="form-control " [(ngModel)]="selectedPriority">
+            <!-- <option [ngValue]='All'>All</option> -->
+            <option *ngFor="let priority of priorityArray" value="{{priority.priorityId}}">{{priority.priorityName}}
+            </option>
+          </select>
+        </div>
+        <div class="col-lg-1 col-md-1 col-sm-1 mb-3 mr-sm-3" style="margin-top: auto">
+          <button type="button" class="btn btn-lg"
+            (click)=search(releaseId,moduleId,featureId,selectedType,selectedPriority)>Search</button>
+        </div>
+        <br>
+      </div>
+      <br><br>
+      <div style="margin:unset">
+        <div>
+          <table class="shadow-lg scroll" style="width: 100%;">
+            <thead class="theadColor">
+              <th *ngIf="create==true">&nbsp;
+              <input type="checkbox" name="fcheck" [(ngModel)]="disable"  [hidden]="hidden"
+              class='checkBoxSelect'(click)="checks(testScriptsData,$event)">
+          </th>
+              <th class="col-xs-3">Module</th>
+              <th class="col-xs-3">Feature </th>
+              <th class="col-xs-2">Testcase</th>
+              <th class="col-xs-1">Type</th>
+              <th class="col-xs-2">Priority</th>
+            </thead>
+            <tbody>
+              <div *ngIf="noData==true" id="noData">{{allData}}</div>
+              <div *ngIf="noData!=true">
+                <tr *ngFor="let test of testScriptsData;let i = index;">
+                  <td *ngIf="create==true&&srch==true" class="col-xs-1">
+                    <input type="checkbox" [(ngModel)]="test.checkbox" [checked]=checkd (ngModelChange)="tick(test,test.checkbox)">
+                    <!-- <input type="checkbox" [checked]=checkd  [(ngModel)]="test.checkbox" (ngModelChange)="copy(i,test,test.checkbox)"> -->
+                  </td>
+                  <td *ngIf="srch==true" class="col-xs-3"><span>{{test.moduleName}}</span></td>
+                  <td *ngIf="srch==true" class="col-xs-3"><span>{{test.featureName}}</span></td>
+                  <td *ngIf="srch==true" class="col-xs-2"><span style="margin-left: 6px">{{test.scriptName}}</span></td>
+                  <td *ngIf="srch==true" class="col-xs-1"><span style="margin-left: 6px">{{test.type1}}</span></td>
+                  <td *ngIf="srch==true" class="col-xs-2"><span style="margin-left: 6px">{{test.priority}}</span></td>
+                </tr>
+              </div>
+            </tbody>
+          </table>
+          <br>
+          <div class="text-center">
+            <button type="button" class="btn btn-lg" (click)="releasebased()" data-toggle="modal"
+              data-target="#copyToSuiteModal" *ngIf="create==true">
+              Copy To Suite</button>
+          </div>
+        </div>
+        <div>
+          <div class="modal fade" id="copyToSuiteModal" role="dialog">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h1 class="modal-title">Select Suite</h1>
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                  Suite
+                  <select id="suite" [(ngModel)]="selectedname" style="font-size:small;width:150px">
+                    <option value="" style="display:none;"></option>
+                    <option *ngFor="let names of releasearray1" style="height:200px; overflow:scroll">
+                      {{names.testsuitename}}
+                    </option>
+                  </select>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-lg" mat-button (click)="saveScripts(selectedname,testScriptsData)"
+                    data-dismiss="modal">Save</button>
+                  <button type="button" class="btn btn-lg btn-cancel" data-dismiss="modal">Close</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- <div class="col-sm-1 col-lg-1 col-md-1" style="height: 550px;">
+  </div> -->
+
+</div>

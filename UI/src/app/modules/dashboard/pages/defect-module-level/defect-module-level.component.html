@@ -1,0 +1,227 @@
+<!--  *ngIf="moduleHide === true" -->
+<div class="ui-fluid">
+  <div class="prioritymodule" *ngIf="prioritymodule==true">
+    <div class="moduleGraph">
+      <!-- <h1>Module</h1>s -->
+      <!-- <div class="row"> -->
+        <!-- <div class="col-2"></div> -->
+        <div align="center">
+          <google-chart *ngIf="activateStacked" [data]="priorityColumnChart"></google-chart>
+          <google-chart [data]="columnChart"></google-chart>
+        </div>
+        <!-- <div class="col-2"></div> -->
+      <!-- </div> -->
+     
+    </div>
+    <!-- moduleGraph end -->
+    <div class="moduleData">
+      <div>
+        <div class="example-container shadow-lg table-container">
+          <table mat-table [dataSource]="allPriorityData" matSort class="mat-elevation-z8">
+  
+            <!-- Position Column -->
+            <ng-container matColumnDef="Sl.No">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header class="angulartheadColor"> Sl.No </th>
+              <td mat-cell *matCellDef="let element; let i = index;"> {{i+1}}</td>
+            </ng-container>
+  
+            <!-- Name Column -->
+            <ng-container matColumnDef="Module">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header class="angulartheadColor">Module</th>
+              <td mat-cell *matCellDef="let element"><a mat-link (click)="fetchFeatureOnMod(element.moduleId)"
+                [routerLink]="['/projectdetail/dashboard/defecthierarchy/Defectmodulelevel/Defectfeaturelevel']">
+                  {{element.moduleName}} </a></td>
+            </ng-container>
+  
+            <!-- Weight Column -->
+            <ng-container matColumnDef="Total Priority">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header class="angulartheadColor">Total Priority</th>
+              <td mat-cell *matCellDef="let element"> {{element.totalPriority}} </td>
+            </ng-container>
+  
+            <!-- Symbol Column -->
+            <ng-container matColumnDef="P1">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header class="angulartheadColor">P1 </th>
+              <td mat-cell *matCellDef="let element"> {{element.P1}} </td>
+            </ng-container>
+  
+            <!-- Symbol Column -->
+            <ng-container matColumnDef="P2">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header class="angulartheadColor">P2 </th>
+              <td mat-cell *matCellDef="let element"> {{element.P2}} </td>
+            </ng-container>
+  
+            <!-- Symbol Column -->
+            <ng-container matColumnDef="P3">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header class="angulartheadColor">P3 </th>
+              <td mat-cell *matCellDef="let element"> {{element.P3}} </td>
+            </ng-container>
+  
+            <ng-container matColumnDef="P4">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header class="angulartheadColor">P4 </th>
+              <td mat-cell *matCellDef="let element">{{element.P4}}</td>
+            </ng-container>
+  
+            <tr mat-header-row *matHeaderRowDef="priorityReport"></tr>
+            <tr mat-row *matRowDef="let row; columns: priorityReport;"></tr>
+          </table>
+        </div>
+      </div>
+
+    </div>
+    <!-- prioritymodule end -->
+
+  </div>
+
+  <div class="severitymodule" *ngIf="severitymodule==true">
+      <div class="moduleGraph">
+            <google-chart *ngIf="activateStacked" [data]="severityColumnChart"></google-chart>
+            <google-chart [data]="columnChart"></google-chart>
+          </div>
+      
+      <!-- moduleGraph end -->
+      <div class="moduleData">
+    
+        <div class="example-container shadow-lg table-container">
+          <table mat-table [dataSource]="allSeverityData" matSort class="mat-elevation-z8">
+  
+            <!-- Position Column -->
+            <ng-container matColumnDef="Sl.No">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header class="angulartheadColor"> Sl.No </th>
+              <td mat-cell *matCellDef="let element; let i = index;"> {{i+1}}</td>
+            </ng-container>
+  
+            <!-- Name Column -->
+            <ng-container matColumnDef="Module">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header class="angulartheadColor">Module</th>
+              <td mat-cell *matCellDef="let element"><a mat-link (click)="fetchFeatureOnMod(element.moduleId)"
+                [routerLink]="['/projectdetail/dashboard/defecthierarchy/Defectmodulelevel/Defectfeaturelevel']">
+                  {{element.moduleName}} </a></td>
+            </ng-container>
+  
+            <!-- Weight Column -->
+            <ng-container matColumnDef="Total Severity">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header class="angulartheadColor">Total Severity</th>
+              <td mat-cell *matCellDef="let element"> {{element.totalSeverity}} </td>
+            </ng-container>
+  
+            <!-- Symbol Column -->
+            <ng-container matColumnDef="Blocker">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header class="angulartheadColor">Blocker </th>
+              <td mat-cell *matCellDef="let element"> {{element.Blocker}} </td>
+            </ng-container>
+  
+            <!-- Symbol Column -->
+            <ng-container matColumnDef="Critical">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header class="angulartheadColor">Critical </th>
+              <td mat-cell *matCellDef="let element"> {{element.Critical}} </td>
+            </ng-container>
+  
+            <!-- Symbol Column -->
+            <ng-container matColumnDef="Major">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header class="angulartheadColor">Major </th>
+              <td mat-cell *matCellDef="let element"> {{element.Major}} </td>
+            </ng-container>
+  
+            <ng-container matColumnDef="Minor">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header class="angulartheadColor">Minor </th>
+              <td mat-cell *matCellDef="let element">{{element.Minor}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="Normal">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header class="angulartheadColor">Normal </th>
+              <td mat-cell *matCellDef="let element">{{element.Normal}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="Trivial">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header class="angulartheadColor">Trivial </th>
+              <td mat-cell *matCellDef="let element">{{element.Trivial}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="Enhancement">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header class="angulartheadColor">Enhancement </th>
+              <td mat-cell *matCellDef="let element">{{element.Enhancement}}</td>
+            </ng-container>
+  
+            <tr mat-header-row *matHeaderRowDef="severityReport"></tr>
+            <tr mat-row *matRowDef="let row; columns: severityReport;"></tr>
+          </table>
+        </div>
+      </div>
+    </div>
+    
+      <!-- severitymodule end -->
+  
+    <div class="statusmodule" *ngIf="statusmodule==true">
+        <div class="moduleGraph">
+            <div align="center">
+              <google-chart *ngIf="activateStacked" [data]="statusColumnChart"></google-chart>
+              <google-chart [data]="columnChart"></google-chart>
+            </div>
+        </div>
+        <!-- moduleGraph end -->
+        <div class="moduleData">
+                   <div class="example-container shadow-lg table-container">
+            <table mat-table [dataSource]="allStatusData" matSort class="mat-elevation-z8">
+    
+              <!-- Position Column -->
+              <ng-container matColumnDef="Sl.No">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header class="angulartheadColor"> Sl.No </th>
+                <td mat-cell *matCellDef="let element; let i = index;"> {{i+1}}</td>
+              </ng-container>
+    
+              <!-- Name Column -->
+              <ng-container matColumnDef="Module">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header class="angulartheadColor">Module</th>
+                <td mat-cell *matCellDef="let element"><a mat-link (click)="fetchFeatureOnMod(element.moduleId)"
+                  [routerLink]="['/projectdetail/dashboard/defecthierarchy/Defectmodulelevel/Defectfeaturelevel']">
+                    {{element.moduleName}} </a></td>
+              </ng-container>
+    
+              <!-- Weight Column -->
+              <ng-container matColumnDef="Total Status">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header class="angulartheadColor">Total Status</th>
+                <td mat-cell *matCellDef="let element"> {{element.totalStatus}} </td>
+              </ng-container>
+    
+              <!-- Symbol Column -->
+              <ng-container matColumnDef="Open">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header class="angulartheadColor">Open </th>
+                <td mat-cell *matCellDef="let element"> {{element.open}} </td>
+              </ng-container>
+    
+              <!-- Symbol Column -->
+              <ng-container matColumnDef="Fixed">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header class="angulartheadColor">Fixed </th>
+                <td mat-cell *matCellDef="let element"> {{element.fixed}} </td>
+              </ng-container>
+    
+              <!-- Symbol Column -->
+              <ng-container matColumnDef="Ready for testing">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header class="angulartheadColor">Ready for testing </th>
+                <td mat-cell *matCellDef="let element"> {{element.readyForTesting}} </td>
+              </ng-container>
+    
+              <ng-container matColumnDef="Closed">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header class="angulartheadColor">Closed </th>
+                <td mat-cell *matCellDef="let element">{{element.closed}}</td>
+              </ng-container>
+  
+              <ng-container matColumnDef="Reopen">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header class="angulartheadColor">Reopen </th>
+                <td mat-cell *matCellDef="let element">{{element.reopen}}</td>
+              </ng-container>
+  
+    
+              <tr mat-header-row *matHeaderRowDef="statusReport"></tr>
+              <tr mat-row *matRowDef="let row; columns: statusReport;"></tr>
+            </table>
+          </div>
+        </div>
+        <!-- statusmodule end -->
+    
+      </div>
+    </div>
+
+<!-- </div> -->
+<!-- module End -->

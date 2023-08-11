@@ -1,0 +1,1242 @@
+<ul class="breadcrumb" style="background-color: unset;margin:unset">
+  <li class="breadcrumb-item" style="width: 106px;"><a id="mainheader">Test
+      Planning</a></li>
+  <li class="breadcrumb-item" id="subheader"><a id="subheader">Manage Reusable</a></li>
+  <li class="breadcrumb-item" id="subheader"><a id="subheader">{{activateMethodName}}</a></li>
+</ul>
+
+
+<!-- <sh-context-menu #menu1>
+
+  <ng-template shContextMenuItem let-data>
+    <div (click)="triggerDelete()">Delete</div>
+  </ng-template>
+
+</sh-context-menu> -->
+<div class="ui-fluid">
+  <div class="ui-g">
+
+    <div class="ui-g-2 ui-md-2 border">
+      <div class="one">
+        <div>
+          <span class="treeStructureTitle" (click)="getReusableFunctionNames()" [shAttachMenu]="menu1"
+            style="position:sticky;">Reusable Functions</span>
+          <p-tree [value]="displayModuleForTree" (onNodeSelect)="nodeSelect($event)" selectionMode="single"
+            (click)="openMenuData(selectedFile)" [(selection)]="selectedFile" [filter]="true" [contextMenu]="cm">
+            sfsfsfsfs</p-tree>
+          <p-contextMenu #cm appendTo="body" [model]="items"></p-contextMenu>
+        </div>
+        <div>
+          <sh-context-menu #menu1 style="background-color:white">
+            <ng-template shContextMenuItem let-data style="background-color:white">
+              <div *ngIf="create==true" (click)="openReusableSection()" class="menuu treeStructureCreate">Create Reusable Functions</div>
+            </ng-template>
+          </sh-context-menu>
+        </div>
+      </div>
+
+      <!-- for excel data -->
+      <div class="two">
+        <div>
+          <span class="treeStructureTitle" id="testData" [shAttachMenu]="menu2" (click)="enableTestData()"
+            style="position:sticky;">Test Data</span>
+          <p-tree [value]="excelFileNameReuse" (onNodeSelect)="spreedSheetNode($event)" selectionMode="single"
+            id="ptree" [contextMenu]="cm2" [(selection)]="selectedFile">sfsfsfsfs</p-tree>
+          <p-contextMenu #cm2 appendTo="body" [model]="spreedSheetName"></p-contextMenu>
+          <button id="viewSpreedSheet" [hidden]="true" data-toggle="modal" data-target="#myModal08"
+            data-backdrop="static"></button>
+          <button id="generateSpreedSheet" [hidden]="true" data-toggle="modal" data-target="#myModal09"
+            data-backdrop="static"></button>
+        </div>
+        <div>
+          <sh-context-menu #menu2 style="background-color:white">
+            <ng-template shContextMenuItem let-data style="background-color:white">
+              <div class="menuu treeStructureCreate" (click)="importSpreedSheet()">Import Excel File
+                <button id="importSpreedSheet" [hidden]="true" data-toggle="modal" data-target="#myModal00"
+                  data-backdrop="static"></button>
+              </div>
+            </ng-template>
+            <ng-template shContextMenuItem let-data style="background-color:white">
+              <div class="menuu treeStructureCreate" (click)="generateSpreedSheet()">
+                Generate Test Data
+              </div>
+            </ng-template>
+
+          </sh-context-menu>
+        </div>
+      </div>
+      <!-- excel node ends -->
+    </div>
+
+
+    <div class="ui-g-10 ui-md-10 border myClass" *ngIf="openToCreate==true"
+      style="height:85vh;border-top: 1px solid #dee2e6!important;">
+      <section class="border topSection">
+        <div class="row divHeight">
+          <div class="form-group col-lg-4 col-md-4 col-sm-4">
+            <label for="classes">Enter Reusable Method Name&nbsp;</label>
+            <input class="form-control" type="text" [(ngModel)]="reusable.reuseAbleMethod"
+              (change)=checkForDuplicateMethod(reusable.reuseAbleMethod)>
+          </div>
+          <div class="form-group col-lg-3 col-md-3 col-sm-3">
+            <label for="classes" class="Parameters">Parameters&nbsp;</label>
+            <input class="form-control" type="text" [(ngModel)]="reusable.reuseAbleParameters"
+              (change)=checkForValidParameters(reusable.reuseAbleParameters)>
+          </div>
+          <div class="form-group col-lg-2 col-md-2 col-sm-2 returnValue">
+            <label for="classes">Return Value&nbsp;</label>
+            <input type="checkbox" [(ngModel)]="reusable.checkBoxValue"
+              (change)="enableTheReturnType($event,reusable.checkBoxValue)">
+          </div>
+          <div class="col-lg-3 col-md-3 col-sm-3" *ngIf="enableTheReturn == true">
+            <label for="classes">Return Type&nbsp;
+              <span class="returnAlign">
+                <select class="opalSelect border" [(ngModel)]="reusable.returnType"
+                  (change)="returnTypeOfFunction(reusable.returnType,variableAdding,reusable)" style="margin-top: 3px">
+                  <option></option>
+                  <option>int</option>
+                  <option>String</option>
+                  <option>boolean</option>
+                </select>&nbsp;
+                <select class="opalSelect border" [(ngModel)]="reusable.returnVariable" style="min-width:50px">
+                  <option></option>
+                  <option *ngFor="let returnVar of variableForReturnFunction">{{returnVar}}</option>
+                </select>
+              </span>
+            </label>
+          </div>
+        </div>
+
+
+        <!-------------------------- Add , edit , delete  ------------------------>
+        <!-- <div class="container-fluid row border reuseOperation"  *ngIf=" disableButton !== true">
+        <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 devMouseOver  text-center" (click)="addRowToReuseable()">
+          <label for="">Add</label>
+        </div>
+        <div  class="col-xs-4 col-sm-4 col-md-4 col-lg-4 devMouseOver  text-center" (click)="editTestCase()">
+          <label for="">Edit</label>
+        </div>
+        <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 devMouseOver  text-center" (click)="deleteReuse()">
+          <label for="">Delete</label>
+        </div>
+
+      </div> -->
+        <!--------------------------end  Add , edit , delete  ------------------------>
+
+
+
+        <!-- <div class="text-center hero"  *ngIf="hideForNow!=true">
+        <h1 style="font-size: 16px;">
+          if reusable functions are not created<br>
+          create below
+        </h1>
+      </div> -->
+        <!-- <div class="innerDiv1" *ngIf="hideForNow==true" >
+        <table class="shadow-lg scroll tableWidth" style="width: 100%">
+          <thead class="theadColor">
+            <tr>
+              <th class="thdata">#</th>
+              <th class="thdata">Groups</th>
+              <th class="thdata">Action List</th>
+              <th class="thdata">Returns Value</th>
+              <th class="thdata">Action</th>
+              <th class="thdata">Page</th>
+              <th class="thdata">Object</th>
+              <th class="thdata">Input2</th>
+              <th class="thdata">Input3</th>
+            </tr>
+          </thead>
+          <tbody class="tdHover"  style="font-weight: bolder">
+            <tr *ngFor="let objectValue of displayActionArrayData; let i = index"
+              [class.selectedFor]="objectValue.Groups == 'Loopings' "
+              [class.selectedIf]="objectValue.Groups == 'Conditions' "
+              [class.selectedValidation]="objectValue.Groups == 'Validation' "
+              [class.selectedRow]="i === selectedRowForOpet" (click)="rowSelection(i)">
+              <td>{{i+1}}</td>
+              <td>{{objectValue.Groups}}</td>
+              <td>{{objectValue.ActionList}}</td>
+              <td>{{objectValue.ReturnsValue}}</td>
+              <td>{{objectValue.Action}}</td>
+              <td>{{objectValue.Page}}</td>
+              <td>{{objectValue.Object}}</td>
+              <td>{{objectValue.Input2}}</td>
+              <td>{{objectValue.Input3}}</td>
+            
+                <button id="openModalButton" [hidden]="true" data-toggle="modal" data-target="#myModal03"></button>
+          
+            </tr>
+
+          </tbody>
+
+        </table>
+      </div> -->
+        <!-- <div style="margin-top:01%" *ngIf="hideForNow==true">
+        <button type="button" class="btn btn-lg" style="margin-left:01%"
+          (click)="allReuseSave()" value = "Save" *ngIf = "reuseBtnToSave == true">Save</button>
+          <button type="button" class="btn btn-lg" style="margin-left:01%" 
+          (click)="allReuseSave()" value = "Save" *ngIf = "reuseBtnToSave == false && disableButton !== true">Update</button>
+        <div class="pull-right">
+          <span class="glyphicon glyphicon-stop if"></span>&nbsp;<span style="font-size: 18px;">If</span>&nbsp;
+          <span class="glyphicon glyphicon-stop for"></span>&nbsp;<span style="font-size: 18px;">For</span>&nbsp;
+          <span class="glyphicon glyphicon-stop validation"></span>&nbsp;<span
+            style="font-size: 18px;">Assertions</span>&nbsp;
+        </div>
+      </div> -->
+
+
+
+        <div class="nlpOuterDiv border">
+          <div class="nlpInnerDiv">
+            <div class="row devRow">
+              <div style="width: 100%">
+                <span *ngIf="create" class="pull-right">
+                  <div class="btn-group btn-group-lg">
+                    <button type="submit" class="btn btn-lg linebuttons" [disabled]="!enableDragger"
+                      (click)="dragTable(displayNlpArrayData)"><i class="fa fa-arrows">&nbsp;</i>Enable
+                      Drag</button>
+                    <button type="button" class="btn btn-lg linebuttons" [disabled]="releaseHeaderBtn"
+                      (click)="nlpAdd()"><i class="fa fa-plus devRowIcon"></i>Add</button>
+                    <button type="button" class="btn btn-lg linebuttons" [disabled]="releaseHeaderBtn"
+                      (click)="nlpEditTestCase()"><i class="fa fa-edit devRowIcon"></i>Edit</button>
+                    <button type="button" class="btn btn-lg linebuttons" [disabled]="releaseHeaderDelete"
+                      (click)="nlpDelet()"><i class="fa fa-trash devRowIcon"></i>Delete</button>
+                  </div>
+                </span>
+
+              </div>
+            </div>
+            <div class="tableDiv">
+              <!-- runtemplate-->
+              <!-- <ng-template [ngTemplateOutlet]="runExecutionUI"></ng-template> -->
+              <!-- runtemplate end-->
+              <table class="table" id="dragTable">
+                <tbody>
+                  <tr class="displayNlpTable" *ngFor="let nlpObjectValue of displayNlpArrayData; let i = index"
+                    (click)="highLightNlpEdit(i)" [class.editSelected]="i === nlpSelectedForEdit"
+                    [class.objectUpdates]="nlpObjectValue.ObjectUpdate === true"
+                    [class.selectedFor]="nlpObjectValue.Groups == 'Loopings' "
+                    [class.selectedIf]="nlpObjectValue.Groups == 'Conditions' "
+                    [class.selectedValidation]="nlpObjectValue.Groups == 'Validation' "
+                    [class.selectedFunction]="nlpObjectValue.Groups == 'User Function' ">
+                    <td>{{i+1}}</td>
+                    <td>{{nlpObjectValue.nlpData}}</td>
+                    <td>
+                      <button id="openModalButtonNlp" [hidden]="true" data-toggle="modal"
+                        data-target="#myModal10"></button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+          </div>
+        </div>
+        <div class="buttetsSubDiv">
+          <ng-template [ngTemplateOutlet]=" bulletsTemplate"></ng-template>
+          <div *ngIf="create" class="pull-right">
+            <button type="button" class="btn btn-lg" *ngIf="reuseBtnToSave=== true" [disabled]="!unSavedChangesExits"
+              (click)="allReuseSave()">Save</button>&nbsp;&nbsp;
+            <!-- <button type="button" class="btn btn-lg" *ngIf=" disableButton !== true"
+            (click)="actionSave()">Update</button>&nbsp;&nbsp; -->
+            <button type="button" class="btn btn-lg" (click)="allReuseSave()" value="Save"
+              [disabled]="!unSavedChangesExits" *ngIf="reuseBtnToSave == false">Update</button>
+            <!-- <button type="button" class="btn btn-lg" *ngIf="disableButton !== true"
+            (click)="dockerIpPort();triggerViewReport()">Run</button>&nbsp;&nbsp;
+          <button type="button" class="btn btn-lg" data-toggle="modal" data-backdrop="static"
+            [disabled]="toDisableViewReport==true" data-keyboard="false" data-target="#executionTrack">View
+            Report</button>
+          <button id="activateDockerButton" [hidden]="true" data-toggle="modal" data-backdrop="static"
+            data-keyboard="false" data-target="#myModal04"></button>
+          <button id="appiumScriptRunConfig" [hidden]="true" data-toggle="modal" data-backdrop="static"
+            data-keyboard="false" data-target="#myModal06"></button> -->
+          </div>
+        </div>
+
+
+      </section>
+      <br>
+      <section *ngIf="create" class="border sectionTwo">
+        <div class="bulletsTemplateForNLP">
+          <ng-template [ngTemplateOutlet]="bulletsTemplateForNLP"></ng-template>
+        </div>
+        <!-- the below commented code belongs to Automated steps  -->
+
+        <!-- <div class="innerDiv2">
+        <table class="table table-bordered">
+          <thead>
+            <tr style="background-color:rgb(248, 242, 242)">
+              <th>Groups</th>
+              <th>Action List</th>
+              <th>Return Value</th>
+              <th>Action</th>
+              <th>Page</th>
+              <th>Object</th>
+              <th>Input2</th>
+              <th>Input3</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody style="font-weight: bolder">
+            <tr>
+              <td *ngIf=" disableButton !== true">
+                <select class="opalSelect" [(ngModel)]="addTestCaseDataToTableReuseFunction.Groups"
+                  (change)="getActionListOnGroupId(addTestCaseDataToTableReuseFunction.Groups,addTestCaseDataToTableReuseFunction)">
+                  <option></option>
+                  <option *ngFor="let groupsUI of resultOfGroupsUI">{{groupsUI.groupName}}</option>
+                </select>
+              </td>
+              <td>
+                <select class="opalSelect" style="min-width:150px"
+                  [(ngModel)]="addTestCaseDataToTableReuseFunction.ActionList"
+                  (change)="displayActionMethodNameOnActionList(addTestCaseDataToTableReuseFunction.ActionList)">
+                  <option></option>
+                  <option *ngFor="let actionListUI of resultOfActionListUI" [selected]="addTestCaseDataToTableReuseFunction.ActionList === actionListUI.actionList">{{actionListUI.actionList}}</option>
+                </select>
+              </td>
+              <td>
+                <select class="opalSelect" style="min-width:150px"
+                  [(ngModel)]="addTestCaseDataToTableReuseFunction.ReturnsValue" [disabled]="disableReturn != 'yes' ">
+                  <option></option>
+                  <option *ngFor="let ObjectDeclrUI of variableObjectDeclr">{{ObjectDeclrUI.variableAddFun}}</option>
+
+                </select>
+              </td>
+              <td style="min-width: 250px">{{sameAsActionLIst}}</td>
+
+              <td>
+                <select class="opalSelect" style="min-width: 150px"
+                  [(ngModel)]="addTestCaseDataToTableReuseFunction.Page"
+                  (change)="displayObjectNameOnPage(addTestCaseDataToTableReuseFunction.Page)"
+                  [disabled]="disableObject != 'yes'">
+                  <option></option>
+                  <option *ngFor="let pageNameUI of resultOfPageNameUI">{{pageNameUI.pageName}}</option>
+                </select>
+              </td>
+              <td>
+                <select class="opalSelect" style="min-width: 150px"
+                  [(ngModel)]="addTestCaseDataToTableReuseFunction.Object"
+                  (change)="getPomObjectOnObject(addTestCaseDataToTableReuseFunction.Object)"
+                  [disabled]="disableObject != 'yes'">
+                  <option></option>
+                  <option *ngFor="let objectUI of resultOfObjectUI">{{objectUI.objectName}}</option>
+                </select>
+              </td>
+              <td>
+                <input type="text" class="modalInput" style="height:25px;"
+                  [(ngModel)]="addTestCaseDataToTableReuseFunction.Input2" [disabled]="disableInputField2 != 'yes' ">
+              </td>
+              <td>
+                <input type="text" class="modalInput"
+                  [disabled]="disableInputField3 != 'yes' " style="height:25px;"
+                  [(ngModel)]="addTestCaseDataToTableReuseFunction.Input3">
+              </td>
+              <td>
+                <button type="button" class="btn btn-lg" *ngIf=" disableButton !== true" data-toggle="modal" [disabled]="disableInputField2 != 'yes' " data-target="#myModal02"
+                  (click)="reuseExcelCall()"><span><i class="fa fa-file-excel-o" 
+                      aria-hidden="true"></i></span></button>
+              </td>
+            </tr>
+          </tbody>
+
+        </table>
+
+      </div>
+      <div style="margin-top:01%">
+            <button type="button" class="btn btn-lg "  
+            (click)="reuseableFunctionValidation(addTestCaseDataToTableReuseFunction,reusable)"
+            *ngIf = "showCreateBtn == true && disableButton !== true" 
+            style="margin-left: 1%;">Create</button>
+        <button type="button" class="btn btn-lg "
+          (click)="addRowInBetween(addTestCaseDataToTableReuseFunction)" *ngIf = "showAddBtn == true  && disableButton !== true" style="margin-left: 1%;">Add</button>
+        <button type="button" class="btn btn-lg " *ngIf=" disableButton !== true"
+          (click)="clearSavedValue(addTestCaseDataToTableReuseFunction)" style="margin-left: 1%;">Clear</button>
+       
+        <button type="button" class="btn btn-lg " *ngIf="disableUpdateBtn == true  && disableButton !== true "
+          (click)="updateTestCaseAfterEdit(addTestCaseDataToTableReuseFunction)" style="margin-left: 1%;">Update</button>
+        <button type="button" class="btn btn-lg" *ngIf=" disableButton !== true" data-toggle="modal" data-target="#myModal01" style="margin-left: 1%;">Variable</button>
+      </div> -->
+
+        <!-- the below commented code belongs to Automated steps ends -->
+
+        <!-- Nlp grammmar Starts -->
+
+        <!-- <div class="border" style="height: 250px; margin-top: 3%;overflow: scroll;"> -->
+        <br>
+        <div class="row">
+          <div class="col-xs-12 col-sm-6 col-md-6 col-lg-5">
+            <label for="">Select Page</label>
+            <select name="pageName" class="form-control" style="min-width: 150px;" [(ngModel)]="nlpObject.Page"
+              (ngModelChange)="displayObjectNameOnPage(nlpObject.Page)">
+              <option value=""></option>
+              <option *ngFor="let nlpPage of resultOfPageNameUI;let i = index;">{{nlpPage.pageName}}</option>
+            </select>
+          </div>
+          <div class="col-xs-12 col-sm-6 col-md-6 col-lg-5">
+            <div [hidden]="multiDropDown">
+              <label for="">Select Object</label>
+              <select name="objectName" class="form-control" style="min-width: 150px;" [(ngModel)]="nlpObject.Object"
+                (ngModelChange)="getPomObjectOnObject(nlpObject.Object)">
+                <option></option>
+                <option *ngFor="let nlpObjectUI of resultOfObjectUI">{{nlpObjectUI.objectName}}</option>
+              </select>
+            </div>
+
+            <div [hidden]="!multiDropDown" style="margin-top:15px;">
+              <mat-form-field>
+                <mat-label class="opalLabel">Select Multi Object</mat-label>
+                <mat-select class="check" name="nlpObject.Object" multiple [(ngModel)]="nlpObject.Object"
+                  (selectionChange)="fecthMultiStepData($event,nlpObject.Object)">
+                  <mat-option *ngFor="let nlpObjectUI of resultOfObjectUI" [value]="nlpObjectUI">
+                    {{nlpObjectUI.objectName}}</mat-option>
+                </mat-select>
+              </mat-form-field>&nbsp;&nbsp;&nbsp;
+              <button class="btn btn-default btn-lg" (click)="selectMultiple()" id="generateBtn"
+                [disabled]="disableGenerateAfterAdd == true">Generate
+                Steps</button>
+            </div>
+          </div>
+        </div><br>
+        <div class="row">
+          <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            &nbsp;<label for="">Multi Step Generation</label>&nbsp;
+            <input type="checkbox" id="checkMulti" (change)="multiDropDownFunction($event)">
+          </div>
+        </div>
+        <!-- add testSageGrammarReuse -->
+        <div class="makeItTemplate">
+          <ng-template [ngTemplateOutlet]="testSageGrammarReuse"></ng-template>
+        </div>
+        <!--testSageGrammarReuse  end -->
+        <!-- validation -->
+        <div [hidden]='!allowToSave'>
+          <div class="col-md-6">
+            <ng-template [ngTemplateOutlet]="testSageGrammarValidation"></ng-template>
+          </div>
+        </div>
+        <!-- validationEnds -->
+
+        <div class="row" [hidden]="multiDropDown">
+          <div class="form-group col-xs-6 col-sm-6 col-md-6 col-lg-6"></div>
+          <div class="form-group col-xs-6 col-sm-6 col-md-6 col-lg-6">
+            <div style="margin-top:01%;margin-bottom: 5%;margin-bottom: 44px;">
+              <button type="button" class="btn btn-lg linebuttons"
+                (click)="addRowInBetweenForNlp(myDiv,nlpObject.nlpData,nlpObject.Object)"
+                *ngIf="disableAddBtn==true && disableUpdateBtn!==true">Add</button>
+              <button type="button" class="btn btn-lg linebuttons"
+                (click)="nlpArraySeperate(myDiv,nlpObject.nlpData,nlpObject)"
+                *ngIf="disableAddBtn!==true && disableUpdateBtn!==true"
+                [disabled]="nlpObject.nlpData == '' ">Create</button>
+              <button type="button" class="btn btn-lg linebuttons" (click)="updateNlpTestCaseAfterEdit(myDiv)"
+                *ngIf="disableUpdateBtn==true && disableAddBtn!==true">Update</button>
+              <button type="button" class="btn btn-lg" data-toggle="modal" data-target="#myModal01"
+                style="margin-left: 3%">Variable</button>
+            </div>
+          </div>
+
+        </div>
+        <br><br>
+
+        <!-- </div> -->
+
+
+        <!-- Nlp grammmar ends -->
+
+      </section>
+
+
+    </div>
+    <div class="ui-g-10 ui-md-10" *ngIf="displayTestData===true">
+      <!-- class="fixedDiv" -->
+      <div class="">
+        <div>
+          <div class="tableData" id="tableData">
+            <div class="row">
+              <div class="col-md-2"></div>
+              <div class="col-md-2"><label for="">Table Name:</label></div>
+              <div class="col-md-4">
+                <p id="spreedSheet">{{viewFileNameUI}}</p>
+              </div>
+            </div>
+            <!-- row-1 -->
+            <div class="row">
+              <div class="col-md-2"></div>
+              <div class="col-md-2"><label for="">Author:</label></div>
+              <div class="col-md-4">
+                <p id="spreedSheet">{{spreedAuthor}}</p>
+              </div>
+            </div>
+            <!-- row-2 -->
+            <div class="row" *ngIf="spreedPropOut.editedDet !== undefined">
+              <div class="col-md-2"></div>
+              <div class="col-md-2"><label for="">Last Author:</label></div>
+              <div class="col-md-4">
+                <p id="spreedSheet">{{editedAuthor}}</p>
+              </div>
+            </div>
+            <!-- row-3 -->
+            <div class="row">
+              <div class="col-md-2"></div>
+              <div class="col-md-2"><label for="">Created Date:</label></div>
+              <div class="col-md-4">
+                <p id="spreedSheet">{{spreedCreatedDate | date: 'dd/MM/yyyy'}}</p>
+              </div>
+            </div>
+            <!-- row-4 -->
+            <div class="row">
+              <div class="col-md-2"></div>
+              <div class="col-md-2"><label for="">Created Time:</label></div>
+              <div class="col-md-4">
+                <p id="spreedSheet">{{spreedCreatedTime}}</p>
+              </div>
+            </div>
+            <!-- row-5 -->
+            <div class="row" *ngIf="spreedSheetEditShow == true">
+              <div class="col-md-2"></div>
+              <div class="col-md-2"><label for="">Column Names:</label></div>
+              <div class="col-md-4">
+                <input type="text" class="form-control" required [(ngModel)]="editedColumnNames">
+              </div>
+
+
+              <!-- <div [hidden]="!spreedSheetEditShow">
+              <form action="" [formGroup]="spreedSheetAuditComments"> -->
+              <!-- <div class="col-md-2"></div>
+                <div class="col-md-2" style="margin-left:-09px;"><label for="">Comments:</label></div>
+                <div class="col-md-2"></div>
+                <div class="col-md-4">
+                  <input type="text" class="form-control" required formControlName="spreedComment"
+                    [(ngModel)]="spreedComments">
+                </div> -->
+              <!--                   
+        <div class="col-md-1"><button type="button" class="btn btn-lg"
+          (click)="addSpreedSheetColumn(editedColumnNames)">Add Columns</button></div>
+      <div class="col-md-1"><button type="button" class="btn btn-lg"
+          (click)="addTestDataForEdit(editedColumnNames)">Add Row</button></div>
+      <div class="col-md-1"><button type="button" class="btn btn-lg" (click)="deleteSpreedSheet()">Delete
+          Row</button></div>
+          <button class="btn btn-lg" data-toggle="modal" data-target="#myModalForAutoGenerateForEdit">Auto Generate</button> -->
+              <!-- </form>
+            </div> -->
+            </div>
+          </div>
+          <!-- tableData -->
+
+          <div [hidden]="!spreedSheetEditShow">
+            <form action="" [formGroup]="spreedSheetAuditComments">
+              <div class="row">
+                <div class="col-md-2"></div>
+                <div class="col-md-2"><label for="">Comments:</label></div>
+                <div class="col-md-4">
+                  <input type="text" class="form-control" required formControlName="spreedComment"
+                    [(ngModel)]="spreedComments">
+                </div>
+              </div><br>
+              <div class="container-fluid">
+                <div class="pull-right btn-group btn-group-lg">
+                  <button class="btn btn-lg linebuttons" data-toggle="modal"
+                    data-target="#myModalForAutoGenerateForEdit" data-backdrop="static" (click)='autoGenModal()'>Auto
+                    Generate</button>
+                  <button type="button" class="btn btn-lg linebuttons"
+                    (click)="addSpreedSheetColumn(editedColumnNames)">Add Columns</button>
+                  <button type="button" class="btn btn-lg linebuttons"
+                    (click)="addTestDataForEdit(editedColumnNames)">Add Row</button>
+                  <button type="button" class="btn btn-lg linebuttons" (click)="deleteSpreedSheet()">Delete Row</button>
+                </div>
+              </div><br>
+
+              <!-- <div><button type="button" class="btn btn-lg"
+                (click)="addTestDataForEdit(editedColumnNames)">Add Row</button></div> -->
+              <!-- <div><button type="button" class="btn btn-lg" (click)="deleteSpreedSheet()">Delete
+                Row</button></div> -->
+              <!-- <button class="btn btn-lg" data-toggle="modal" data-target="#myModalForAutoGenerateForEdit">Auto Generate</button> -->
+            </form>
+          </div>
+
+
+          <!-- view starts -->
+          <div class="container-fluid view" [hidden]="spreedSheetViewShow == false" style="height: 65vh;width: 100%;
+          overflow: scroll;">
+            <table class="table table-bordered" id="addTestDataTable" style="position: absolute;">
+              <tr *ngFor="let row of spreedView; let i = index" [class.tableHeader]="i==0">
+                <!-- <td>{{i+1}}</td> -->
+                <td *ngFor="let val of row">
+                  {{val}}
+                </td>
+              </tr>
+            </table>
+          </div>
+          <!-- view-ends -->
+          <!-- edit starts -->
+          <div class="container-fluid edit" *ngIf="spreedSheetEditShow == true" style="height: 47vh;width: 100%;
+  overflow: scroll;">
+            <table class="table table-bordered" id="data-table-edit" style="position: absolute;">
+              <tr *ngFor="let row of spreedView; let i = index" (click)="highLightSpreedSheet(i)"
+                [class.editManualSelected]="i === spreedSheetId" [class.tableHeader]="i==0" contenteditable="true">
+                <!-- <td>{{i+1}}</td> -->
+                <td *ngFor="let val of row" style="max-width:10px;">
+                  {{val}}
+                </td>
+              </tr>
+            </table>
+          </div>
+          <!-- edit ends -->
+          <!-- audit starts -->
+          <div class="container-fluid edit" *ngIf="spreedAuditDisplay == true">
+            <table class="table table-bordered" style="position: absolute;">
+              <thead class="tableHeader">
+                <th>Sl.No</th>
+                <th>Date</th>
+                <th>Time</th>
+                <th>Edited By</th>
+                <th>Reason</th>
+              </thead>
+              <tbody>
+                <tr *ngFor="let spreedAudit of spreedSheetAuditInfo; let i = index">
+                  <td>{{i+1}}</td>
+                  <td>{{spreedAudit.spreedDate | date: 'dd/MM/yyyy' }}</td>
+                  <td>{{spreedAudit.spreedTime}}</td>
+                  <td>{{spreedAudit.spreedUser}}</td>
+                  <td>{{spreedAudit.comments.spreedComment}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <!-- audit ends -->
+          <div>
+            <div class="container-fluid" id="bottomButtons">
+              <div class="pull-right">
+                <button type="button" [disabled]="!spreedSheetEditShow || spreedSheetAuditComments.invalid "
+                  [hidden]="spreedAuditDisplay || spreedSheetViewShow" (click)="generateSpreedSheetDataEdit()"
+                  class="btn btn-lg"> Update </button>
+
+                <button type="button" class="btn btn-lg btn-cancel" (click)="closeSpreed()">
+                  Cancel </button>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+
+      </div>
+      <!-- ui-g-10-2 ui-md-10 -->
+    </div>
+  </div>
+</div>
+<!-- class="row" end -->
+
+
+<!-- Modal-01 Variable starts -->
+
+<!-- <div class="modal fade" id="myModal01" role="dialog">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content" style="width: fit-content;">
+      <div class="modal-header" style="background-color:rgb(166, 243, 11);">
+        <h1 class="modal-title">Variable Configuration</h1>
+      </div>
+      <div class="modal-body">
+        <table class="shadow-lg scroll tableWidth table-striped" style="width: max-content;">
+          <thead class="block theadColor">
+            <tr>
+              <th style="width: 157px" class="thdata col-xs-3">SNo</th>
+              <th style="width: 176px" class="thdata col-xs-3">Variable Name</th>
+              <th style="width: 189px" class="thdata col-xs-3">Type</th>
+              <th style="width: 191px" class="thdata col-xs-3">Default Value</th>
+              <th style="width: 64px"></th>
+            </tr>
+          </thead>
+          <tbody class="block bodyHeight">
+            <tr *ngFor="let variableAdding of variableObjectDeclr; let i = index">
+              <td class="col-xs-3">{{i+1}}</td>
+              <td class="col-xs-3">
+                <input class="inputtext border" type="text" [(ngModel)]="variableAdding.variableAddFun"
+                  value={{variableAdding.variableName}} style="height: 25px" />
+              </td>
+              <td class="col-xs-3">
+
+                <select class="opalSelect border" [(ngModel)]="variableAdding.variableType" style="min-width:172px">
+                  <option>int</option>
+                  <option>String</option>
+                  <option>boolean</option>
+                </select>
+              </td>
+              <td class="col-xs-3">
+                <input class="modalInput border" type="text" [(ngModel)]="variableAdding.variableDefaultValue"
+                  value={{variableAdding.variableDefaultValue}} style="height: 25px" />
+              </td>
+              <td>
+                <button type="button" class="btn btn-lg" (click)="deleteVariable(i)"><span><i 
+                      class="glyphicon glyphicon-trash" aria-hidden="true"></i></span></button>
+              </td> 
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-lg" (click)="variableAddFun()">Add</button>
+        <button type="button" class="btn btn-lg" data-dismiss="modal"
+          (click)="savevariable(variableAdding)">Save</button>
+        <button type="button" class="btn btn-lg btn-cancel" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div> -->
+
+
+<div class="modal fade" id="myModal01" role="dialog">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title">Variable Configuration</h1>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+      <div class="modal-body varableModel">
+        <table class="shadow-lg scroll tableWidth">
+          <thead class="block theadColor">
+            <tr>
+              <th style="width: 157px" class="thdata col-xs-3">Sl.No</th>
+              <th style="width: 176px" class="thdata col-xs-3">Variable Name</th>
+              <th style="width: 189px" class="thdata col-xs-3">Type</th>
+              <th style="width: 191px" class="thdata col-xs-3">Default Value</th>
+              <th style="width: 64px"></th>
+            </tr>
+          </thead>
+          <tbody class="block bodyHeight">
+            <tr *ngFor="let variableAdding of variableObjectDeclr; let i = index">
+              <td class="col-xs-3" style="min-width: 143px;">{{i+1}}</td>
+              <td class="col-xs-3">
+                <input class="inputtext border" type="text" [(ngModel)]="variableAdding.variableAddFun"
+                  (change)="checkVariableDup(variableAdding.variableAddFun,i)" value={{variableAdding.variableName}}
+                  style="height: 25px" />
+              </td>
+              <td class="col-xs-3">
+
+                <select class="opalSelect border" [(ngModel)]="variableAdding.variableType"
+                  (change)="checkVariableType(variableAdding.variableAddFun,variableAdding.variableType)"
+                  style="min-width:172px">
+                  <option>int</option>
+                  <option>String</option>
+                  <option>boolean</option>
+                </select>
+              </td>
+              <td class="col-xs-3">
+                <input class="modalInput border" type="text" [(ngModel)]="variableAdding.variableDefaultValue"
+                  value={{variableAdding.variableDefaultValue}} style="height: 25px" />
+              </td>
+              <td>
+                <button type="button" class="btn btn-lg" (click)="deleteVariable(i)"><span><i
+                      class="glyphicon glyphicon-trash" aria-hidden="true"></i></span></button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="modal-footer">
+        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6" [hidden]='!allowToSaveVariable'>
+          <ng-template [ngTemplateOutlet]="testSageGrammarValidation"></ng-template>
+        </div>
+        <button type="button" class="btn btn-lg" (click)="variableAddFun()">Add</button>
+        <button type="button" class="btn btn-lg" (click)="savevariable(variableAdding)">Save</button>
+        <button id='dismissBTN' [hidden]="true" data-dismiss="modal"></button>
+        <button type="button" class="btn btn-lg btn-cancel" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+<!-- Modal-01 Variable ends -->
+
+<div class="modal fade" id="myModal00" role="dialog">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title">Excel Configuration</h1>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+      <div class="modal-body" style="min-height: 100%;">
+        <form action="" [formGroup]='spreedSheetForm'>
+          <div style="display:flex ;text-align: center;">
+            <label class="center" style="width: 100%;margin-top: 9px;">Choose File To Upload</label>
+
+            <!-- <div class="col-md-6"> -->
+            <input type="file" (change)="validateExcel($event)" class="form-control" style="height: 100%;" #myInput
+              formControlName="importFile"
+              accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"
+              placeholder="Upload file..." [(ngModel)]="fileName" />
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-lg" [disabled]="spreedSheetForm.invalid" type="button"
+          (click)="uploadImporetdFile(fileName)" data-dismiss="modal">Upload</button>
+        <button type="button" class="btn btn-lg btn-cancel" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+<!-- myModal00 for Excel import Ends -->
+
+<div class="modal fade" id="myModal09" role="dialog">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content" style="margin-left: 20%;">
+      <div class="modal-header">
+        <h1 class="modal-title">Generate Test Data</h1>
+        <button type="button" id="duplicate" class="close" data-dismiss="modal">&times;</button>
+      </div>
+      <div class="modal-body" style="overflow-y: scroll;">
+        <div>
+          <form [formGroup]='spreedSheetGenerate' (ngSubmit)="formTableButton()" #tableForm="ngForm">
+            <div class="row">
+              <div class="col-md-2">
+                <label for="">Table Name</label>
+              </div>
+              <div class="col-md-4">
+                <input type="text" class="form-control" formControlName="tableName" maxlength="30" required
+                  [(ngModel)]="editedFileName" (change)=checkForDuplicateFiles(editedFileName)>
+              </div>
+            </div>
+            <br>
+
+            <div class="row">
+              <div class="col-md-2">
+                <label for="">Columns Name</label>
+              </div>
+              <div class="col-md-4">
+                <input type="text" class="form-control" formControlName="columnNames" required
+                  [(ngModel)]="editedColumnNames">
+              </div>
+            </div>
+            <div>
+              <button class="btn btn-lg" (click)="formTable(spreedSheetGenerate)"
+                [disabled]="!spreedSheetGenerate.valid">Form Table</button>
+            </div>
+            <div>
+            </div>
+          </form>
+        </div>
+        <div>
+          <div *ngIf="formTableTrue">
+            <br>
+            <hr>
+            <br>
+            <div class="pull-right">
+              <div class="btn-group btn-group-lg">
+                <button class="btn btn-lg linebuttons" data-toggle="modal" data-target="#myModalForAutoGenerate">Auto
+                  Generate</button>
+                <button class="btn btn-lg linebuttons" (click)="addTestData()">Add Row</button>
+                <button class="btn btn-lg linebuttons" (click)="deleteSpreedSheetNew()">Delete Row</button>
+              </div>
+            </div>
+          </div><br><br>
+          <table class="table table-bordered" id="data-table-new">
+            <tbody>
+              <tr class="" *ngFor='let item of mainArray;let i = index' (click)="highLightSpreedSheet(i)"
+                [class.tableHeader]="i==0" [class.editManualSelected]="i === spreedSheetId">
+
+                <td *ngFor="let val of item" contenteditable="true" style="max-width:10px;outline:none;">
+                  {{val}}
+
+                </td>
+              </tr>
+
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <!-- <div class="pull-right"> -->
+        <button class="btn btn-lg" data-dismiss="modal" (click)="generateSpreedSheetDataAdd()">Save</button>
+        <button type="button" class="btn btn-lg btn-cancel" data-dismiss="modal" (click)="resetTable()">Close</button>
+        <!-- </div> -->
+      </div>
+    </div>
+  </div>
+
+</div>
+<!-- myModal09 -->
+
+<!-- <div id="myModal02" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title">Read Data From Excel</h1>
+      </div>
+      <div class="container modal-body" style="height:auto">
+        <div>
+          <label class="opalLabelForExcel" for="classes">ExcelFile:</label>
+          <select id="modalExcelValue" [(ngModel)]="excelOpalReuseable.excelFile"
+            (change)="excelOpalFunCall(excelOpalReuseable)">
+            <option></option>
+            <option *ngFor="let fileExcel of excelFileNameReuse">{{fileExcel}}</option>
+          </select>
+        </div>
+        <br>
+
+        <div>
+          <label class="opalLabelForExcel" for="classes">SheetName:</label>
+          <input type="text" [(ngModel)]="excelOpalReuseable.excelSheet" (change)="excelOpalFunCall(excelOpalReuseable)"
+            id="modalExcelValue">
+        </div>
+        <br>
+
+        <div>
+          <label class="opalLabelForExcel" for="classes">RowNo:</label>
+          <input type="text" [(ngModel)]="excelOpalReuseable.excelRow" (change)="excelOpalFunCall(excelOpalReuseable)"
+            id="modalExcelValue">
+        </div>
+        <br>
+
+        <div>
+          <label class="opalLabelForExcel" for="classes">Cell_No:</label>
+          <input type="text" [(ngModel)]="excelOpalReuseable.excelCell" (change)="excelOpalFunCall(excelOpalReuseable)"
+            id="modalExcelValue">
+        </div>
+        <br>
+
+        <div>
+          <label class="opalLabelForExcel" for="classes">Input:</label>
+          <input type="text" readonly [(ngModel)]="addTestCaseDataToTableReuseFunction.Input2" id="modalExcelValue">
+        </div>
+        <br>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-lg" data-dismiss="modal"
+          (click)="clearExcelValue(excelOpalReuseable,addTestCaseDataToTableReuseFunction.Input2)">Save</button>
+        <button type="button" class="btn btn-lg btn-cancel" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div> -->
+<!-- Modal-02 Excel -->
+
+<div class="modal fade" id="myModal03" role="dialog">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title opalLabel">Adding New Row</h4>
+      </div>
+      <div class="modal-body" style="height:auto;">
+        <div class="row">
+          <div class="col-md-4 col-lg-4 col-sm-4 col-sx-4">
+            <button type="button" class="btn btn-lg " data-dismiss="modal" (click)="addrowAbove()">Above</button>
+          </div>
+          <div class="col-md-4 col-lg-4 col-sm-4 col-sx-4">
+            <button type="button" class="btn btn-lg " data-dismiss="modal" (click)="addrowBelow()">Below</button>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-lg btn-cancel" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- myModal03 Adding row -->
+
+<!-- Delete warning modal starts -->
+<button class="btn btn-lg" id="triggerDeleteReuseFunction" [hidden]="true" data-toggle="modal"
+  data-target="#deleteReuseFunctionWarningModal"></button>
+
+<div class="modal fade" id="deleteReuseFunctionWarningModal" data-backdrop="static" data-focus="false">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Warning!!!</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <strong> Are you sure, Do you want to delete Reusable Function? </strong>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal"
+          (click)="deleteSelectedReusableFun()">Delete</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Delete warning modal ends  -->
+
+<!-- Notify user regarding scripts which are using edited resuable function modal starts -->
+<button class="btn btn-lg" id="notifyUser" [hidden]="true" data-toggle="modal"
+  data-target="#notifyUserModal01"></button>
+
+<div class="modal fade" id="notifyUserModal01" data-backdrop="static" data-focus="false">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Attention!!!</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <strong> The following Scripts are using edited reusable function,So please go to respective
+          scripts and edit them accordingly.
+        </strong>
+        <div class="container" style="overflow-y: auto; height:10rem;">
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item"
+              *ngFor="let scriptName of ScriptsUsingEditedReusableFunctionList; let i = index">{{i+1}}.{{scriptName}}
+            </li>
+          </ul>
+        </div>
+
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">OK</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Notify user regarding scripts which are using edited resuable function modal ends -->
+
+
+<!-- Notify user regarding scripts which are using resuable function before delete modal starts -->
+<button class="btn btn-lg" id="notifyUserTheScriptsUsingRFuncBeforeDelete" [hidden]="true" data-toggle="modal"
+  data-target="#notifyUserModal02"></button>
+
+<div class="modal fade" id="notifyUserModal02" data-backdrop="static" data-focus="false">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Attention!!!</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <strong> The following Scripts are using Selected reusable function,So please go to respective
+          scripts and delete them accordingly Before deleting them in Reusable Module.
+        </strong>
+        <div class="container" style="overflow-y: auto; height:10rem;">
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item" *ngFor="let scriptName of ScriptsUsingReusableFunctionList; let i = index">
+              {{i+1}}.{{scriptName}}</li>
+          </ul>
+        </div>
+
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">OK</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Notify user regarding scripts which are using resuable function before delete modal ends -->
+
+
+<ng-template #bulletsTemplateForNLP>
+
+  <span class="glyphicon glyphicon-stop nlpUiElement"></span>&nbsp;<span class="ifCss">UI
+    Element</span>&nbsp;
+  <span class="glyphicon glyphicon-stop nlpVariable"></span>&nbsp;<span class="ifCss">Variable</span>&nbsp;
+  <span class="glyphicon glyphicon-stop nlpInput"></span>&nbsp;<span class="ifCss">Input</span>&nbsp;
+  <span class="glyphicon glyphicon-stop nlpCondition"></span>&nbsp;<span class="ifCss">Condition</span>&nbsp;
+
+</ng-template>
+
+<ng-template #testSageGrammarReuse>
+
+  <div class="row" [hidden]="multiDropDown">
+    <div class="form-group col-xs-6 col-sm-6 col-md-6 col-lg-6">
+      <p *ngIf="displayNlp === true" [innerHTML]="xx" #myDiv class="form-control" id="displayNlp"></p>
+      <button *ngIf="displayNlp === true" class="btn btn-default btn-lg  pull-right"
+        (click)="nlpClear(myDiv)">Clear</button>
+      <input placeholder="Enter The Specific Keyword To Search NLP Grammar" id="datalistDisplay" list="browsers"
+        [(ngModel)]="nlpObject.nlpData" class="form-control"
+        (ngModelChange)="getDocOnNlp(nlpObject.nlpData,nlpObject.Object,nlpObject)" (change)="change()"
+        *ngIf="hideDataList === false" style="font-size: small">
+      <datalist id="browsers">
+        <select name="" id="">
+          <option></option>
+          <option *ngFor="let uiNlpGrammar of displayNlpGrammarToUi">{{uiNlpGrammar.nlpGrammar}}
+          </option>
+        </select>
+
+      </datalist>
+      <!-- <span [tooltip]="this.Tooltip" [options]="this.myOptions" *ngIf="displayNlp === true" class="glyphicon glyphicon-info-sign"></span> -->
+    </div>
+    <!-- class="form-group col-xs-6 col-sm-6 col-md-6 col-lg-6" end -->
+
+    <!-- commented below code by abhi for later work -->
+    <div class="form-group col-xs-6 col-sm-6 col-md-6 col-lg-6 row">
+      <div>
+        <button type="button" class="btn btn-lg" [disabled]="nlpObject.nlpData == '' " style="margin-right:10px;"
+          (click)="displayExcel()">Excel</button>
+      </div>
+      <div [hidden]="!showExcelParamDiv" style="margin-top:-10px;">
+        <form action="" [formGroup]='excelParamFormValidation'>
+          <mat-form-field>
+            <mat-select formControlName='excelParaFile' style="font-size: 12px;font-family: 'lato', sans-serif;">
+              <mat-option style="font-size: 12px;" *ngFor="let excel of ExcelAddPara" [value]="excel.label">
+                {{excel.label}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>&nbsp;&nbsp;
+
+          <label for="">Row:</label>
+          <input type="text" style="max-width: 50px;" formControlName='excelParaRow'>&nbsp;&nbsp;
+
+          <label for="">Column:</label>
+          <input type="text" style="max-width: 50px;" formControlName='excelParaColumn'>&nbsp;&nbsp;
+
+          <button type="button" class="btn btn-lg" [disabled]="excelParamFormValidation.invalid"
+            (click)="addExcelParam(nlpObject.Object)">Add Test Data</button>
+
+        </form>
+      </div>
+
+    </div>
+  </div>
+</ng-template>
+
+
+<ng-template #testSageGrammarValidation>
+  <div class="alert alert-danger text-center alert-dismissible show">
+    <strong>{{validationMessage}}</strong>
+  </div>
+</ng-template>
+
+<div>
+  <ng-template #bulletsTemplate>
+    <span class="glyphicon glyphicon-stop if"></span>&nbsp;<span class="ifCss">If</span>&nbsp;
+    <span class="glyphicon glyphicon-stop for"></span>&nbsp;<span class="ifCss">For</span>&nbsp;
+    <span class="glyphicon glyphicon-stop validation"></span>&nbsp;<span class="ifCss">Assertions</span>&nbsp;
+    <span class="glyphicon glyphicon-stop function"></span>&nbsp;<span class="ifCss">Function</span>&nbsp;
+
+  </ng-template>
+</div>
+
+<!-- start myModal10 -->
+<div class="modal fade" id="myModal10" role="dialog">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title">Adding New Row Nlp</h1>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-md-4 col-lg-4 col-sm-4 col-sx-4">
+            <button type="button" class="btn btn-lg " data-dismiss="modal" (click)="addrowAboveNlp()">Above</button>
+          </div>
+          <div class="col-md-4 col-lg-4 col-sm-4 col-sx-4">
+            <button type="button" class="btn btn-lg" data-dismiss="modal" (click)="addrowBelowNlp()">Below</button>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-lg btn-cancel" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- myModal10 -->
+<form [formGroup]='autoGenForm' (ngSubmit)="generateData()" #genDataForm="ngForm">
+  <div class="modal" id="myModalForAutoGenerate">
+    <div class="modal-dialog">
+
+      <div class="modal-content">
+
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title">Auto Generate</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+
+        <!-- Modal body -->
+        <div class="modal-body">
+          <section>
+
+            <div class="container-fluid" *ngFor="let column of autoGenerate;let i = index">
+              <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1">
+                <input type="checkbox" class="form-control" class="exception" (change)="getExceptionOption($event,i)"
+                  checked>
+              </div>
+              <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                <label>{{column.columnName}}</label>
+              </div>
+              <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
+                <select [(ngModel)]="column.typeObject" class="form-control"
+                  (change)="typeDropdownSelected(column.typeObject,i)" formControlName="type">
+                  <option></option>
+                  <option *ngFor="let types of typeDropdown" [ngValue]="types.typeObject">
+                    {{types.type}}
+                  </option>
+                </select>
+              </div>
+
+            </div>
+          </section>
+        </div>
+        <!-- Modal footer -->
+        <div class="modal-footer">
+          <label>Rows</label>
+          <input type="number" class="form-control" [(ngModel)]="value" formControlName="inputReq">
+          <button type="button" class="btn btn-lg" (click)="autoGenerateData(value)" [disabled]="!autoGenForm.valid"
+            data-dismiss="modal">Generate</button>
+
+          <button type="button" class="btn btn-lg btn-cancel" data-dismiss="modal">Cancel</button>
+        </div>
+
+
+
+
+      </div>
+    </div>
+  </div>
+</form>
+
+<div class="modal fade" id="myModalForAutoGenerateForEdit">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">Auto Generate</h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body">
+        <section>
+
+          <div class="container-fluid" *ngFor="let column of autoGenerate5;let i = index">
+            <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1">
+              <input type="checkbox" class="exception" (change)="getcheckedIndex($event,i)" checked>
+            </div>
+            <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+              <h3>{{column.columnName}}</h3>
+            </div>
+            <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
+              <select [(ngModel)]="column.typeObject" (change)="typeDropdownSelected(column.typeObject,i)">
+                <option></option>
+                <option *ngFor="let types of typeDropdown" [ngValue]="types.typeObject">
+                  {{types.type}}
+                </option>
+              </select>
+            </div>
+
+          </div>
+        </section>
+      </div>
+
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <h4>Rows :</h4>
+        <input type="number" [(ngModel)]="value">
+        <button type="button" class="btn" (click)="autoGenerateEdit(value)" data-dismiss="modal">Generate</button>
+        <button type="button" class="btn btn-cancel" data-dismiss="modal" (click)="resetColmnForEdit()">Cancel</button>
+      </div>
+
+    </div>
+  </div>
+</div>

@@ -1,0 +1,35 @@
+.col-4{
+    padding: 10px;
+}
+.inventory-body {
+    /* position: fixed; */
+    /* min-width: 100%; */
+    background-image: url("/assets/images/linegraph.jpg");
+    /* background-repeat: no-repeat;
+    /* background-size: 100%; */
+    /* background-position: center;  */
+    /* background-size: cover; */
+    }
+
+    .card-img-top{
+        height: 100%;
+        width: 100%;
+    }
+
+    .tooltip .tooltiptext {
+        visibility: hidden;
+        width: 120px;
+        background-color: black;
+        color: #fff;
+        text-align: center;
+        border-radius: 6px;
+        padding: 5px 0;
+      
+        /* Position the tooltip */
+        position: absolute;
+        z-index: 1;
+      }
+      
+      .tooltip:hover .tooltiptext {
+        visibility: visible;
+      }

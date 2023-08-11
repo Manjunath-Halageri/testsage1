@@ -1,0 +1,460 @@
+<!-- <ngx-spinner bdColor="rgba(51, 51, 51, 0.8)" size="large" color="#fff" type="line-scale-pulse-out">
+  <p style="color: white">Please Wait. </p>
+</ngx-spinner> -->
+<!-- <div>
+  <table [dataSource]="tableData">
+    <th>Sl No.</th>
+    <td  CellDef="let element; let i = index;">{{i+1}} </td>
+    <th>Organization Name </th>
+    <td CellDef="let element">{{element.organizationName}}</td>
+
+  </table>
+</div> -->
+
+
+
+<div class="ui-g-10 ui-md-10" style="height:85vh;border-top: 1px solid #dee2e6!important;overflow-y: auto;width: 100%;">
+
+
+  <!-- <h3 style="margin-left:250px;">Docker</h3> height: 247px;overflow-y: auto;max-height: 245px;-->
+  <div style="margin-left:250px"><label><u><h1>Docker Machines</h1></u></label></div>
+  <section class="container" style="font-size: medium;padding-top: 3px;">
+    <div class="example-container ">
+      
+      <table mat-table [dataSource]="tableData" class="mat-elevation-z8 ;" width="70%">
+  
+        <!--- Note that these columns can be defined in any order.
+                The actual rendered columns are set as a property on the row definition" -->
+  
+        <!-- Position Column -->
+        <ng-container matColumnDef="Slno">
+          <th mat-header-cell *matHeaderCellDef class="angulartheadColor"> Sl No. </th>
+          <td mat-cell *matCellDef="let element; let i = index;"> {{i+1}} </td>
+        </ng-container>
+        <!-- Name Column -->
+  
+        <ng-container matColumnDef="OrganizationName">
+          <th mat-header-cell *matHeaderCellDef class="angulartheadColor"> Organization Name </th>
+          <td mat-cell *matCellDef="let element"> {{element.organizationName}} </td>
+        </ng-container>
+  
+        <!-- Weight Column -->
+        <ng-container matColumnDef="OrganizationID">
+          <th mat-header-cell *matHeaderCellDef class="angulartheadColor"> Organization ID </th>
+          <td mat-cell *matCellDef="let element"> {{element.orgId}} </td>
+        </ng-container>
+  
+        <ng-container matColumnDef="MachineType">
+          <th mat-header-cell *matHeaderCellDef class="angulartheadColor"> Docker Machine Type </th>
+          <td class="upper" mat-cell *matCellDef="let element;"> {{element.machineType}} </td>
+        </ng-container>
+  
+  
+        <!-- Symbol Column -->
+        <ng-container matColumnDef="Browsers">
+          <th mat-header-cell *matHeaderCellDef class="angulartheadColor"> Max Browsers</th>
+          <td mat-cell *matCellDef="let element"> {{element.totalNoOfUser}} </td>
+        </ng-container>
+  
+        <ng-container matColumnDef="Start">
+          <th mat-header-cell *matHeaderCellDef class="angulartheadColor"> Start</th>
+          <td mat-cell *matCellDef="let element; let i = index;">
+            <button type="button" class="btn btn-lg" mat-raised-button color="primary" (click)="rowStart(i)" 
+             [disabled]="element.state == 'Running' || element.state == 'Starting'">
+              Start
+            </button>
+          </td>
+        </ng-container>
+  
+        <ng-container matColumnDef="Stop">
+          <th mat-header-cell *matHeaderCellDef class="angulartheadColor"> Stop</th>
+          <td mat-cell *matCellDef="let element; let i = index;">
+            <button type="button" class="btn btn-lg" mat-raised-button color="warn" (click)="rowStop(i)" 
+            [disabled]="element.state == 'Stopped' || element.state == 'Starting'">
+              Stop
+            </button>
+          </td>
+        </ng-container>
+  
+        <ng-container matColumnDef="Status">
+          <th mat-header-cell *matHeaderCellDef class="angulartheadColor"> Status</th>
+          <td mat-cell *matCellDef="let element"> {{element.state}}</td>
+        </ng-container>
+        <ng-container matColumnDef="Edit">
+          <th mat-header-cell *matHeaderCellDef class="angulartheadColor"> Edit</th>
+          <td mat-cell *matCellDef="let element; let i = index;" [hidden]="element.machineType== 'usersMachine'||element.machineType=='jmeterUsersMachine'||element.machineType=='jmeterExecutionMachine'" (click)="editModal(i)">
+            <i class="fa fa-edit" style="font-size:30px;color:red"></i> </td>
+        </ng-container>
+  
+  
+  
+        <tr mat-header-row *matHeaderRowDef="displayedColumns;"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+  
+    </div>
+  </section>
+  
+  <button id="hideUserMachine" [hidden]="true" data-toggle="modal" data-target="#dropdownModal"
+              data-backdrop="static"></button>
+  
+  <div class="modal" id="dropdownModal">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+  
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title">Edit {{organization}}</h4>
+        </div>
+  
+        <!-- Modal body -->
+        <div class="modal-body" style="font-size: medium">
+          <div>
+            <ng-container>
+              <table  style="margin-bottom:10px;">
+                <thead>
+                  <tr>
+                    <th>Organization Name </th>
+                    <th> Plan Type </th>
+                    <th> Expiry Date </th>
+                    <th> Max Browser </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td> {{organization}} </td>
+                    <td> {{planType}} </td>
+                    <td> {{expiryDtae | date:'mediumDate'}} </td>
+                    <td>{{maxBrowser}}</td>
+                  </tr>
+                </tbody>
+              </table>
+  
+  
+            </ng-container>
+  
+            <table ng-controller="myCtrl" border="1" style="font-size: medium;margin-bottom: 15px;">
+              <thead>
+                <tr>
+                  <th> Browser Name </th>
+                  <th> Browser version </th>
+                  <th> Delete </th>
+                </tr>
+              </thead>
+              <tbody *ngFor="let group of browserData" class="EditBrowsers">
+                <tr *ngFor="let versions of group.version; let i = index">
+                  <td>{{i+1}}.{{group.browserName}}</td>
+                  <td>{{versions.versionName}}</td>
+                  <td><i class="fa fa-trash-o" style="font-size:30px;color:red"
+                      (click)="delete(versions.ID,versions.NodeName)"></i></td>
+                </tr>
+  
+              </tbody>
+            </table>
+            <div>
+              <table class="table table-borderless" style="margin-bottom: 20px;">
+                <thead>
+                  <tr>
+                    <th class="a">Browser Type</th>
+                    <th class="a">Browser Version</th>
+                    <th class="a">Count</th>
+                    <th class="a">Delete</th>
+                  </tr>
+                </thead>
+  
+                <tbody style="min-height: 10px;max-height: 170px;">
+                  <tr *ngFor="let dockerObj of dockerObject; let i = index">
+  
+                    <td>
+                      <select class="custom-select mr-sm-2" [(ngModel)]="dockerObj.browserName" >
+                        <option>{{browser1}}</option>
+                        <option>{{browser2}}</option>
+                      </select>
+                    </td>
+                    <td>
+                      <select class="custom-select mr-sm-2" [(ngModel)]="dockerObj.dockerVersion" >
+                        <optgroup label="Chrome" *ngIf= "dockerObj.browserName=='Chrome'">
+                          <option value="3.0.1">56.0.2924.87</option>
+                          <option value="3.6.0">62.0.3202.75</option>
+                          <option value="3.7.1">62.0.3202.94</option>
+                          <option value="3.8.1">64.0.3282.119</option>
+                          <option value="3.141.59-20210929">94.0.4606.61</option>
+                          <option value="3.141.59-20210913">93.0.4577.63</option>
+                        </optgroup>
+                        <optgroup label="Firefox" *ngIf= "dockerObj.browserName=='Firefox'">
+                          <option value="3.2.0">52.0</option>
+                          <option value="3.0.1">51.0.1</option>
+                        </optgroup>
+                      </select>
+                    </td>
+                    <td>
+  
+                      <input type="number" id="countNumber" class="form-control" [(ngModel)]="dockerObj.count" min="0"
+                        max="{{_remaning}}" value={{dockerObj.count}} (change) = "validateInput(dockerObj.count, i)" [disabled]="dockerObj.browserName== undefined || dockerObj.dockerVersion==undefined"/>
+                    </td>
+                    <td align="center">
+                      <button type="button" class="btn btn-lg" (click)="deleteVariable(i)"><span><i
+                            class="glyphicon glyphicon-trash" aria-hidden="true"></i></span></button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div>
+              <button type="button" class="btn btn-lg" mat-raised-button color="primary" [disabled]="_full==maxBrowser"
+                (click)="browserName()">
+                <i class="fa fa-plus"></i>Add
+              </button>
+            </div>
+            <hr>
+            <div align="center">
+              <button mat-raised-button class="btn btn-lg" id="cancelBtn" color="primary" data-dismiss="modal">Cancel</button>
+              <button mat-raised-button color="primary" class="btn btn-lg" (click)="createNew()" [disabled]="enableCreateBtn==false">
+                Create
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- JMeter Starts-->
+  <div style="margin-top:5px;" *ngIf="tableJmeterData.length>0&&tableJmeterData[0].machineState=='Running'">
+  <!-- <h3 style="margin-left:250px">JMeter</h3> height: 350px;overflow-y: auto;max-height: 260px;-->
+  <div style="margin-left:100px"><label><u><h1>{{filterMachineType[0].machineType}} Master and Slaves</h1></u></label></div>
+  <section class="container" style="font-size: medium;">
+    <div class="example-container ">
+      
+      <table mat-table [dataSource]="tableJmeterData" class="mat-elevation-z8 ;" width="70%">
+  
+        <!--- Note that these columns can be defined in any order.
+                The actual rendered columns are set as a property on the row definition" -->
+  
+        <!-- Position Column -->
+        <ng-container matColumnDef="Slno">
+          <th mat-header-cell *matHeaderCellDef class="angulartheadColor"> Sl No. </th>
+          <td mat-cell *matCellDef="let element; let i = index;"> {{i+1}} </td>
+        </ng-container>
+        <!-- Name Column -->
+  
+        <ng-container matColumnDef="OrganizationName">
+          <th mat-header-cell *matHeaderCellDef class="angulartheadColor"> Organization Name </th>
+          <td mat-cell *matCellDef="let element"> {{element.organizationName}} </td>
+        </ng-container>
+  
+        <!-- Weight Column -->
+        <ng-container matColumnDef="OrganizationID">
+          <th mat-header-cell *matHeaderCellDef class="angulartheadColor"> Organization ID </th>
+          <td mat-cell *matCellDef="let element"> {{element.orgId}} </td>
+        </ng-container>
+  
+        <ng-container matColumnDef="MachineType">
+          <th mat-header-cell *matHeaderCellDef class="angulartheadColor"> JMeter Machine Type </th>
+          <td class="upper" mat-cell *matCellDef="let element;"> {{element.machineType}} </td>
+        </ng-container>
+  
+  
+         <!-- Symbol Column -->
+         <ng-container matColumnDef="Browsers">
+          <th mat-header-cell *matHeaderCellDef class="angulartheadColor"> Name</th>
+          <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+        </ng-container>
+  
+        <ng-container matColumnDef="Start">
+          <th mat-header-cell *matHeaderCellDef class="angulartheadColor"> Start</th>
+          <td mat-cell *matCellDef="let element; let i = index;">
+            <button type="button" class="btn btn-lg" mat-raised-button color="primary" (click)="jmeterRowStart(i)" 
+             [disabled]="element.state == 'Running' || element.state == 'Starting'||element.machineState=='Stopped'">
+              Start
+            </button>
+          </td>
+        </ng-container>
+  
+        <ng-container matColumnDef="Stop">
+          <th mat-header-cell *matHeaderCellDef class="angulartheadColor"> Stop</th>
+          <td mat-cell *matCellDef="let element; let i = index;">
+            <button type="button" class="btn btn-lg" mat-raised-button color="warn" (click)="jmeterRowStop(i)" 
+            [disabled]="element.state == 'Stopped' || element.state == 'Starting'||element.machineState=='Stopped'">
+              Stop
+            </button>
+          </td>
+        </ng-container>
+  
+        <ng-container matColumnDef="Status">
+          <th mat-header-cell *matHeaderCellDef class="angulartheadColor"> Status</th>
+          <td mat-cell *matCellDef="let element"> {{element.state}}</td>
+        </ng-container>
+  
+  
+        <tr mat-header-row *matHeaderRowDef="displayedJmeterColumns;"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedJmeterColumns;"></tr>
+      </table>
+  
+    </div>
+  </section>
+  </div>
+  <!--Jmeter Ends-->
+  
+  </div>
+  <ngx-spinner bdColor = "rgba(51, 51, 51, 0.8)" size = "medium" color = "#fff" type = "ball-clip-rotate" [fullScreen] = "true"><h3><p style="color: white" > Please Wait... </p></h3></ngx-spinner>
+  
+  <!-- <ngx-spinner bdColor="rgba(51, 51, 51, 0.8)" size="large" color="#fff" type="line-scale-pulse-out">
+    <p style="color: white">Please Wait.... </p>
+  </ngx-spinner> -->
+  
+  
+  <!-- <ul class="breadcrumb" style="font-size:15px;background-color: unset;margin:unset">
+    <li class="breadcrumb-item"><a [routerLink]="['/projectdetail']" id="mainheader">ProjectDetails</a></li>
+    <li class="breadcrumb-item"><a id="subheader">Docker</a></li>
+  </ul>
+  <hr>
+  <br><br>
+  <div>
+    <p class="text-center" style="font-size:16px">
+      Available Machines
+    </p>
+  </div>
+  <table class="shadow-lg scroll" style="border:unset;width:80%;margin:10%;;margin-top: 2%;margin-bottom: 2%">
+    <thead class="theadColor">
+      <tr>
+        <th class="col-xs-1">Name</th>
+        <th class="col-xs-1">State</th>
+        <th class="col-xs-3">Url</th>
+        <th class="col-xs-2">Errors</th>
+        <th class="col-xs-2">Execution Status</th>
+        <th class="col-xs-2">
+          <span style="padding: 8px">Start/Stop</span>
+        </th>
+        <th class="col-xs-1" *ngIf="delete==true">Delete</th>
+      </tr>
+    </thead>
+    <tbody class="block bodyHeight">
+  
+      <tr *ngFor="let data of dbmachine ;let i = index">
+        <td class="col-xs-1">
+          <a [routerLink]="['dockerMachineNameComponent']" [(ngModel)]="data.machine"
+            (click)=showingMachineDetails(data.machine)>{{data.machine}}</a>
+        </td>
+        <td class="col-xs-1">{{data.state}}</td>
+        <td class="col-xs-3">{{data.url}}</td>
+        <td class="col-xs-2"><span style="margin-left:5px">{{data.errors}}</span></td>
+        <td class="col-xs-2"><span style="margin-left:5px">{{data.executionStatus}}</span></td>
+        <td class="col-xs-2">
+  
+          <span style="margin-left:12px" *ngIf="data.state=='Stopped'">
+            <span class="glyphicon glyphicon-play btn btn-info btn-lg" (click)=machineStart(i,data.machine)></span>
+          </span>
+          <span style="margin-left:12px" *ngIf="data.state=='Running'">
+            <span class="glyphicon glyphicon-pause btn btn-info btn-lg" (click)=machineStop(i,data.machine)></span>
+          </span>
+        </td>
+        <td class="col-xs-1" *ngIf="delete==true">
+          <span class="glyphicon glyphicon-trash btn btn-info btn-lg" (click)=machineDelete(i,data.machine)></span>
+        </td>
+      </tr>
+  
+  
+    </tbody>
+  </table>
+  <div class="text-center">
+    <!- - <button type="button" class="btn btn-lg" title="hoorey!" data-toggle="modal" data-target="#myModal">Create
+      Machine</button> - ->
+    <button class="btn btn-lg" data-toggle="modal" data-target="#myModal" mat-raised-button *ngIf="create==true"
+      matTooltip="Info about the action" aria-label="Button that displays a tooltip when focused or hovered over">
+      Create Machine
+    </button>
+  </div>
+  
+  <form [formGroup]="userForm" (submit)="saveUser()">
+    <div class="modal" data-backdrop="static" id="myModal">
+      <div class="modal-dialog">
+        <div class="modal-content">
+  
+          <!- - Modal Header - ->
+          <div class="modal-header">
+            <h4 class="modal-title">Create New Machine</h4>
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+          </div>
+  
+          <!- - Modal body - ->
+          <div class="modal-body">
+            <div class="container">
+              <div class="row">
+  
+                <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 col-xl-4 setpadding">
+                  <div>
+                    <div class="row excelTable"> <label for="name">Name</label></div>
+  
+                    <div class="row excelTable"> <label for="ram">Ram</label></div>
+  
+                    <div class="row excelTable"> <label for="Disksize">Disk Size</label></div>
+  
+                    <div class="row excelTable"> <label for="Cpu">CPU</label></div>
+                  </div>
+                </div>
+  
+                <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8 col-xl-8 setpadding"><br>
+                  <div>
+                    <div class="row excelTable1">
+                      <input formControlName="name" id="name" [(ngModel)]="Name" (change)="checkFormValues()" />
+                      <control-messages [control]="userForm.controls.name"></control-messages><br>
+                    </div>
+                    <div class="row excelTable1">
+                      <input formControlName="ram" id="ram" [(ngModel)]="Ram" (change)="checkFormValues()" />
+                      <control-messages [control]="userForm.controls.ram"></control-messages><br>
+                    </div>
+                    <div class="row excelTable1">
+                      <input formControlName="Disksize" id="Disksize" [(ngModel)]="diskSize"
+                        (change)="checkFormValues()" />
+                      <control-messages [control]="userForm.controls.Disksize"></control-messages><br>
+                    </div>
+                    <div class="row excelTable1">
+                      <input formControlName="Cpu" id="Cpu" [(ngModel)]="cpu" (change)="checkFormValues()" />
+                      <control-messages [control]="userForm.controls.Cpu"></control-messages><br>
+                    </div>
+                  </div>
+                </div>
+  
+              </div>
+  
+            </div>
+  
+          </div>
+  
+          <!- - Modal footer - ->
+          <div class="modal-footer">
+            <!- - <button type="submit" [disabled]="!userForm.valid" class="btn btn-lg" data-dismiss="modal" (click)=createNewMachine(Name,Ram,diskSize,cpu)>Create</button> - ->
+            <mat-spinner-button [options]="spinnerButtonOptions" (btnClick)="createNewMachine(Name,Ram,diskSize,cpu)">
+  
+            </mat-spinner-button>
+  
+            <button type="submit" class="btn btn-lg btn-cancel" data-dismiss="modal"
+              (click)=cancelMachine(Name,Ram,diskSize,cpu)>Cancel</button>
+          </div>
+  
+        </div>
+      </div>
+    </div>
+  </form> -->
+  
+  <!-- <tr *ngFor="let data of dbmachine ;let i = index" >
+        <td style="width:17%">
+            <a  [routerLink]="['dockerMachineNameComponent']" [(ngModel)]="data.machine" (click)=showingMachineDetails(data.machine)>{{data.machine}}</a>
+        </td>
+        <td style="width:17%">{{data.state}}</td>
+        <td style="width:17%">{{data.url}}</td>
+        <td style="width:17%">{{data.errors}}</td>
+        <td style="width:17%">{{data.executionStatus}}</td>
+        <td style="width:17%">
+          <span>
+            <span class="glyphicon glyphicon-play btn btn-info btn-lg" (click)=machineStart(i,data.machine)></span>
+            <span class="glyphicon glyphicon-pause btn btn-info btn-lg" (click)=machineStop(i,data.machine)></span>
+                      <span class="glyphicon glyphicon-stop btn btn-info btn-lg"></span>
+  
+          </span>
+        </td>
+        <td style="width:17%" *ngIf="delete==true">
+          <span class="glyphicon glyphicon-trash btn btn-info btn-lg" (click)=machineDelete(i,data.machine)></span>
+        </td>
+      </tr>   -->

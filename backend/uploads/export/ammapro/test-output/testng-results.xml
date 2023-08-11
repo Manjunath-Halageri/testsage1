@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testng-results skipped="0" failed="0" ignored="0" total="7" passed="7">
+  <reporter-output>
+  </reporter-output>
+  <suite name="Default suite" duration-ms="15490" started-at="2019-03-06T12:01:13Z" finished-at="2019-03-06T12:01:28Z">
+    <groups>
+    </groups>
+    <test name="Default test" duration-ms="15490" started-at="2019-03-06T12:01:13Z" finished-at="2019-03-06T12:01:28Z">
+      <class name="finalModule.finalFeature.final09999">
+        <test-method status="PASS" signature="step_0()[pri:0, instance:finalModule.finalFeature.final09999@4e1d422d]" name="step_0" duration-ms="7081" started-at="2019-03-06T12:01:13Z" finished-at="2019-03-06T12:01:20Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- step_0 -->
+        <test-method status="PASS" signature="step_1()[pri:0, instance:finalModule.finalFeature.final09999@4e1d422d]" name="step_1" duration-ms="3022" started-at="2019-03-06T12:01:20Z" finished-at="2019-03-06T12:01:23Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- step_1 -->
+        <test-method status="PASS" signature="step_2()[pri:0, instance:finalModule.finalFeature.final09999@4e1d422d]" name="step_2" duration-ms="735" started-at="2019-03-06T12:01:23Z" finished-at="2019-03-06T12:01:24Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- step_2 -->
+        <test-method status="PASS" signature="step_3()[pri:0, instance:finalModule.finalFeature.final09999@4e1d422d]" name="step_3" duration-ms="536" started-at="2019-03-06T12:01:24Z" finished-at="2019-03-06T12:01:24Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- step_3 -->
+        <test-method status="PASS" signature="step_4()[pri:0, instance:finalModule.finalFeature.final09999@4e1d422d]" name="step_4" duration-ms="2751" started-at="2019-03-06T12:01:24Z" finished-at="2019-03-06T12:01:27Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- step_4 -->
+        <test-method status="PASS" signature="step_5()[pri:0, instance:finalModule.finalFeature.final09999@4e1d422d]" name="step_5" duration-ms="835" started-at="2019-03-06T12:01:27Z" finished-at="2019-03-06T12:01:28Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- step_5 -->
+        <test-method status="PASS" signature="step_6()[pri:0, instance:finalModule.finalFeature.final09999@4e1d422d]" name="step_6" duration-ms="488" started-at="2019-03-06T12:01:28Z" finished-at="2019-03-06T12:01:28Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- step_6 -->
+      </class> <!-- finalModule.finalFeature.final09999 -->
+    </test> <!-- Default test -->
+  </suite> <!-- Default suite -->
+</testng-results>

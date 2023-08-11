@@ -1,0 +1,138 @@
+{"testng-results": {
+          "reporter-output": {"line": [
+                    "Chrome",
+                    "94.0.4606.61",
+                    "E:\\zap\\backend\\uploads\\opal\\manjunathpro\\manjunathpl\\projectToRun\\.\\Screenshot\\EachStepScreenshot\\100_Suite1\\sID886\\step_0.png",
+                    "Chrome",
+                    "94.0.4606.61",
+                    "E:\\zap\\backend\\uploads\\opal\\manjunathpro\\manjunathpl\\projectToRun\\.\\Screenshot\\EachStepScreenshot\\100_Suite1\\sID886\\step_1.png",
+                    "Chrome",
+                    "94.0.4606.61",
+                    "E:\\zap\\backend\\uploads\\opal\\manjunathpro\\manjunathpl\\projectToRun\\.\\Screenshot\\EachStepScreenshot\\100_Suite1\\sID886\\step_2.png",
+                    "Chrome",
+                    "94.0.4606.61",
+                    "E:\\zap\\backend\\uploads\\opal\\manjunathpro\\manjunathpl\\projectToRun\\.\\Screenshot\\EachStepScreenshot\\100_Suite1\\sID886\\step_3.png",
+                    "Chrome",
+                    "94.0.4606.61",
+                    "E:\\zap\\backend\\uploads\\opal\\manjunathpro\\manjunathpl\\projectToRun\\.\\Screenshot\\EachStepScreenshot\\100_Suite1\\sID886\\step_4.png",
+                    "Chrome",
+                    "94.0.4606.61",
+                    "E:\\zap\\backend\\uploads\\opal\\manjunathpro\\manjunathpl\\projectToRun\\.\\Screenshot\\EachStepScreenshot\\100_Suite1\\sID886\\step_5.png",
+                    "Chrome",
+                    "94.0.4606.61",
+                    "E:\\zap\\backend\\uploads\\opal\\manjunathpro\\manjunathpl\\projectToRun\\.\\Screenshot\\EachStepScreenshot\\100_Suite1\\sID886\\step_6.png"
+          ]},
+          "total": 7,
+          "suite": {
+                    "test": {
+                              "started-at": "2023-08-01T06:17:23Z",
+                              "name": "Test",
+                              "finished-at": "2023-08-01T06:19:27Z",
+                              "class": {
+                                        "test-method": [
+                                                  {
+                                                            "reporter-output": {"line": [
+                                                                      "Chrome",
+                                                                      "94.0.4606.61",
+                                                                      "E:\\zap\\backend\\uploads\\opal\\manjunathpro\\manjunathpl\\projectToRun\\.\\Screenshot\\EachStepScreenshot\\100_Suite1\\sID886\\step_0.png"
+                                                            ]},
+                                                            "signature": "step_0()[pri:0, instance:mID642.fID681.sID886@4566e5bd]",
+                                                            "started-at": "2023-08-01T11:47:23Z",
+                                                            "name": "step_0",
+                                                            "finished-at": "2023-08-01T11:47:40Z",
+                                                            "status": "PASS",
+                                                            "duration-ms": 17354
+                                                  },
+                                                  {
+                                                            "reporter-output": {"line": [
+                                                                      "Chrome",
+                                                                      "94.0.4606.61",
+                                                                      "E:\\zap\\backend\\uploads\\opal\\manjunathpro\\manjunathpl\\projectToRun\\.\\Screenshot\\EachStepScreenshot\\100_Suite1\\sID886\\step_1.png"
+                                                            ]},
+                                                            "signature": "step_1()[pri:0, instance:mID642.fID681.sID886@4566e5bd]",
+                                                            "started-at": "2023-08-01T11:47:40Z",
+                                                            "name": "step_1",
+                                                            "finished-at": "2023-08-01T11:47:55Z",
+                                                            "status": "PASS",
+                                                            "duration-ms": 14768
+                                                  },
+                                                  {
+                                                            "reporter-output": {"line": [
+                                                                      "Chrome",
+                                                                      "94.0.4606.61",
+                                                                      "E:\\zap\\backend\\uploads\\opal\\manjunathpro\\manjunathpl\\projectToRun\\.\\Screenshot\\EachStepScreenshot\\100_Suite1\\sID886\\step_2.png"
+                                                            ]},
+                                                            "signature": "step_2()[pri:0, instance:mID642.fID681.sID886@4566e5bd]",
+                                                            "started-at": "2023-08-01T11:47:55Z",
+                                                            "name": "step_2",
+                                                            "finished-at": "2023-08-01T11:47:57Z",
+                                                            "status": "PASS",
+                                                            "duration-ms": 2562
+                                                  },
+                                                  {
+                                                            "reporter-output": {"line": [
+                                                                      "Chrome",
+                                                                      "94.0.4606.61",
+                                                                      "E:\\zap\\backend\\uploads\\opal\\manjunathpro\\manjunathpl\\projectToRun\\.\\Screenshot\\EachStepScreenshot\\100_Suite1\\sID886\\step_3.png"
+                                                            ]},
+                                                            "signature": "step_3()[pri:0, instance:mID642.fID681.sID886@4566e5bd]",
+                                                            "started-at": "2023-08-01T11:47:57Z",
+                                                            "name": "step_3",
+                                                            "finished-at": "2023-08-01T11:47:58Z",
+                                                            "status": "PASS",
+                                                            "duration-ms": 1146
+                                                  },
+                                                  {
+                                                            "reporter-output": {"line": [
+                                                                      "Chrome",
+                                                                      "94.0.4606.61",
+                                                                      "E:\\zap\\backend\\uploads\\opal\\manjunathpro\\manjunathpl\\projectToRun\\.\\Screenshot\\EachStepScreenshot\\100_Suite1\\sID886\\step_4.png"
+                                                            ]},
+                                                            "signature": "step_4()[pri:0, instance:mID642.fID681.sID886@4566e5bd]",
+                                                            "started-at": "2023-08-01T11:47:58Z",
+                                                            "name": "step_4",
+                                                            "finished-at": "2023-08-01T11:48:04Z",
+                                                            "status": "PASS",
+                                                            "duration-ms": 5376
+                                                  },
+                                                  {
+                                                            "reporter-output": {"line": [
+                                                                      "Chrome",
+                                                                      "94.0.4606.61",
+                                                                      "E:\\zap\\backend\\uploads\\opal\\manjunathpro\\manjunathpl\\projectToRun\\.\\Screenshot\\EachStepScreenshot\\100_Suite1\\sID886\\step_5.png"
+                                                            ]},
+                                                            "signature": "step_5()[pri:0, instance:mID642.fID681.sID886@4566e5bd]",
+                                                            "started-at": "2023-08-01T11:48:04Z",
+                                                            "name": "step_5",
+                                                            "finished-at": "2023-08-01T11:49:07Z",
+                                                            "status": "PASS",
+                                                            "duration-ms": 62778
+                                                  },
+                                                  {
+                                                            "reporter-output": {"line": [
+                                                                      "Chrome",
+                                                                      "94.0.4606.61",
+                                                                      "E:\\zap\\backend\\uploads\\opal\\manjunathpro\\manjunathpl\\projectToRun\\.\\Screenshot\\EachStepScreenshot\\100_Suite1\\sID886\\step_6.png"
+                                                            ]},
+                                                            "signature": "step_6()[pri:0, instance:mID642.fID681.sID886@4566e5bd]",
+                                                            "started-at": "2023-08-01T11:49:07Z",
+                                                            "name": "step_6",
+                                                            "finished-at": "2023-08-01T11:49:27Z",
+                                                            "status": "PASS",
+                                                            "duration-ms": 20258
+                                                  }
+                                        ],
+                                        "name": "mID642.fID681.sID886"
+                              },
+                              "duration-ms": 124271
+                    },
+                    "started-at": "2023-08-01T06:17:23Z",
+                    "name": "Suite",
+                    "groups": "",
+                    "finished-at": "2023-08-01T06:19:27Z",
+                    "duration-ms": 124271
+          },
+          "failed": 0,
+          "passed": 7,
+          "skipped": 0
+}}

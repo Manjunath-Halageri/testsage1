@@ -1,0 +1,14 @@
+NAME                           ACTIVE   DRIVER      STATE   URL   SWARM   DOCKER    ERRORS
+Boatorg1ExecutionInfra         -        amazonec2   Error                 Unknown   AuthFailure: AWS was not able to validate the provided access credentials
+                               status code: 401, request id: ee85c678-409e-4747-aaa0-efe754d8d3fb
+Boatorg1JmeterExecutionInfra   -    amazonec2   Error             Unknown   AuthFailure: AWS was not able to validate the provided access credentials
+                               status code: 401, request id: 8eccdf53-e34e-4073-be6d-00882a90feaf
+Boatorg1JmeterUserInfra        -    amazonec2   Error             Unknown   AuthFailure: AWS was not able to validate the provided access credentials
+                               status code: 401, request id: d025c1cc-7590-4f0d-bdee-db724cb79f05
+Boatorg1UserInfra              -    amazonec2   Error             Unknown   AuthFailure: AWS was not able to validate the provided access credentials
+                               status code: 401, request id: 31745eb7-702d-479d-9b36-8b957513e43e
+samsungExecutionInfra          -    amazonec2   Error             Unknown   AuthFailure: AWS was not able to validate the provided access credentials
+                               status code: 401, request id: a97eba09-7bc5-49aa-a53f-fb6b3ad373d7
+samsungInfraaa                 -    virtualbox   Stopped             Unknown   
+samsungUserInfra               -    amazonec2    Error               Unknown   AuthFailure: AWS was not able to validate the provided access credentials
+                               status code: 401, request id: f9788022-82cb-4e20-a101-7c472eaa538c

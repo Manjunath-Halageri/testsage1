@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite guice-stage="DEVELOPMENT" name="Failed suite [Suite]">
+  <test thread-count="5" name="Test(failed)">
+    <classes>
+      <class name="marchModule06Again.marchFeature06Again.marchScript06Again">
+        <methods>
+          <include name="step_4"/>
+          <include name="step_1"/>
+          <include name="step_2"/>
+          <include name="step_0"/>
+          <include name="step_5"/>
+          <include name="step_6"/>
+          <include name="step_3"/>
+        </methods>
+      </class> <!-- marchModule06Again.marchFeature06Again.marchScript06Again -->
+    </classes>
+  </test> <!-- Test(failed) -->
+</suite> <!-- Failed suite [Suite] -->

@@ -1,0 +1,431 @@
+<ul class="breadcrumb" style="margin:unset;background-color: unset;margin:unset">
+  <!-- [routerLink]="['/projectdetail']"  -->
+  <li class="breadcrumb-item" style="width: 153px;"><a id="mainheader">Defect Management</a></li>
+  <li class="breadcrumb-item" id="subheader" *ngIf="form==true"><a id="subheader">Search a Defect</a></li>
+  <li class="breadcrumb-item" id="subheader" *ngIf="confirmation==true"><a id="subheader">Edit Defect</a></li>
+</ul>
+<hr style="margin: unset;"><br>
+
+<section class="container-fluid">
+  <section *ngIf="form==true">
+    <form [formGroup]='searchForm'>
+      <div class="container" style="width:300px;">
+        <div>
+          <div class="input-group">
+            <input type="text" class="form-control form-control-lg" name="defect" formControlName="quickForm"
+            autocomplete="off"  placeholder="Enter defect id like dIDxx" [(ngModel)]="value">
+              <!-- <control-messages [control]="searchForm.controls.defectForm"></control-messages> -->
+
+            <button class="btn btn-success" type="submit" style="font-size: small;" [disabled]="!searchForm.valid"
+              (click)="singleDefectDetail(value)">Quick Search</button>
+
+          </div>
+          <control-messages [control]="searchForm.controls.quickForm"></control-messages>
+
+
+        </div>
+      </div>
+    </form>
+    <br>
+    <div>
+      <div class="row">
+        <div class="col-lg-2 col-md-2 col-sm-2 form-group">
+          <label for="module">Module</label>
+          <select class="form-control" [(ngModel)]="moduleId" name="hjbzdh" (change)="moduleIndex(moduleId)">
+            <!-- <option></option> -->
+            <option *ngFor="let m of allModule" value="{{m.moduleId}}">{{m.moduleName}}</option>
+          </select>
+        </div>
+        <div class="col-lg-2 col-md-2 col-sm-2 form-group">
+          <label for="feature">Feature</label>
+          <select class="form-control" [(ngModel)]="featureId" name="sss" (change)="featureIndex(moduleId,featureId)">
+            <!-- <option></option> -->
+            <option *ngFor="let f of featureNames" value="{{f.featureId}}">{{f.featureName}}</option>
+          </select>
+        </div>
+        <div class="col-lg-2 col-md-2 col-sm-2 form-group">
+          <label for="script">Test Case</label>
+          <select class="form-control" [(ngModel)]="scriptId" name="ssxs">
+            <!-- <option></option> -->
+            <option *ngFor="let s of scriptNames" value="{{s.scriptId}}">{{s.scriptName}}</option>
+          </select>
+        </div>
+        <div class="col-lg-2 col-md-2 col-sm-2 form-group">
+          <label for="priority">Priority</label>
+          <select class="form-control" name="prioriDDDty" [(ngModel)]="priorityId">
+            <!-- <option>All</option> -->
+            <option *ngFor="let p of priority" value="{{p.priorityId}}">{{p.priorityName}}</option>
+          </select>
+        </div>
+        <div class="col-lg-2 col-md-2 col-sm-2 form-group">
+          <label for="severity">Severity</label>
+          <select class="form-control" name="seve" [(ngModel)]="severityId">
+            <!-- <option>All</option> -->
+            <option *ngFor="let s of severity" value="{{s.severityId}}">{{s.severityName}}</option>
+          </select>
+        </div>
+        <div class="col-lg-2 col-md-2 col-sm-2 form-group">
+          <label for="status">Status</label>
+          <select class="form-control" name="nsnsn" [(ngModel)]="statusId">
+            <!-- <option>All</option> -->
+            <option *ngFor="let s of status" value="{{s.statusId}}">{{s.status}}</option>
+          </select>
+        </div>
+
+      </div>
+      <div style="text-align: center;">
+        <button class="btn btn-primary btn-lg" type="button"
+          (click)="search(moduleId,featureId,scriptId,priorityId,severityId,statusId)">Search</button>
+      </div>
+    </div>
+    <br>
+    <!-- <section> -->
+    <div class="example-container table-container shadow-lg">
+
+      <table mat-table [dataSource]="tableData" matSort class="mat-elevation-z8 table-hover">
+
+        <!--- Note that these columns can be defined in any order.
+                          The actual rendered columns are set as a property on the row definition" -->
+
+        <!-- Position Column -->
+        <ng-container matColumnDef="defectId">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header class="angulartheadColor" style="text-align:center;"> Defect Id </th>
+          <td mat-cell *matCellDef="let element" class="defectId" style="color: blue;cursor: pointer;text-align: center;" (click)="def(element.defectId)">
+            {{element.defectId}} </td>
+        </ng-container>
+
+        <!-- Name Column -->
+        <ng-container matColumnDef="summary" >
+          <th mat-header-cell *matHeaderCellDef mat-sort-header class="angulartheadColor" style="text-align:center;"> Summary </th>
+          <td mat-cell *matCellDef="let element" style="text-align:center;width:20%;padding-right:3%;word-break: break-word;"> 
+            {{element.summary}} </td>
+        </ng-container>
+
+        <!-- Weight Column -->
+        <ng-container matColumnDef="priority">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header class="angulartheadColor" style="text-align:center;"> Priority </th>
+          <td mat-cell *matCellDef="let element" style="text-align: center;"> {{element.priorityName}} </td>
+        </ng-container>
+
+        <!-- Symbol Column -->
+        <ng-container matColumnDef="severity">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header class="angulartheadColor" style="text-align:center;"> Severity </th>
+          <td mat-cell *matCellDef="let element" style="text-align: center;"> {{element.severityName}} </td>
+        </ng-container>
+
+        <!-- Symbol Column -->
+        <ng-container matColumnDef="status">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header class="angulartheadColor" style="text-align:center;"> Status </th>
+          <td mat-cell *matCellDef="let element" style="text-align: center;"> {{element.status}} </td>
+        </ng-container>
+
+        <!-- Symbol Column -->
+        <ng-container matColumnDef="raised by">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header class="angulartheadColor" style="text-align:center;"> Raised by </th>
+          <td mat-cell *matCellDef="let element" style="text-align: center;"> {{element.qaContact}} </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+      <div *ngIf="noData==true" style="text-align: center;margin-top: 10%;color: var(--main-button-color);" id="noData"><h1>{{allData}}</h1></div>
+
+    </div>
+    <!-- </section> -->
+  </section>
+
+
+
+
+  <section *ngIf="confirmation==true" style="font-size:15px">
+    <div style="text-align: end;">
+      <button class="btn btn-primary btn-lg" type="button" *ngIf="confirmation==true"
+        (click)="newDefect()">Back</button>
+    </div>
+    <!-- <br> [value]=defectId  [(ngModel)]="defectId" -->
+    <form [formGroup]="defectForm" (ngSubmit)="onSubmitDefectDetails()" #dfForm="ngForm">
+
+      <div class=" row" style="margin: unset;padding: unset;">
+        <div class="col-lg-3 col-md-3 col-sm-3 form-group">
+          <label for="email" style="font-weight: 600;">Defect Id</label>
+          <input type="text" class="form-control" formControlName="defectId" [(ngModel)]="allDefectData.defectId" >
+        </div>
+        <div class="col-lg-3 col-md-3 col-sm-3 form-group">
+          <label for="module">Module</label>
+          <select class="form-control" formControlName="moduleId" [(ngModel)]="allDefectData.moduleId"
+          name="hjbzdh"  (change)="getFeatures(allDefectData.moduleId)">
+            <option value="" style="display:none;"></option>
+            <option *ngFor="let m of allModule" value="{{m.moduleId}}"
+              [selected]="m.moduleId == allDefectData.moduleId">
+              {{m.moduleName}}</option>
+          </select>
+        </div>
+        <div class="col-lg-3 col-md-3 col-sm-3 form-group">
+          <label for="feature">Feature</label>
+          <select class="form-control" formControlName="featureId" [(ngModel)]="allDefectData.featureId" name="sss"
+            (change)="getScripts(allDefectData.moduleId,allDefectData.featureId)">
+            <option value="" style="display:none;"></option>
+            <option *ngFor="let f of featureNames" value="{{f.featureId}}"
+              [selected]="f.featureId == allDefectData.featureId">{{f.featureName}}</option>
+          </select>
+        </div>
+        <div class="col-lg-3 col-md-3 col-sm-3 form-group">
+          <label for="script">Test Case</label>
+          <select class="form-control" formControlName="scriptId" [(ngModel)]="allDefectData.scriptId" name="sss"
+            >
+            <option *ngFor="let s of scriptNames" value="{{s.scriptId}}"
+              [selected]="s.scriptId == allDefectData.scriptId">{{s.scriptName}}</option>
+          </select>
+        </div>
+
+        <div class="col-lg-3 col-md-3 col-sm-3 form-group">
+          <label for="date">Date</label>
+          <input type="date" class="form-control" [(ngModel)]="allDefectData.date" name="date" formControlName="date">
+        </div>
+
+
+        <div class="col-lg-3 col-md-3 col-sm-3 form-group">
+          <label for="priority">Priority</label>
+          <select class="form-control" formControlName="priorityId" [(ngModel)]="allDefectData.priorityId">
+            <option></option>
+            <option *ngFor="let p of priority" [value]="p.priorityId"
+              [selected]="p.priorityId == allDefectData.priorityId">{{p.priorityName}}</option>
+          </select>
+        </div>
+        <div class="col-lg-3 col-md-3 col-sm-3 form-group">
+          <label for="severity">Severity</label>
+          <select class="form-control" formControlName="severityId" [(ngModel)]="allDefectData.severityId">
+            <option></option>
+            <option *ngFor="let s of severity" [value]="s.severityId"
+              [selected]="s.severityId==allDefectData.severityId">
+              {{s.severityName}}
+            </option>
+          </select>
+        </div>
+        <div class="col-lg-3 col-md-3 col-sm-3 form-group">
+          <label for="status">Status</label>
+          <select class="form-control" formControlName="statusId" [(ngModel)]="allDefectData.statusId">
+            <option></option>
+            <option *ngFor="let s of status" [value]="s.statusId" [selected]="s.statusId==allDefectData.statusId">
+              {{s.status}}</option>
+          </select>
+        </div>
+        <div class="col-lg-3 col-md-3 col-sm-3 form-group">
+          <label for="time">Time</label>
+          <input type="time" class="form-control" [(ngModel)]="allDefectData.time" name="time" formControlName="time">
+        </div>
+        <div class="col-lg-3 col-md-3 col-sm-3 form-group">
+          <label for="version">Version</label>
+          <select class="form-control" formControlName="releaseId" [(ngModel)]="allDefectData.releaseId">
+            <option></option>
+            <option *ngFor="let rv of releaseVer" [value]="rv.releaseId"
+              [selected]="rv.releaseId == allDefectData.releaseId">{{rv.releaseVersion}}</option>
+          </select>
+        </div>
+      </div>
+
+      <br>
+
+      <section>
+        <div class="row" style="margin: unset;padding: unset;">
+          <div class="col-lg-12 col-md-12 col-sm-12 form-group">
+            <label for="summary">Summary</label>
+            <input type="text" class="form-control" [(ngModel)]="allDefectData.summary" formControlName="summary">
+          </div>
+        </div>
+      </section>
+      <br>
+      <section>
+        <div class="row" style="margin: unset;padding: unset;">
+          <div class="col-lg-4 col-md-4 col-sm-4 form-group">
+            <label for="description">Description</label>
+            <textarea name="description" rows="10" cols="10" class="form-control"
+              [(ngModel)]="allDefectData.description" formControlName="description"></textarea>
+          </div>
+          <div class="col-lg-8 col-md-8 col-sm-8 form-group" style="padding:unset;margin: unset;">
+            <div class="col-lg-4 col-md-4 col-sm-4 form-group">
+              <label for="device">Device</label>
+              <select class="form-control" formControlName="deviceId" [(ngModel)]="allDefectData.deviceId">
+                <option></option>
+                <option *ngFor="let d of device" [value]="d.deviceId" [selected]="d.deviceId == allDefectData.deviceId">
+                  {{d.deviceName}}</option>
+              </select>
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-4 form-group">
+              <label for="browser">Browser Name</label>
+              <select class="form-control" formControlName="browserName" [(ngModel)]="allDefectData.browserName"
+              (change)="getVersions(allDefectData.browserName)">
+                <option></option>
+                <option *ngFor="let b of browserName" [value]="b.browserName"
+                  [selected]="b.browserName == allDefectData.browserName">
+                  {{b.browserName}}</option>
+              </select>
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-4 form-group">
+              <label for="assigned">Assigned To</label>
+              <select class="form-control" formControlName="assignedTo" [(ngModel)]="allDefectData.assignedTo">
+                <option></option>
+                <option *ngFor="let a of assign" [value]="a.name" [selected]="a.name == allDefectData.assignedTo">
+                  {{a.name}}</option>
+              </select>
+            </div>
+
+            <div class="col-lg-4 col-md-4 col-sm-4 form-group">
+              <label for="os">OS</label>
+              <select class="form-control" formControlName="osId" [(ngModel)]="allDefectData.osId">
+                <option></option>
+                <option *ngFor="let o of os" [value]="o.osId" [selected]="o.osId == allDefectData.osId">{{o.osName}}
+                </option>
+              </select>
+            </div>
+            <br>
+            <br>
+            <div class="col-lg-4 col-md-4 col-sm-4 form-group">
+              <label for="browserVersion">Browser Version</label>
+              <select class="form-control" formControlName="browserVersion" [(ngModel)]="allDefectData.browserVersion">
+                <option></option>
+                <option *ngFor="let v of version" [value]="v.versionName"
+                  [selected]="v.versionName == allDefectData.browserVersion">{{v.versionName}}
+                </option>
+              </select>
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-4 form-group">
+              <label for="qaContact">QA Contact</label>
+              <select class="form-control" formControlName="qaContact" [(ngModel)]="allDefectData.qaContact">
+                <option></option>
+                <option *ngFor="let q of contactTo" [value]="q.name" [selected]="q.name== allDefectData.qaContact">
+                  {{q.name}}</option>
+              </select>
+            </div>
+            <br>
+            <!-- data-target="#videoModal" -->
+            <form [formGroup]="uploadVideoForm" >
+            <div class="col-lg-6 col-md-6 col-sm-6 form-group" style="margin: unset;">
+              <label for="video">Video</label>
+              <p style="font-size: 10px;text-overflow: ellipsis;font-weight: 600;">Selected Video : {{selectedVideo}}</p>
+              <i *ngIf="selectedVideo!=null&&selectedVideo!=''" style="cursor: pointer;float: right;margin-top: -25px;
+              color: red;" class="glyphicon glyphicon-trash col-0" (click)="deleteVideo()"></i>
+              <button type="button" class="btn btn-sm" data-toggle="modal"  *ngIf="selectedVideo!=null&&selectedVideo!=''"
+                (click)="playVideo()">Watch Video</button>
+
+              <input type="file" name="videoPath" accept="video/x-flv,video/mp4,video/3gpp,video/x-msvideo,video/quicktime,video/x-ms-wmv" 
+              [(ngModel)]="manualVideo" #vdo [ngModelOptions]="{standalone: true}" class="form-control" style="height:100%;padding:0px;"
+                (change)="videoFileSave($event)">
+              <button type="button" class="btn btn-lg btn-success" *ngIf="activeVideoUpload == 1" [disabled]="uploadVideoForm.invalid"
+                (click)="uploadvideo()">Upload</button>
+              <br>
+            </div>
+          </form>
+<!-- data-target="#screenshotModal" -->
+          <form [formGroup]="uploadImageForm">
+            <div class="col-lg-6 col-md-6 col-sm-6 form-group">
+              <label for="screenshot">ScreenShot</label>
+              <p style="font-size: 10px;text-overflow: ellipsis;font-weight: 600;">Selected Screenshot : {{selectedScreenshot}}</p>
+              <i *ngIf="selectedScreenshot!=null&&selectedScreenshot!=''" style="cursor: pointer;float: right;margin-top: -25px;
+              color: red;" class="glyphicon glyphicon-trash col-0" (click)="deleteImage()"></i>
+              <button type="button" class="btn btn-sm " data-toggle="modal" (click)="viewImage()" *ngIf="selectedScreenshot!=null&&selectedScreenshot!=''" >
+                Watch ScreenShot</button>
+              <input type="file" name="pic" accept="image/apng,image/jpeg,image/png" #screen (change)="onSelectFile($event)"
+              class="form-control" [(ngModel)]="manualscreenShot" #screen [ngModelOptions]="{standalone: true}"  style="height:100%;padding:0px;">
+              <button type="button" class="btn btn-lg" *ngIf="activeScreenUpload == 1" [disabled]="uploadImageForm.invalid"
+                (click)="uploadScreenShot()">Upload</button>
+            </div>
+          </form>
+          </div>
+        </div>
+      </section>
+
+      <section style="font-size:15px;text-align: end">
+        <div class="row" class="btn btn-lg" style="margin: unset;padding: unset;">
+           <!-- <button type="button" (click)="FormValidate(defectForm)">Validate Form</button> -->
+          <div class="col-lg-12 col-md-12 col-sm-12 form-group">
+            <!-- <button type="submit" *ngIf="form==true" data-toggle="modal" data-target="#submitModal">Submit</button>data-target="#updateModal" -->
+            <button class="btn btn-lg" type="submit" (click)="updateDefectDetails(defectForm,allDefectData.defectId)"
+              *ngIf="confirmation==true" data-toggle="modal" 
+              [disabled]="!defectForm.valid">Update</button>
+          </div>
+        </div>
+      </section>
+    </form>
+
+  </section>
+</section>
+
+<button id="openVideo" [hidden]="true" data-toggle="modal" data-target="#videoModal"
+data-backdrop="static"></button>
+<button id="openImage" [hidden]="true" data-toggle="modal" data-target="#screenshotModal"
+data-backdrop="static"></button>
+
+<!-- update confimation modal starts here -->
+<div class="modal" id="updateModal">
+  <div class="modal-dialog modal-lg modal-dialog-centered" style="font-size: medium;">
+    <div class="modal-content">
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4>Defect Update Summary</h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+      <!-- Modal body -->
+      <div class="modal-body">
+        Defect 1 has been successfully updated
+      </div>
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-lg" data-dismiss="modal">OK</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- update confimation modal ends here -->
+
+<!-- display video modal starts here -->
+<div class="modal" id="videoModal">
+  <div class="modal-dialog modal-lg modal-dialog-centered" style="font-size: medium;">
+    <div class="modal-content">
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4>watchVideo</h4>
+        <!-- <button type="button" class="close" data-dismiss="modal">&times;</button> -->
+      </div>
+      <!-- Modal body -->
+      <div class="modal-body">
+        <video  id="my_video_1" style=" width: 100%;max-height: 100%;" [src]="watchVideo" controls autoplay>
+          Your browser does not support the video tag.
+        </video>
+      </div>
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-lg btn-cancel" (click)="pause();removeUIuploads();" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- display video modal ends here -->
+
+<!-- display screenshot modal starts here -->
+<div class="modal" id="screenshotModal">
+  <div class="modal-dialog modal-lg modal-dialog-centered" style="font-size: medium;">
+    <div class="modal-content" style="width:850px;height:500px;margin-left:10%;margin-top:5%;">
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4>watchScreenshot</h4>
+        <!-- <button type="button" class="close" data-dismiss="modal">&times;</button> -->
+      </div>
+      <!-- Modal body -->
+      <div class="modal-body">
+
+        <img [src]=watchScreenshot alt="image not found" width="800" height="400">
+      </div>
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-lg btn-cancel" (click)="removeUIuploads()" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- display screenshot modal ends here -->
+
+<ngx-spinner bdColor="rgba(51, 51, 51, 0.8)" size="medium" color="#fff"  [fullScreen]="false">
+  <div style="margin-top:-10%;text-align: center;">
+    <h2 style="color: white"> Please Wait... {{spinnerVal}} </h2>
+    </div>
+</ngx-spinner>

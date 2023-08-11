@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testng-results skipped="0" failed="0" total="7" passed="7">
+  <reporter-output>
+    <line>
+      <![CDATA[Chrome]]>
+    </line>
+    <line>
+      <![CDATA[94.0.4606.61]]>
+    </line>
+    <line>
+      <![CDATA[E:\zap\backend\uploads\opal\manjjpro\manjjpl\projectToRun\.\Screenshot\EachStepScreenshot\100_Suite1\sID879\step_0.png]]>
+    </line>
+    <line>
+      <![CDATA[Chrome]]>
+    </line>
+    <line>
+      <![CDATA[94.0.4606.61]]>
+    </line>
+    <line>
+      <![CDATA[E:\zap\backend\uploads\opal\manjjpro\manjjpl\projectToRun\.\Screenshot\EachStepScreenshot\100_Suite1\sID879\step_1.png]]>
+    </line>
+    <line>
+      <![CDATA[Chrome]]>
+    </line>
+    <line>
+      <![CDATA[94.0.4606.61]]>
+    </line>
+    <line>
+      <![CDATA[E:\zap\backend\uploads\opal\manjjpro\manjjpl\projectToRun\.\Screenshot\EachStepScreenshot\100_Suite1\sID879\step_2.png]]>
+    </line>
+    <line>
+      <![CDATA[Chrome]]>
+    </line>
+    <line>
+      <![CDATA[94.0.4606.61]]>
+    </line>
+    <line>
+      <![CDATA[E:\zap\backend\uploads\opal\manjjpro\manjjpl\projectToRun\.\Screenshot\EachStepScreenshot\100_Suite1\sID879\step_3.png]]>
+    </line>
+    <line>
+      <![CDATA[Chrome]]>
+    </line>
+    <line>
+      <![CDATA[94.0.4606.61]]>
+    </line>
+    <line>
+      <![CDATA[E:\zap\backend\uploads\opal\manjjpro\manjjpl\projectToRun\.\Screenshot\EachStepScreenshot\100_Suite1\sID879\step_4.png]]>
+    </line>
+    <line>
+      <![CDATA[Chrome]]>
+    </line>
+    <line>
+      <![CDATA[94.0.4606.61]]>
+    </line>
+    <line>
+      <![CDATA[E:\zap\backend\uploads\opal\manjjpro\manjjpl\projectToRun\.\Screenshot\EachStepScreenshot\100_Suite1\sID879\step_5.png]]>
+    </line>
+    <line>
+      <![CDATA[Chrome]]>
+    </line>
+    <line>
+      <![CDATA[94.0.4606.61]]>
+    </line>
+    <line>
+      <![CDATA[E:\zap\backend\uploads\opal\manjjpro\manjjpl\projectToRun\.\Screenshot\EachStepScreenshot\100_Suite1\sID879\step_6.png]]>
+    </line>
+  </reporter-output>
+  <suite name="Suite" duration-ms="245485" started-at="2023-05-19T11:33:54Z" finished-at="2023-05-19T11:38:00Z">
+    <groups>
+    </groups>
+    <test name="Test" duration-ms="245485" started-at="2023-05-19T11:33:54Z" finished-at="2023-05-19T11:38:00Z">
+      <class name="mID637.fID676.sID879">
+        <test-method status="PASS" signature="step_0()[pri:0, instance:mID637.fID676.sID879@4566e5bd]" name="step_0" duration-ms="5818" started-at="2023-05-19T17:03:54Z" finished-at="2023-05-19T17:04:00Z">
+          <reporter-output>
+            <line>
+              <![CDATA[Chrome]]>
+            </line>
+            <line>
+              <![CDATA[94.0.4606.61]]>
+            </line>
+            <line>
+              <![CDATA[E:\zap\backend\uploads\opal\manjjpro\manjjpl\projectToRun\.\Screenshot\EachStepScreenshot\100_Suite1\sID879\step_0.png]]>
+            </line>
+          </reporter-output>
+        </test-method> <!-- step_0 -->
+        <test-method status="PASS" signature="step_1()[pri:0, instance:mID637.fID676.sID879@4566e5bd]" name="step_1" duration-ms="6379" started-at="2023-05-19T17:04:00Z" finished-at="2023-05-19T17:04:06Z">
+          <reporter-output>
+            <line>
+              <![CDATA[Chrome]]>
+            </line>
+            <line>
+              <![CDATA[94.0.4606.61]]>
+            </line>
+            <line>
+              <![CDATA[E:\zap\backend\uploads\opal\manjjpro\manjjpl\projectToRun\.\Screenshot\EachStepScreenshot\100_Suite1\sID879\step_1.png]]>
+            </line>
+          </reporter-output>
+        </test-method> <!-- step_1 -->
+        <test-method status="PASS" signature="step_2()[pri:0, instance:mID637.fID676.sID879@4566e5bd]" name="step_2" duration-ms="2996" started-at="2023-05-19T17:04:06Z" finished-at="2023-05-19T17:04:09Z">
+          <reporter-output>
+            <line>
+              <![CDATA[Chrome]]>
+            </line>
+            <line>
+              <![CDATA[94.0.4606.61]]>
+            </line>
+            <line>
+              <![CDATA[E:\zap\backend\uploads\opal\manjjpro\manjjpl\projectToRun\.\Screenshot\EachStepScreenshot\100_Suite1\sID879\step_2.png]]>
+            </line>
+          </reporter-output>
+        </test-method> <!-- step_2 -->
+        <test-method status="PASS" signature="step_3()[pri:0, instance:mID637.fID676.sID879@4566e5bd]" name="step_3" duration-ms="2485" started-at="2023-05-19T17:04:09Z" finished-at="2023-05-19T17:04:12Z">
+          <reporter-output>
+            <line>
+              <![CDATA[Chrome]]>
+            </line>
+            <line>
+              <![CDATA[94.0.4606.61]]>
+            </line>
+            <line>
+              <![CDATA[E:\zap\backend\uploads\opal\manjjpro\manjjpl\projectToRun\.\Screenshot\EachStepScreenshot\100_Suite1\sID879\step_3.png]]>
+            </line>
+          </reporter-output>
+        </test-method> <!-- step_3 -->
+        <test-method status="PASS" signature="step_4()[pri:0, instance:mID637.fID676.sID879@4566e5bd]" name="step_4" duration-ms="4396" started-at="2023-05-19T17:04:12Z" finished-at="2023-05-19T17:04:16Z">
+          <reporter-output>
+            <line>
+              <![CDATA[Chrome]]>
+            </line>
+            <line>
+              <![CDATA[94.0.4606.61]]>
+            </line>
+            <line>
+              <![CDATA[E:\zap\backend\uploads\opal\manjjpro\manjjpl\projectToRun\.\Screenshot\EachStepScreenshot\100_Suite1\sID879\step_4.png]]>
+            </line>
+          </reporter-output>
+        </test-method> <!-- step_4 -->
+        <test-method status="PASS" signature="step_5()[pri:0, instance:mID637.fID676.sID879@4566e5bd]" name="step_5" duration-ms="209003" started-at="2023-05-19T17:04:16Z" finished-at="2023-05-19T17:07:45Z">
+          <reporter-output>
+            <line>
+              <![CDATA[Chrome]]>
+            </line>
+            <line>
+              <![CDATA[94.0.4606.61]]>
+            </line>
+            <line>
+              <![CDATA[E:\zap\backend\uploads\opal\manjjpro\manjjpl\projectToRun\.\Screenshot\EachStepScreenshot\100_Suite1\sID879\step_5.png]]>
+            </line>
+          </reporter-output>
+        </test-method> <!-- step_5 -->
+        <test-method status="PASS" signature="step_6()[pri:0, instance:mID637.fID676.sID879@4566e5bd]" name="step_6" duration-ms="14373" started-at="2023-05-19T17:07:45Z" finished-at="2023-05-19T17:08:00Z">
+          <reporter-output>
+            <line>
+              <![CDATA[Chrome]]>
+            </line>
+            <line>
+              <![CDATA[94.0.4606.61]]>
+            </line>
+            <line>
+              <![CDATA[E:\zap\backend\uploads\opal\manjjpro\manjjpl\projectToRun\.\Screenshot\EachStepScreenshot\100_Suite1\sID879\step_6.png]]>
+            </line>
+          </reporter-output>
+        </test-method> <!-- step_6 -->
+      </class> <!-- mID637.fID676.sID879 -->
+    </test> <!-- Test -->
+  </suite> <!-- Suite -->
+</testng-results>

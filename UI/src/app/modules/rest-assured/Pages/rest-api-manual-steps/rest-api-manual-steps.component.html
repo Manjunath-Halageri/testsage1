@@ -1,0 +1,262 @@
+<div class="myClass" *ngIf="itISOnlyNLPUI===true && scriptLock===false">
+  <section class="border topSection">
+    <div class="nlpOuterDiv border">
+      <div class="nlpInnerDiv">
+        <div class="row devRow">
+          <div style="width: 100%">
+            <span class="pull-right">
+              <div class="btn-group btn-group-lg">
+                <button type="button" class="btn btn-lg linebuttons" (click)="nlpAdd()"><i
+                    class="fa fa-plus devRowIcon"></i>Add</button>
+                <button type="button" class="btn btn-lg linebuttons" (click)="nlpEditTestCase()"><i
+                    class="fa fa-edit devRowIcon"></i>Edit</button>
+                <button type="button" class="btn btn-lg linebuttons" (click)="nlpDelet(); resetNlp()"><i
+                    class="fa fa-trash devRowIcon"></i>Delete</button>
+              </div>
+            </span>
+
+          </div>
+        </div>
+        <div class="tableDiv">
+          <table class="table">
+            <tbody>
+              <tr *ngFor="let nlpObjectValue of displayNlpArrayData; let i = index" (click)="row(i)"
+                (click)="highLightNlpEdit(i)" [class.editSelected]="i === nlpSelectedForEdit"
+                [class.emptyObject]="(nlpObjectValue|objectLength:i === nlpSelectedForEdit)"
+                [class.selectedValidation]="nlpObjectValue.Groups == 'Validation' ">
+                <td>{{nlpObjectValue.slNo}}</td>
+                <td>{{nlpObjectValue.nlpData}}</td>
+                <td>
+                  <button id="AddStepModalNlp" [hidden]="true" data-toggle="modal" data-target="#AddStepModal"></button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+      </div>
+      <div>
+        <div class="pull-right" style="display: flex;">
+          <h2 style="width: 250px;">{{msg}}</h2>
+          <button type="button" class="btn btn-lg" data-toggle="modal" [disabled]="toDisableViewReport==true"
+            data-target="#ViewSteps" style="margin-left: 1%">View Report</button>
+          <button type="button" [disabled]="saveDisable==true" class="btn btn-lg"
+            *ngIf="disableButton !== true && showSaveBtn == true" (click)="actionSave()"
+            style="margin-left: 1%">Save</button>
+          <button type="button" [disabled]="updateDisable==true" class="btn btn-lg"
+            *ngIf="disableButton !== true && showUpdateBtn == true" style="margin-left: 1%"
+            (click)="actionSave()">Update</button>
+          <button type="button" [disabled]="runDisable==true" class="btn btn-lg" *ngIf="disableButton !== true"
+            (click)="triggerExecution()" style="margin-left: 1%">Run</button>
+        </div>
+      </div>
+
+    </div>
+  </section>
+  <br>
+  <div class="modal" id="ViewSteps" data-backdrop="static">
+    <div class="modal-dialog modal-lg modal-dialog-scrollable">
+      <div class="modal-content">
+
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h1 class="modal-title">API-Execution Report</h1>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+
+        <!-- Modal body -->
+        <div class="modal-body">
+          <div *ngIf="typeofError==true">
+            <div *ngFor="let object of stepsResult">
+              <div class="container mt-2">
+                <div class="media border p-2">
+                  <div class="media-body">
+                    <h2>{{object.StepName}} &nbsp;
+                    </h2>
+                    <h2>{{object.StepStatus}} &nbsp; </h2>
+                    <h4 style="line-break:anywhere;white-space: pre-wrap;">{{object.stepMessage}} &nbsp;
+                    </h4>
+                    <div *ngFor="let report of object.reporterOutputLine" class="reportObjects">
+                      <div *ngIf="report.includes('ResponseBody:')">
+                        <h4 style="color: black;font-weight:bold ;">ResponseBody</h4>
+                        <h4 style="/*line-break:anywhere;white-space: pre-wrap;*/word-break:break-word;">
+                          {{report.split("ResponseBody:")[1]}}</h4>
+                      </div>
+                      <div *ngIf="report.includes('ResponseHeaders:')">
+                        <h4 style="color: black;font-weight:bold ;">ResponseHeaders</h4>
+                        <h4 style="line-break:anywhere;white-space: pre-wrap;">{{report.split("ResponseHeaders:")[1]}}
+                        </h4>
+                      </div>
+                      <div *ngIf="report.includes('ResponseTime:')">
+                        <h4 style="color: black;font-weight:bold ;">ResponseTime</h4>
+                        <h4 style="line-break:anywhere;white-space: pre-wrap;">{{report.split("ResponseTime:")[1]}}</h4>
+                      </div>
+                      <!-- <h4>{{report}} &nbsp; </h4> -->
+                    </div>
+                    <!-- <h4>{{object.reporterOutputLine}} &nbsp;
+                  </h4> -->
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div style="overflow: auto;" *ngIf="typeofError==false">
+            <h4>{{stepsResult}}</h4>
+          </div>
+        </div>
+
+        <!-- Modal footer -->
+        <div class="modal-footer">
+          <button type="button" class="btn btn-lg" data-dismiss="modal">Close</button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+  <div>
+    <div class="nlpOuterDiv01">
+      <div>
+        <div class="container-fluid">
+
+          <div class="makeItTemplate">
+            <ng-template [ngTemplateOutlet]="testSageGrammarReuse"></ng-template>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="scriptLock===true" style="text-align: center;margin-top: 80px;">
+  <h3> Changes cannot be made to this script as it is used by another user</h3>
+</div>
+
+<ng-template #bulletsTemplate>
+
+  <span class="glyphicon glyphicon-stop if"></span>&nbsp;<span style="font-size: 18px;">If</span>&nbsp;
+  <span class="glyphicon glyphicon-stop for"></span>&nbsp;<span style="font-size: 18px;">For</span>&nbsp;
+  <span class="glyphicon glyphicon-stop validation"></span>&nbsp;<span style="font-size: 18px;">Assertions</span>&nbsp;
+  <span class="glyphicon glyphicon-stop function"></span>&nbsp;<span style="font-size: 18px;">Function</span>&nbsp;
+
+</ng-template>
+
+<ng-template #bulletsTemplateForNLP>
+
+  <span class="glyphicon glyphicon-stop nlpUiElement"></span>&nbsp;<span style="font-size: 18px;">UI
+    Element</span>&nbsp;
+  <span class="glyphicon glyphicon-stop nlpVariable"></span>&nbsp;<span style="font-size: 18px;">Variable</span>&nbsp;
+  <span class="glyphicon glyphicon-stop nlpInput"></span>&nbsp;<span style="font-size: 18px;">Input</span>&nbsp;
+  <span class="glyphicon glyphicon-stop nlpCondition"></span>&nbsp;<span style="font-size: 18px;">Condition</span>&nbsp;
+
+</ng-template>
+
+
+<ng-template #testSageGrammarReuse>
+  <div class="row nlpconfig-container" [hidden]="multiDropDown" *ngIf=" disableButton !== true">
+    <div class="form-group col-xs-6 col-sm-6 col-md-6 col-lg-6 nlpdropdown-container">
+      <p *ngIf="displayNlp && !displayResponseValidation && !displayResponseHeaderValid && !displayResponseTimeValid"
+        [innerHTML]="xx" #myDiv class="form-control" id="displayNlp">
+      </p>
+      <app-response-validation
+        *ngIf="displayResponseValidation || displayResponseHeaderValid || displayResponseTimeValid"
+        [validationsList]="validationsList" [displayResponseValidation]="displayResponseValidation"
+        [displayResponseHeaderValid]="displayResponseHeaderValid" [displayResponseTimeValid]="displayResponseTimeValid"
+        (validationValuesEvent)="setValidationListData($event)"></app-response-validation>
+      <input placeholder="Enter The Specific Keyword To Search NLP Grammar" id="datalistDisplay" list="browsers"
+        [(ngModel)]="nlpObject.nlpData" class="form-control" (ngModelChange)="getDocOnNlp(nlpObject.nlpData,nlpObject)"
+        *ngIf="hideDataList === false" style="font-size: small">
+      <datalist id="browsers">
+        <select name="" id="">
+          <option></option>
+          <option *ngFor="let uiNlpGrammar of displayNlpGrammarToUi">{{uiNlpGrammar.nlpGrammar}}
+          </option>
+        </select>
+      </datalist>
+    </div>
+
+    <div class="form-group col-xs-6 col-sm-6 col-md-6 col-lg-6 row">
+      <div>
+        <button type="button" class="btn btn-lg" [disabled]="nlpObject.nlpData == ''||nlpObject.Object == '' "
+          style="margin-right:10px;" (click)="displayExcel()">Excel</button>
+      </div>
+      <div [hidden]="!showExcelParamDiv" style="margin-top:-10px;">
+        <form action="" [formGroup]='excelParamFormValidation'>
+          <mat-form-field style="margin-top:1.5rem;">
+            <mat-select formControlName='excelParaFile' style="font-size: 12px;font-family: 'lato', sans-serif;">
+              <mat-option style="font-size: 12px;" *ngFor="let excel of ExcelAddPara" [value]="excel.label">
+                {{excel.label}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>&nbsp;&nbsp;
+
+          <label for="">Row:</label>
+          <input type="text" style="max-width: 50px;" formControlName='excelParaRow'>&nbsp;&nbsp;
+
+          <label for="">Column:</label>
+          <input type="text" style="max-width: 50px;" formControlName='excelParaColumn'>&nbsp;&nbsp;
+
+          <button type="button" class="btn btn-lg" [disabled]="excelParamFormValidation.invalid"
+            (click)="addExcelParam(nlpObject.Object)">Add Test Data</button>
+
+        </form>
+      </div>
+
+    </div>
+
+    <div>
+      <div class="button-container">
+        <button type="button" class="btn btn-lg"
+          (click)="addRowInBetweenForNlp(myDiv,nlpObject.nlpData,nlpObject.Object)"
+          *ngIf="disableAddBtn==true && disableUpdateBtn!==true && disableButton !== true">Add</button>
+        <button type="button" class="btn btn-lg" (click)="nlpArraySeperate(myDiv,nlpObject.nlpData,nlpObject)"
+          *ngIf="disableAddBtn!==true && disableUpdateBtn!==true && disableButton !== true"
+          [disabled]="nlpObject.nlpData == '' ">Create</button>
+        <button type="button" class="btn btn-lg " (click)="updateNlpTestCaseAfterEdit(myDiv)"
+          *ngIf="disableUpdateBtn==true && disableAddBtn!==true && disableButton !== true">Update</button>
+        <button
+          *ngIf="displayNlp || displayResponseValidation || displayClear || displayResponseHeaderValid || displayResponseTimeValid"
+          class="btn btn-default btn-lg clear-btn" (click)="resetNlp(); ">Clear</button>
+      </div>
+    </div>
+
+
+  </div>
+</ng-template>
+
+
+<!-- start AddStepModal -->
+<div class="modal fade" id="AddStepModal" role="dialog" data-backdrop="static">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title opalLabel">Adding New Row Nlp</h4>
+      </div>
+      <div class="modal-body" style="height:auto;">
+        <div class="row">
+          <div class="col-md-4 col-lg-4 col-sm-4 col-sx-4">
+            <button type="button" class="btn btn-primary button2" data-dismiss="modal"
+              (click)="addrowAboveNlp()">Above</button>
+          </div>
+          <div class="col-md-4 col-lg-4 col-sm-4 col-sx-4">
+            <button type="button" class="btn btn-primary button2" data-dismiss="modal"
+              (click)="addrowBelowNlp()">Below</button>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default button2 btn-cancel" data-dismiss="modal"
+          (click)="resetNlp();">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!--End AddStepModal -->
+
+<!-- Start Spinner -->
+<ngx-spinner bdColor="rgba(51, 51, 51, 0.8)" size="medium" color="#fff" type="ball-clip-rotate" [fullScreen]="false">
+  <h3><br>
+    <p style="color: white">{{spinnerVal}} Please Wait... </p>
+  </h3>
+</ngx-spinner>
+<!-- End Spinner -->

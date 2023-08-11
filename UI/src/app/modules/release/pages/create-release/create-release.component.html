@@ -1,0 +1,315 @@
+<ul class="breadcrumb topHeadingNames " style="background-color: #fff;">
+  <li class="breadcrumb-item"><a  id="mainheader">Release</a></li>
+  <li class="breadcrumb-item"><a id="subheader">Manage Release</a></li>
+</ul>
+<div class="ui-fluid">
+  <div class="ui-g">
+
+    <div class="ui-g-2 ui-md-2 border">
+      <div class="one">
+        <div>
+          <span class="treeStructureTitle" [shAttachMenu]="menu1"
+            class="treeStructureLabel">Active Releases</span>
+          <p-tree [value]="displayModuleForTree" (onNodeSelect)="nodeSelect($event)" selectionMode="single"
+            [(selection)]="selectedFile" [filter]="true" [contextMenu]="cm">sfsfsfsfs</p-tree>
+          <p-contextMenu #cm appendTo="body" [model]="items"></p-contextMenu>
+        </div>
+        <div>
+          <sh-context-menu #menu1>
+            <ng-template shContextMenuItem let-data *ngIf="create==true">
+              <div (click)="landModulePage()" class="menuu treeStructureCreate" >Create Release
+              </div>
+            </ng-template>
+          </sh-context-menu>
+        </div>
+      </div>
+      <div class="two">
+        <div>
+          <span class="treeStructureTitle" [shAttachMenu]="menu2" 
+            class="treeStructureLabel">Closed Releases</span>
+          <p-tree [value]="closedReleases" (onNodeSelect)="closedReleaseNode($event)" selectionMode="single" id="ptree"
+            [contextMenu]="cm2" [(selection)]="selectedFile">sfsfsfsfs</p-tree>
+          <p-contextMenu #cm2 appendTo="body" [model]="closedRelease"></p-contextMenu>
+        </div>
+        <div>
+          <sh-context-menu #menu2>
+            <ng-template shContextMenuItem let-data>
+              <div class="menuu treeStructureCreate" (click)="showClosedReleases()">Show All Closed Releases
+              </div>
+            </ng-template>
+
+          </sh-context-menu>
+        </div>
+
+      </div>
+      <!-- class one Ends -->
+    </div>
+
+    <div class="ui-g-10 ui-md-10 border">
+      <!-- <div class="sticky" style="float: right;">
+        <img src="../../../../../assets/images/back-arrow.png" (click)='openMain($event)' width="50px"
+          style="padding: 5px;">
+      </div><br> -->
+      <div *ngIf="createRelease==true">
+        <form [formGroup]="createForm">
+          <div class="card createCard shadow-lg">
+            <div class="card-header">Create Release</div>
+            <div class="card-body">
+              <!-- <div> -->
+              <div class="row fieldStyle">
+                <div class="col-lg-5 col-md-4 col-sm-5 col-xs-6 labelClass">
+                  <label>Release Version <sup><i class="fa fa-asterisk asteriskStyle"></i></sup>
+                  </label>
+                </div>
+                <div class="col-lg-7 col-md-8 col-sm-7 col-xs-6">
+                  <input class="form-control" formControlName="releaseVersion" [(ngModel)]="releaseVersion">
+                  <control-messages [control]="createForm.controls.releaseVersion"></control-messages><br>
+                </div>
+              </div>
+
+              <div class="row fieldStyle">
+                <div class="col-lg-5 col-md-4 col-sm-5 col-xs-6 labelClass">
+                  <label>Plan StartDate <sup><i class="fa fa-asterisk asteriskStyle"></i></sup></label>
+                </div>
+
+                <div class="col-lg-7 col-md-8 col-sm-7 col-xs-6">
+                  <mat-form-field class="example-full-width" appearance="none">
+                    <mat-label></mat-label>
+                    <input class="form-control" formControlName="planStartDate" matInput [min]="minDate" [max]="maxDate"
+                      [matDatepicker]="planStartDate" [(ngModel)]="planStartdate">
+                    <mat-datepicker-toggle matSuffix [for]="planStartDate"></mat-datepicker-toggle>
+                    <mat-datepicker #planStartDate></mat-datepicker>
+                  </mat-form-field>
+                  <control-messages [control]="createForm.controls.planStartDate"></control-messages><br>
+
+                </div>
+              </div>
+
+              <div class="row fieldStyle">
+                <div class="col-lg-5 col-md-4 col-sm-5 col-xs-6 labelClass">
+                  <label>Plan EndDate <sup><i class="fa fa-asterisk asteriskStyle"></i></sup></label>
+                </div>
+                <div class="col-lg-7 col-md-8 col-sm-7 col-xs-6">
+                  <mat-form-field class="example-full-width" appearance="none">
+                    <mat-label></mat-label>
+                    <input class="form-control" formControlName="planEndDate" matInput [min]="minDate" [max]="maxDate"
+                      [matDatepicker]="planEndDate" [(ngModel)]="planendDate">
+                    <mat-datepicker-toggle matSuffix [for]="planEndDate"></mat-datepicker-toggle>
+                    <mat-datepicker #planEndDate></mat-datepicker>
+                  </mat-form-field>
+                  <small class="datePickererrMsg" *ngIf="createForm.hasError('notValid')">StartDate is greater then
+                    EndDate</small>
+                  <control-messages [control]="createForm.controls.planEndDate"></control-messages><br>
+
+                </div>
+              </div>
+
+              <div class="row fieldStyle">
+                <div class="col-lg-5 col-md-4 col-sm-5 col-xs-6 labelClass">
+                  <label>Status <sup><i class="fa fa-asterisk asteriskStyle"></i></sup></label>
+                </div>
+                <div class="col-lg-7 col-md-8 col-sm-7 col-xs-6">
+                  <select type="select" class="form-control selectOption" formControlName="status" [(ngModel)]="status" disabled>
+                    <option >Active</option>
+                  </select>
+                  <control-messages [control]="createForm.controls.status"></control-messages><br>
+                </div>
+              </div>
+
+              <div class="row fieldStyle">
+                <div class="col-lg-5 col-md-4 col-sm-5 col-xs-6 labelClass">
+                  <label>Description <sup><i class="fa fa-asterisk asteriskStyle"></i></sup></label>
+                </div>
+                <div class="col-lg-7 col-md-8 col-sm-7 col-xs-6">
+                  <textarea class="form-control desStyle" placeholder="Maximum of 100 characters"
+                    formControlName="description" [(ngModel)]="description"></textarea>
+                  <control-messages [control]="createForm.controls.description"></control-messages><br>
+                </div>
+              </div>
+            </div>
+
+            <div class="card-footer fieldStyle">
+              <button type="submit" class="btn btn-lg" [disabled]="!createForm.valid" data-dismiss="modal"
+                (click)="saverelease(releaseVersion,planStartdate,planendDate,status,description)">Save</button>
+              &nbsp;&nbsp;&nbsp;
+              <button type="submit" class="btn btn-lg btn-cancel" (click)="dataClose()"
+                data-dismiss="modal">Cancel</button>
+            </div>
+
+          </div>
+        </form>
+      </div>
+      <!-- ////////////////////////////////////// Edit Release ////////////////////////////////// -->
+      <div *ngIf="editReleaseData">
+
+
+        <form [formGroup]="updateForm" style="text-align: -webkit-center;">
+          <div class="card createEditCard shadow-lg">
+            <div class="card-header">Edit Release</div>
+            <div class="card-body ">
+              <!-- <div> -->
+              <div class="row fieldStyle">
+                <div class="col-lg-5 col-md-4 col-sm-5 col-xs-6 labelClass">
+                  <label>Release Version <sup><i class="fa fa-asterisk asteriskStyle"></i></sup>
+                  </label>
+                </div>
+                <div class="col-lg-7 col-md-8 col-sm-7 col-xs-6">
+                  <input class="form-control" formControlName="releaseVersion" [(ngModel)]="releaseVersion"
+                    disabled="nonEdit">
+                  <control-messages [control]="updateForm.controls.releaseVersion"></control-messages><br>
+                </div>
+              </div>
+
+              <div class="row fieldStyle">
+                <div class="col-lg-5 col-md-4 col-sm-5 col-xs-6 labelClass">
+                  <label>Plan StartDate <sup><i class="fa fa-asterisk asteriskStyle"></i></sup></label>
+                </div>
+
+                <div class="col-lg-7 col-md-8 col-sm-7 col-xs-6">
+                  <input type="date" class="form-control" formControlName="planStartDate" [(ngModel)]="planStartDate"
+                    disabled="nonEdit">
+                  <control-messages [control]="updateForm.controls.planStartDate"></control-messages><br>
+
+                </div>
+              </div>
+
+              <div class="row fieldStyle">
+                <div class="col-lg-5 col-md-4 col-sm-5 col-xs-6 labelClass">
+                  <label>Plan EndDate <sup><i class="fa fa-asterisk asteriskStyle"></i></sup></label>
+                </div>
+                <div class="col-lg-7 col-md-8 col-sm-7 col-xs-6">
+                  <input type="date" class="form-control" formControlName="planEndDate" [(ngModel)]="planEndDate"
+                    disabled="nonEdit">
+                  <control-messages [control]="updateForm.controls.planEndDate"></control-messages><br>
+
+                </div>
+              </div>
+
+              <div class="row fieldStyle">
+                <div class="col-lg-5 col-md-4 col-sm-5 col-xs-6 labelClass">
+                  <label>Status <sup><i class="fa fa-asterisk asteriskStyle"></i></sup></label>
+                </div>
+                <div class="col-lg-7 col-md-8 col-sm-7 col-xs-6">
+                  <select type="select" class="form-control" class="form-control"
+                    (input)="onSearchChange($event.target.value)" formControlName="status" [(ngModel)]="status">
+                    <option>Active</option>
+                    <option>Close</option>
+                  </select>
+                  <control-messages [control]="updateForm.controls.status"></control-messages><br>
+                </div>
+              </div>
+              <div class="row fieldStyle">
+                <div class="col-lg-5 col-md-4 col-sm-5 col-xs-6 labelClass">
+                  <label>Actual StartDate <sup><i class="fa fa-asterisk asteriskStyle"></i></sup></label>
+                </div>
+                <div class="col-lg-7 col-md-8 col-sm-7 col-xs-6">
+                  <mat-form-field class="example-full-width" appearance="none">
+                    <!-- <mat-label></mat-label> -->
+                    <input class="form-control" formControlName="actualStartDate" matInput 
+                      [max]="maxDate" [matDatepicker]="actualStartDate">
+                    <mat-datepicker-toggle matSuffix [for]="actualStartDate"></mat-datepicker-toggle>
+                    <mat-datepicker #actualStartDate></mat-datepicker>
+                  </mat-form-field>
+                  <control-messages [control]="updateForm.controls.actualStartDate"></control-messages><br>
+
+                </div>
+              </div>
+              <div class="row fieldStyle">
+                <div class="col-lg-5 col-md-4 col-sm-5 col-xs-6 labelClass">
+                  <label>Actual EndDate <sup><i class="fa fa-asterisk asteriskStyle"></i></sup></label>
+                </div>
+                <div class="col-lg-7 col-md-8 col-sm-7 col-xs-6">
+                  <mat-form-field class="example-full-width" appearance="none">
+                    <!-- <mat-label></mat-label> -->
+                    <input class="form-control" formControlName="actualEndDate" matInput  [max]="maxDate"
+                      [matDatepicker]="actualEndDate">
+                    <mat-datepicker-toggle matSuffix [for]="actualEndDate"></mat-datepicker-toggle>
+                    <mat-datepicker #actualEndDate></mat-datepicker>
+                  </mat-form-field>
+                  <span style="color:#dc3545;font-size: revert;font-weight: 700;"
+                    *ngIf="updateForm.hasError('notValid')">StartDate is greater then EndDate</span>
+                  <control-messages [control]="updateForm.controls.actualEndDate"></control-messages><br>
+
+                </div>
+              </div>
+              <div class="row fieldStyle">
+                <div class="col-lg-5 col-md-4 col-sm-5 col-xs-6 labelClass">
+                  <label>Description <sup><i class="fa fa-asterisk asteriskStyle"></i></sup></label>
+                </div>
+                <div class="col-lg-7 col-md-8 col-sm-7 col-xs-6">
+                  <textarea class="form-control" name="dis" formControlName="description"
+                    [(ngModel)]="description"></textarea>
+                  <control-messages [control]="updateForm.controls.description"></control-messages><br>
+                </div>
+              </div>
+            </div>
+
+            <div class="card-footer">
+              <button type="submit" class="btn btn-lg" [disabled]="!updateForm.valid" data-dismiss="modal"
+                (click)="updaterelease(releaseVersion,planStartDate,planEndDate,status,actualStartDate,actualEndDate,description)">Update</button>
+              &nbsp;&nbsp;&nbsp;
+              <button type="submit" class="btn btn-lg btn-cancel" data-dismiss="modal"
+                (click)="cancelEditPage()">Cancel</button>
+            </div>
+          </div>
+        </form>
+
+      </div>
+      <div class="example-container shadow-lg table-container" *ngIf="showAllClosedRelease == true">
+        <div>
+          <h3> <u>Closed Releases</u></h3>
+        </div><br>
+        <table mat-table [dataSource]="displayAllClosedReleases" matSort class="mat-elevation-z8">
+
+          <!-- Position Column -->
+          <ng-container matColumnDef="Sl.No">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header class="angulartheadColor"> Sl.No </th>
+            <td mat-cell *matCellDef="let element; let i = index;"> {{i+1}}</td>
+          </ng-container>
+
+          <!-- Name Column -->
+          <ng-container matColumnDef="Release Version">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header class="angulartheadColor"> Release Version </th>
+            <td mat-cell *matCellDef="let element"> {{element.releaseVersion}} </td>
+          </ng-container>
+
+          <!-- Weight Column -->
+          <ng-container matColumnDef="Plan StartDate">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header class="angulartheadColor"> Plan StartDate </th>
+            <td mat-cell *matCellDef="let element"> {{element.planStartDate | date: 'dd-MM-yyyy'}} </td>
+          </ng-container>
+
+          <!-- Symbol Column -->
+          <ng-container matColumnDef="Plan EndDate">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header class="angulartheadColor"> Plan EndDate </th>
+            <td mat-cell *matCellDef="let element"> {{element.planEndDate | date: 'dd-MM-yyyy'}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="Status">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header class="angulartheadColor"> Status </th>
+            <td mat-cell *matCellDef="let element"> {{element.status}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="Actual StartDate">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header class="angulartheadColor"> Actual StartDate </th>
+            <td mat-cell *matCellDef="let element"> {{element.actualStartDate | date: 'dd-MM-yyyy'}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="Actual EndDate">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header class="angulartheadColor"> Actual EndDate </th>
+            <td mat-cell *matCellDef="let element"> {{element.actualEndDate | date: 'dd-MM-yyyy'}} </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+      </div>
+    </div>
+
+
+  </div>
+</div>
+
+
+
+

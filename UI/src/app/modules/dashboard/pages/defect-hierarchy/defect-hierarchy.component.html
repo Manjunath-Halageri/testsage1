@@ -1,0 +1,40 @@
+<ul class="breadcrumb" style="font-size:15px;background-color: unset;margin:unset">
+  <li class="breadcrumb-item" style="width: 96px;"><a id="mainheader">Dashboard</a>
+  </li>
+  <li class="breadcrumb-item" style="width: 250px;"><a [routerLink]="['/projectdetail/dashboard/defecthierarchy/']"
+      id="subheader">Defect Hierarchy</a></li>
+
+</ul>
+<hr>
+<div class="ui-fluid">
+  <div class="rows">
+    <form class="formClass" [formGroup]='defectPriorityForm'>
+      <div class="col-lg-2 col-md-4 col-sm-4 mb-3 mr-sm-3">
+        <label for="module">Release</label>
+        <select class="form-control" formControlName="defectReleaseVersion" name="version" [(ngModel)]="releaseId">
+          <option *ngFor="let release of getAllReleasesVersions" value="{{release.releaseId}}">
+            {{release.releaseVersion}}</option>
+        </select>
+        <control-messages [control]="defectPriorityForm.controls.defectReleaseVersion"></control-messages>
+      </div>
+      <div class="col-lg-3 col-md-4 col-sm-4 mb-3 mr-sm-3">
+        <label for="module">Select bugwise graph</label>
+        <select class="form-control" formControlName="bugwiseSelect" name="bug" [(ngModel)]="bugWise">
+          <option>Priority</option>
+          <option>Severity</option>
+          <option>Status</option>
+        </select>
+        <control-messages [control]="defectPriorityForm.controls.bugwiseSelect"></control-messages>
+      </div>
+
+      <div class="col-lg-2 col-md-4 col-sm-4 col2 sreachButton">
+        <button type="button" class="btn btn-lg" (click)="searchData(releaseId,bugWise)">Search</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+
+<div class="ui-fluid">
+  <router-outlet></router-outlet>
+</div>

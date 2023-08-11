@@ -1,0 +1,74 @@
+tbody {
+  display:block;
+  min-height:300px;
+  max-height:350px;
+  overflow:auto;
+}
+thead, tbody tr {
+  display:table;
+  width:100%;
+  table-layout:fixed;
+}
+/* thead {
+  width: calc( 101% - 0.4em )
+} */
+
+
+.excelSpan {
+  margin-left: 30%;
+  font-weight: bold;    
+}
+
+.excelTable {
+
+  height: 45px;
+  font-weight: bold;
+  font-size: 14px !important;
+
+}
+.excelTable1{
+  height: 45px;
+  font-size: 12px !important;
+} 
+.starSpan {
+  color: red
+}
+.excelInput {
+
+  height: 40px;
+  font-weight: bold;
+  /* border:2px solid; */
+  width:240px;
+  
+}
+.texta {
+  font-weight: bold;
+  /* border:2px solid; */
+  width:240px;
+}
+.amPm {
+  width:60px
+  ;margin-left: 53px;
+  height:35px;
+  border:none;
+}
+.timeAt{
+  width:120px;
+  height:35px;
+  border:none;
+}
+
+/* table.scroll tbody {
+  display: block;
+  height: 300px;
+  overflow-y: auto;
+  overflow-x: auto;
+}
+
+table {
+  border-radius: 10px;
+}
+
+thead {
+  border-radius: 10px 10px 0px 0px;
+} */

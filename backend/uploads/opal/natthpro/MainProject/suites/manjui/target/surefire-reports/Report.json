@@ -1,0 +1,51 @@
+{"testng-results": {
+          "reporter-output": "",
+          "total": 2,
+          "suite": {
+                    "test": {
+                              "started-at": "2023-06-14T04:08:38Z",
+                              "name": "Opal1",
+                              "finished-at": "2023-06-14T04:09:01Z",
+                              "class": {
+                                        "test-method": [
+                                                  {
+                                                            "exception": {
+                                                                      "full-stacktrace": "java.lang.NullPointerException\r\n\tat reuseablePackage.feature.AllActions.CaptureOnFailure(AllActions.java:1570)\r\n\tat mID641.fID680.sID884.step_0(sID884.java:65)\r\n\tat sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)\r\n\tat sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)\r\n\tat sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)\r\n\tat java.lang.reflect.Method.invoke(Method.java:498)\r\n\tat org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:80)\r\n\tat org.testng.internal.Invoker.invokeMethod(Invoker.java:714)\r\n\tat org.testng.internal.Invoker.invokeTestMethod(Invoker.java:901)\r\n\tat org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1231)\r\n\tat org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:127)\r\n\tat org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:111)\r\n\tat org.testng.TestRunner.privateRun(TestRunner.java:767)\r\n\tat org.testng.TestRunner.run(TestRunner.java:617)\r\n\tat org.testng.SuiteRunner.runTest(SuiteRunner.java:334)\r\n\tat org.testng.SuiteRunner.access$000(SuiteRunner.java:37)\r\n\tat org.testng.SuiteRunner$SuiteWorker.run(SuiteRunner.java:368)\r\n\tat org.testng.internal.thread.ThreadUtil$2.call(ThreadUtil.java:64)\r\n\tat java.util.concurrent.FutureTask.run(FutureTask.java:266)\r\n\tat java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)\r\n\tat java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)\r\n\tat java.lang.Thread.run(Thread.java:748)\r\n",
+                                                                      "class": "java.lang.NullPointerException"
+                                                            },
+                                                            "reporter-output": "",
+                                                            "signature": "step_0()[pri:0, instance:mID641.fID680.sID884@ff5b51f]",
+                                                            "started-at": "2023-06-14T09:38:38Z",
+                                                            "name": "step_0",
+                                                            "finished-at": "2023-06-14T09:39:00Z",
+                                                            "status": "FAIL",
+                                                            "duration-ms": 22711
+                                                  },
+                                                  {
+                                                            "exception": {
+                                                                      "full-stacktrace": "java.lang.NullPointerException\r\n\tat reuseablePackage.feature.AllActions.CaptureOnFailure(AllActions.java:1570)\r\n\tat mID641.fID680.sID884.step_1(sID884.java:103)\r\n\tat sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)\r\n\tat sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)\r\n\tat sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)\r\n\tat java.lang.reflect.Method.invoke(Method.java:498)\r\n\tat org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:80)\r\n\tat org.testng.internal.Invoker.invokeMethod(Invoker.java:714)\r\n\tat org.testng.internal.Invoker.invokeTestMethod(Invoker.java:901)\r\n\tat org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1231)\r\n\tat org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:127)\r\n\tat org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:111)\r\n\tat org.testng.TestRunner.privateRun(TestRunner.java:767)\r\n\tat org.testng.TestRunner.run(TestRunner.java:617)\r\n\tat org.testng.SuiteRunner.runTest(SuiteRunner.java:334)\r\n\tat org.testng.SuiteRunner.access$000(SuiteRunner.java:37)\r\n\tat org.testng.SuiteRunner$SuiteWorker.run(SuiteRunner.java:368)\r\n\tat org.testng.internal.thread.ThreadUtil$2.call(ThreadUtil.java:64)\r\n\tat java.util.concurrent.FutureTask.run(FutureTask.java:266)\r\n\tat java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)\r\n\tat java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)\r\n\tat java.lang.Thread.run(Thread.java:748)\r\n",
+                                                                      "class": "java.lang.NullPointerException"
+                                                            },
+                                                            "reporter-output": "",
+                                                            "signature": "step_1()[pri:0, instance:mID641.fID680.sID884@ff5b51f]",
+                                                            "started-at": "2023-06-14T09:39:01Z",
+                                                            "name": "step_1",
+                                                            "finished-at": "2023-06-14T09:39:01Z",
+                                                            "status": "FAIL",
+                                                            "duration-ms": 1
+                                                  }
+                                        ],
+                                        "name": "mID641.fID680.sID884"
+                              },
+                              "duration-ms": 22747
+                    },
+                    "started-at": "2023-06-14T04:08:38Z",
+                    "name": "manjui",
+                    "groups": "",
+                    "finished-at": "2023-06-14T04:09:01Z",
+                    "duration-ms": 22747
+          },
+          "failed": 2,
+          "passed": 0,
+          "skipped": 0
+}}

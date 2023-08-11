@@ -1,0 +1,427 @@
+<ul class="breadcrumb" style="font-size:14px;background-color: unset;margin:unset">
+  <li class="breadcrumb-item" style="width: 106px;"><a id="mainheader">Test Planning</a></li>
+  <li class="breadcrumb-item" id="subheader"><a id="subheader">Manage Testcase</a></li>
+  <li class="breadcrumb-item" id="subheader" *ngFor="let item of crumbitems">{{item}}</li>
+</ul>
+<div class="ui-fluid">
+  <div class="ui-g">
+    <div class="ui-g-2 ui-md-2 border">
+      <div class="one">
+        <div>
+          <span class="treeStructureTitle" (click)="getTreeModules()" [shAttachMenu]="menu1"
+            style="position:sticky;">Testcase</span>
+          <p-tree [value]="displayModuleForTree" (onNodeSelect)="nodeSelect($event)" selectionMode="single"
+            [(selection)]="selectedFile" [filter]="true" [contextMenu]="cm">sfsfsfsfs</p-tree>
+          <p-contextMenu #cm [model]="items" appendTo="body"></p-contextMenu>
+        </div>
+        <div>
+          <sh-context-menu #menu1 style="background-color:white">
+            <ng-template shContextMenuItem let-data style="background-color:white">
+              <div (click)="landModulePage()" class="menuu"> Create New Module</div>
+            </ng-template>
+
+          </sh-context-menu>
+        </div>
+      </div>
+      <div class="one">
+        <div>
+          <span class="treeStructureTitle" [shAttachMenu]="menu2" (click)="enableTestData()"
+            style="position:sticky;">Test Data</span>
+          <p-tree [value]="excelFileNameCTC" (onNodeSelect)="spreedSheetNode($event)" selectionMode="single" id="ptree"
+            [contextMenu]="cm2" [(selection)]="selectedFile">sfsfsfsfs</p-tree>
+          <p-contextMenu #cm2 appendTo="body" [model]="spreedSheetName"></p-contextMenu>
+          <button id="viewSpreedSheet" [hidden]="true" data-toggle="modal" data-target="#myModal08"
+            data-backdrop="static"></button>
+          <button id="generateSpreedSheet" [hidden]="true" data-toggle="modal" data-target="#myModal09"
+            data-backdrop="static"></button>
+        </div>
+        <div>
+          <sh-context-menu #menu2 style="background-color:white">
+            <ng-template shContextMenuItem let-data style="background-color:white">
+              <div class="menuu treeStructureCreate" (click)="importSpreedSheet()">Import Excel File
+                <button id="importSpreedSheet" [hidden]="true" data-toggle="modal" data-target="#myModal07"
+                  data-backdrop="static"></button>
+              </div>
+            </ng-template>
+            <ng-template shContextMenuItem let-data style="background-color:white">
+              <div class="menuu treeStructureCreate" (click)="generateSpreedSheet()">
+                Generate Test Data
+              </div>
+            </ng-template>
+
+          </sh-context-menu>
+        </div>
+
+      </div>
+
+      <div class="modal fade" id="myModal07" role="dialog">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title">Excel Configuration</h1>
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body" style="min-height: 100%;">
+              <form action="" [formGroup]='spreedSheetForm'>
+                <div style="display:flex ;text-align: center;">
+                  <label class="center" style="width: 100%;margin-top: 9px;">Choose File To Upload</label>
+
+                  <!-- <div class="col-md-6"> -->
+                  <input type="file" (change)="validateExcel($event)" class="form-control" style="height: 100%;"
+                    #myInput formControlName="importFile"
+                    accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"
+                    placeholder="Upload file..." [(ngModel)]="fileName" />
+                </div>
+              </form>
+            </div>
+            <div class="modal-footer">
+              <button class="btn btn-lg" [disabled]="spreedSheetForm.invalid" type="button"
+                (click)="uploadImporetdFile(fileName)">Upload</button>
+              <button type="button" id="importModal" class="btn btn-lg btn-cancel" data-dismiss="modal"
+                (click)="closeUpload()">Close</button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="modal fade" id="myModal09" role="dialog">
+        <div class="modal-dialog modal-xl">
+          <div class="modal-content" style="height: -webkit-fill-available;">
+            <div class="modal-header">
+              <h1 class="modal-title">Generate Test Data</h1>
+              <!-- <button type="button" class="close" data-dismiss="modal">&times;</button> -->
+            </div>
+            <div class="modal-body">
+              <div>
+                <form [formGroup]='spreedSheetGenerate' (ngSubmit)="formTableButton()" #tableForm="ngForm">
+                  <div class="row">
+                    <div class="col-md-2">
+                      <label for="">Table Name</label>
+                    </div>
+                    <div class="col-md-4">
+                      <input type="text" class="form-control" formControlName="tableName" maxlength="30" required
+                        [(ngModel)]="editedFileName" (change)=checkForDuplicateFiles(editedFileName)>
+                    </div>
+                  </div>
+                  <br>
+
+                  <div class="row">
+                    <div class="col-md-2">
+                      <label for="">Columns Name</label>
+                    </div>
+                    <div class="col-md-4">
+                      <input type="text" class="form-control" formControlName="columnNames" required
+                        [(ngModel)]="editedColumnNames">
+                    </div>
+                  </div>
+                  <div>
+                    <button class="btn btn-lg" (click)="formTable(spreedSheetGenerate)"
+                      [disabled]="!spreedSheetGenerate.valid">Form Table</button>
+                  </div>
+                  <div>
+                  </div>
+                </form>
+              </div>
+              <div>
+                <div *ngIf="formTableTrue">
+                  <br>
+                  <hr>
+                  <br>
+                  <div class="pull-right">
+                    <div class="btn-group btn-group-lg">
+                      <button class="btn btn-lg linebuttons" data-toggle="modal"
+                        data-target="#myModalForAutoGenerate">Auto
+                        Generate</button>
+                      <button class="btn btn-lg linebuttons" (click)="addTestData()">Add Row</button>
+                      <button class="btn btn-lg linebuttons" (click)="deleteSpreedSheetNew()">Delete Row</button>
+                    </div>
+                  </div>
+                </div><br><br>
+                <div class="table-responsive" [class.table-responsive]="formTableTrue">
+                  <table class="table table-bordered" id="data-table-new">
+                    <tbody>
+                      <tr class="" *ngFor='let item of mainArray;let i = index' (click)="highLightSpreedSheet(i)"
+                        [class.tableHeader]="i==0" [class.editManualSelected]="i === spreedSheetId"
+                        style="height:30px;">
+
+                        <td *ngFor="let val of item" contenteditable="true" style="max-width:10px;outline:none;">
+                          {{val}}
+
+                        </td>
+                      </tr>
+
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <!-- <div class="pull-right"> -->
+              <button class="btn btn-lg" data-dismiss="modal" (click)="generateSpreedSheetDataAdd()">Save</button>
+              <button type="button" class="btn btn-lg btn-cancel" data-dismiss="modal"
+                (click)="resetTable()">Close</button>
+              <!-- </div> -->
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <!-- myModal09 -->
+
+      <!-- myModalForAutoGenerate -->
+      <form [formGroup]='autoGenForm' (ngSubmit)="generateData()" #genDataForm="ngForm">
+        <div class="modal" id="myModalForAutoGenerate">
+          <div class="modal-dialog">
+
+            <div class="modal-content">
+
+              <!-- Modal Header -->
+              <div class="modal-header">
+                <h4 class="modal-title">Auto Generate</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+              </div>
+
+              <!-- Modal body -->
+              <div class="modal-body">
+                <section>
+
+                  <div class="container-fluid" *ngFor="let column of autoGenerate;let i = index">
+                    <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1">
+                      <input type="checkbox" class="form-control" class="exception" checked>
+                    </div>
+                    <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                      <label>{{column.columnName}}</label>
+                    </div>
+                    <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
+                      <select [(ngModel)]="column.typeObject" class="form-control"
+                        (change)="typeDropdownSelected(column.typeObject,i)" formControlName="type">
+                        <option></option>
+                        <option *ngFor="let types of typeDropdown" [ngValue]="types.typeObject">
+                          {{types.type}}
+                        </option>
+                      </select>
+                    </div>
+
+                  </div>
+                </section>
+              </div>
+              <!-- Modal footer -->
+              <div class="modal-footer">
+                <label>Rows</label>
+                <input type="number" min="1" step="1" autocomplete="off" name="inputReq" class="form-control"
+                  [(ngModel)]="value" formControlName="inputReq">
+                <button type="button" class="btn btn-lg" (click)="autoGenerateData(value)"
+                  [disabled]="!autoGenForm.valid" data-dismiss="modal">Generate</button>
+
+                <button type="button" class="btn btn-lg btn-cancel" data-dismiss="modal">Cancel</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+
+      <div class="modal fade" id="myModalForAutoGenerateForEdit">
+        <div class="modal-dialog">
+          <div class="modal-content">
+
+            <!-- Modal Header -->
+            <div class="modal-header">
+              <h4 class="modal-title">Auto Generate</h4>
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+
+            <!-- Modal body -->
+            <div class="modal-body">
+              <section>
+
+                <div class="container-fluid" *ngFor="let column of autoGenerate5;let i = index">
+                  <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1">
+                    <input type="checkbox" class="exception" (change)="getcheckedIndex($event,i)" checked>
+                  </div>
+                  <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                    <h3>{{column.columnName}}</h3>
+                  </div>
+                  <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
+                    <select [(ngModel)]="column.typeObject" (change)="typeDropdownSelected(column.typeObject,i)">
+                      <option></option>
+                      <option *ngFor="let types of typeDropdown" [ngValue]="types.typeObject">
+                        {{types.type}}
+                      </option>
+                    </select>
+                  </div>
+
+                </div>
+              </section>
+            </div>
+
+            <!-- Modal footer -->
+            <div class="modal-footer">
+              <h4>Rows :</h4>
+              <input type="number" [(ngModel)]="value">
+              <button type="button" class="btn" (click)="autoGenerateEdit(value)" data-dismiss="modal">Generate</button>
+              <button type="button" class="btn btn-cancel" data-dismiss="modal"
+                (click)="resetColmnForEdit()">Cancel</button>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="ui-g-10 ui-md-10" *ngIf="displayTestData===true">
+      <!-- class="fixedDiv" -->
+      <div class="">
+        <div>
+          <div class="tableData" id="tableData">
+            <div class="row">
+              <div class="col-md-2"></div>
+              <div class="col-md-2"><label for="">Table Name:</label></div>
+              <div class="col-md-4">
+                <p id="spreedSheet">{{viewFileNameUI}}</p>
+              </div>
+            </div>
+            <!-- row-1 -->
+            <div class="row">
+              <div class="col-md-2"></div>
+              <div class="col-md-2"><label for="">Author:</label></div>
+              <div class="col-md-4">
+                <p id="spreedSheet">{{spreedAuthor}}</p>
+              </div>
+            </div>
+            <!-- row-2 -->
+            <div class="row" *ngIf="spreedPropOut.editedDet !== undefined">
+              <div class="col-md-2"></div>
+              <div class="col-md-2"><label for="">Last Author:</label></div>
+              <div class="col-md-4">
+                <p id="spreedSheet">{{editedAuthor}}</p>
+              </div>
+            </div>
+            <!-- row-3 -->
+            <div class="row">
+              <div class="col-md-2"></div>
+              <div class="col-md-2"><label for="">Created Date:</label></div>
+              <div class="col-md-4">
+                <p id="spreedSheet">{{spreedCreatedDate | date: 'dd/MM/yyyy'}}</p>
+              </div>
+            </div>
+            <!-- row-4 -->
+            <div class="row">
+              <div class="col-md-2"></div>
+              <div class="col-md-2"><label for="">Created Time:</label></div>
+              <div class="col-md-4">
+                <p id="spreedSheet">{{spreedCreatedTime}}</p>
+              </div>
+            </div>
+            <!-- row-5 -->
+            <div class="row" *ngIf="spreedSheetEditShow == true">
+              <div class="col-md-2"></div>
+              <div class="col-md-2"><label for="">Column Names:</label></div>
+              <div class="col-md-4">
+                <input type="text" class="form-control" required [(ngModel)]="editedColumnNames">
+              </div>
+            </div>
+          </div>
+          <!-- tableData -->
+
+          <div [hidden]="!spreedSheetEditShow">
+            <form action="" [formGroup]="spreedSheetAuditComments">
+              <div class="row">
+                <div class="col-md-2"></div>
+                <div class="col-md-2"><label for="">Comments:</label></div>
+                <div class="col-md-4">
+                  <input type="text" class="form-control" required formControlName="spreedComment"
+                    [(ngModel)]="spreedComments">
+                </div>
+              </div><br>
+              <div class="container-fluid">
+                <div class="pull-right btn-group btn-group-lg">
+                  <button class="btn btn-lg linebuttons" data-toggle="modal"
+                    data-target="#myModalForAutoGenerateForEdit" data-backdrop="static" (click)='autoGenModal()'>Auto
+                    Generate</button>
+                  <button type="button" class="btn btn-lg linebuttons"
+                    (click)="addSpreedSheetColumn(editedColumnNames)">Add Columns</button>
+                  <button type="button" class="btn btn-lg linebuttons"
+                    (click)="addTestDataForEdit(editedColumnNames)">Add Row</button>
+                  <button type="button" class="btn btn-lg linebuttons" (click)="deleteSpreedSheet()">Delete
+                    Row</button>
+                </div>
+              </div><br>
+            </form>
+          </div>
+
+          <!-- view starts -->
+          <div class="container-fluid view" [hidden]="spreedSheetViewShow == false" style="height: 65vh;width: 100%;
+          overflow: scroll;">
+            <table class="table table-bordered" id="addTestDataTable">
+              <tr *ngFor="let row of spreedView; let i = index" [class.tableHeader]="i==0">
+                <!-- <td>{{i+1}}</td> -->
+                <td *ngFor="let val of row">
+                  {{val}}
+                </td>
+              </tr>
+            </table>
+          </div>
+          <!-- view-ends -->
+          <!-- edit starts -->
+          <div class="container-fluid edit" *ngIf="spreedSheetEditShow == true"
+            style="height: 47vh;width: 100%;overflow: scroll;">
+            <table class="table table-bordered" id="data-table-edit">
+              <tr *ngFor="let row of spreedView; let i = index" (click)="highLightSpreedSheet(i)" style="height:30px;"
+                [class.editManualSelected]="i === spreedSheetId" [class.tableHeader]="i==0" contenteditable="true">
+                <!-- <td>{{i+1}}</td> -->
+                <td *ngFor="let val of row" style="max-width:10px;">
+                  {{val}}
+                </td>
+              </tr>
+            </table>
+          </div>
+          <!-- edit ends -->
+          <!-- audit starts -->
+          <div class="container-fluid edit" *ngIf="spreedAuditDisplay == true">
+            <table class="table table-bordered">
+              <thead class="tableHeader">
+                <th>Sl.No</th>
+                <th>Date</th>
+                <th>Time</th>
+                <th>Edited By</th>
+                <th>Reason</th>
+              </thead>
+              <tbody>
+                <tr *ngFor="let spreedAudit of spreedSheetAuditInfo; let i = index">
+                  <td>{{i+1}}</td>
+                  <td>{{spreedAudit.spreedDate | date: 'dd/MM/yyyy' }}</td>
+                  <td>{{spreedAudit.spreedTime}}</td>
+                  <td>{{spreedAudit.spreedUser}}</td>
+                  <td>{{spreedAudit.comments.spreedComment}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <!-- audit ends -->
+          <div>
+            <div class="container-fluid" id="bottomButtons">
+              <div class="pull-right">
+                <button type="button" [disabled]="!spreedSheetEditShow || spreedSheetAuditComments.invalid "
+                  [hidden]="spreedAuditDisplay || spreedSheetViewShow" (click)="generateSpreedSheetDataEdit()"
+                  class="btn btn-lg"> Update </button>
+
+                <button type="button" class="btn btn-lg btn-cancel" (click)="closeSpreed()">
+                  Cancel </button>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+
+      </div>
+      <!-- ui-g-10-2 ui-md-10 -->
+    </div>
+
+    <div class="ui-g-10 ui-md-10 border">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>

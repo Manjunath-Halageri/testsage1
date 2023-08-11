@@ -1,0 +1,212 @@
+
+    @media screen and (min-device-width: 768px) and (max-device-width: 1023px) {
+      .ui-md-2 {
+        width: 25%;
+        height: 100%;
+    }
+    .ui-md-10{
+      width: 75%;
+      height: 100vh;
+
+    }
+    .createCard{
+      width: 80%;
+      margin-top: 5%;
+      height: 450px;
+    }
+    .createEditCard{
+      width: 93% !important;
+      margin-top: 5% !important;
+      height: 529px !important;
+    }
+    .excelTable {
+      height: 50px;
+      font-weight: bold;
+      padding-left: 15px;
+      
+    }
+    .excelTable1 {
+      height: 50px;
+      font-size: 12px;  
+      padding-right: 15px
+    }
+    
+
+    }
+    
+    @media screen and (min-device-width: 1024px) and (max-device-width: 1440px) { 
+      .ui-md-2 {
+        width: 20%;
+        height: 100%;
+    }
+    .ui-md-10{
+      width: 80%;
+      height:100vh;
+    }
+    .createCard{
+      width: 60% !important;
+      margin-top: 2% !important;
+      margin-left: 19% !important;
+    }
+    .createEditCard{
+      width: 67% !important;
+      margin-top: 2% !important;
+    }
+    .excelTable {
+      height: 50px;
+      font-size: 12px;  
+      padding-right: 15px
+      
+    }
+    .excelTable1 {
+      height: 50px;
+      font-size: 12px;  
+      padding-right: 15px
+    }
+    .labelClass{
+      text-align: right;
+    }
+    
+    }
+   
+    @media screen and (min-device-width: 375px) and (max-device-width: 767px) { 
+    .ui-md-2 {
+      width: 100%;
+      height: 100%;
+    }
+    .ui-md-10{
+    width: 100%;
+    height: 100%;
+
+    }
+    .ui-fluid{
+      height: 85vh;
+     overflow-y: visible;
+     overflow-x: hidden;
+    }
+    .createEditCard{
+      width: 100% !important;
+      margin-top: 5% !important;
+      height: 529px !important;
+    }
+    }
+    @media screen and (min-device-width: 768px) and (max-device-width: 991px) { 
+      .dateStyle{
+        padding-left: 38px !important;
+      }
+      .createCard{
+        width: 92%;
+        margin-left: 4%;
+      }
+      .labelClass{
+        text-align: right;
+      }
+    }
+    @media screen and (min-device-width: 992px) and (max-device-width: 1199px) { 
+      
+      .labelClass{
+        text-align: right;
+      }
+      .createCard{
+        width: 68%;
+        margin-top: 5%;
+        height: 450px;
+        margin-left: 11%;
+    }
+    }
+
+    @media screen and (min-device-width: 376px) and (max-device-width: 575px) { 
+      .labelClass{
+        text-align: left;
+      }
+    }
+    @media screen and (min-device-width: 0px) and (max-device-width: 375px) { 
+    .ui-md-2 {
+      width: 100%;
+      height: 100%;
+    }
+    .ui-md-10{
+    width: 100%;
+    height: 100%;
+    }
+
+    .labelClass{
+      text-align: left;
+    }
+
+    }
+
+    .one{
+      height: 45vh !important;
+      overflow: scroll;
+    }
+    .two{
+      height: 45vh !important;
+      overflow: scroll;
+    }
+
+    .highlight-dates{
+      background: red;
+      border-radius: 100%;
+  }
+
+  .control-label:after { 
+    content:"*";
+    color:red;
+ }
+
+ table {
+  width: 100%;
+}
+
+th.mat-sort-header-sorted {
+  color: black;
+}
+td.mat-cell, td.mat-footer-cell, th.mat-header-cell {
+  padding-left: 10px;
+}
+.example-container {
+  overflow: auto;
+  margin-top: 30px;
+  padding: 10px;
+}
+
+.topHeadingNames{
+  font-size:15px;
+  background-color: unset;
+  margin:unset
+}
+
+.treeStructureLabel{
+  position:sticky !important;
+  font-size: 14px;
+}
+
+
+.fieldStyle{
+  height: 60px;
+}
+.asteriskStyle{
+  color: #d40b0b;
+  font-size: 8px;
+}
+
+.datePickererrMsg{
+  color:#dc3545;
+  font-size: small;
+  font-weight: bold;
+}
+/* .selectOption{
+  width: 215px;
+} */
+
+.table-container {
+  margin-top: 10px;
+  max-height: 400px;
+  overflow: auto;
+}
+
+mat-form-field {
+  width: 100%;
+}
+

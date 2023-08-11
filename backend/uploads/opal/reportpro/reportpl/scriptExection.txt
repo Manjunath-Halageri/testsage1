@@ -1,0 +1,114 @@
+[INFO] Scanning for projects...
+[WARNING] 
+[WARNING] Some problems were encountered while building the effective model for Opal:OpalDevelopment:jar:0.0.1-SNAPSHOT
+[WARNING] 'dependencies.dependency.(groupId:artifactId:type:classifier)' must be unique: org.json:json:jar -> duplicate declaration of version 20180813 @ line 76, column 13
+[WARNING] 'dependencies.dependency.(groupId:artifactId:type:classifier)' must be unique: commons-io:commons-io:jar -> duplicate declaration of version 2.6 @ line 93, column 13
+[WARNING] 'dependencies.dependency.(groupId:artifactId:type:classifier)' must be unique: com.googlecode.json-simple:json-simple:jar -> version 1.1 vs 1.1.1 @ line 123, column 13
+[WARNING] 'dependencies.dependency.systemPath' for atu.testng.reports.ATUTestRecorder:ATUTestRecorder:jar should not point at files within the project directory, ${basedir}/Jars/ATUTestRecorder_2.1.jar will be unresolvable by dependent projects @ line 182, column 22
+[WARNING] 
+[WARNING] It is highly recommended to fix these problems because they threaten the stability of your build.
+[WARNING] 
+[WARNING] For this reason, future Maven versions might no longer support building such malformed projects.
+[WARNING] 
+[INFO] 
+[INFO] ------------------------< Opal:OpalDevelopment >------------------------
+[INFO] Building OpalDevelopment 0.0.1-SNAPSHOT
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-clean-plugin:2.5:clean (default-clean) @ OpalDevelopment ---
+[INFO] Deleting E:\zap\backend\uploads\opal\reportpro\reportpl\projectToRun\target
+[INFO] 
+[INFO] --- maven-resources-plugin:2.6:resources (default-resources) @ OpalDevelopment ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] skip non existing resourceDirectory E:\zap\backend\uploads\opal\reportpro\reportpl\projectToRun\src\main\resources
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.1:compile (default-compile) @ OpalDevelopment ---
+[INFO] Changes detected - recompiling the module!
+[INFO] Compiling 6 source files to E:\zap\backend\uploads\opal\reportpro\reportpl\projectToRun\target\classes
+[WARNING] /E:/zap/backend/uploads/opal/reportpro/reportpl/projectToRun/src/main/java/reuseablePackage/feature/AllActions.java: E:\zap\backend\uploads\opal\reportpro\reportpl\projectToRun\src\main\java\reuseablePackage\feature\AllActions.java uses or overrides a deprecated API.
+[WARNING] /E:/zap/backend/uploads/opal/reportpro/reportpl/projectToRun/src/main/java/reuseablePackage/feature/AllActions.java: Recompile with -Xlint:deprecation for details.
+[INFO] 
+[INFO] --- maven-resources-plugin:2.6:testResources (default-testResources) @ OpalDevelopment ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] skip non existing resourceDirectory E:\zap\backend\uploads\opal\reportpro\reportpl\projectToRun\src\test\resources
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.1:testCompile (default-testCompile) @ OpalDevelopment ---
+[INFO] Changes detected - recompiling the module!
+[INFO] Compiling 1 source file to E:\zap\backend\uploads\opal\reportpro\reportpl\projectToRun\target\test-classes
+[INFO] 
+[INFO] --- maven-surefire-plugin:3.0.0-M1:test (default-test) @ OpalDevelopment ---
+[INFO] 
+[INFO] -------------------------------------------------------
+[INFO]  T E S T S
+[INFO] -------------------------------------------------------
+[INFO] Running TestSuite
+./src/test/java/mID638/fID677/
+./src/test/java/mID638/fID677/
+./src/test/java/mID638/fID677/
+./src/test/java/mID638/fID677/
+false
+false
+File is Main
+path is E:\zap\backend\uploads\opal\reportpro\reportpl\projectToRun\.\Screenshot\EachStepScreenshot\100_Suite1\sID880
+File is Main
+path1 is E:\zap\backend\uploads\opal\reportpro\reportpl\projectToRun\.\Screenshot\FailedScreenshot\100_Suite1\sID880
+./src/test/java/mID638/fID677/
+./src/test/java/mID638/fID677/
+./src/test/java/mID638/fID677/
+./src/test/java/mID638/fID677/
+./src/test/java/mID638/fID677/
+./src/test/java/mID638/fID677/
+./src/test/java/mID638/fID677/
+org.zaproxy.clientapi.core.ClientApi@1a8a8f7c
+///////////////////////////////////////////Proxy///////////////////////////////////////////////////////
+Launching Google browser
+Before setProxyProxy(manual, http=http://192.168.99.254:8080, ssl=http://192.168.99.254:8080)
+Before setProxy
+Capabilities {acceptInsecureCerts: true, browser: Chrome, browserName: chrome, browser_version: 93.0.4577.63, goog:chromeOptions: {args: [--no-sandbox, --disable-dev-shm-usage], extensions: []}, proxy: Proxy(manual, http=http://1...}
+Before RemoteWebDriver
+///////////////////////////starting passive scan//////////////////////////
+[ERROR] Tests run: 4, Failures: 4, Errors: 0, Skipped: 0, Time elapsed: 2.882 s <<< FAILURE! - in TestSuite
+[ERROR] step_0(mID638.fID677.sID880)  Time elapsed: 1.634 s  <<< FAILURE!
+java.lang.NullPointerException
+	at mID638.fID677.sID880.step_0(sID880.java:69)
+
+[ERROR] step_1(mID638.fID677.sID880)  Time elapsed: 0.002 s  <<< FAILURE!
+java.lang.NullPointerException
+	at mID638.fID677.sID880.step_1(sID880.java:102)
+
+[ERROR] step_2(mID638.fID677.sID880)  Time elapsed: 0.17 s  <<< FAILURE!
+java.lang.NullPointerException
+	at mID638.fID677.sID880.step_2(sID880.java:137)
+
+[ERROR] step_3(mID638.fID677.sID880)  Time elapsed: 0 s  <<< FAILURE!
+java.lang.NullPointerException
+	at mID638.fID677.sID880.step_3(sID880.java:177)
+
+[INFO] 
+[INFO] Results:
+[INFO] 
+[ERROR] Failures: 
+[ERROR]   sID880.step_0:69->AllActions.CaptureOnFailure:1570 » NullPointer
+[ERROR]   sID880.step_1:102->AllActions.CaptureOnFailure:1570 » NullPointer
+[ERROR]   sID880.step_2:137->AllActions.CaptureOnFailure:1570 » NullPointer
+[ERROR]   sID880.step_3:177->AllActions.CaptureOnFailure:1570 » NullPointer
+[INFO] 
+[ERROR] Tests run: 4, Failures: 4, Errors: 0, Skipped: 0
+[INFO] 
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD FAILURE
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  11.920 s
+[INFO] Finished at: 2023-05-24T12:20:18+05:30
+[INFO] ------------------------------------------------------------------------
+[ERROR] Failed to execute goal org.apache.maven.plugins:maven-surefire-plugin:3.0.0-M1:test (default-test) on project OpalDevelopment: There are test failures.
+[ERROR] 
+[ERROR] Please refer to E:\zap\backend\uploads\opal\reportpro\reportpl\projectToRun\target\surefire-reports for the individual test results.
+[ERROR] Please refer to dump files (if any exist) [date].dump, [date]-jvmRun[N].dump and [date].dumpstream.
+[ERROR] -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException

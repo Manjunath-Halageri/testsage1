@@ -1,0 +1,286 @@
+<!-- <div class="mainDiv">
+    <div id="div1">
+      <span>Report : </span>&nbsp;&nbsp;
+      <span class="bar">/ </span>&nbsp;&nbsp;
+      <span>{{projectName}}</span>&nbsp;&nbsp;
+      <span class="bar"> / </span>&nbsp;&nbsp;
+      <span>{{suiteName}}</span>&nbsp;&nbsp;
+      <span class="bar"> /</span>&nbsp;&nbsp;
+
+      <span>
+        <a [routerLink]="['/projectdetail/reports/suitelevel/featurelevel']">{{moduleName}}</a>
+      </span>&nbsp;&nbsp;
+      <span class="bar">/</span>&nbsp;&nbsp;
+      <span>
+        <a [routerLink]="['/projectdetail/reports/suitelevel/featurelevel/scriptlevel']">{{featureName}}</a>
+      </span>&nbsp;&nbsp;
+      <span class="bar">/</span>&nbsp;&nbsp;
+      <span>{{scriptName}}</span>&nbsp;&nbsp;
+    </div>
+  </div> -->
+  <ul class="breadcrumb" style="font-size:15px;background-color: unset;margin:unset">
+    <li class="breadcrumb-item"><a id="mainheader">{{projectName}}</a></li>
+    <li class="breadcrumb-item" *ngIf="navSuite != 0"><a id="subheader" [routerLink]="['/projectdetail/reports/suitelevel']">{{suiteName}}</a></li>
+    <li class="breadcrumb-item" id="subheader">
+      <!-- <a id="subheader" >{{module}}</a></li> -->
+      <a id="subheader" [routerLink]="['/projectdetail/reports/suitelevel/featurelevel']">{{module}}</a></li>
+    <li class="breadcrumb-item" id="subheader">
+      <!-- <a id="subheader" >{{featureName}}</a> -->
+      <a id="subheader" [routerLink]="['/projectdetail/reports/suitelevel/featurelevel/scriptlevel']">{{featureName}}</a>
+    </li>
+    <li class="breadcrumb-item" id="subheader"><a id="subheader">{{scriptName}}</a></li>
+  </ul>
+  <div class="mainDiv">
+    <!--modal to display video [src]='videoPath'-->
+    <div class="container">
+      <div class="modal fade" id="vModal" role="dialog">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title">Execution Video</h1>
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+              <video width="400" height="400"  controls autoplay>
+                Your browser does not support the video tag.
+              </video>
+            </div>
+            <div class="modal-footer">
+              <button type="button">
+                <a style="font-size: 12px;color: white;" href={{videoPath}} class="btn " target="_self"
+                  download>Download</a>
+              </button>
+              <button type="button" class="btn btn-default btn-cancel" data-dismiss="modal">Close</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--End of display video-->
+    <!--modal to display logs -->
+    <div class="container">
+      <div class="modal fade" id="logModal" role="dialog">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title">Log</h1>
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default btn-cancel" data-dismiss="modal">Close</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--End of display logs -->
+    <!--modal to display screenshots -->
+    <div class="container">
+      <div class="modal fade " id="screenModal11" role="dialog">
+        <div class="modal-dialog ">
+          <div class="modal-content ">
+            <div class="modal-header">
+              <h1 class="modal-title">Screenshot</h1>
+              <!-- <button type="button" class="close" data-dismiss="modal">&times;</button> -->
+            </div>
+            <div class="modal-body ">
+  
+              <div>
+  
+                <img src={{screenShotPath1}} alt="image not found" style="height:400px;width:480px;">
+                <!-- <img src="../uploads/opal/manualScreenShots/step_1.png" alt="image not found" style="height:400px;width:480px;"> -->
+  
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button>
+                <a style="color: white;font-size: 12px;" href={{screenShotPath1}} class="btn " target="_self"
+                  download>Download</a>
+              </button>
+              <button type="button" class="btn btn-default btn-cancel" (click)="deleteImage()" data-dismiss="modal">Close</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+    <div class="container-fluid" style="border:1px solid #dee2e6!important;padding-bottom: 10px">
+      <div >
+        <!-- <div class="col-sm-3 col-md-5 col-xs-3 col-lg-3 bordercol3">
+          <div>
+            <div> <br><br><br>
+              <div class="form-group btn-group" style="height:inherit">
+                <label for="date">FromDate</label> &nbsp;&nbsp;
+                <input type="date" class="form-control" name="bday" [(ngModel)]="fDate" style="width: 130px;">
+              </div>
+              <br><br>
+  
+              <div class="form-group btn-group" style="height:inherit">
+                <label for="date">ToDate</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <input type="date" class="form-control" name="tday" [(ngModel)]="tDate">
+              </div>
+              <div style="text-align: center;">
+                <button class="btn btn-lg" (click)="searchReport(fromDate,toDate)">Search</button>
+              </div>
+            </div><br><br>
+  
+            <div>
+              <table class="shadow-lg scroll " style="width: 100%">
+                <thead class="theadColor">
+                  <tr>
+                    <th class="col-xs-2">Run No</th>
+                    <th class="col-xs-4">Suite</th>
+                    <th class="col-xs-3">Date</th>
+                    <th class="col-xs-3">Time</th>
+                  </tr>
+                </thead>
+                <tbody style="height:369px">
+                  <tr *ngFor="let suite of searchedSuites;let i=index;">
+                    <td class="col-xs-2">{{suite._id.Run}}</td>
+                    <td class="col-xs-4">{{suite._id.suiteName}}</td>
+                    <td class="col-xs-3">{{suite._id.startedAt | date : "MM/d/yy"}}</td>
+                    <td class="col-xs-3">{{suite._id.startedAt | date : "h:mm:ss a"}}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div> -->
+  
+        <!-- <div class="col-sm-9 col-md-7 col-xs-9 col-lg-9"> -->
+        <div class="ExecutionSummary">
+          <span >ExecutionSummary</span>
+        </div>
+        <hr>
+        <div class="d-flex mb-4 bg-secondary">
+          <button class="m p-2 flex-sm-fill" *ngFor="let t of title" [class.selected]="t === selected"
+            (click)="onSelect(t);" [routerLink]="['/projectdetail/reports/suitelevel']">{{t}}</button>
+        </div>
+        <div class="container" style="border: 1px solid #dee2e6!important">
+          <div class="row">
+            <div class="col-sm-6 col-xs-6 col-lg-6 col-md-6">
+              <div class="col6headings" style="text-align: center;">
+                <div>
+                  <span class="bodyHighlitedtext">Script :</span>
+                  <span class="labelHighlited">{{scriptName}}</span>&nbsp;&nbsp;&nbsp;&nbsp;
+                </div>
+                <div>
+                <span class="bodyHighlitedtext">Browser :</span>
+                <span class="labelHighlited">{{browserName}}</span>&nbsp;&nbsp;&nbsp;&nbsp;
+              </div>
+                <div>
+                  <span class="bodyHighlitedtext"> Version :</span>
+                  <span class="labelHighlited">{{browserVersion}}</span>
+                </div>
+              </div>
+  
+              <div class="testcaseName">
+                <div>
+                  <span class="bodyHighlitedtext">Testsuite Name : </span>
+                  <span class="labelHighlited">{{suiteName}}</span>&nbsp;&nbsp;&nbsp;&nbsp;
+                </div>
+                <div>
+                  <div>
+                    <span class="bodyHighlitedtext">Test Priority:</span>
+                    <span class="labelHighlited">P1</span>
+                  </div>
+                </div>
+              </div>
+              &nbsp;
+              <div>
+                <div class="totalSteps">
+                  <label>Total Steps</label>
+                </div>
+                <table class="totaltable">
+                  <tbody>
+                    <tr>
+                      <th>Totalsteps Executed</th>
+                      <td>{{totalSteps}}</td>
+                    </tr>
+                    <tr>
+                      <th>Pass</th>
+                      <td>{{pass}}</td>
+                    </tr>
+                    <tr>
+                      <th>Fail</th>
+                      <td>{{fail}}</td>
+                    </tr>
+                  </tbody>
+                </table>
+  
+              </div>
+              <!-- <div class="totalSteps">
+                <button type="button" class="btn btn-lg" data-toggle="modal" data-backdrop="static"
+                  data-target="#logModal" (click)="getLogs()">Log
+                </button>
+              </div> -->
+              <br>
+  
+          </div>
+          <div class="col-sm-6 col-xs-6 col-lg-6 col-md-6"><br>
+            <div class="resultData">
+              <span >Result :</span>
+              <span class="labelHighlited">{{completeScriptStatus}}</span>
+            </div>
+            <div class="startEndTime">
+              <span class="bodyHighlitedtext">Strat Time :</span>
+              <span class="labelHighlited">{{startedAt | date :"h:mm:ss a"}}</span>&nbsp;&nbsp;
+              <span class="bodyHighlitedtext">End Time :</span>
+              <span class="labelHighlited">{{endedAt| date :"h:mm:ss a"}}</span>
+            </div>
+            <div class="pieChart">
+              <google-chart *ngIf="activatePie == 1" [data]="pieChart"></google-chart>
+            </div>
+  
+          </div>
+        </div>
+  
+      </div>
+      
+      <div style="padding: 5% 5% 5% 5%;">
+        <table class="shadow-lg table" >
+          <thead class="theadColor">
+            <tr>
+              <th >Sl.No</th>
+              <th >Step Name</th>
+              <th >Status</th>
+              <th class="col-xs-2">Screenshot</th>
+              <th class="col-xs-3">Download</th>
+              <th >Start Time</th>
+              <th >End Time</th>
+              <!-- <th  *ngIf="manualAutomation == true">Video</th> -->
+              <!-- <th  *ngIf="manualAutomation == true">Duration(ms)</th> -->
+  
+            </tr>
+          </thead>
+          <tbody style="height: 200px;">
+            <tr *ngFor="let steps of allStepSData;let i=index;">
+              <td >{{i+1}}</td>
+              <td >{{steps.name}} </td>
+              <td >{{steps.status}}</td>
+              <td class="col-xs-2">yes</td>
+              <td class="col-xs-3">
+                <button type="button" class="btn btn-info btn-lg" class="btn btn-lg" data-backdrop="static"
+                  data-toggle="modal" data-target="#screenModal11" (click)="displayScreen(steps)">
+                  <span class="glyphicon glyphicon-download">&nbsp;</span>Screenshot
+                </button>
+              </td>
+              <td >{{steps.startedAt| date :"h:mm:ss a"}}</td>
+              <td >{{steps.endedAt| date :"h:mm:ss a"}}</td>
+              <!-- <td *ngIf="manualAutomation == true">{{steps.duration | date:"ss"}}</td> -->
+              <!-- <td *ngIf="manualAutomation == true"> -->
+                <!-- <button class="btn btn-lg" data-toggle="modal" data-backdrop="static" data-target="#vModal"
+                  (click)="stepVideo(steps,i)">Watch Video</button>
+              </td> -->
+            </tr>
+          </tbody>
+        </table>
+        
+      </div>
+      <!-- </div> -->
+    </div>
+  </div>
+  </div>
+  

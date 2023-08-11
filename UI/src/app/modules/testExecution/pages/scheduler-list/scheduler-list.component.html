@@ -1,0 +1,481 @@
+<ul class="breadcrumb" style="font-size:15px;background-color: unset;margin:unset">
+  <li class="breadcrumb-item" style="width: 115px;"><a id="mainheader">Test
+      Execution</a></li>
+  <!--[routerLink]="['/projectdetail']"-->
+  <li class="breadcrumb-item" id="subheader"><a id="subheader">Scheduler List</a></li>
+</ul>
+<hr>
+<div class="container-fulid">
+  <mat-tab-group mat-align-tabs="center" animationDuration="0ms">
+
+    <mat-tab label="Yet TO Start">
+      <br><br>
+      <div>
+        <div align="center">
+          <div style=" width: 20%;">
+            <div class="input-group">
+              <input style="font-size: 14px;height: 32px;" type="text" class="form-control" placeholder="Search"
+                list="browsers" [(ngModel)]="Schedule" id="myInput" (keyup)="myFunction()">
+              <!-- <div class="input-group-append">
+                <button class="btn btn-secondary" type="button" (click)="getSchedule(Schedule)">
+                  <i class="fa fa-search"></i>
+                </button>
+              </div> -->
+            </div>
+          </div>
+        </div><br><br>
+
+
+        <datalist id="browsers">
+          <option></option>
+          <option *ngFor="let sechdule of AllInpgressSchedule">{{sechdule.scheduleName}}</option>
+        </datalist>
+      </div>
+      <table class="shadow-lg  scroll" id="myTable" style="border:unset;width:95%;margin:auto;table-layout: fixed;">
+        <thead class="theadColor" style="text-align:center;">
+          <th class="thdata col-xs-2">Name</th>
+          <th class="thdata col-xs-1">Schedule</th>
+          <th class="thdata col-xs-1">Date</th>
+          <th class="thdata col-xs-1">Time</th>
+          <th class="thdata col-xs-1">type</th>
+          <th class="thdata col-xs-2">Machine Status</th>
+          <th class="col-xs-1" *ngIf="read==true">View</th>
+          <th class="col-xs-1" *ngIf="edit==true">Edit</th>
+          <th class="col-xs-1" *ngIf="delete==true">Delete</th>
+        </thead>
+        <tbody class="block bodyHeight">
+          <tr *ngFor="let sechdule of AllInpgressSchedule">
+            <td class="col-xs-2" style="word-break:break-word;text-align:center;">{{sechdule.scheduleName}}</td>
+            <td class="col-xs-1" style="text-align:center;">{{sechdule.scheduleType}}</td>
+            <td class="col-xs-1" style="text-align:center;">{{sechdule.status.startDate | date:'dd-MM-yyyy' }}</td>
+            <td class="col-xs-1" style="text-align:center;"> {{sechdule.status.time}} </td>
+            <td class="col-xs-1" style="text-align:center;"> {{sechdule.type}} </td>
+            <td class="col-xs-2" style="word-break:break-word;"> {{sechdule.machineStatus}} </td>
+            <td class="col-xs-1"  (click)="viewSechdule(sechdule)" data-target="#viewSchedule" data-toggle="modal" style="text-align:center;">
+              <span class="glyphicon glyphicon-info-sign btn btn-info btn-lg"></span>
+            </td>
+            <!-- <td class="col-xs-1" *ngIf="edit==true" >
+              <button  [disabled]="edit&&update" class="btn btn-info btn-sm" style="background-color:#17a2b8 ;"  (click)="editSechdule(sechdule)" *ngIf="edit==true" data-target="#editSchedule" data-toggle="modal">
+                <span class="glyphicon glyphicon-pencil btn btn-info btn-sm"></span>
+              </button>
+            </td> -->
+            <td class="col-xs-1" (click)="editSechdule(sechdule)" *ngIf="edit==true" data-target="#editSchedule" data-toggle="modal" style="text-align:center;">
+              <span class="glyphicon glyphicon-pencil btn btn-info btn-lg"></span>
+            </td>
+            <td class="col-xs-1" *ngIf="delete==true" style="text-align:center;">
+              <span class="glyphicon glyphicon-trash btn btn-info btn-lg" (click)="deleteSechdule(sechdule)"></span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <br><br><br>
+
+    </mat-tab>
+    <mat-tab label="In progress" dynamicHeight=false>
+      <br><br>
+      <div>
+        <p class="text-center" style="font-size:16px;">
+          In Progress Schedule List
+        </p>
+      </div>
+      <br><br>
+      <table class="shadow-lg scroll" style="border:unset;width:80%;margin:auto">
+        <thead class=" theadColor">
+          <tr>
+            <th class="thdata">Name</th>
+            <th class="thdata">Schedule</th>
+            <th class="thdata">Date</th>
+            <th class="thdata">Time</th>
+          </tr>
+        </thead>
+        <tbody class="block bodyHeight">
+          <tr *ngFor="let sechdule of AllSchedule">
+            <td>{{sechdule.scheduleName}}</td>
+            <td>{{sechdule.scheduleType}}</td>
+            <td>{{sechdule.status[0].startDate | date:'dd-MM-yy'}}</td>
+            <td> {{sechdule.status[0].time}} </td>
+          </tr>
+        </tbody>
+      </table>
+      <br><br><br>
+    </mat-tab>
+    <mat-tab label="Completed">
+      <br><br>
+      <div>
+        <p class="text-center" style="font-size:16px">
+          Completed Schedule List
+        </p>
+      </div>
+      <br><br>
+
+
+      <table class="shadow-lg  scroll" style="border:unset;width:80%;margin:auto">
+        <thead class="theadColor">
+          <!-- <tr> -->
+          <th class="thdata">Name</th>
+          <th class="thdata">Schedule</th>
+          <th class="thdata">Date</th>
+          <th class="thdata">Time</th>
+          <!-- </tr> -->
+        </thead>
+        <tbody class="block bodyHeight">
+          <tr *ngFor="let sechdule of AllCompletedSchedule">
+            <td>{{sechdule.scheduleName}}</td>
+            <td>{{sechdule.scheduleType}}</td>
+            <td>{{sechdule.status.startDate | date:'dd-MM-yy' }}</td>
+            <td> {{sechdule.status.time}} </td>
+          </tr>
+        </tbody>
+      </table><br><br><br>
+    </mat-tab>
+  </mat-tab-group>
+
+</div>
+
+<!-- ///////////////////////////////////////        Start of View schedule  ////////////////////////////  -->
+
+<div class="modal fade" id="viewSchedule" data-backdrop="static">
+  <div class="modal-dialog">
+    <div class="modal-content" style="min-height: 500px; max-height: 700px; overflow-y: scroll;width:600px">
+      <div class="modal-header">
+        <h1 class="modal-title">View Schedule</h1>
+      </div>
+      <div>
+        <div>
+          <span class="excelSpan"> </span>
+          <div class=" col-sm-4 col-sm-4 col-sm-4 colFont">
+
+            <span class="excelSpan"> </span>
+            <div class="row excelTable">
+              &nbsp; Name:
+            </div>
+
+            <div class="row excelTable">
+              &nbsp; Description:
+            </div>
+
+            <div class="row excelTable " style="margin-top: 30px">
+              &nbsp; Test Suite:
+            </div>
+
+            <div class="row excelTable">
+              &nbsp; Schedule:
+            </div>
+
+            <div class="row excelTable" *ngIf="startTime==true">
+              &nbsp; Start Date :
+            </div>
+
+            <div class="row excelTable" *ngIf="endTime==true">
+              &nbsp; End Date :
+            </div>
+
+            <div class="row excelTable">
+              &nbsp; Time :
+            </div>
+
+            <div class="row excelTable" *ngIf="week==true">
+              &nbsp; Day of week :
+            </div>
+
+            <div class="row excelTable" *ngIf="hourly==true">
+              &nbsp; Repeat Every::
+            </div>
+
+            <div class="row excelTable" *ngIf="weekEnd==true">
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              <input type="checkbox" [(ngModel)]="scheduleObject.weekend" disabled [checked]="scheduleObject.weekend">
+            </div>
+
+          </div>
+
+
+          <div class=" col-sm-8 col-sm-8 col-sm-8 colFont">
+            <div class="row excelTable1">
+              <input type="text" class="excelInput" name="scheduleName" disabled
+                [(ngModel)]='scheduleObject.scheduleName'>
+            </div>
+
+            <div class="row excelTable1">
+              <textarea rows="3" cols="21.99" maxlength="100" class="texta" name="desc" disabled
+                [(ngModel)]='scheduleObject.desc'></textarea>
+            </div>
+
+            <div class="row excelTable1" style="margin-top:30px">
+              <input type="text" class=" excelInput" disabled value="jjj" name="selectedSuite"
+                [(ngModel)]='scheduleObject.testSuite'>
+            </div>
+
+            <div class="row excelTable1">
+              <select class="excelInput" name="scheduleType" [(ngModel)]='scheduleObject.scheduleType' disabled>
+                <option>{{scheduleObject.scheduleType}} </option>
+              </select>
+            </div>
+
+            <div class="row excelTable1" *ngIf="startTime==true">
+              <input type="text" class="excelInput" name="startDate" disabled
+                [(ngModel)]="scheduleObject.status.startDate">
+            </div>
+
+            <div class="row excelTable1" *ngIf="endTime==true">
+              <input type="text" class="excelInput" name="endDate" disabled [(ngModel)]='scheduleObject.endDate'>
+            </div>
+
+            <div class="row excelTable1">
+              <span class="excelInput">
+                <input type="text" class="timeAt" name="time" disabled [(ngModel)]='scheduleObject.status.time'>
+              </span>
+            </div>
+
+            <div class="row excelTable1" *ngIf="week==true">
+              <select class="excelInput" name="weeks" [(ngModel)]='scheduleObject.weekName' disabled>
+                <option>{{scheduleObject.weekName}} </option>
+              </select>
+            </div>
+
+            <div class="row excelTable1" *ngIf="hourly==true">
+              <select class="excelInput" name="hourl" [(ngModel)]='scheduleObject.hourly' disabled>
+                <option>{{scheduleObject.hourly}} </option>
+              </select>
+            </div>
+
+            <div class="row excelTable1" *ngIf="weekEnd==true">
+              Weekends
+            </div>
+
+            <div style="padding: 5px;">
+
+              <button class="btn btn-lg btn-cancel" style="margin-left:50px" data-dismiss="modal">Close</button>
+            </div>
+
+
+
+          </div>
+
+
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+</div>
+<!-- ///////////////////////////////////////        End of View schedule  ////////////////////////////  -->
+<div *ngIf='sc==true' >
+  <div class="modal fade" id="editSchedule" data-backdrop="static">
+    <div class="modal-dialog">
+      <div class="modal-content" style="min-height: 500px; max-height: 700px; overflow-y: scroll;width:600px">
+        <div class="modal-header">
+          <h1 class="modal-title">Edit Schedule</h1>
+        </div>
+        <div>
+          <div>
+            <span class="excelSpan"> </span>
+            <div class=" col-sm-4 col-sm-4 col-sm-4 colFont">
+
+              <span class="excelSpan"> </span>
+              <div class="row excelTable">
+                &nbsp; Name:
+                <span class="starSpan">*</span>
+              </div>
+
+              <div class="row excelTable">
+                &nbsp; Description:
+
+                <span class="starSpan">*</span>
+
+              </div>
+              <div class="row excelTable " style="margin-top: 30px">
+                &nbsp; Test Suite:
+
+                <span class="starSpan">*</span>
+              </div>
+
+              <div class="row excelTable">
+                &nbsp; Schedule:
+
+                <span class="starSpan">*</span>
+              </div>
+              <div class="row excelTable" *ngIf="startTime1==true">
+                &nbsp; Start Date :
+
+                <span class="starSpan">*</span>
+
+
+              </div>
+              <div class="row excelTable" *ngIf="endTime1==true">
+                &nbsp; End Date :
+                <span class="starSpan">*</span>
+              </div>
+              <div class="row excelTable">
+                &nbsp; Time :
+                <span class="starSpan">*</span>
+              </div>
+              <div class="row excelTable" *ngIf="week1==true">
+                &nbsp; Day of week :
+                <span class="starSpan">*</span>
+              </div>
+
+              <div class="row excelTable" *ngIf="hourly1==true">
+                &nbsp; Repeat Every::
+                <span class="starSpan">*</span>
+              </div>
+              <div class="row excelTable" *ngIf="weekEnd1==true">
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <input type="checkbox"  [(ngModel)]="scheduleObject.weekend" [checked]="scheduleObject.weekend" >
+
+              </div>
+
+
+
+            </div>
+            <div class=" col-sm-8 col-sm-8 col-sm-8 colFont">
+              <form [formGroup]="angForm123" novalidate>
+                
+                <div class="row excelTable1">
+                  <input type="text" class="excelInput" formControlName="scheduleName" disabled  [(ngModel)]='scheduleObject.scheduleName'>
+                  <div
+                    *ngIf="angForm123.controls['scheduleName'].invalid && (angForm123.controls['scheduleName'].dirty || angForm123.controls['scheduleName'].touched)"
+                    class="alert alert-danger">
+                    <div *ngIf="angForm123.controls['scheduleName'].errors.required">
+                      Name is required.
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row excelTable1">
+                  <textarea rows="3" cols="21.99" maxlength="100" class="texta" formControlName="desc"
+                    [(ngModel)]='scheduleObject.desc'></textarea>
+                  <div
+                    *ngIf="angForm123.controls['desc'].invalid && (angForm123.controls['desc'].dirty || angForm123.controls['desc'].touched)"
+                    class="alert alert-danger">
+                    <div *ngIf="angForm123.controls['desc'].errors.required">
+                      Description is required.
+                    </div>
+                  </div>
+
+
+
+                </div>
+
+               <div class="row excelTable1" style="margin-top:30px">
+                  <input type="text" class=" excelInput" disabled value="jjj" formControlName="selectedSuite"[(ngModel)]='scheduleObject.testSuite'>
+                </div>
+
+                 <div class="row excelTable1">
+                  <select class="excelInput" formControlName="scheduleType" [(ngModel)]='scheduleObject.scheduleType'
+                    (change)="getscheduleName(scheduleObject.scheduleType)" (click)="getSchedules()">
+                    <!-- <option style="display:none"> </option> -->
+                    <option *ngFor="let scheduleName of scheduleDetails">{{scheduleName}}</option>
+                  </select>
+                  <div
+                    *ngIf="angForm123.controls['scheduleType'].invalid && (angForm123.controls['scheduleType'].dirty || angForm123.controls['scheduleType'].touched)"
+                    class="alert alert-danger">
+                    <div *ngIf="angForm123.controls['scheduleType'].errors.required">
+                      Schedule is required.
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row excelTable1" *ngIf="startTime1==true">
+                  <input type="date" class="excelInput" formControlName="startDate" [min]="dated"
+                    [(ngModel)]='scheduleObject.status.startDate' (change)="checkStartDate(scheduleObject.status.startDate,scheduleObject.endDate,scheduleObject.scheduleType)"
+                    data-target="#lastDate" data-toggle="modal">
+                  <div
+                    *ngIf="angForm123.controls['startDate'].invalid && (angForm123.controls['startDate'].dirty || angForm123.controls['startDate'].touched)"
+                    class="alert alert-danger">
+                    <div *ngIf="angForm123.controls['startDate'].errors.required">
+                      startDate is required.
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row excelTable1" *ngIf="endTime1==true">
+
+                  <input type="date" class="excelInput" formControlName="endDate" [min]="dated"
+                    [(ngModel)]='scheduleObject.endDate'(change)="checkEndDate(scheduleObject.status.startDate,scheduleObject.endDate)" >
+                  <div
+                    *ngIf="angForm123.controls['endDate'].invalid && (angForm123.controls['endDate'].dirty || angForm123.controls['endDate'].touched)"
+                    class="alert alert-danger">
+                    <div *ngIf="angForm123.controls['endDate'].errors.required">
+                      endDate is required.
+                    </div>
+                  </div>
+
+                </div>
+
+               <div class="row excelTable1">
+                  <span class="excelInput">
+
+                    <input type="time" class="timeAt" formControlName="givenTime"
+                      [(ngModel)]='scheduleObject.status.time'
+                      (change)="checkTime(scheduleObject.status.time,scheduleObject.scheduleType,scheduleObject.status.startDate)"> 
+                  </span>
+                   <div
+                    *ngIf="angForm123.controls['givenTime'].invalid && (angForm123.controls['givenTime'].dirty || angForm123.controls['givenTime'].touched)"
+                    class="alert alert-danger">
+                    <div *ngIf="angForm123.controls['givenTime'].errors.required">
+                      givenTime is required.
+                    </div>
+                  </div>
+
+                </div>
+
+                 <div class="row excelTable1" *ngIf="week1==true">
+                  <select class="excelInput" formControlName="weekName" [(ngModel)]='scheduleObject.weekName'>
+                    <!-- <option style="display:none"> </option> -->
+                    <option *ngFor="let Weekly of WeeklyDetails">{{Weekly}}</option>
+                  </select>
+                  <div
+                    *ngIf="angForm123.controls['weekName'].invalid && (angForm123.controls['weekName'].dirty || angForm123.controls['weekName'].touched)"
+                    class="alert alert-danger">
+                    <div *ngIf="angForm123.controls['weekName'].errors.required">
+                      week Name is required.
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row excelTable1" *ngIf="hourly1==true">
+                  <select class="excelInput" formControlName="hourly" [(ngModel)]='scheduleObject.hourly' (click)="getHourly()">
+                    <!-- <option style="display:none"> </option> -->
+                    <!-- <option *ngFor="let hourly of hourlyDetails">{{hourly.hour}} Hour</option> -->
+                    <option *ngFor="let hourly of hourlyDetails">{{hourly}}</option>
+                  </select>
+                  <div
+                    *ngIf="angForm123.controls['hourly'].invalid && (angForm123.controls['hourly'].dirty || angForm123.controls['hourly'].touched)"
+                    class="alert alert-danger">
+                    <div *ngIf="angForm123.controls['hourly'].errors.required">
+                      Time is required.
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row excelTable1" *ngIf="weekEnd1==true">
+                  Weekends
+                </div>
+
+                <div style="padding: 5px;">
+                   <button type="submit" class="btn btn-lg" 
+                  [disabled]="angForm123.pristine" (click)="updateSchedule()"
+                  > Create </button>
+                <!-- <button type="submit" class="btn btn-lg" style="margin-left:50px"> Update </button> -->
+                <button type="submit" class="btn btn-lg btn-cancel" id="cancelSched" (click)="cancel()" style="margin-left:50px"data-dismiss="modal">Cancel</button>
+                </div>
+               
+
+              </form>
+
+            </div>
+
+
+          </div>
+
+        </div>
+
+
+
+      </div>
+    </div>
+  </div>
+  </div>

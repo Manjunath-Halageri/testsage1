@@ -1,0 +1,85 @@
+.ui-fluid {
+  /* height: 85vh;
+  overflow-y: auto; */
+  overflow-x: hidden;
+  margin-top: -5px;
+}
+
+.ui-md-2 {
+  width: 20%;
+  height: 100vh;
+}
+
+.ui-md-10 {
+  width: 80%;
+  height: 85vh;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+.headerClass {
+  color: black;
+}
+
+.one{
+	height: 85vh !important;
+	overflow: scroll;
+}
+
+#select #option{
+  height:40px;
+  font-size: 20px;
+  padding: 5px; 
+  align-items: center;
+  background-color: rgba(0,0,0,0.04);
+}
+
+#hoverHttp:hover{
+  background-color: lightgray;
+}
+.editSelected{
+  background-color: lightgray;
+}
+
+.example-container {
+  overflow: auto;
+  margin-top: 30px;
+  padding: 10px;
+  
+}   
+
+.table-container {
+  margin-top: 10px;
+  max-height: 400px;
+  overflow: auto;
+  height: 310px;
+  }
+  #table {
+    width: 100%;
+  }
+
+  .mat-row:hover .mat-cell {
+    background-color: rgb(217, 240, 241);
+  }
+
+  #line {
+    display: flex;
+    align-items: center;
+  }
+  
+  #line::after {
+    content: '';
+    flex: auto;
+    margin-left: 1rem;
+    border-top: 1px solid rgb(204, 204, 204);
+  }
+  
+  .mat-tab-header, .mat-tab-nav-bar {
+    border-bottom: 1px solid #ddd;
+}
+ 
+.timer {
+  text-align: center;
+  font-family: Arial, sans-serif;
+  letter-spacing: -0.1px;
+  color: white;
+}

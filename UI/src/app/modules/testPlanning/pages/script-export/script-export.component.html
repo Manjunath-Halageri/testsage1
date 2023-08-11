@@ -1,0 +1,60 @@
+<div class="container-fluid">
+  <div class="opalLabel border shadow-lg formTopDiv">
+    <form [formGroup]='scriptExport'>
+      <div class="text-center ExportDiv">
+        <h2 style="font-weight:600;font-size: 16px;">Export To Git Repository</h2>
+      </div>
+
+      <div class="row" style="margin-top:4%">
+        <!-- <div class="col-12 mainDiv">
+          <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 labelDiv">
+            <label>User Name</label>
+          </div>
+          <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 form-group scriptExportInput">
+            <input type="text" class="form-control" formControlName="userName" (focus)="onFocus()">
+          </div>
+        </div> -->
+
+        <div class="col-12 mainDiv">
+          <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 labelDiv">
+            <label>Personal Access Token</label>
+          </div>
+          <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 form-group scriptExportInput">
+            <input type="password" class="form-control" formControlName="userPassword">
+          </div>
+        </div>
+
+        <div class="col-12 mainDiv">
+          <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 labelDiv">
+            <label>User Comments</label>
+          </div>
+          <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 form-group scriptExportInput">
+            <input type="text" class="form-control" formControlName="userComments">
+          </div>
+        </div>
+
+        <div class="col-12 mainDiv">
+          <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 labelDiv">
+            <label>Repository Path</label>
+          </div>
+          <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 form-group scriptExportInput">
+            <input type="text" class="form-control" formControlName="userGitRepo">
+          </div>
+        </div>
+      </div>
+      <div style="text-align: center;">
+        <button class="btn btn-lg" [disabled]=" tempDisabled || scriptExport.invalid"
+          (click)="exportToGitRepo()">Export</button>&nbsp;&nbsp;
+          <button class="btn btn-lg btn-cancel" [disabled]="tempDisabled"
+          (click)="resetValues()">Reset</button>
+          
+      </div>
+    </form>
+    <br><br>
+    <div id="statusDisplay">
+      <h3>{{pushStatus}}{{timeLeft}}</h3>
+      <!-- <h3 class="pull-right">{{timeLeft}}</h3> -->
+    </div>
+  </div>
+
+</div>

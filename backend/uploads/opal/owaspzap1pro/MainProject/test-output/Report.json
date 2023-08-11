@@ -1,0 +1,33 @@
+{"testng-results": {
+          "reporter-output": "",
+          "ignored": 0,
+          "total": 1,
+          "suite": {
+                    "test": {
+                              "started-at": "2018-12-28T06:17:11Z",
+                              "name": "Test",
+                              "finished-at": "2018-12-28T06:17:19Z",
+                              "class": {
+                                        "test-method": {
+                                                  "reporter-output": "",
+                                                  "signature": "run()[pri:0, instance:module.feature.ProvideFileNameOpalAppium09@343f4d3d]",
+                                                  "started-at": "2018-12-28T06:17:11Z",
+                                                  "name": "run",
+                                                  "finished-at": "2018-12-28T06:17:19Z",
+                                                  "status": "PASS",
+                                                  "duration-ms": 8449
+                                        },
+                                        "name": "module.feature.ProvideFileNameOpalAppium09"
+                              },
+                              "duration-ms": 8478
+                    },
+                    "started-at": "2018-12-28T06:17:11Z",
+                    "name": "Suite",
+                    "groups": "",
+                    "finished-at": "2018-12-28T06:17:19Z",
+                    "duration-ms": 8478
+          },
+          "failed": 0,
+          "passed": 1,
+          "skipped": 0
+}}

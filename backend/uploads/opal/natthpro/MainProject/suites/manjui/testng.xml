@@ -1,0 +1,8 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE suite SYSTEM 'http://testng.org/testng-1.0.dtd'>
+<suite thread-count="1"  name="manjui" parallel="tests" >
+<test name="Opal1">
+<parameter name="Node" value="http://192.168.99.254:4444"/>
+<classes><class name="mID641.fID680.sID884"/></classes>
+</test>
+</suite>

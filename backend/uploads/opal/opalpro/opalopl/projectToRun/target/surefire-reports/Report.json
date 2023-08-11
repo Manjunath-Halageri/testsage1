@@ -1,0 +1,138 @@
+{"testng-results": {
+          "reporter-output": {"line": [
+                    "Chrome",
+                    "94.0.4606.61",
+                    "E:\\zap\\backend\\uploads\\opal\\opalpro\\opalopl\\projectToRun\\.\\Screenshot\\EachStepScreenshot\\100_Suite1\\sID882\\step_0.png",
+                    "Chrome",
+                    "94.0.4606.61",
+                    "E:\\zap\\backend\\uploads\\opal\\opalpro\\opalopl\\projectToRun\\.\\Screenshot\\EachStepScreenshot\\100_Suite1\\sID882\\step_1.png",
+                    "Chrome",
+                    "94.0.4606.61",
+                    "E:\\zap\\backend\\uploads\\opal\\opalpro\\opalopl\\projectToRun\\.\\Screenshot\\EachStepScreenshot\\100_Suite1\\sID882\\step_2.png",
+                    "Chrome",
+                    "94.0.4606.61",
+                    "E:\\zap\\backend\\uploads\\opal\\opalpro\\opalopl\\projectToRun\\.\\Screenshot\\EachStepScreenshot\\100_Suite1\\sID882\\step_3.png",
+                    "Chrome",
+                    "94.0.4606.61",
+                    "E:\\zap\\backend\\uploads\\opal\\opalpro\\opalopl\\projectToRun\\.\\Screenshot\\EachStepScreenshot\\100_Suite1\\sID882\\step_4.png",
+                    "Chrome",
+                    "94.0.4606.61",
+                    "E:\\zap\\backend\\uploads\\opal\\opalpro\\opalopl\\projectToRun\\.\\Screenshot\\EachStepScreenshot\\100_Suite1\\sID882\\step_5.png",
+                    "Chrome",
+                    "94.0.4606.61",
+                    "E:\\zap\\backend\\uploads\\opal\\opalpro\\opalopl\\projectToRun\\.\\Screenshot\\EachStepScreenshot\\100_Suite1\\sID882\\step_6.png"
+          ]},
+          "total": 7,
+          "suite": {
+                    "test": {
+                              "started-at": "2023-05-25T14:12:09Z",
+                              "name": "Test",
+                              "finished-at": "2023-05-25T14:15:58Z",
+                              "class": {
+                                        "test-method": [
+                                                  {
+                                                            "reporter-output": {"line": [
+                                                                      "Chrome",
+                                                                      "94.0.4606.61",
+                                                                      "E:\\zap\\backend\\uploads\\opal\\opalpro\\opalopl\\projectToRun\\.\\Screenshot\\EachStepScreenshot\\100_Suite1\\sID882\\step_0.png"
+                                                            ]},
+                                                            "signature": "step_0()[pri:0, instance:mID639.fID678.sID882@4566e5bd]",
+                                                            "started-at": "2023-05-25T19:42:09Z",
+                                                            "name": "step_0",
+                                                            "finished-at": "2023-05-25T19:42:17Z",
+                                                            "status": "PASS",
+                                                            "duration-ms": 8334
+                                                  },
+                                                  {
+                                                            "reporter-output": {"line": [
+                                                                      "Chrome",
+                                                                      "94.0.4606.61",
+                                                                      "E:\\zap\\backend\\uploads\\opal\\opalpro\\opalopl\\projectToRun\\.\\Screenshot\\EachStepScreenshot\\100_Suite1\\sID882\\step_1.png"
+                                                            ]},
+                                                            "signature": "step_1()[pri:0, instance:mID639.fID678.sID882@4566e5bd]",
+                                                            "started-at": "2023-05-25T19:42:17Z",
+                                                            "name": "step_1",
+                                                            "finished-at": "2023-05-25T19:42:24Z",
+                                                            "status": "PASS",
+                                                            "duration-ms": 7117
+                                                  },
+                                                  {
+                                                            "reporter-output": {"line": [
+                                                                      "Chrome",
+                                                                      "94.0.4606.61",
+                                                                      "E:\\zap\\backend\\uploads\\opal\\opalpro\\opalopl\\projectToRun\\.\\Screenshot\\EachStepScreenshot\\100_Suite1\\sID882\\step_2.png"
+                                                            ]},
+                                                            "signature": "step_2()[pri:0, instance:mID639.fID678.sID882@4566e5bd]",
+                                                            "started-at": "2023-05-25T19:42:24Z",
+                                                            "name": "step_2",
+                                                            "finished-at": "2023-05-25T19:42:26Z",
+                                                            "status": "PASS",
+                                                            "duration-ms": 1936
+                                                  },
+                                                  {
+                                                            "reporter-output": {"line": [
+                                                                      "Chrome",
+                                                                      "94.0.4606.61",
+                                                                      "E:\\zap\\backend\\uploads\\opal\\opalpro\\opalopl\\projectToRun\\.\\Screenshot\\EachStepScreenshot\\100_Suite1\\sID882\\step_3.png"
+                                                            ]},
+                                                            "signature": "step_3()[pri:0, instance:mID639.fID678.sID882@4566e5bd]",
+                                                            "started-at": "2023-05-25T19:42:26Z",
+                                                            "name": "step_3",
+                                                            "finished-at": "2023-05-25T19:42:29Z",
+                                                            "status": "PASS",
+                                                            "duration-ms": 3228
+                                                  },
+                                                  {
+                                                            "reporter-output": {"line": [
+                                                                      "Chrome",
+                                                                      "94.0.4606.61",
+                                                                      "E:\\zap\\backend\\uploads\\opal\\opalpro\\opalopl\\projectToRun\\.\\Screenshot\\EachStepScreenshot\\100_Suite1\\sID882\\step_4.png"
+                                                            ]},
+                                                            "signature": "step_4()[pri:0, instance:mID639.fID678.sID882@4566e5bd]",
+                                                            "started-at": "2023-05-25T19:42:29Z",
+                                                            "name": "step_4",
+                                                            "finished-at": "2023-05-25T19:42:32Z",
+                                                            "status": "PASS",
+                                                            "duration-ms": 2762
+                                                  },
+                                                  {
+                                                            "reporter-output": {"line": [
+                                                                      "Chrome",
+                                                                      "94.0.4606.61",
+                                                                      "E:\\zap\\backend\\uploads\\opal\\opalpro\\opalopl\\projectToRun\\.\\Screenshot\\EachStepScreenshot\\100_Suite1\\sID882\\step_5.png"
+                                                            ]},
+                                                            "signature": "step_5()[pri:0, instance:mID639.fID678.sID882@4566e5bd]",
+                                                            "started-at": "2023-05-25T19:42:32Z",
+                                                            "name": "step_5",
+                                                            "finished-at": "2023-05-25T19:45:45Z",
+                                                            "status": "PASS",
+                                                            "duration-ms": 193273
+                                                  },
+                                                  {
+                                                            "reporter-output": {"line": [
+                                                                      "Chrome",
+                                                                      "94.0.4606.61",
+                                                                      "E:\\zap\\backend\\uploads\\opal\\opalpro\\opalopl\\projectToRun\\.\\Screenshot\\EachStepScreenshot\\100_Suite1\\sID882\\step_6.png"
+                                                            ]},
+                                                            "signature": "step_6()[pri:0, instance:mID639.fID678.sID882@4566e5bd]",
+                                                            "started-at": "2023-05-25T19:45:45Z",
+                                                            "name": "step_6",
+                                                            "finished-at": "2023-05-25T19:45:58Z",
+                                                            "status": "PASS",
+                                                            "duration-ms": 12994
+                                                  }
+                                        ],
+                                        "name": "mID639.fID678.sID882"
+                              },
+                              "duration-ms": 229669
+                    },
+                    "started-at": "2023-05-25T14:12:09Z",
+                    "name": "Suite",
+                    "groups": "",
+                    "finished-at": "2023-05-25T14:15:58Z",
+                    "duration-ms": 229669
+          },
+          "failed": 0,
+          "passed": 7,
+          "skipped": 0
+}}

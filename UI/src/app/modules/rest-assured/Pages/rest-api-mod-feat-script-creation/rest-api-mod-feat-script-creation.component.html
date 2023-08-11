@@ -1,0 +1,120 @@
+<!-- for module -->
+
+<div class="divpadding" *ngIf="showmoduleData==true || editModule==true">
+  <form [formGroup]='rForm'>
+    <div class="card createCard shadow-lg">
+      <div class="card-header">Module Configuration</div>
+      <div class="card-body" style="display: flex;margin-top: 7%;">
+        <div class="col-sm-5 col-md-5 col-lg-4 col-xs-4">
+          <label>Module</label>
+        </div>
+        <div class="col-sm-7 col-md-6 col-lg-8 col-xs-8" style="height: 37px;">
+          <input type="text" class="form-control" [(ngModel)]="moduleData" formControlName="modName">
+          <control-messages [control]="rForm.controls.modName"></control-messages>
+        </div>
+      </div>
+      <div class="card-footer">
+        <button *ngIf="showmoduleData==true" class="btn mr-1" [disabled]="!rForm.valid"
+          (click)="saveApiModuleData(moduleData)">Save</button>
+        <button *ngIf="editModule==true" class="btn" [disabled]="!rForm.valid" class="btn"
+          (click)="updateModuleData(moduleData)">update</button>&nbsp;
+        <button *ngIf="showmoduleData==true|| editModule==true" class="btn" (click)="closeApiModule()">Close</button>
+      </div>
+    </div>
+
+  </form>
+</div>
+<!-- for module -->
+
+
+<!-- for feature -->
+<div class="divpadding" *ngIf="showFeatureData==true || editFeature==true">
+  <form [formGroup]='featForm'>
+    <div class="card createCard shadow-lg">
+      <div class="card-header">Feature Configuration</div>
+      <div class="card-body" style="display: flex;margin-top: 7%;">
+        <div class="col-sm-5 col-md-5 col-lg-4 col-xs-4">
+          <label>Feature</label>
+        </div>
+        <div class="col-sm-7 col-md-6 col-lg-8 col-xs-8" style="height: 37px;">
+          <input type="text" class="form-control" [(ngModel)]="featureData" formControlName="featName">
+          <control-messages [control]="featForm.controls.featName"></control-messages>
+        </div>
+      </div>
+      <div class="card-footer">
+        <button *ngIf="showFeatureData==true" class="btn mr-1" [disabled]="!featForm.valid"
+          (click)="saveApiFeatureData(featureData)">Save</button>
+        <button *ngIf="editFeature==true" [disabled]="!featForm.valid" class="btn"
+          (click)="updateFeatureData(featureData)">update</button>&nbsp;
+        <button *ngIf="showFeatureData==true || editFeature==true" class="btn"
+          (click)="closeApifeature()">Close</button>
+      </div>
+    </div>
+  </form>
+</div>
+
+<!-- for feature -->
+
+<!-- for Script -->
+<div class="divpadding" *ngIf="showScriptData==true || showEditData==true">
+  <form [formGroup]='scriptForm'>
+    <div class="card createTestCard shadow-lg">
+      <div class="card-header">Testcase Configuration</div>
+      <div class="card-body">
+        <div class="row">
+          <div class="col-5">
+            <div class="text-left">
+              <label>Testcase Name</label><br><br>
+              <label>Priority</label><br><br>
+              <label>Type</label><br><br>
+              <label>Requirement</label><br><br>
+              <label>Description</label><br><br>
+            </div>
+          </div>
+          <!-- value="{{priority.priorityName}}" (focusin)="spliceDefault()" (blur)="addDefault()" -->
+          <div class="col-7 form-group">
+            <input type="text" [(ngModel)]="scriptData" formControlName="scrName" class="form-control"
+              style="font-size: small">
+            <control-messages [control]="scriptForm.controls.scrName"></control-messages><br>
+            <select [(ngModel)]="priorityData" class="form-control" style="font-size: small" formControlName="prio">
+              <option hidden></option>
+              <option *ngFor="let priority of priority  ; let i = index">{{priority.priorityName}}</option>
+            </select>
+            <control-messages [control]="scriptForm.controls.prio"></control-messages><br>
+            <select [(ngModel)]="typeData" class="form-control" style="font-size: small" formControlName="typeSelect">
+              <option hidden></option>
+              <option *ngFor="let type of type  ; let i = index">{{type.typeName}}</option>
+            </select>
+            <control-messages [control]="scriptForm.controls.typeSelect"></control-messages><br>
+            <select [(ngModel)]="requirementName" (change)="requirementIdChange(requirementName)" class="form-control"
+              style="font-size: small" formControlName="requirementSelect">
+              <option hidden></option>
+              <option *ngFor="let Requirement of displayRequirementdata;"
+                [selected]="Requirement.requirementName == requirementName">
+                {{Requirement.requirementName}}</option>
+            </select>
+            <control-messages [control]="scriptForm.controls.requirementSelect"></control-messages><br>
+            <div>
+              <textarea class="form-control" rows="5" name="text" [(ngModel)]="description" style="font-size: small"
+                required formControlName="description"></textarea>
+              <control-messages [control]="scriptForm.controls.description"></control-messages>
+            </div>
+            <br>
+            <br>
+          </div>
+
+        </div>
+      </div>
+      <div class="card-footer">
+        <button *ngIf="showScriptData==true" class="btn" [disabled]="!scriptForm.valid"
+          (click)="saveScriptData(scriptData,priorityData,typeData,requirementName,description)">Save</button>&nbsp;
+        <button *ngIf="showEditData==true " class="btn" [disabled]="!scriptForm.valid"
+          (click)="updateScriptData(scriptData,priorityData,typeData,requirementName,description,scriptStatus)">update</button>&nbsp;
+        <button *ngIf="showScriptData==true||showEditData==true" class="btn btn-cancel"
+          (click)="closeScriptData()">Close</button>
+      </div>
+    </div>
+
+  </form>
+</div>
+<!-- for Script -->

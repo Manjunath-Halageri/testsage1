@@ -1,0 +1,975 @@
+<ul class="breadcrumb" style="font-size:15px;background-color: unset;margin:unset">
+  <li class="breadcrumb-item" style="width: 115px;"><a id="mainheader">Test
+      Execution</a></li>
+  <!--[routerLink]="['/projectdetail']"-->
+  <li class="breadcrumb-item" id="subheader"><a id="subheader">Execution</a></li>
+  <li class="breadcrumb-item" *ngIf="navSuite"><a id="subheader">{{releaseName}}</a></li>
+  <li class="breadcrumb-item" *ngIf="navSuite"><a id="subheader">{{selectedname}}</a></li>
+</ul>
+
+<div class="ui-fluid">
+  <div class="ui-g">
+    <div class="ui-g-2 ui-md-2 border">
+      <div class="one">
+        <div>
+          <span class="treeStructureTitle" style="position:sticky;">Release</span>
+          <p-tree [value]="displayModuleForTree" (onNodeSelect)="nodeSelect($event)" selectionMode="single"
+            [(selection)]="selectedFile" [filter]="true" [contextMenu]="cm">sfsfsfsfs</p-tree>
+          <p-contextMenu #cm appendTo="body" [model]="items"></p-contextMenu>
+        </div>
+        <!-- <div>
+          <sh-context-menu #menu1 style="background-color:white">
+            <ng-template shContextMenuItem let-data style="background-color:white">
+              <div (click)="landModulePage()" class="menuu treeStructureCreate" *ngIf="create==true"> Create New
+                Module</div>
+            </ng-template>
+          </sh-context-menu>
+        </div> -->
+      </div>
+    </div>
+    <!-- </div> -->
+    <div class="ui-g-10 ui-md-10 border sectionHeight" *ngIf="openWhenClic == true">
+      <div class="row">
+        <div class="col-lg-4 col-md-3 col-sm-3 col-xs-12 col-xl-3" *ngIf="suiteSelected==1">
+          <input type="radio" name="exeType" value="manual" (click)="selectManualType();">&nbsp;
+          <mat-form-field>
+            <label>Manual</label>
+            <mat-select #matRef panelClass="my-panel-manual" multiple [(ngModel)]="typeTestcases"
+              [disabled]="normalExe">
+              <mat-option *ngFor="let typeTestcase of typeTestsList" [value]="typeTestcase" style="font-size: 12px;">
+                {{typeTestcase}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+        </div>
+        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 col-xl-3" *ngIf="suiteSelected==1">
+          <input type="radio" name="exeType" value="execution" checked="checked" (click)="selectExeType()">&nbsp;
+          <label>Execution</label>
+        </div>
+
+        <div class="col-lg-5 col-md-6 col-sm-6 col-xs-12 col-xl-3" *ngIf="create==true&&suiteSelected==1">
+          <!-- <input type="checkbox" (click)="sendEmail($event,)">&nbsp;
+          <label>Email Configuration</label>&nbsp;&nbsp; -->
+          <form #emailForm="ngForm" autocomplete="on" >
+            <!-- <input type="checkbox"  (click)="sendEmail($event,emailForm)">&nbsp; [hidden]="!enableEmailInput"-->
+            <label>Email Configuration</label>&nbsp;&nbsp;
+            <div class="form-group">
+              <input type="email" name="email" [class.is-invalid]="emailRef.invalid && emailRef.touched"
+                class="form-control" autocomplete="on" [(ngModel)]="userEmail" id="email" placeholder="Enter Email"
+                (focusout)="focusOutFunction(userEmail,selectedname)" [email]='true' 
+                pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" #emailRef="ngModel" required list="statusMail" />
+              <div *ngIf="(emailRef.invalid && emailRef.touched) ">
+                <strong class="text-danger" *ngIf="emailRef.errors?.required">Email address is required</strong>
+                <strong class="text-danger" *ngIf="emailRef.errors?.pattern">Email address is invalid</strong>
+              </div>
+            </div>
+            <datalist id="statusMail">
+              <option></option>
+              <option *ngFor="let emails of usersData">{{emails.Email}}</option>
+            </datalist>
+          </form>
+          <!-- <form [formGroup]='emailForm'> -->
+
+          <!-- <input type="text" formControlName="email" [email]='true' [hidden]="!enableEmailInput" [(ngModel)]="clientEmailId" id="statusMail"
+            placeholder="Enter Email"  (focusout)="focusOutFunction(clientEmailId,selectedname)"> list="statusMail"-->
+
+          <!-- <div class="form-group">
+            <input type="email"  [class.is-invalid] = "emailForm.get('email').invalid && emailForm.get('email').touched" 
+            [email]='true' [hidden]="!enableEmailInput" [(ngModel)]="clientEmailId" id="Email" list="statusMail"
+            placeholder="Enter Email"  (focusout)="focusOutFunction(clientEmailId,selectedname)" class="form-control" formControlName="email"  />
+              <div *ngIf="(emailForm.get('email').invalid && emailForm.get('email').touched) || emailForm.get('email').dirty">
+                <strong class="text-danger" *ngIf="emailForm.get('email').errors?.required">Email address is required</strong>
+                <strong class="text-danger" *ngIf="emailForm.get('email').errors?.pattern">Email address is invalid</strong>
+              </div>
+            </div>
+            <datalist id="statusMail">
+              <option></option>
+              <option *ngFor="let emails of usersData">{{emails.Email}}</option>
+            </datalist>
+          </form> -->
+
+        </div>
+      </div>
+      <br>
+      <div class="row">
+        <!-- <div hidden class="col-lg-4 col-md-3 col-sm-3 col-xs-12 col-xl-3" *ngIf="normalExe == true">
+          <input type="radio" name="suite" value="suite" (click)="suiteclick()">&nbsp;
+          <label>Suite</label>
+        </div> -->
+
+        <!-- <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 col-xl-3" *ngIf="normalExe == true">
+          <input type="radio" name="suite" value="suite" id="suite1" checked="checked" (click)="suiteclicks()">&nbsp;
+          <label>Testcase</label>
+        </div> -->
+
+        <div class="col-sm-3 col-md-2 col-lg-2 col-md-5" *ngIf="assignButton==true">
+          <div class="text-center">
+            <button type="button" class="btn btn-lg" data-toggle="modal" data-target="#testModal">
+              Assign</button>
+          </div>
+        </div>
+
+        <div class="col-sm-3 col-md-2 col-lg-2 col-md-5" *ngIf="normalExe==true">
+          <button type="button" class="btn btn-lg"
+            (click)="searchCall(ty,statusExe,moduleId,featureId,selectedPriority,selectedType)">Search</button>
+        </div>
+
+        <div class="col-sm-3 col-md-2 col-lg-2 col-md-5" *ngIf="manualExe==true">
+          <div class="text-center">
+            <button type="button" class="btn  btn-lg"
+              (click)="searchCall(typeTestcases,statusExe,moduleId,featureId,selectedPriority,selectedType)">Search</button>
+          </div>
+          <!-- <div style="width: 13%;" *ngIf="manualExe==true">
+            <button type="button" class="btn  btn-lg"
+              (click)="searchCall(typeTestcases,statusExe,moduleId,featureId,selectedPriority,selectedType)">Search</button>
+          </div> -->
+        </div>
+      </div>
+      <!-- <div style="display: flex;">
+        <div>
+          <input type="radio" name="suite1" value="All" *ngIf="suite == true">&nbsp;
+          <label *ngIf="suite == true">All</label>
+        </div>
+
+        <div style="margin-left: 10%;">
+          <input type="radio" name="suite1" value="Split" *ngIf="suite == true" id="suite1" (click)="split()">&nbsp;
+          <label *ngIf="suite == true">Split</label>
+        </div>
+
+        <div style="margin-left: 10%;">
+          <input type="radio" name="suite1" value="Default" *ngIf="suite == true" (click)="default(selectedname)">&nbsp;
+          <label *ngIf="suite == true">Default</label>
+        </div>
+      </div> -->
+      <div style="display: flex;">
+        <div class="multiselectCss" *ngIf="checkd==true">
+          <label>Multiselect </label>&nbsp;
+          <select *ngIf="checkd==true" [(ngModel)]='status' class="form-control"
+            (change)="saveScriptStatus(status,index)">
+            <option value="" style="display:none;"></option>
+            <option *ngFor="let manual of multiselectCheck" [ngValue]="manual.status">{{manual.status}}</option>
+          </select>
+        </div>
+        <div class="multiselectCss" *ngIf="checke==true||normalExe == true&&filterArr.length>0">
+          <label>Multiselect </label>&nbsp;
+          <select [(ngModel)]='multiBrowser.browserName' style="width:80px;" class="form-control"
+            (click)="displayErrorMessage()" (ngModelChange)="getVersions(multiBrowser.browserName)">
+            <option *ngFor="let browser of dbrowsers" [ngValue]="browser">{{browser.browserName}}</option>
+          </select>&nbsp;
+          <select [(ngModel)]='multiBrowser.versionName' (ngModelChange)="insertMultiVersions(multiBrowser.versionName)"
+            (click)="displayErrorMessage()" class="form-control" style="width:80px;margin-left: 5px">
+            <option *ngFor="let versions of verss" [ngValue]="versions">{{versions.versionName}}</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- <div style="display: flex;">||normalExe == true&&filterArr.length>0
+        <div class="multiselectCss" *ngIf="checke==true||normalExe == true&&filterArr.length>0">
+          <label >Multiselect </label>&nbsp;
+          <select  [(ngModel)]='multiBrowser.browserName'  style="width:80px;"class="form-control"
+            (ngModelChange)="getVersions(multiBrowser.browserName)">
+            <option *ngFor="let browser of dbrowsers" [ngValue]="browser">{{browser.browserName}}</option>
+          </select>&nbsp;
+          <select [(ngModel)]='multiBrowser.versionName' (ngModelChange)="insertMultiVersions(multiBrowser.versionName)"
+          class="form-control" style="width:80px;margin-left: 5px">
+            <option *ngFor="let versions of verss" [ngValue]="versions">{{versions.versionName}}</option>
+          </select>
+        </div>
+      </div> -->
+
+      <br>
+      <div class="modal fade" id="testModal" data-backdrop="static">
+        <div class="modal-dialog">
+
+          <!-- Modal content-->
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title">Select Testers</h1>
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+              <label>Testers</label>
+              <select id="suite" [(ngModel)]="selectedTester" class="form-control" style="font-size:small;width:150px">
+                <option value="" style="display:none;"></option>
+                <option *ngFor="let names of testers" style="height:200px; overflow:scroll">
+                  {{names}}
+                </option>
+              </select>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-lg" mat-button (click)="TestersCall(selectedTester)"
+                data-dismiss="modal">Save</button>
+              <button type="button" class="btn btn-lg btn-cancel" data-dismiss="modal">Close</button>
+
+            </div>
+          </div>
+
+        </div>
+      </div>
+      <!-- </div> -->
+      <div class="col-lg-12 col-md-12 col-sm-12  col-xs-12" *ngIf="suite==false">
+        <div class="example-container shadow-lg table-container" style="min-height: 100px;max-height: 310px;">
+          <table class="shadow-lg scroll" style=" width:100%;margin-top: 10px">
+            <thead class="theadColor">
+              <!-- <tr> -->
+              <!-- <th class="col-xs-1" *ngIf="normalExe == true"></th> -->
+
+              <th class="col-xs-1" *ngIf="create==true&&manualExe == true&&scriptsNew.length>0">
+                <input type="checkbox" name="qcheck" class='checkBoxSelect' [checked]="checkd ==true"
+                  (click)="checks(scriptsNew,$event)">
+              </th>
+              <th class="col-xs-1" *ngIf="create==true&&normalExe == true&&scriptsNew.length>0">
+                <input type="checkbox" name="dcheck" class='checkBoxSelect' [checked]="checke ==true"
+                  (click)="checkNormalExe(scriptsNew,$event)">
+              </th>
+              <th class="col-xs-2">Module
+                <select class="form-control" [(ngModel)]="moduleId" (change)="moduleIndex(moduleId)">
+                  <!-- <option [ngValue]='All' >All</option> -->
+                  <option *ngFor="let var_moduleName of moduleNames" value="{{var_moduleName.moduleId}}">
+                    {{var_moduleName.moduleName}}</option>
+                </select>
+              </th>
+              <th class="col-xs-2">Feature
+                <select class="form-control" [(ngModel)]="featureId">
+                  <!-- <option [ngValue]='All'  [selected]="All">All</option> -->
+                  <option *ngFor="let var2_featureName of featureNames" value="{{var2_featureName.featureId}}">
+                    {{var2_featureName.featureName}}</option>
+                </select>
+              </th>
+              <th class="col-xs-2">Priority
+                <select class="form-control " [(ngModel)]="selectedPriority">
+                  <option [ngValue]='All'>All</option>
+                  <option *ngFor="let priority of priorityArray" value="{{priority.priorityId}}">
+                    {{priority.priorityName}}
+                  </option>
+                </select>
+              </th>
+              <th class="col-xs-2" style="width: 10%;">Type
+                <select class="form-control" [(ngModel)]="selectedType">
+                  <option [ngValue]='All'>All</option>
+                  <option *ngFor="let type of typeArray" value="{{type.typeId}}">{{type.typeName}}</option>
+                </select>
+              </th>
+              <th class="col-xs-2">Testcase</th>
+              <th class="col-xs-2">
+                <mat-form-field>
+                  <label>Status</label>
+                  <mat-select class="" panelClass="my-panel" multiple [(ngModel)]="statusExe">
+                    <mat-option *ngFor="let topping of toppingList" [value]="topping">{{topping}}</mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </th>
+              <th class="col-xs-2">Execution Type</th>
+              <th class="col-xs-2" *ngIf="manualExe == true">Testcase Type</th>
+              <th class="col-xs-2">Assigned To</th>
+              <th class="col-xs-2" *ngIf="create==true&&manualExe == true">Steps Details</th>
+              <th class="col-xs-2" *ngIf="create==true&&normalExe == true">Browser</th>
+              <th class="col-xs-2" *ngIf="create==true&&normalExe == true">Version</th>
+              <th class="col-xs-1" *ngIf="deletePage==true">Delete</th>
+            </thead>
+            <tbody>
+              <!-- "data.testcaseStatus == 'Fail' || data.testcaseStatus == 'Fail' || in line 216 and 225 -->
+              <tr *ngFor="let data of scriptsNew; let i=index;">
+                <!-- <td class="col-xs-1" *ngIf="normalExe == true">
+                  <i class="fa fa-info-circle" 
+                    *ngIf=" data.testcaseStatus == 'NotExecuted'"
+                    matTooltip="The testcase is failed or notexecuted at testcaselevel"></i>
+                </td> [disabled]=" data.testcaseStatus == 'NotExecuted'"-->
+                <td class="col-xs-1" *ngIf="create==true&&manualExe == true">
+                  <input type="checkbox" [checked]="checkd ==true" name="tcheck" class='checkBoxSelect'
+                    (click)="arraypush(i, scriptsNew)">
+                </td>
+                <td class="col-xs-1" *ngIf="create==true&&normalExe == true">
+                  <input type="checkbox" [checked]="checke ==true" name="fcheck" class='checkBoxSelect'
+                    (click)="uncheck(i,scriptsNew,data.moduleName)">
+                </td>
+                <td class="col-xs-2">{{data.moduleName}}</td>
+                <td class="col-xs-2">{{data.fetaureName}}</td>
+                <td class="col-xs-2">{{data.priority}}</td>
+                <td class="col-xs-2">{{data.type1}}</td>
+                <td class="col-xs-2"><span style="margin-left: 5px">{{data.scriptName}}</span></td>
+                <td class="col-xs-2"
+                  [ngClass]="{'color1': data.scriptStatus === 'Pass','color': data.scriptStatus === 'Fail'}">
+                  {{data.scriptStatus}}</td>
+                <td class="col-xs-2">{{data.executionType}}</td>
+                <td class="col-xs-2" *ngIf="manualExe == true">{{data.testcaseType}}</td>
+                <td class="col-xs-2">{{data.tester}}</td>
+                <td class="col-xs-2" *ngIf="create==true&&manualExe == true">
+                  <button type="button" class="btn btn-info btn-lg" (click)="fetchScriptNlpData(data,i)" 
+                  [disabled]="data.check=='false'" data-toggle="modal" data-backdrop="static" data-target="#mySteps">See Steps</button>
+                </td>
+                <td class="col-xs-2" *ngIf="create==true&&normalExe == true">
+                  <select [(ngModel)]='data.browser' (change)="getversion(i,data.browser,data.scriptName)"
+                    (click)="displayErrorMessage()" style="margin-left:5px">
+                    <option value="" style="display:none;"></option>
+                    <option *ngFor="let browser of dbrowsers " [ngValue]="browser.browserName">{{browser.browserName}}
+                    </option>
+                  </select>
+                </td>
+                <td class="col-xs-2" *ngIf="create==true&&normalExe == true">
+                  <div>
+                    <select [(ngModel)]='data.versions' (change)="insertversion(i,data.versions)"
+                      (click)="displayErrorMessage()" style="width:80px;margin-left: 5px">
+                      <option value="" style="display:none;"></option>
+                      <option *ngFor="let versions of version[i]" [ngValue]="versions">
+                        {{versions.versionName}}
+                      </option>
+                    </select>
+                  </div>
+
+                  <!-- <div >
+                    <select [(ngModel)]='data.Version'  style="width:80px;margin-left: 5px">
+                      <option value="" style="display:none;"></option>
+                      <option *ngFor="let versions of verss" [ngValue]="versions.versionName">
+                        {{versions.versionName}}
+                      </option>
+                    </select>
+                  </div> -->
+
+                </td>
+                <td class="col-xs-1" *ngIf="deletePage==true">
+                  <span style="margin-left: 5px" class="glyphicon glyphicon-trash btn btn-info btn-lg"
+                    (click)="delete(i,scriptsNew,selectedname)"></span>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+
+        <div class="text-center">
+          <span>
+            <span style="font-size:12px;margin-left:-300px;">
+              <span>total Testcases : {{totalTestcases}}</span>&nbsp;&nbsp;<span>Selected Testcases :
+                {{selectedTestcases}}</span>
+            </span>
+            <span style="font: size 11px;margin-left :100px;" *ngIf="create==true&&manualExe != true">
+              <input type="checkbox" class="exception" [(ngModel)]="excep"
+                (ngModelChange)="getExceptionOption(excep)">&nbsp;&nbsp;
+              <strong class="exception1">Enable Auto Healing</strong>
+            </span>
+          </span>
+        </div>
+        <!-- </div> (click)="getData123(scriptsNew, clientEmailId)" -->
+        <div>
+          <h1 *ngIf="create==true && manualExe != true" style="font-size: 14px;">{{resultDisplayNew}}
+            <a *ngIf="checkReportPresent==true" [routerLink]="['/projectdetail/reports/suitelevel']"
+              style="font-size: 14px;">{{checkReportstatus}}</a>
+          </h1>
+          <h1 *ngIf="manualExe == true">{{mreportno}}</h1>
+          <div style="text-align:center">
+            <button type="button" class="btn btn-lg" id='run' data-toggle="modal" data-target="#normalParallel"
+              style="margin-top: 1%;" *ngIf="create==true && manualExe != true">Run</button>
+            <button type="button" class="btn btn-info btn-lg" (click)="checkBrowsers(scriptsNew,userEmail)"
+              data-toggle="modal" id='scheduler' data-target="#myModalsechdule"
+              *ngIf="create==true && manualExe != true" style="margin-top: 1%;margin-left:2%"
+              [disabled]='sched'>Scheduler</button>
+
+            <!-- ///////////Shiva Jenkins satrt/////////////////////////////// -->
+            <span *ngIf="jenkinsbutton1 ==true">
+              <span *ngIf="create==true && manualExe != true">
+                <button type="button" (click)="jenUrl(scriptsNew,userEmail)" class="btn btn-lg"
+                  style="margin-top: 1%;margin-left:2%">Jenkins</button>
+              </span>
+            </span><br><br>
+
+            <div class="input-group mb-3" *ngIf="jenkinsbutton ==true">
+              <input type="text" class="form-control" [(ngModel)]="jenkinsUrl" #userinput style="height: auto;">
+              <div class="input-group-append">
+                <button type="button" class="btn btn-success" style="background-color: green;"
+                  (click)="copyInputMessage(userinput)" ngbTooltip=value value="click to copy">Copy</button>
+              </div>
+            </div>
+            <!-- ///////////Shiva Jenkins end/////////////////////////////// -->
+
+            <button type="button" class="btn btn-lg" *ngIf="create==true && manualExe == true" (click)="GenerateManualReportOne()"
+              data-dismiss="modal" style="margin-top: 1%;margin-left:2%">Generate Report</button>
+            <div>
+              <div class="modal fade" id="normalParallel" data-backdrop="static">
+                <div class="modal-dialog">
+
+                  <!-- Modal content-->
+                  <div class="modal-content" style="width: 65%;">
+                    <div class="modal-header topColor">
+                      <h1 class="modal-title">Execution Type</h1>
+                      <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+                    </div>
+                    <div class="modal-body">
+                      <div class="row">
+                        <div class="col-md-4">
+                          <input type="radio" name="np" checked="checked" (click)="normalex()">&nbsp;
+                          <label>Normal</label>
+                        </div>
+                        <div class="col-md-8">
+                          <input type="radio" name="np" (click)="parallel()">&nbsp;
+                          <label>Parallel&nbsp;&nbsp;&nbsp;</label>
+                          <label style="font-weight: unset;" *ngIf="parallelExecution == true">No of
+                            Browsers&nbsp;&nbsp; </label>
+                          <input type="number" [(ngModel)]="noOfBrowsers" min="1" max="10" step="1"
+                            (keydown)="inputBox($event)" style="width: 55px;" class="form-control"
+                            *ngIf="parallelExecution == true">
+                        </div>
+                      </div>
+                    </div>
+                    <div class="modal-footer">
+
+                      <button type="button" class="btn btn-lg" mat-button *ngIf="create==true && manualExe != true"
+                        (click)="checkBrowsers(scriptsNew,userEmail,noOfBrowsers,'proceed')"
+                        data-dismiss="modal">Proceed</button>
+                      <button type="button" class="btn btn-lg btn-cancel" data-dismiss="modal">Close</button>
+
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+
+
+            </div>
+          </div>
+        </div>
+
+
+
+
+
+
+        <!-- <h1 *ngIf="create==true && manualExe != true" style="font-size: 14px;">{{resultDisplayNew}}
+          <a *ngIf="checkReportPresent==true" [routerLink]="['/projectdetail/reports/suitelevel']"
+            style="font-size: 14px;">{{checkReportstatus}}</a>
+        </h1>
+        <h1 *ngIf="manualExe == true">{{mreportno}}</h1> -->
+        <div class="container">
+          <div class="modal fade" id="mySteps" data-backdrop="static">
+            <div class="modal-dialog modal-lg ">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h4 class="modal-title">Step Details</h4>
+                  <!-- <button type="button" class="close" data-dismiss="modal">&times;</button> -->
+                </div>
+                <div class="modal-body">
+                  <div class="selectheight">
+                    <label style="padding-right:5px" *ngIf="checkr==true">Multiselect</label>
+                    <select class="selectsize" *ngIf="checkr==true" [(ngModel)]="multi.status"
+                      (ngModelChange)="selectedstepdetailss(multi.status)">
+                      <option value="" style="display:none;"></option>
+                      <option *ngFor="let manual of manualStatus" [ngValue]="manual.status">{{manual.status}}</option>
+                    </select>
+                  </div>
+
+                  <div class="example-container shadow-lg table-container">
+                    <table class="shadow-lg scroll">
+                      <thead class="theadColor">
+                        <th style="width:20px">
+                          <input type="checkbox" [(ngModel)]="checkr" #checkBoxSe name="echeck" class='checkBoxSe'
+                            (click)="schecks(nlpStepDetails,$event)">
+                        </th>
+                        <th style="width:70px">StepNo</th>
+                        <th>Description</th>
+                        <th>Status</th>
+                        <th>AddData</th>
+                      </thead>
+                      <tbody>
+                        <tr *ngFor="let nlp of nlpStepDetails;let i=index;">
+                          <td style="width:20px">
+                            <input type="checkbox" [checked]="nlp.check=='true'" name="echeck" class='checkBoxSe'
+                              (click)='arraypushs(nlpStepDetails,i)'>
+                          </td>
+                          <td style="width:70px">{{i+1}}</td>
+                          <td>{{nlp.action}}</td>
+                          <td>
+                            <select [(ngModel)]="nlp.status" (ngModelChange)="SelectedStep($event,i);" name="nlp.status"
+                              [disabled]="stopEditing">
+                              <option value="" style="display:none;"></option>
+                              <option *ngFor="let manual of manualStatus " [ngValue]="manual.status">{{manual.status}}
+                              </option>
+                            </select>
+                          </td>
+                          <td>
+                            <button type="button" class="btn btn-info btn-lg" (click)="ActivateTime(i,nlp);ActiveData(i)"
+                              data-toggle="modal" data-target="#myModal">Open</button>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-default" data-dismiss="modal"
+                    (click)='SaveStatus($event,multi.status,nlpStepDetails)'>Save</button>
+                  <button type="button" class="btn btn-default btn-cancel" data-dismiss="modal"
+                    (click)='closeStatus($event,multi.status)'>Close</button>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+        <!-- //End of modal -->
+
+        <!-- //Added By vinayak for stepData collecting -->
+        <div class="container">
+
+          <div class="modal fade" id="myModal" data-backdrop="static">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h4 class="modal-title">Step Details</h4>
+                  <!-- <button type="button" class="close" data-dismiss="modal">&times;</button> -->
+                </div>
+                <div class="modal-body">
+                  <div style="display: flex;">
+                    <label>comments </label>&nbsp;&nbsp;
+                    <!-- <input type="tes" [(ngModel)]="comment" class="form-control" style="width: 20%;"> -->
+                    <textarea [(ngModel)]="comment" class="form-control" style="width: 60%;"></textarea>
+                  </div>
+                  <br>
+                  <div style="display: flex;">
+                    <div>
+                      <label>ScreenShot </label>&nbsp;&nbsp;
+                      <p *ngIf="activeOpenFields == 1">Previous selected screenshot <span>{{manualscreenShot}}</span>
+                      </p>
+                      <input type="file" name="file" id="file" accept="image/*" (change)="fileChangeEvent($event)" #myInput
+                      placeholder="Upload image file.."  [(ngModel)]="manualScreenShot">
+                      <button type="button" class="btn btn-lg btn-success" *ngIf="activeScreenUpload == 1"
+                        (click)="upload()" [disabled]="uploadDisable" style="margin: 10px;">Upload</button>
+
+                    </div>
+                    <br>
+                    <!-- <div>
+                  <label>Video </label>&nbsp;&nbsp;
+                    <p *ngIf="activeOpenFields == 1">Previous selected video <span>{{manualVideo}}</span></p>
+                    <input type="file" name="video" id="video" [(ngModel)]="manualVideo" accept="video/*"
+                      (change)="videoFileSave($event)">
+                    <button type="button" class="btn btn-lg btn-success" *ngIf="activeVideoUpload == 1"
+                      (click)="uploadvideo()" style="margin: 10px;"> Upload</button>
+                  
+                </div> -->
+                  </div>
+                </div>
+
+
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-default btn-lg btn-success"
+                    (click)="SaveStepData1(comment,manualScreenShot,manualVideo)" data-dismiss="modal">SAVE</button>
+                  <span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                  <button type="button" class="btn btn-default btn-cancel" data-dismiss="modal">Close</button>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+
+      <!-- //End's Above -->
+
+
+
+
+      <!-- </div> -->
+
+
+      <div class="col-lg-9 col-md-12 col-sm-9  col-xs-12" *ngIf="suite==true">
+        <div class="example-container shadow-lg table-container">
+          <table class="shadow-lg scroll" style=" border: none;width: 100%">
+            <thead class="theadColor">
+              <!-- <tr> -->
+              <th class="col-xs-1">#</th>
+              <th class="col-xs-2">Module</th>
+              <th class="col-xs-2">Feature</th>
+              <th class="col-xs-2">Testcase</th>
+              <th class="col-xs-2">Browser</th>
+              <th class="col-xs-2">Version</th>
+
+              <th class="col-xs-1" *ngIf="deletePage==true">Delete</th>
+              <!-- </tr> -->
+            </thead>
+            <tbody>
+
+              <tr *ngFor="let data of scriptsNew; let i=index">
+                <td class="col-xs-1">
+                  <input type="checkbox" checked="checked" (click)="uncheck(i,scriptsNew,data.moduleName)">
+                </td>
+                <td class="col-xs-2">{{data.moduleName}}</td>
+                <td class="col-xs-2">{{data.fetaureName}}</td>
+                <td class="col-xs-2"><span style="margin-left:5px">{{data.scriptName}}</span></td>
+                <td class="col-xs-2">
+                  <select style="margin-left:5px" [(ngModel)]='data.browser'
+                    (change)="getversion(i,data.browser,data.scriptName)">
+                    <option *ngIf="divAS != 1" disabled>{{defaultBrowserName}}</option>
+                    <option *ngFor="let s of splitDisArray" disabled>{{s.browser}}</option>
+                    <option value="" style="display:none;"></option>
+                    <option *ngFor="let browser of dbrowsers" [ngValue]="browser">{{browser.browserName}}</option>
+                  </select>
+                </td>
+                <td class="col-xs-2">
+                  <select [(ngModel)]='data.Version' style="width:80px;margin-left: 5px">
+                    <option *ngIf="divAS != 1" disabled>{{defaultVersionName}}</option>
+                    <option *ngFor="let s of splitDisArray" disabled>{{s.version}}</option>
+                    <option value="" style="display:none;"></option>
+                    <option *ngFor="let versions of version[i]" [ngValue]="versions.versionName">
+                      {{versions.versionName}}
+                    </option>
+                  </select>
+                </td>
+                <td class="col-xs-1" *ngIf="deletePage==true">
+                  <span class="glyphicon glyphicon-trash btn btn-info btn-lg"
+                    (click)="delete(i,scriptsNew,selectedname)"></span>
+                </td>
+              </tr>
+
+            </tbody>
+          </table>
+
+
+
+        </div>
+        <h1>{{resultDisplay}}</h1>
+        <div style="text-align:center">
+          <button type="button" class="btn btn-lg" (click)="getData(scriptsNew)" style="margin-top: 1%;"
+            *ngIf="create==true">Run</button>
+
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-12 col-sm-3 col-xs-12" *ngIf="divAS==1">
+        <div class="example-container shadow-lg table-container">
+          <div>
+            <div class="theadColor " style="width:100%;">
+              <th class="theadColor" style="width:1%;text-align: center;">Browser Selection</th>
+            </div>
+            <table class="tableWidth" style="margin:auto;margin-top: 20px">
+              <label>Browser</label>&nbsp;&nbsp;
+              <select [(ngModel)]='browserName' (change)="getversion(i,browserName,data.scriptName)"
+                style="width:120px;font-size: 12pt">
+                <option value="" style="display:none;"></option>
+                <option *ngFor="let browser of dbrowsers " [ngValue]="browser">{{browser.browserName}}</option>
+              </select>
+              <br> <br>
+              <label>Version</label>&nbsp;&nbsp;
+              <select [(ngModel)]='versionName' (change)="insertversion(i,data.versionName)"
+                style="width:120px;margin-left: 5px;font-size: 12pt">
+                <option value="" style="display:none;"></option>
+                <option *ngFor="let versions of version[i]" [ngValue]="versions.versionName">{{versions.versionName}}
+                </option>
+              </select>
+
+              <br><br>
+              <div style="text-align: center;">
+                <button type="button" class="glyphicon glyphicon-plus btn btn-lg"
+                  (click)="splitAdd(browserName,versionName)"></button> &nbsp;&nbsp;
+                <button type="button" class="btn btn-lg" (click)="splitClear(browserName,versionName)">Clear</button>
+              </div>
+            </table>
+            <!-- </div> -->
+            <br>
+            <br>
+            <div>
+
+              <table class="border">
+                <thead class="theadColor" style="table-layout: unset;width: unset;">
+                  <!-- <tr style="color: white"> -->
+                  <th class="col-xs-4">Browser</th>
+                  <th class="col-xs-4">Version</th>
+                  <th class="col-xs-4">Dlete</th>
+                  <!-- </tr> -->
+                </thead>
+                <tbody>
+                  <tr *ngFor="let sp of splitArray;let i=index;">
+                    <td class="col-xs-4">{{sp.browser}}</td>
+                    <td class="col-xs-4">{{sp.version}}</td>
+                    <td class="col-xs-4">
+                      <span class="glyphicon glyphicon-trash btn btn-info btn-md" (click)="deleteSplit(i)"></span>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+        <div style="text-align:center;padding: 10px;">
+          <button type="button" class="btn btn-lg applybutton" (click)="applySplit()">Apply</button>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</div>
+
+<!--*ngIf='sc==true'-->
+
+<div *ngIf='sc==true'>
+  <div class="modal fade" id="myModalsechdule" data-backdrop="static">
+    <div class="modal-dialog">
+      <div class="modal-content" style="min-height: 500px; max-height: 700px; overflow-y: scroll;width:700px">
+        <div class="modal-header">
+          <h1 class="modal-title">Schedule Execution</h1>
+        </div>
+        <div>
+          <div>
+            <span class="excelSpan"> </span>
+            <div class=" col-sm-4 col-sm-4 col-sm-4 colFont">
+
+              <span class="excelSpan"> </span>
+              <div class="row excelTable">
+                &nbsp; Name:
+                <span class="starSpan">*</span>
+              </div>
+
+              <div class="row excelTable">
+                &nbsp; Description:
+
+                <span class="starSpan">*</span>
+
+              </div>
+              <div class="row excelTable " style="margin-top: 30px">
+                &nbsp; Test Suite:
+
+                <span class="starSpan">*</span>
+              </div>
+
+              <div class="row excelTable">
+                &nbsp; Schedule:
+
+                <span class="starSpan">*</span>
+              </div>
+              <div class="row excelTable" *ngIf="startTime==true">
+                &nbsp; Start Date :
+
+                <span class="starSpan">*</span>
+
+
+              </div>
+              <div class="row excelTable" *ngIf="endTime==true">
+                &nbsp; End Date :
+                <span class="starSpan">*</span>
+              </div>
+              <div class="row excelTable">
+                &nbsp; Time :
+                <span class="starSpan">*</span>
+              </div>
+              <div class="row excelTable" *ngIf="week==true">
+                &nbsp; Day of week :
+                <span class="starSpan">*</span>
+              </div>
+
+              <div class="row excelTable" *ngIf="hourly==true">
+                &nbsp; Repeat Every::
+                <span class="starSpan">*</span>
+              </div>
+              <div class="row excelTable" *ngIf="weekEnd==true">
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <input type="checkbox" [(ngModel)]="checkboxValue" [checked]="checkBoxValue=='1'"
+                  (click)="getCheck($event)">
+
+              </div>
+
+
+
+            </div>
+            <div class=" col-sm-8 col-sm-8 col-sm-8 colFont">
+              <form [formGroup]="angForm123" novalidate>
+                <div class="row excelTable1">
+
+                  <input type="text" class="excelInput" formControlName="scheduleName"
+                    [(ngModel)]='scheduleObject.scheduleName'>
+                  <div
+                    *ngIf="angForm123.controls['scheduleName'].invalid && (angForm123.controls['scheduleName'].dirty || angForm123.controls['scheduleName'].touched)"
+                    class="alert alert-danger">
+                    <!-- <div *ngIf="angForm123.controls['scheduleName'].errors.required">Name is required</div> -->
+                    <!-- <div *ngIf="angForm123.controls['scheduleName'].errors.maxlength">Maximum 20 characters are allowed</div> -->
+                    <control-messages [control]="angForm123.controls.scheduleName"></control-messages>
+                  </div>
+
+
+
+                </div>
+                <div class="row excelTable1">
+                  <textarea rows="3" cols="21.99" maxlength="100" class="texta" formControlName="desc"
+                    [(ngModel)]='scheduleObject.desc'></textarea>
+                  <div
+                    *ngIf="angForm123.controls['desc'].invalid && (angForm123.controls['desc'].dirty || angForm123.controls['desc'].touched)"
+                    class="alert alert-danger">
+                    <div *ngIf="angForm123.controls['desc'].errors.required">
+                      Description is required.
+                    </div>
+                  </div>
+
+
+
+                </div>
+
+                <div class="row excelTable1" style="margin-top:30px">
+
+                  <input type="text" class=" excelInput" disabled value="jjj" formControlName="selectedSuite"
+                    [(ngModel)]='selectedSuite'>
+
+                </div>
+                <div class="row excelTable1">
+
+
+                  <select class="excelInput" formControlName="type" [(ngModel)]='scheduleObject.type'
+                    (change)="getscheduleName(scheduleObject.type)">
+                    <option style="display:none"> </option>
+                    <option *ngFor="let names of scheduleDetails">{{names.scheduleName}}</option>
+                  </select>
+                  <div
+                    *ngIf="angForm123.controls['type'].invalid && (angForm123.controls['type'].dirty || angForm123.controls['type'].touched)"
+                    class="alert alert-danger">
+                    <div *ngIf="angForm123.controls['type'].errors.required">
+                      Schedule is required.
+                    </div>
+                  </div>
+
+                </div>
+                <!-- (change)="checkStartDate(scheduleObject.startDate,scheduleObject.type)"(change)="checkEndDate(scheduleObject.startDate,scheduleObject.endDate)" -->
+                <div class="row excelTable1" *ngIf="startTime==true">
+                  <input type="Date" class="excelInput" formControlName="startDate"
+                    [(ngModel)]='scheduleObject.startDate' [min]="dated"
+                    (change)="checkStartDate(scheduleObject.startDate,scheduleObject.endDate,scheduleObject.type)"
+                    data-target="#lastDate" data-toggle="modal">
+                  <div
+                    *ngIf="angForm123.controls['startDate'].invalid && (angForm123.controls['startDate'].dirty || angForm123.controls['startDate'].touched)"
+                    class="alert alert-danger">
+                    <div *ngIf="angForm123.controls['startDate'].errors.required">
+                      startDate is required.
+                    </div>
+                  </div>
+                </div>
+                <div class="row excelTable1" *ngIf="endTime==true">
+
+                  <input type="Date" class="excelInput" formControlName="endDate" [(ngModel)]='scheduleObject.endDate' [min]="dated"
+                    (change)="checkEndDate(scheduleObject.startDate,scheduleObject.endDate)">
+                  <div
+                    *ngIf="angForm123.controls['endDate'].invalid && (angForm123.controls['endDate'].dirty || angForm123.controls['endDate'].touched)"
+                    class="alert alert-danger">
+                    <div *ngIf="angForm123.controls['endDate'].errors.required">
+                      endDate is required.
+                    </div>
+                  </div>
+
+                </div>
+                <div class="row excelTable1">
+                  <span class="excelInput">
+
+                    <input type="time" class="timeAt" formControlName="givenTime" [(ngModel)]='scheduleObject.givenTime'
+                      (change)="checkTime(scheduleObject.givenTime,scheduleObject.type,scheduleObject.startDate)">
+
+                    <!-- <mat-form-field appearance="fill" >
+                          <mat-label>TIME</mat-label>
+                          <input matTimepicker #t="matTimepicker" [strict]="false" id="timepicker-example" mode="24h"
+                              (timeChange)="timeChangeHandler($event)" class="timeAt time" formControlName="givenTime"
+                            [(ngModel)]='scheduleObject.givenTime'
+                            (timeChange)="checkTime(scheduleObject.givenTime,scheduleObject.type,scheduleObject.startDate)"
+                            >
+                        </mat-form-field> -->
+
+                  </span>
+                  <div
+                    *ngIf="angForm123.controls['givenTime'].invalid && (angForm123.controls['givenTime'].dirty || angForm123.controls['givenTime'].touched)"
+                    class="alert alert-danger">
+                    <div *ngIf="angForm123.controls['givenTime'].errors.required">
+                      givenTime is required.
+                    </div>
+                  </div>
+
+                </div>
+                <div class="row excelTable1" *ngIf="week==true">
+                  <select class="excelInput" formControlName="weeks" [(ngModel)]='scheduleObject.weeks'>
+                    <option style="display:none"> </option>
+                    <option *ngFor="let Weekly of WeeklyDetails">{{Weekly}}</option>
+                  </select>
+                  <div
+                    *ngIf="angForm123.controls['weeks'].invalid && (angForm123.controls['weeks'].dirty || angForm123.controls['weeks'].touched)"
+                    class="alert alert-danger">
+                    <div *ngIf="angForm123.controls['weeks'].errors.required">
+                      week Name is required.
+                    </div>
+                  </div>
+
+
+                </div>
+                <div class="row excelTable1" *ngIf="hourly==true">
+                  <select class="excelInput" formControlName="hourl" [(ngModel)]='scheduleObject.hourl'>
+                    <option style="display:none"> </option>
+                    <option *ngFor="let hourly of hourlyDetails">{{hourly.hour}} Hour</option>
+                  </select>
+
+                  <div
+                    *ngIf="angForm123.controls['hourl'].invalid && (angForm123.controls['hourl'].dirty || angForm123.controls['hourl'].touched)"
+                    class="alert alert-danger">
+                    <div *ngIf="angForm123.controls['hourl'].errors.required">
+                      Time is required.
+                    </div>
+                  </div>
+
+
+                </div>
+                <div class="row excelTable1" *ngIf="weekEnd==true">
+
+                  Weekends
+                </div>
+
+                <div style="padding: 5px;">
+                  <button type="submit" class="btn btn-lg" style="margin-left:-100px" [disabled]="angForm123.pristine"
+                    (click)="allScheduleSave(selectedSuite)"> Create </button>
+                  <!-- <button type="submit" class="btn btn-lg" style="margin-left:50px"> Update </button> -->
+                  <button type="submit" class="btn btn-lg btn-cancel" id="cancelSched" (click)="cancel()"
+                    style="margin-left:50px" data-dismiss="modal">Cancel</button>
+                </div>
+
+
+              </form>
+
+            </div>
+
+
+          </div>
+
+        </div>
+
+
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<button id="openCompilation" [hidden]="true" data-toggle="modal" data-target="#executionTrack"
+  data-backdrop="static"></button>
+
+<div class="modal" id="executionTrack">
+  <div class="modal-dialog modal-lg modal-dialog-scrollable">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h3 class="modal-title">Compilation Report</h3>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body">
+        <div style="overflow: auto;">
+          <h4>{{completeTrackReport}}</h4>
+        </div>
+      </div>
+
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-lg btn-cancel" data-dismiss="modal">Close</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<ngx-spinner bdColor="rgba(51, 51, 51, 0.8)" size="medium" color="#fff" type="ball-clip-rotate" [fullScreen]="false">
+  <h3><br>
+    <p style="color: white"> Please Wait... </p>
+  </h3>
+</ngx-spinner>

@@ -1,0 +1,116 @@
+.scriptExportLabel{
+    font-size: 18px;
+    font-weight: 700;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+.scriptExportInput input{
+    font-size: 15px;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+#statusDisplay{
+    font-size: 20px;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-weight: bolder;
+    text-align: center;
+}
+
+.mainDiv{
+    margin-bottom: 4%;
+}
+.formTopDiv{
+    padding: 20px;
+    margin: 30px;
+    margin-top:5%
+}
+
+@media screen and (min-device-width: 768px) and (max-device-width: 1023px) {
+
+    .container-fluid {
+      height: 100vh;
+      overflow-y: visible;
+      overflow-x: hidden;
+      padding-bottom: 14px;
+      }
+      .labelDiv{
+          text-align: center;
+      }
+  }
+  
+  @media screen and (min-device-width: 1024px) and (max-device-width: 1440px) {
+  
+    .container-fluid {
+      height: 100vh;
+      overflow-y: visible;
+      overflow-x: hidden;
+      padding-bottom: 14px;
+      }
+      .labelDiv{
+        text-align: center;
+    }
+  }
+  
+  @media screen and (min-device-width: 768px) and (max-device-width: 991px) {
+  
+    .container-fluid {
+      height: 95vh;
+      overflow-y: visible;
+      overflow-x: hidden;
+      padding-bottom: 14px;
+      }
+      .labelDiv{
+        text-align: center;
+    }
+  }
+  
+  @media screen and (min-device-width: 992px) and (max-device-width: 1199px) {
+  
+    .container-fluid {
+      height: 100vh;
+      overflow-y: visible;
+      overflow-x: hidden;
+      padding-bottom: 14px;
+      }
+      .labelDiv{
+        text-align: center;
+    }
+  }
+  
+  @media screen and (min-device-width: 426px) and (max-device-width: 767px) {
+  
+    .container-fluid {
+      height: 95vh;
+      overflow-y: visible;
+      overflow-x: hidden;
+      padding-bottom: 14px;
+      }
+      .labelDiv{
+        text-align: center;
+    }
+  }
+  
+  @media screen and (min-device-width: 0px) and (max-device-width: 425px) {
+  
+    .container-fluid {
+      height: 95vh;
+      overflow-y: visible;
+      overflow-x: hidden;
+      padding-bottom: 14px;
+      }
+    .ExportDiv{
+        margin-bottom: 9%;
+    }
+  }
+  
+  @media screen and (min-device-width: 1441px) and (max-device-width: 2560px) {
+  
+    .container-fluid {
+      height: 100vh;
+      overflow-y: visible;
+      overflow-x: hidden;
+      padding-bottom: 14px;
+      } 
+      .labelDiv{
+        text-align: center;
+    }
+  }

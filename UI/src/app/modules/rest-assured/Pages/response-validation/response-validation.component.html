@@ -1,0 +1,141 @@
+<div>
+  <div class="list-group">
+    <div class="header">
+      <h3 *ngIf="displayResponseValidation">Response Validation</h3>
+      <h3 *ngIf="displayResponseHeaderValid">Response Header Validation</h3>
+      <h3 *ngIf="displayResponseTimeValid">Response Time Validation</h3>
+      <!-- <button style="font-size: 14px" type="button" class="btn btn-primary" data-toggle="modal"
+        data-target="#responseValidationModal" >
+        + Add
+      </button> -->
+      <button style="font-size: 14px" type="button" class="btn btn-primary" 
+          (click)="OpenResponseModal('open')">
+        + Add
+      </button>
+      
+    </div>
+    <li class="list-group-item list-group-item-light" *ngIf="validationsList.length == 0" else listElseBlock>
+      No Validations present</li>
+    <ol class="list-group" #listElseBlock>
+      <li class="list-group-item overflow-auto" *ngFor="let list of validationsList ;
+      index as indexOfElement;">{{list.jsonPath}} {{getListMethods(list)}}
+        {{getListValues(list)}}<button style="font-size: 14px" type="button" class="btn btn-default btn-sm float-right"
+          (click)="editValidationList(list,indexOfElement)" data-toggle="modal" data-target="#responseValidationModal">
+          <span class="glyphicon glyphicon-pencil"></span> </button><button style="font-size: 14px" type="button"
+          class="btn btn-default btn-sm float-right" (click)="removeValidation(indexOfElement)">
+          <span class="glyphicon glyphicon-remove"></span> </button></li>
+    </ol>
+  </div>
+</div>
+<button id="generateResponseModal" [hidden]="true" data-toggle="modal" data-target="#responseValidationModal"
+            data-backdrop="static"></button>
+
+<!-- Response Validation Modal -->
+<!-- The Modal -->
+<div class="modal" id="responseValidationModal" data-backdrop="static">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <span  *ngIf="displayResponseValidation">
+          <h2 *ngIf="!isEdit" style="text-align:center" class="modal-title">Add Response Validation</h2>
+          <h2 *ngIf="isEdit" style="text-align:center" class="modal-title">Edit Response Validation</h2>
+        </span>
+        <span  *ngIf="displayResponseHeaderValid">
+          <h2 *ngIf="!isEdit" style="text-align:center" class="modal-title">Add Response Header Validation</h2>
+          <h2 *ngIf="isEdit" style="text-align:center" class="modal-title">Edit Response Header Validation</h2>
+        </span>
+        <span  *ngIf="displayResponseTimeValid">
+          <h2 *ngIf="!isEdit" style="text-align:center" class="modal-title">Add Response Time Validation</h2>
+          <h2 *ngIf="isEdit" style="text-align:center" class="modal-title">Edit Response Time Validation</h2>
+        </span>
+        <!-- <button type="button" class="close size-set" data-dismiss="modal">&times;</button> -->
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body">
+        <form>
+          <div class="form-group" *ngIf="!displayResponseTimeValid">
+            <label for="jsonPath">JSON Path:</label>
+            <input type="text" class="form-control size-set" id="jsonPath" placeholder="Enter JSONpath" name="jsonPath"
+              [(ngModel)]="responseValidationData.jsonPath">
+          </div>
+          <div class="form-group">
+            <label>Request Method:</label>
+            <div class="custom-control custom-switch flex-container" *ngIf="negateType">
+              <input type="checkbox" class="custom-control-input" id="notSwitch" name="notSwitch"
+                [(ngModel)]="responseValidationData.not">
+              <label class="custom-control-label" for="notSwitch">negate</label>
+            </div>
+            <select class="form-control size-set" name="requestMethod"
+              [(ngModel)]="responseValidationData.requestMethod" (ngModelChange)="setMethodValues()">
+              <!-- <option selected disabled> Please select the method</option> -->
+              <option value="{{method.methodName}}" *ngFor="let method of methods">{{method.methodName}}</option>
+            </select>
+          </div>
+          <div style="padding-bottom: 5px" *ngIf="responseValidationData.type==1" class="form-group">
+            <label for="values">Values:</label>
+            <input  class="form-control size-set" id="values" placeholder="Enter values" name="values"
+              [(ngModel)]="responseValidationData.values" #values>
+          </div>
+
+          <!-- Shows Iterative function -->
+
+          <div style="padding-bottom: 5px;" *ngIf="responseValidationData.type==2">
+            <label style="font-size: 12px">Request Iterative Method:</label>
+            <!-- <ng-container *ngFor="let iterativeMethod of iterativeDataList;let i = index"> -->
+              <ng-container *ngFor="let iterativeMethod of responseValidationData.values;let i = index">
+              <form class="iterativeForm">
+                <i class="glyphicon glyphicon-remove col-0" style="cursor: pointer;float: right;
+                padding: 3px 5px 3px 5px;" (click)="removeIterative(i)" ></i>
+                <div class="form-group form-group1">
+                  <select class="form-control IterativeMethod" name="requestIterativeMethod"
+                    [(ngModel)]="iterativeMethod.requestIterativeMethod"
+                    (ngModelChange)=checkType2Method(iterativeMethod,i)>
+                    <option value="{{method.methodName}}" *ngFor="let method of iterativeMethods">{{method.methodName}}
+                    </option>
+                  </select>
+                  <div class="custom-control custom-switch flex-container">
+                    <input type="checkbox" class="custom-control-input" id="{{'notSwitch'+i}}" name="{{'notSwitch'+i}}"
+                      [(ngModel)]="iterativeMethod.not">
+                    <label class="custom-control-label" for="{{'notSwitch'+i}}">negate</label>
+                  </div>
+                </div>
+                <div class="form-group form-group2">
+                  <input *ngIf="iterativeMethod.type==1" type="text" name="values" class="form-control InputVals"
+                    placeholder="Enter value for iterativemethod" [(ngModel)]="iterativeMethod.value">
+                </div>
+              </form>
+            </ng-container>
+            <button type="button" class="btn btn-primary btn-sm" (click)="addIterativeValuesToList()">
+              <span class="glyphicon glyphicon-plus"></span> </button>
+          </div>
+          <!-- end iterative function -->
+          <div style="padding-bottom: 5px;margin-top: 3rem;" *ngIf="responseValidationData.type==4">
+            <mat-form-field class="chip-list">
+              <mat-chip-list #chipList aria-label="Value selection">
+                <mat-chip *ngFor="let value1 of type4Value" [selectable]="selectable" [removable]="removable"
+                  (removed)="remove(value1)">
+                  {{value1}}
+                  <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+                </mat-chip>
+                <input style="padding-top:10px;" placeholder="Enter value and press Enter or Comma key to add" #fruitInput [formControl]="valueCtrl" [matChipInputFor]="chipList"
+                  [matChipInputSeparatorKeyCodes]="separatorKeysCodes" (matChipInputTokenEnd)="add($event);addType4ValueToList()">
+              </mat-chip-list>
+            </mat-form-field>
+            <!-- <button type="button" class="btn btn-primary button2" (click)="addType4ValueToList()">Add</button> -->
+          </div>
+
+          <button *ngIf="!isEdit" type="button" class="btn btn-primary button2 size-set" (click)="addValidationToList(values)"
+            [disabled]="!isFormValid" data-dismiss="modal">Add</button>
+          <button *ngIf="isEdit" type="button" class="btn btn-primary button2 size-set" (click)="addValidationToList(values)"
+            [disabled]="!isFormValid" data-dismiss="modal">Update</button>
+            <button type="button" class="btn btn-outline-primary ml-10 size-set" data-dismiss="modal" (click)="closeResModal()">Close</button>
+          <button type="button" class="btn btn-outline-primary ml-10 size-set" id="closeResponseModal"
+          [hidden]="true" data-dismiss="modal"></button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

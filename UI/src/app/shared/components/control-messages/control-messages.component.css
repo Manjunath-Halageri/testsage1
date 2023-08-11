@@ -1,0 +1,12 @@
+/* .errorMessage {
+    color: #a94442;
+    margin: 6px 0;
+    
+  } */
+  .text-danger{
+    color: #d66d5b;
+    
+    font-size: small;
+    font-weight: bold;
+  }
+  

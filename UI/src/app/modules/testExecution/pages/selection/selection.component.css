@@ -1,0 +1,67 @@
+.container-fluid{
+  height: 85vh !important;
+	overflow: scroll;
+}
+
+tbody {
+  display: block;
+  max-height: 350px;
+  min-height:300px;
+  overflow: auto;
+}
+thead,
+tbody tr {
+  display: table;
+  width: 100%;
+  table-layout: fixed;
+}
+thead {
+  width: calc(101% - 0.6em);
+}
+
+h1 {
+  text-align: center;
+}
+
+.row {
+  margin-right: 15px;
+  margin-left: 15px;
+}
+
+.col2 {
+  margin-top: 20px;
+}
+
+.col8 {
+  margin-left: 15%;
+}
+
+.modal-body {
+  font-size: 16px;
+  font-weight: 700;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+  height: unset;
+}
+
+.modal-content {
+  width: 70%;
+  margin-left: 15%;
+}
+
+.modal-title {
+  font-size: 20px;
+}
+
+.modal-dialog {
+  margin-top: unset;
+}
+
+#noData {
+  text-align: center;
+  margin-top: 14%;
+  font-size: 20px;
+  color: var(--main-button-color);
+}
+/* .theadColor>th{
+  border: 1px solid #d0c0c0;
+  } */

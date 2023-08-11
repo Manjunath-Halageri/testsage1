@@ -1,0 +1,2 @@
+CONTAINER ID   IMAGE                               COMMAND                  CREATED                  STATUS                  PORTS                                                                                    NAMES
+65556fb01db0   selenium/node-firefox-debug:3.0.1   "/opt/bin/entry_poin…"   Less than a second ago   Up Less than a second   0.0.0.0:5563->4444/tcp, :::5563->4444/tcp, 0.0.0.0:49162->5900/tcp, :::49162->5900/tcp   firefox_112

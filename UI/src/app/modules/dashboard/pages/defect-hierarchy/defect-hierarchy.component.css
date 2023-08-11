@@ -1,0 +1,87 @@
+.example-container {
+    overflow: auto;
+    margin-top: 30px;
+    padding: 10px;
+    
+  }   
+  table {
+    width: 100%;
+  }
+  .table-container {
+    margin-top: 10px;
+    max-height: 400px;
+    overflow: auto;
+    height: 310px;
+    }
+  
+  @media screen and (min-device-width: 768px) and (max-device-width: 1023px) {
+  
+    .sreachButton{
+        margin-top: 21px;
+    }
+    .formClass{
+        display: flex;
+    }
+  }
+  
+  @media screen and (min-device-width: 1024px) and (max-device-width: 1440px) {
+  
+    .sreachButton{
+      margin-top: 21px;
+  }
+  .formClass{
+    display: flex;
+}
+  }
+  
+  @media screen and (min-device-width: 768px) and (max-device-width: 991px) {
+  
+    .sreachButton{
+      margin-top: 21px;
+  }
+  .formClass{
+    display: flex;
+}
+  }
+  
+  @media screen and (min-device-width: 992px) and (max-device-width: 1199px) {
+  
+    .sreachButton{
+      margin-top: 21px;
+  } 
+  .formClass{
+    display: flex;
+}
+    
+  }
+  
+  @media screen and (min-device-width: 426px) and (max-device-width: 767px) {
+  
+    .sreachButton{
+      text-align: center !important;
+  } 
+  .formClass{
+      display: flex;
+  }
+  }
+  
+  @media screen and (min-device-width: 0px) and (max-device-width: 425px) {
+  
+    .sreachButton{
+      text-align: center;
+  } 
+    
+  }
+  
+  @media screen and (min-device-width: 1441px) and (max-device-width: 2560px) {
+  
+    .sreachButton{
+      margin-top: 21px;
+  } 
+  .formClass{
+    display: flex;
+}
+  }
+  ::ng-deep .mat-form-field-underline {
+    display: none;
+  }

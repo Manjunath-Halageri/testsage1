@@ -1,0 +1,429 @@
+<ul class="breadcrumb" style="font-size:15px;background-color: unset;margin:unset">
+  <li class="breadcrumb-item" style="width: 115px;">
+    <a  id="mainheader"><!--[routerLink]="['/projectdetail']"s-->
+      Test Execution</a></li>
+  <li class="breadcrumb-item" id="subheader"><a id="subheader">API Execution</a></li>
+</ul>
+
+<div class="ui-fluid">
+  <div class="ui-g">
+    <div class="ui-g-2 ui-md-2 border">
+      <div class="one">
+        <div>
+          <span class="treeStructureTitle" (click)="getTreeStructureAllReleases()" [shAttachMenu]="menu1"
+            style="position:sticky;">Release</span>
+          <p-tree [value]="displayModuleForTree" (onNodeSelect)="nodeSelect($event)"
+            (click)="openMenuData(displayModuleForTree,selectedFile)" selectionMode="single"
+            [(selection)]="selectedFile" [filter]="true" [contextMenu]="cm">sfsfsfsfs</p-tree>
+          <p-contextMenu #cm appendTo="body" [model]="items"></p-contextMenu>
+        </div>
+        <div>
+          <sh-context-menu #menu1 style="background-color:white">
+            <ng-template shContextMenuItem let-data style="background-color:white">
+              <div (click)="landModulePage()" class="menuu treeStructureCreate"> Create New Module</div>
+            </ng-template>
+          </sh-context-menu>
+        </div>
+      </div>
+    </div>
+    <!-- </div> -->
+    <div class="ui-g-10 ui-md-10 border" *ngIf="openWhenClic == true">
+      <div class="topSearchButton">
+        <div *ngIf="assignButton==true">
+          <button type="button" class="btn btn-lg" data-toggle="modal" data-target="#testModal">
+            Assign</button>
+        </div>&nbsp;&nbsp;&nbsp;
+        <div>
+          <button type="button" class="btn btn-info btn-lg"
+            (click)="searchCall(statusExe,moduleId,featureId,selectedPriority,selectedType)">Search</button>
+        </div>
+
+      </div><br>
+      <section>
+
+        <section>
+          <!-- <div class="form-group" style="width: 200px;">
+            <label for="module">Release</label>
+            <select class="form-control" [(ngModel)]="releaseVersion" name="release"
+              (change)="releaseBase(releaseVersion)">
+              <option></option>
+              <option *ngFor="let data of ReleaseVersions">{{data.releaseVersion}}</option>
+            </select>
+          </div> -->
+          <!-- <div class="form-group" style="width: 200px;">
+            <label for="feature">Testsuite</label>
+            <select class="form-control" [(ngModel)]="selectedSuite" name="suite"
+              (change)="getSuiteData(selectedSuite)">
+              <option value="" style="display:none;"></option>
+              <option *ngFor="let suite of Suites">{{suite.testsuitename}}</option>
+            </select>
+          </div> -->
+
+          <div class="modal fade" id="testModal" role="dialog">
+            <div class="modal-dialog">
+
+              <!-- Modal content-->
+              <div class="modal-content">
+                <div class="modal-header">
+                  <!-- <button type="button" class="close" data-dismiss="modal">&times;</button> -->
+                  <h1 class="modal-title">Select Testers</h1>
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                  Testers
+                  <select id="suite" [(ngModel)]="selectedTester" style="font-size:small;width:150px">
+                    <option value="" style="display:none;"></option>
+                    <option *ngFor="let names of testers" style="height:200px; overflow:scroll">
+                      {{names}}
+                    </option>
+                  </select>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-lg" mat-button (click)="TestersCall(selectedTester)"
+                    data-dismiss="modal">Save</button>
+                  <button type="button" class="btn btn-lg btn-cancel" data-dismiss="modal">Close</button>
+
+                </div>
+              </div>
+
+            </div>
+          </div>
+          <br>
+
+          
+
+
+          <div class="example-container shadow-lg table-container">
+            <table class="shadow-lg scroll" style=" width:100%;margin-top: 10px">
+              <thead class="theadColor">
+                <!-- <tr> -->
+                <th class="col-xs-1"></th>
+  
+                <th class="col-xs-1" *ngIf="scriptsData.length>0">
+                  <input type="checkbox" name="qcheck" class='checkBoxSelect' (click)="checks(scriptsData,$event)">
+                </th>
+                <th class="col-xs-2">Module
+                  <select class="form-control" [(ngModel)]="moduleId" (change)="moduleIndex(moduleId)">
+                    <option [ngValue]='All'>All</option>
+                    <option *ngFor="let var_moduleName of moduleNames" value="{{var_moduleName.moduleId}}">
+                      {{var_moduleName.moduleName}}</option>
+                  </select>
+                </th>
+                <th class="col-xs-2">Feature
+                  <select class="form-control" [(ngModel)]="featureId">
+                    <option [ngValue]='All'>All</option>
+                    <option *ngFor="let var2_featureName of featureNames" value="{{var2_featureName.featureId}}">
+                      {{var2_featureName.featureName}}</option>
+                  </select>
+                </th>
+                <th class="col-xs-2">Priority
+                  <select class="form-control " [(ngModel)]="selectedPriority">
+                    <option [ngValue]='All'>All</option>
+                    <option *ngFor="let priority of priorityArray" value="{{priority.priorityId}}">
+                      {{priority.priorityName}}
+                    </option>
+                  </select>
+                </th>
+                <th class="col-xs-2" style="width: 145px;">Type
+                  <select class="form-control" [(ngModel)]="selectedType">
+                    <option [ngValue]='All'>All</option>
+                    <option *ngFor="let type of typeArray" value="{{type.typeId}}">{{type.typeName}}</option>
+                  </select>
+                </th>
+                <th class="col-xs-2">Testcase</th>
+                <th class="col-xs-2" style="width: 196px;">
+                  <mat-form-field>
+                    <label>Status</label>
+                    <mat-select class="" panelClass="my-panel" multiple [(ngModel)]="statusExe">
+                      <mat-option *ngFor="let topping of toppingList" [value]="topping">{{topping}}</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </th>
+                <th class="col-xs-2">Assigned To</th>
+                <th class="col-xs-1" >Delete</th>
+              </thead>
+              <tbody>
+                <tr *ngFor="let data of scriptsData; let i=index;">
+                  <td class="col-xs-1">&nbsp;&nbsp;&nbsp;
+                    <i class="fa fa-info-circle"
+                      *ngIf="data.testcaseStatus == 'Fail' || data.testcaseStatus == 'NotExecuted'"
+                      matTooltip="The testcase is failed or notexecuted at testcaselevel"></i>
+                  </td>
+                  <td class="col-xs-1">
+                    <input type="checkbox" [checked]="checke ==true"
+                      [disabled]="data.testcaseStatus == 'Fail' || data.testcaseStatus == 'NotExecuted'" name="fcheck"
+                      class='checkBoxSelect' (click)="uncheck(i,scriptsData,data.moduleName)">
+                  </td>
+                  <td class="col-xs-2">{{data.moduleName}}</td>
+                  <td class="col-xs-2">{{data.fetaureName}}</td>
+                  <td class="col-xs-2">{{data.priority}}</td>
+                  <td class="col-xs-2">{{data.type1}}</td>
+                  <td class="col-xs-2"><span style="margin-left: 5px">{{data.scriptName}}</span></td>
+                  <td class="col-xs-2"
+                    [ngClass]="{'color1': data.scriptStatus === 'Pass','color': data.scriptStatus === 'Fail'}">
+                    {{data.scriptStatus}}</td>
+                  <td class="col-xs-2">{{data.tester}}</td>
+                  <td class="col-xs-1">
+                    <span style="margin-left: 5px" class="glyphicon glyphicon-trash btn btn-info btn-lg"
+                      (click)="delete(i,scriptsData,data.scriptName,data.moduleName,data.fetaureName)"></span>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+
+
+
+
+
+        </section><br>
+        <div align="center">
+          <button class="btn btn-lg" type="button" (click)="getData(scriptsData)">Run</button>&nbsp;&nbsp;
+          <button class="btn btn-lg" type="button" data-target="#myModalsechdule" data-toggle="modal"
+            (click)="getData123(scriptsData)">Scheduler</button>
+        </div>
+        <div>
+          <h1>{{msg}}
+            <a *ngIf="checkReportPresent==true"
+              [routerLink]="['/projectdetail/reports/suitelevel']">{{checkReportstatus}}</a>
+          </h1>
+        </div>
+
+      </section>
+
+      <div *ngIf='sc==true'>
+        <div class="modal fade" id="myModalsechdule" role="dialog">
+          <div class="modal-dialog">
+            <div class="modal-content" style="height:600px;width:500px">
+              <div class="modal-header">
+                <h1 class="modal-title">Schedule Execution</h1>
+              </div>
+              <div>
+                <div>
+                  <span class="excelSpan"> </span>
+                  <div class=" col-sm-4 col-sm-4 col-sm-4 colFont">
+
+                    <span class="excelSpan"> </span>
+                    <div class="row excelTable">
+                      &nbsp; Name:
+                      <span class="starSpan">*</span>
+                    </div>
+
+                    <div class="row excelTable">
+                      &nbsp; Description:
+
+                      <span class="starSpan">*</span>
+
+                    </div>
+                    <div class="row excelTable " style="margin-top: 30px">
+                      &nbsp; Test Suite:
+
+                      <span class="starSpan">*</span>
+                    </div>
+
+                    <div class="row excelTable">
+                      &nbsp; Schedule:
+
+                      <span class="starSpan">*</span>
+                    </div>
+                    <div class="row excelTable">
+                      &nbsp; Start Date :
+
+                      <span class="starSpan">*</span>
+
+
+                    </div>
+                    <div class="row excelTable" *ngIf="endTime==true">
+                      &nbsp; End Date :
+                      <span class="starSpan">*</span>
+                    </div>
+                    <div class="row excelTable">
+                      &nbsp; Time :
+                      <span class="starSpan">*</span>
+                    </div>
+                    <div class="row excelTable" *ngIf="week==true">
+                      &nbsp; Day of week :
+                      <span class="starSpan">*</span>
+                    </div>
+
+                    <div class="row excelTable" *ngIf="hourly==true">
+                      &nbsp; Repeat Every::
+                      <span class="starSpan">*</span>
+                    </div>
+                    <div class="row excelTable" *ngIf="weekEnd==true">
+                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                      <input type="checkbox" [(ngModel)]="checkBoxValue" (click)="getCheck()">
+
+                    </div>
+
+
+
+                  </div>
+                  <div class=" col-sm-8 col-sm-8 col-sm-8 colFont">
+                    <form [formGroup]="angForm123" novalidate>
+                      <div class="row excelTable1">
+
+                        <input type="text" maxlength="100" class="excelInput" formControlName="scheduleName"
+                          [(ngModel)]='scheduleObject.scheduleName'>
+                        <div
+                          *ngIf="angForm123.controls['scheduleName'].invalid && (angForm123.controls['scheduleName'].dirty || angForm123.controls['scheduleName'].touched)"
+                          class="alert alert-danger">
+                          <div *ngIf="angForm123.controls['scheduleName'].errors.required">
+                            scheduleName is required.
+                          </div>
+                        </div>
+
+
+
+                      </div>
+                      <div class="row excelTable1">
+                        <textarea rows="3" cols="39" maxlength="100" class="texta" formControlName="desc"
+                          [(ngModel)]='scheduleObject.desc'></textarea>
+                        <div
+                          *ngIf="angForm123.controls['desc'].invalid && (angForm123.controls['desc'].dirty || angForm123.controls['desc'].touched)"
+                          class="alert alert-danger">
+                          <div *ngIf="angForm123.controls['desc'].errors.required">
+                            Description is required.
+                          </div>
+                        </div>
+
+
+
+                      </div>
+
+                      <div class="row excelTable1" style="margin-top:30px">
+
+                        <input type="text" class=" excelInput" disabled value="jjj" formControlName="selectedSuite"
+                          [(ngModel)]='selectedSuite'>
+
+                      </div>
+                      <div class="row excelTable1">
+
+
+                        <select class="excelInput" formControlName="type" [(ngModel)]='scheduleObject.type'
+                          (change)="getscheduleName(scheduleObject.type)">
+                          <option> </option>
+                          <option *ngFor="let names of scheduleDetails">{{names.scheduleName}}</option>
+                        </select>
+                        <div
+                          *ngIf="angForm123.controls['type'].invalid && (angForm123.controls['type'].dirty || angForm123.controls['type'].touched)"
+                          class="alert alert-danger">
+                          <div *ngIf="angForm123.controls['type'].errors.required">
+                            Schedule is required.
+                          </div>
+                        </div>
+
+                      </div>
+                      <div class="row excelTable1">
+                        <input type="Date" class="excelInput" formControlName="startDate"
+                          [(ngModel)]='scheduleObject.startDate' [(ngModel)]='scheduleObject.startDate'
+                          (change)="checkStartDate(scheduleObject.startDate,scheduleObject.type)"
+                          data-target="#lastDate" data-toggle="modal">
+                        <div
+                          *ngIf="angForm123.controls['startDate'].invalid && (angForm123.controls['startDate'].dirty || angForm123.controls['startDate'].touched)"
+                          class="alert alert-danger">
+                          <div *ngIf="angForm123.controls['startDate'].errors.required">
+                            startDate is required.
+                          </div>
+                        </div>
+
+
+                      </div>
+                      <div class="row excelTable1" *ngIf="endTime==true">
+
+                        <input type="Date" class="excelInput" formControlName="endDate"
+                          [(ngModel)]='scheduleObject.endDate' (change)="checkDate()">
+                        <div
+                          *ngIf="angForm123.controls['endDate'].invalid && (angForm123.controls['endDate'].dirty || angForm123.controls['endDate'].touched)"
+                          class="alert alert-danger">
+                          <div *ngIf="angForm123.controls['endDate'].errors.required">
+                            endDate is required.
+                          </div>
+                        </div>
+
+                      </div>
+                      <div class="row excelTable1">
+                        <span class="excelInput">
+
+                          <input type="time" class="timeAt" formControlName="givenTime"
+                            [(ngModel)]='scheduleObject.givenTime'
+                            (change)="checkTime(scheduleObject.givenTime,scheduleObject.name)">
+
+                        </span>
+                        <div
+                          *ngIf="angForm123.controls['givenTime'].invalid && (angForm123.controls['givenTime'].dirty || angForm123.controls['givenTime'].touched)"
+                          class="alert alert-danger">
+                          <div *ngIf="angForm123123.controls['givenTime'].errors.required">
+                            givenTime is required.
+                          </div>
+                        </div>
+
+                      </div>
+                      <div class="row excelTable1" *ngIf="week==true">
+                        <select class="excelInput" formControlName="weeks" [(ngModel)]='scheduleObject.weeks'>
+                          <option> </option>
+                          <option *ngFor="let Weekly of WeeklyDetails">{{Weekly.weekName}}</option>
+                        </select>
+                        <div
+                          *ngIf="angForm123.controls['weeks'].invalid && (angForm123.controls['weeks'].dirty || angForm123.controls['weeks'].touched)"
+                          class="alert alert-danger">
+                          <div *ngIf="angForm123.controls['weeks'].errors.required">
+                            week Name is required.
+                          </div>
+                        </div>
+
+
+                      </div>
+                      <div class="row excelTable1" *ngIf="hourly==true">
+                        <select class="excelInput" formControlName="hourl" [(ngModel)]='scheduleObject.hourl'>
+                          <option> </option>
+                          <option *ngFor="let hourly of hourlyDetails">{{hourly.hour}} Hour</option>
+                        </select>
+
+                        <div
+                          *ngIf="angForm123.controls['hourl'].invalid && (angForm123.controls['hourl'].dirty || angForm123.controls['hourl'].touched)"
+                          class="alert alert-danger">
+                          <div *ngIf="angForm123.controls['hourl'].errors.required">
+                            Time is required.
+                          </div>
+                        </div>
+
+
+                      </div>
+                      <div class="row excelTable1" *ngIf="weekEnd==true">
+
+                        Weekends
+
+
+
+                      </div>
+
+
+
+
+                      <button type="submit" class="btn btn-lg" style="margin-left:-100px"
+                        [disabled]="angForm123.pristine" (click)="allScheduleSave(selectedSuite,checkBoxValue)"
+                        data-dismiss="modal"> Create </button>
+                      <!-- <button type="submit" class="btn btn-lg" style="margin-left:50px"> Update </button> -->
+                      <button type="submit" class="btn btn-lg btn-cancel" style="margin-left:50px" data-dismiss="modal">
+                        Cancel</button>
+
+                    </form>
+
+                  </div>
+
+
+                </div>
+
+              </div>
+
+
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

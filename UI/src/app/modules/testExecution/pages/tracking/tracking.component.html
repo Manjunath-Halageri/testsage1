@@ -1,0 +1,98 @@
+<ul class="breadcrumb" style="font-size:15px;background-color: unset;margin:unset">
+  <li class="breadcrumb-item" style="width: 115px;"><a  id="mainheader">Test
+    Execution</a></li><!--[routerLink]="['/projectdetail']"-->
+  <li class="breadcrumb-item"><a id="subheader">Tracking</a></li>
+
+</ul>
+<hr style="margin:3px">
+
+<div class="container-fluid">
+
+  <div class="col-sm-12 col-lg-12 col-md-12 shadow-lg border" style="height: 500px">
+    <div style="margin: 10px">
+      <br><br>
+      <div style="margin:unset">
+        <div>
+          <table class="shadow-lg scroll" style="width: 100%;table-layout:fixed;">
+            <thead class="theadColor">
+              <tr>
+                <!-- <span>Delete/Edit</span> -->
+                <th class="col-xs-1" style="width: 9%;">SL.No</th>
+                <th class="col-xs-2" style="line-height: 16px">Suite Name</th>
+                <th class="col-xs-2" style="line-height: 16px;width: 15%;">Run No</th>
+                <th class="col-xs-2" style="line-height: 16px;width: 20%;">Executing By</th>
+                <!-- <th class="col-xs-2">Type</th> -->
+                <!-- <th class="col-xs-2" style="line-height: 16px">Time Taken</th> -->
+                <!-- <th class="col-xs-3" style="line-height: 16px">Estimated Remaining Time</th> -->
+                <th class="col-xs-2" style="line-height: 16px"> Total Testcases</th>
+                <th class="col-xs-2">Executed</th>
+                <th class="col-xs-2">Pending</th>
+                <th class="col-xs-2">Pass</th>
+                <th class="col-xs-2">Fail</th>
+                <th class="col-xs-2" style="line-height: 16px">Pass %</th>
+                <th class="col-xs-2" style="line-height: 16px;width: 20%;">Status</th>
+                <th class="col-xs-2" style="line-height: 16px" *ngIf="edit==true">Threshold Exit</th>
+              </tr>
+            </thead>
+            <tbody style="height: 400px;">
+              <tr *ngFor = 'let data of Names;let i=index'>
+                <td class="col-xs-1">{{i+1}}</td>
+                <td class="col-xs-2" style="word-break: break-word;text-align: center;">{{data.SuiteName}}</td>
+                <td class="col-xs-2"style="text-align: center;">{{data.RunNo}}</td>
+                <td class="col-xs-2"style="word-break: break-word;">{{data.executingBy}}</td>
+                <!-- <td class="col-xs-2">{{data.Type}}</td> -->
+                <!-- <td class="col-xs-2">{{timetaken}}</td> -->
+                <!-- <td class="col-xs-3">{{EstimatedTime}}</td> -->
+                <td class="col-xs-2"style="text-align: center;">{{data.TotalTestcases}}</td>
+                <td class="col-xs-2"style="text-align: center;">{{data.ExecutedCount}}</td>
+                <td class="col-xs-2"style="text-align: center;">{{data.pendingCount}}</td>
+                <td class="col-xs-2"style="text-align: center;">{{data.PassCount}}</td>
+                <td class="col-xs-2"style="text-align: center;">{{data.FailCount}}</td>
+                <td class="col-xs-2"style="text-align: center;">{{data.passPercentage | number:'1.0-0'}}</td>
+                <td class="col-xs-2" style="word-break: break-word;text-align: center;">{{data.status}}</td>
+                <td class="col-xs-2" *ngIf="edit==true" style="text-align: center;">
+                  
+                   <button type="button" [disabled]="data.stopEnable == false" class="btn btn-info btn-lg"  
+                  (click)="displayModal(data,i)"  data-toggle="modal" data-target="#myModal">Stop</button>
+                </td> 
+              </tr>
+            </tbody>
+          </table>
+<!-- 
+          <button type="button" class="btn btn-info btn-lg" 
+          (click)="thresholdExit()">Stop</button> -->
+        </div>
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="modal" id="myModal" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content" style="width: 100%;">
+      
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title">Modal Heading</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        
+        <!-- Modal body -->
+        <div class="modal-body">
+        Terminating the execution will not generate Reports
+        <br>
+        Failure percentage is
+        <span>{{ExitFailurePercentage}}</span>
+        </div>
+        
+        <!-- Modal footer -->
+        <div class="modal-footer">
+          <button type="button" class="btn btn-lg" (click)="thresholdExit()" data-dismiss="modal">Stop</button>
+          <button type="button" class="btn btn-lg" data-dismiss="modal">Close</button>
+        </div>
+        
+      </div>
+    </div>
+  </div>
+</div>
+
